@@ -3,14 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="@dimen/bottom_app_bar_height"
         android:background="@color/white"
         tools:context=".ui.fragments.ProfileMainFragment">
 
@@ -20,12 +17,12 @@
             android:id="@+id/profile_main_guest"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/profile_top_bar"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="@dimen/profile_top_bar_height"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -35,7 +32,7 @@
                     android:fontFamily="@font/logo_bold"
                     android:text="@string/app_title"
                     android:textColor="@color/main"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/text_xlarge"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +41,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#40000000"
+                    android:background="@color/trans_black_25"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -53,10 +50,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="@dimen/margin_default"
                 android:text="@string/profile_guest_text"
-                android:textColor="#80000000"
-                android:textSize="24sp"
+                android:textColor="@color/trans_black_50"
+                android:textSize="@dimen/text_large"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/center_divider"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,27 +69,36 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="@dimen/margin_default"
+                android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@+id/center_divider">
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp" />
+                <ImageView
+                    android:id="@+id/profile_kakao_login"
+                    android:layout_width="@dimen/login_button_width"
+                    android:layout_height="@dimen/login_button_height"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:contentDescription="@string/kakao_login"
+                    android:src="@drawable/kakao_login_btn_long" />
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp" />
+                <ImageView
+                    android:id="@+id/profile_naver_login"
+                    android:layout_width="@dimen/login_button_width"
+                    android:layout_height="@dimen/login_button_height"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:contentDescription="@string/naver_login"
+                    android:src="@drawable/naver_login_btn_long" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_default"
                     android:text="@string/do_later"
                     android:textAlignment="center"
-                    android:textColor="#80000000"
-                    android:textSize="18sp" />
+                    android:textColor="@color/trans_black_50"
+                    android:textSize="@dimen/text_small" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -103,12 +109,12 @@
             android:id="@+id/profile_main_member"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/profile_top_bar_member"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="@dimen/profile_top_bar_height"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -118,7 +124,7 @@
                     android:fontFamily="@font/logo_bold"
                     android:text="@string/app_title"
                     android:textColor="@color/main"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/text_xlarge"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -127,14 +133,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#40000000"
+                    android:background="@color/trans_black_25"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <ScrollView
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -149,11 +155,11 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/profile_card_container"
                         android:layout_width="match_parent"
-                        android:layout_height="180dp"
+                        android:layout_height="@dimen/profile_card_height"
+                        android:layout_margin="@dimen/margin_default"
                         android:backgroundTint="@color/main"
-                        android:layout_margin="20dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="5dp"
+                        app:cardCornerRadius="@dimen/card_corner_radius"
+                        app:cardElevation="@dimen/card_elevation"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -164,28 +170,28 @@
 
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/profile_card_image"
-                                android:layout_width="130dp"
-                                android:layout_height="130dp"
-                                android:layout_margin="20dp"
+                                android:layout_width="@dimen/image_view_size"
+                                android:layout_height="@dimen/image_view_size"
+                                android:layout_margin="@dimen/margin_default"
                                 android:clipChildren="true"
                                 android:contentDescription="@string/home_card_image"
                                 app:cardBackgroundColor="@color/white"
-                                app:cardCornerRadius="90dp"
-                                app:cardElevation="5dp"
+                                app:cardCornerRadius="@dimen/rounded_corner_radius"
+                                app:cardElevation="@dimen/card_elevation"
                                 app:layout_constraintBottom_toBottomOf="@id/profile_card"
                                 app:layout_constraintStart_toStartOf="@id/profile_card"
                                 app:layout_constraintTop_toTopOf="@id/profile_card">
 
                                 <ImageView
-                                    android:layout_width="130dp"
-                                    android:layout_height="130dp"
+                                    android:layout_width="@dimen/image_view_size"
+                                    android:layout_height="@dimen/image_view_size"
                                     android:contentDescription="@string/home_card_image"
                                     android:scaleType="centerCrop"
                                     android:src="@drawable/cat" />
                             </androidx.cardview.widget.CardView>
 
 
-                            <LinearLayout
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
@@ -198,42 +204,48 @@
                                     android:id="@+id/home_card_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
-                                    android:shadowColor="#40000000"
+                                    android:layout_marginBottom="@dimen/margin_xsmall"
+                                    android:shadowColor="@color/trans_black_25"
                                     android:shadowDx="2"
                                     android:shadowDy="4"
                                     android:shadowRadius="6"
                                     android:text="@string/example_name"
                                     android:textColor="@color/white"
-                                    android:textSize="24sp" />
+                                    android:textSize="@dimen/text_xlarge"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
                                     android:id="@+id/home_card_grade"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
-                                    android:shadowColor="#40000000"
+                                    android:layout_marginVertical="@dimen/margin_xsmall"
+                                    android:shadowColor="@color/trans_black_25"
                                     android:shadowDx="2"
                                     android:shadowDy="4"
                                     android:shadowRadius="6"
                                     android:text="@string/example_grade"
                                     android:textColor="@color/white"
-                                    android:textSize="22sp" />
+                                    android:textSize="@dimen/text_xlarge"
+                                    app:layout_constraintBottom_toTopOf="@+id/home_card_club"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/home_card_name" />
 
                                 <TextView
                                     android:id="@+id/home_card_club"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
-                                    android:shadowColor="#40000000"
+                                    android:shadowColor="@color/trans_black_25"
                                     android:shadowDx="2"
                                     android:shadowDy="4"
                                     android:shadowRadius="6"
                                     android:text="@string/example_club"
                                     android:textColor="@color/white"
-                                    android:textSize="22sp" />
+                                    android:textSize="@dimen/text_xlarge"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" />
 
-                            </LinearLayout>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -241,10 +253,10 @@
                         android:id="@+id/profile_setting_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:text="설정"
-                        android:textColor="#80000000"
-                        android:textSize="16sp"
+                        android:layout_margin="@dimen/margin_default"
+                        android:text="@string/profile_setting_text"
+                        android:textColor="@color/trans_black_50"
+                        android:textSize="@dimen/text_medium"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/profile_card_container" />
@@ -253,7 +265,7 @@
                         android:id="@+id/profile_setting_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
+                        android:layout_margin="@dimen/margin_default"
                         android:orientation="vertical"
                         app:layout_constraintTop_toBottomOf="@id/profile_setting_text">
 
@@ -261,10 +273,10 @@
                             android:id="@+id/profile_setting_info"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            android:text="개인정보 수정"
-                            android:textColor="#BF000000"
-                            android:textSize="20sp"
+                            android:layout_margin="@dimen/margin_default"
+                            android:text="@string/profile_menu_privacy"
+                            android:textColor="@color/trans_black_75"
+                            android:textSize="@dimen/text_large"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -272,20 +284,18 @@
                             android:id="@+id/profile_setting_info_divider"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginTop="20dp"
-                            android:background="#40000000"
+                            android:layout_marginTop="@dimen/margin_default"
+                            android:background="@color/trans_black_25"
                             app:layout_constraintTop_toBottomOf="@id/profile_setting_info" />
 
                         <TextView
                             android:id="@+id/profile_setting_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="20dp"
-                            android:text="비밀번호 변경"
-                            android:textColor="#BF000000"
-                            android:textSize="20sp"
+                            android:layout_margin="@dimen/margin_default"
+                            android:text="@string/profile_menu_password"
+                            android:textColor="@color/trans_black_75"
+                            android:textSize="@dimen/text_large"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/profile_setting_info_divider" />
 
@@ -293,18 +303,18 @@
                             android:id="@+id/profile_setting_password_divider"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginTop="20dp"
-                            android:background="#40000000"
+                            android:layout_marginTop="@dimen/margin_default"
+                            android:background="@color/trans_black_25"
                             app:layout_constraintTop_toBottomOf="@id/profile_setting_password" />
 
                         <TextView
                             android:id="@+id/profile_setting_logout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            android:text="로그아웃"
-                            android:textColor="#BF000000"
-                            android:textSize="20sp"
+                            android:layout_margin="@dimen/margin_default"
+                            android:text="@string/profile_menu_logout"
+                            android:textColor="@color/trans_black_75"
+                            android:textSize="@dimen/text_large"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/profile_setting_password_divider" />
 
@@ -312,8 +322,8 @@
                             android:id="@+id/profile_setting_logout_divider"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginTop="20dp"
-                            android:background="#40000000"
+                            android:layout_marginTop="@dimen/margin_default"
+                            android:background="@color/trans_black_25"
                             app:layout_constraintTop_toBottomOf="@id/profile_setting_logout" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -322,14 +332,17 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
+                        android:layout_marginHorizontal="@dimen/margin_default"
+                        android:layout_marginTop="@dimen/splash_logo_size"
+                        android:paddingBottom="@dimen/margin_default"
                         app:layout_constraintTop_toBottomOf="@id/profile_setting_container">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="앱 버전 1.0.0"
-                            android:textColor="#80000000"
-                            android:textSize="18sp"
+                            android:text="@string/app_version"
+                            android:textColor="@color/trans_black_50"
+                            android:textSize="@dimen/text_medium"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -337,15 +350,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="최신버전"
-                            android:textColor="#80000000"
-                            android:textSize="18sp"
+                            android:text="@string/check_update"
+                            android:textColor="@color/trans_black_50"
+                            android:textSize="@dimen/text_medium"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </ScrollView>
+            </androidx.core.widget.NestedScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

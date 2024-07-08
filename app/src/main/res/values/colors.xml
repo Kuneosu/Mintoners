@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="main">#4B89DC</color>
+    <color name="trans_black_50">#80000000</color>
+    <color name="trans_black_25">#40000000</color>
+    <color name="trans_black_75">#BF000000</color>
 </resources>

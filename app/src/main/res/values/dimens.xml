@@ -1,0 +1,40 @@
+<resources>
+    <!-- Margin and padding values -->
+    <dimen name="margin_xsmall">5dp</dimen>
+    <dimen name="margin_small">10dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_default">20dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_xlarge">42dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+
+    <!-- Font size values -->
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_large">20sp</dimen>
+    <dimen name="text_xlarge">24sp</dimen>
+    <dimen name="text_2xlarge">30sp</dimen>
+    <dimen name="text_3xlarge">34sp</dimen>
+    <dimen name="text_4xlarge">36sp</dimen>
+
+    <!-- Specific dimensions -->
+    <dimen name="splash_logo_size">100dp</dimen>
+    <dimen name="bottom_app_bar_height">60dp</dimen>
+    <dimen name="card_corner_radius">10dp</dimen>
+    <dimen name="card_elevation">5dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="image_view_size">130dp</dimen>
+    <dimen name="card_height">105dp</dimen>
+    <dimen name="card_width">180dp</dimen>
+    <dimen name="profile_top_bar_height">80dp</dimen>
+    <dimen name="profile_card_height">180dp</dimen>
+    <dimen name="home_top_view_height">300dp</dimen>
+    <dimen name="home_card_height">140dp</dimen>
+    <dimen name="rounded_corner_radius">90dp</dimen>
+    <dimen name="recent_game_recycler_height">110dp</dimen>
+    <dimen name="match_making_card_height">200dp</dimen>
+    <dimen name="login_button_width">337.5dp</dimen>
+    <dimen name="login_button_height">50dp</dimen>
+</resources>
