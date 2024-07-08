@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.mainBottomNav.setOnItemSelectedListener { item ->
+            if (item.itemId == binding.mainBottomNav.selectedItemId) {
+                return@setOnItemSelectedListener false
+            }
             when (item.itemId) {
                 R.id.menu_home -> {
                     binding.mainContainer.findNavController().navigate(R.id.action_profileMainFragment_to_homeFragment)
