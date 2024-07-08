@@ -14,10 +14,11 @@
         android:theme="@style/Theme.Mintoners"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.MatchActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.SplashActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.activities.MainActivity"
             android:exported="true">
