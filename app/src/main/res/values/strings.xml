@@ -16,4 +16,9 @@
     <string name="example_name"><b>구너수</b> 님</string>
     <string name="example_grade">급수: <b>D</b> 조</string>
     <string name="example_club">소속: <b>마코 클럽</b></string>
+    <string name="guest_login">로그인 하기</string>
+    <string name="bottom_home">홈</string>
+    <string name="bottom_profile">프로필</string>
+    <string name="profile_guest_text">로그인 후,\n더 편리하게\n여러 사람들과 운동해보세요.</string>
+    <string name="do_later">나중에 하기</string>
 </resources>

@@ -4,7 +4,7 @@
     <item
         android:id="@+id/menu_home"
         android:icon="@drawable/selector_bottom_nav_home"
-        android:title="홈"
+        android:title="@string/bottom_home"
         app:showAsAction="ifRoom" />
 
     <item
@@ -13,9 +13,9 @@
         android:title="" />
 
     <item
-        android:id="@+id/menu_list"
+        android:id="@+id/menu_profile"
         android:icon="@drawable/selector_bottom_nav_profile"
-        android:title="프로필"
+        android:title="@string/bottom_profile"
         app:showAsAction="always" />
 
 </menu>
