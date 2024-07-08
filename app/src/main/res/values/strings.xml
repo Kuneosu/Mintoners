@@ -5,7 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_title">홈</string>
     <string name="home_card_image">home_card_image</string>
-    <string name="recent_game">최근 경기 ></string>
+    <string name="recent_game">최근 경기</string>
     <string name="match_card_subtitle">KDK 복식/단식 매칭</string>
     <string name="match_card_title">대진표\n생성하기</string>
     <string name="match_card_image">match_card_image</string>

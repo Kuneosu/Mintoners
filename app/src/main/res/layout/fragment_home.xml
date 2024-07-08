@@ -42,7 +42,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:fontFamily="@font/main_regular"
             android:text="@string/home_title"
             android:textColor="@color/white"
             android:textSize="30sp"
@@ -71,9 +70,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/main_regular"
                     android:text="@string/example_name"
                     android:textColor="@color/white"
+                    android:shadowColor="#40000000"
+                    android:shadowDy="4"
+                    android:shadowDx="2"
+                    android:shadowRadius="6"
                     android:textSize="24sp" />
 
                 <TextView
@@ -81,9 +83,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/main_regular"
                     android:text="@string/example_grade"
                     android:textColor="@color/white"
+                    android:shadowColor="#40000000"
+                    android:shadowDy="4"
+                    android:shadowDx="2"
+                    android:shadowRadius="6"
                     android:textSize="22sp" />
 
                 <TextView
@@ -91,21 +96,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/main_regular"
                     android:text="@string/example_club"
                     android:textColor="@color/white"
+                    android:shadowColor="#40000000"
+                    android:shadowDy="4"
+                    android:shadowDx="2"
+                    android:shadowRadius="6"
                     android:textSize="22sp" />
 
             </LinearLayout>
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/home_card_image"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:background="@drawable/style_circle"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:clipChildren="true"
                 android:contentDescription="@string/home_card_image"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="90dp"
+                app:cardElevation="5dp"
+                app:layout_constraintBottom_toBottomOf="@id/home_card"
                 app:layout_constraintEnd_toEndOf="@id/home_card"
-                app:layout_constraintTop_toTopOf="@id/home_card" />
+                app:layout_constraintTop_toTopOf="@id/home_card">
+
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:contentDescription="@string/home_card_image"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cat" />
+            </androidx.cardview.widget.CardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -114,16 +135,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="5dp"
-            android:fontFamily="@font/main_regular"
             android:text="@string/recent_game"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/home_recent_game_recycler"
             app:layout_constraintStart_toStartOf="parent" />
 
 
         <!-- Recent GAME CARDS -->
-        <!-- 리사이클러뷰로 교체하고 카드는 아이템으로 만들어야 함 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_recent_game_recycler"
             android:layout_width="match_parent"
@@ -154,7 +174,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/main_regular"
                     android:text="@string/match_card_subtitle"
                     android:textColor="#80000000"
                     android:textSize="18sp"
@@ -164,9 +183,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/main_bold"
                     android:text="@string/match_card_title"
                     android:textSize="32sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
