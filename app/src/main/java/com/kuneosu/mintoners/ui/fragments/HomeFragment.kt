@@ -23,7 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
@@ -32,7 +33,7 @@ class HomeFragment : Fragment() {
     ): View {
 
         // 데이터 바인딩 객체를 인플레이트합니다
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = homeViewModel
 
@@ -62,5 +63,10 @@ class HomeFragment : Fragment() {
     private fun updateBottomNavigationView(menuItemId: Int) {
         val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.main_bottom_nav)
         bottomNavigationView?.selectedItemId = menuItemId
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

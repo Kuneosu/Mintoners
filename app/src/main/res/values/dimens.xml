@@ -37,4 +37,6 @@
     <dimen name="match_making_card_height">200dp</dimen>
     <dimen name="login_button_width">337.5dp</dimen>
     <dimen name="login_button_height">50dp</dimen>
+    <dimen name="small_button_height">52dp</dimen>
+    <dimen name="match_info_game_count">140dp</dimen>
 </resources>
