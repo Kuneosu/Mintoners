@@ -44,4 +44,7 @@ July 2024 Personal project, match table creation and management application
   - 리사이클러뷰 아이템 개발 완료
   - Navigation 연결 완료
   - 리사이클러뷰 세부 기능 개발 필요(어댑터, 레포지토리, 뷰모델)
+- **MatchInfoFragment 기능 일부 개발**
+  - 대회명 힌트 기능 구현 (오늘 날짜 기반 대회명 자동 생성)
+  - 대회일자 오늘 날짜 자동 입력
   
