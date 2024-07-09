@@ -19,5 +19,16 @@
         <action
             android:id="@+id/action_matchPlayerFragment_to_matchInfoFragment"
             app:destination="@id/matchInfoFragment" />
+        <action
+            android:id="@+id/action_matchPlayerFragment_to_matchListFragment"
+            app:destination="@id/matchListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchListFragment"
+        android:name="com.kuneosu.mintoners.ui.fragments.MatchListFragment"
+        android:label="MatchListFragment" >
+        <action
+            android:id="@+id/action_matchListFragment_to_matchPlayerFragment"
+            app:destination="@id/matchPlayerFragment" />
     </fragment>
 </navigation>

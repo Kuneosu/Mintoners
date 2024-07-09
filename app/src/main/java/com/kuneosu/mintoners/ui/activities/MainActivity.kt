@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
             // start MatchActivity
             val intent = Intent(this, MatchActivity::class.java)
             startActivity(intent)
-            Toast.makeText(this, "Add Button Clicked", Toast.LENGTH_SHORT).show()
         }
 
 

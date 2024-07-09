@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentMatchPlayerBinding
 import com.kuneosu.mintoners.ui.adapters.MatchPlayerAdapter
 import com.kuneosu.mintoners.viewmodels.MatchViewModel
@@ -74,6 +75,9 @@ class MatchPlayerFragment : Fragment() {
 
         binding.matchPlayerPreviousButton.setOnClickListener {
             findNavController().popBackStack()
+        }
+        binding.matchPlayerNextButton.setOnClickListener {
+            findNavController().navigate(R.id.action_matchPlayerFragment_to_matchListFragment)
         }
     }
 

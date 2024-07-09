@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.DataBindingUtil
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentProfileMainBinding
 
@@ -20,10 +21,20 @@ class ProfileMainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentProfileMainBinding.inflate(inflater, container, false)
-        val view = binding.root
+        _binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_profile_main, container, false)
 
-        return view
+        binding.profileKakaoLogin.setOnClickListener {
+            binding.profileMainGuest.visibility = View.GONE
+            binding.profileMainMember.visibility = View.VISIBLE
+        }
+
+        binding.profileSettingLogout.setOnClickListener {
+            binding.profileMainMember.visibility = View.GONE
+            binding.profileMainGuest.visibility = View.VISIBLE
+        }
+
+        return binding.root
     }
 
     override fun onDestroyView() {

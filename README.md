@@ -17,10 +17,10 @@ July 2024 Personal project, match table creation and management application
 - MatchInfoFragment 개발중 (상단 바, 대회명 까지 완료)
 
 ## 2024.07.09
-- MatchInfoFragment 개발 완료
+- **MatchInfoFragment 개발 완료**
   - 대회일자, 승점 입력, 1인당 게임수, 복식/단식 선택
   - 다음 버튼, MatchPlayerFragment와 연결
-- MatchPlayerFragment 개발 완료
+- **MatchPlayerFragment 개발 완료**
   - 플레이어 추가, 삭제, 플레이어 이름 입력
   - 이전 버튼, MatchInfoFragment와 연결
   - RecyclerView 세부 기능 일부 개발
@@ -34,8 +34,14 @@ July 2024 Personal project, match table creation and management application
   - MatchViewmodel 개발 (향후 수정 필요. 현재는 플레이어 관련 정보만 다루지만 향후 대회 정보와 유저 정보를 총괄할 수 있는 뷰모델로 개선 필요)
   - MatchRepository 개발 (향후 수정 필요. 현재는 플레이어 관련 정보만 다루지만 향후 대회 정보와 유저 정보를 총괄할 수 있는 레포지토리로 개선 필요)
   - RecyclerView 아이템 개수에 따른 레이아웃 업데이트 (개수 출력)
-- CustomConstraint 개발
+- **CustomConstraint 개발**
   - ConstraintLayout을 상속받아서 레이아웃을 변경할 수 있는 클래스 개발
   - 터치 이벤트를 받아오려고 하니 perform() 을 오버라이드 해야하는 문제가 발생해서 커스텀 뷰 생성
   - 큰 의미가 있나 싶어서 삭제도 고려중
+- **MatchListFragment 개발 시작**
+  - 프래그먼트 생성 및 바인딩
+  - UI 개발 완료
+  - 리사이클러뷰 아이템 개발 완료
+  - Navigation 연결 완료
+  - 리사이클러뷰 세부 기능 개발 필요(어댑터, 레포지토리, 뷰모델)
   

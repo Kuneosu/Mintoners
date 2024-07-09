@@ -1,5 +1,6 @@
 package com.kuneosu.mintoners.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.ActivityMainBinding
 import com.kuneosu.mintoners.databinding.FragmentHomeBinding
 import com.kuneosu.mintoners.ui.activities.MainActivity
+import com.kuneosu.mintoners.ui.activities.MatchActivity
 import com.kuneosu.mintoners.ui.adapters.RecentGameAdapter
 import com.kuneosu.mintoners.ui.decoration.LeftOffsetDecoration
 import com.kuneosu.mintoners.viewmodels.HomeViewModel
@@ -56,12 +58,19 @@ class HomeFragment : Fragment() {
             updateBottomNavigationView(R.id.menu_profile)
         }
 
+        binding.homeMakeMatchCard.setOnClickListener {
+            // start MatchActivity
+            val intent = Intent(requireContext(), MatchActivity::class.java)
+            startActivity(intent)
+        }
+
 
         return binding.root
     }
 
     private fun updateBottomNavigationView(menuItemId: Int) {
-        val bottomNavigationView = activity?.findViewById<BottomNavigationView>(R.id.main_bottom_nav)
+        val bottomNavigationView =
+            activity?.findViewById<BottomNavigationView>(R.id.main_bottom_nav)
         bottomNavigationView?.selectedItemId = menuItemId
     }
 
