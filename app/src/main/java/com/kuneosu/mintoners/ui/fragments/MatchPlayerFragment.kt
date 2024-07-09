@@ -49,6 +49,7 @@ class MatchPlayerFragment : Fragment() {
             updatePlayerCount(players.size)
         }
 
+
         // Set OnTouchListener to root layout to detect touch events
         binding.matchPlayerCard.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {

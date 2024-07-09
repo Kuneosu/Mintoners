@@ -4,6 +4,10 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.kuneosu.mintoners.databinding.MatchPlayerItemBinding
@@ -74,8 +78,10 @@ class MatchPlayerAdapter(
                     }
                 }
                 binding.editPlayerName.requestFocus()
-            }
+                showKeyboard(binding.editPlayerName)
 
+            }
+            binding.editPlayerName.setOnEditorActionListener(getEditorActionListener(binding.editPlayerName))
             binding.editPlayerName.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     val newName = binding.editPlayerName.text.toString()
@@ -99,6 +105,19 @@ class MatchPlayerAdapter(
             }
             binding.addPlayerInfo.visibility = View.GONE
             binding.matchPlayerInfo.visibility = View.VISIBLE
+        }
+    }
+    private fun showKeyboard(view: View) {
+        val imm = ContextCompat.getSystemService(view.context, InputMethodManager::class.java)
+        imm?.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    fun getEditorActionListener(view: View): TextView.OnEditorActionListener { // 키보드에서 done(완료) 클릭 시
+        return TextView.OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                view.clearFocus()
+            }
+            false
         }
     }
 

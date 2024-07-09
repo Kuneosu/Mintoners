@@ -46,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/match_edittext"
                 android:padding="@dimen/padding_medium"
+                android:inputType="text"
                 android:text="Player Name"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_large"

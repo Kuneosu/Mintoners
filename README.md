@@ -29,6 +29,7 @@ July 2024 Personal project, match table creation and management application
     - 아이템 추가 버튼이 자동으로 생성
     - 뒤로가기 이벤트 (포커스 해제, 키보드 숨김, navigation pop stack)
     - index 자동화
+    - 포커스 이벤트 (TextView 터치 시 바로 키패드 오픈, 키패드에서 완료 클릭 시 포커스 해제)
   - Hilt 연결 완료
   - MatchViewmodel 개발 (향후 수정 필요. 현재는 플레이어 관련 정보만 다루지만 향후 대회 정보와 유저 정보를 총괄할 수 있는 뷰모델로 개선 필요)
   - MatchRepository 개발 (향후 수정 필요. 현재는 플레이어 관련 정보만 다루지만 향후 대회 정보와 유저 정보를 총괄할 수 있는 레포지토리로 개선 필요)
