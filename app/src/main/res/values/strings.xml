@@ -30,4 +30,8 @@
     <string name="splash_logo">splash_logo</string>
     <string name="kakao_login">kakao_login</string>
     <string name="naver_login">naver_login</string>
+    <string name="match_info">match_info</string>
+    <string name="match_player">match_player</string>
+    <string name="match_list">match_list</string>
+    <string name="match_main">match_main</string>
 </resources>

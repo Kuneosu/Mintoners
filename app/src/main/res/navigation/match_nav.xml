@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/matchInfoFragment"
         android:name="com.kuneosu.mintoners.ui.fragments.MatchInfoFragment"
-        android:label="MatchInfoFragment" />
+        android:label="MatchInfoFragment" >
+        <action
+            android:id="@+id/action_matchInfoFragment_to_matchPlayerFragment"
+            app:destination="@id/matchPlayerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchPlayerFragment"
+        android:name="com.kuneosu.mintoners.ui.fragments.MatchPlayerFragment"
+        android:label="MatchPlayerFragment" >
+        <action
+            android:id="@+id/action_matchPlayerFragment_to_matchInfoFragment"
+            app:destination="@id/matchInfoFragment" />
+    </fragment>
 </navigation>

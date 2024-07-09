@@ -3,11 +3,11 @@ package com.kuneosu.mintoners.ui.fragments
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentMatchInfoBinding
 
@@ -39,8 +39,13 @@ class MatchInfoFragment : Fragment() {
             binding.matchInfoGameCountNumber.text = (currentCount + 1).toString()
         }
 
+        binding.matchInfoNextButton.setOnClickListener {
+            findNavController().navigate(R.id.action_matchInfoFragment_to_matchPlayerFragment)
+        }
+
         return binding.root
     }
+
 
     private fun matchTypeRadioChanged(checkedId: Int) {
         when (checkedId) {
