@@ -22,5 +22,50 @@
         <action
             android:id="@+id/action_profileMainFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_profileMainFragment_to_profileRegisterFragment"
+            app:destination="@id/profileRegisterFragment" />
+        <action
+            android:id="@+id/action_profileMainFragment_to_profilePersonalFragment"
+            app:destination="@id/profilePersonalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileRegisterFragment"
+        android:name="com.kuneosu.mintoners.ui.fragments.ProfileRegisterFragment"
+        android:label="ProfileRegisterFragment" >
+        <action
+            android:id="@+id/action_profileRegisterFragment_to_profileMainFragment"
+            app:destination="@id/profileMainFragment" />
+        <action
+            android:id="@+id/action_profileRegisterFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilePersonalFragment"
+        android:name="com.kuneosu.mintoners.ui.fragments.ProfilePersonalFragment"
+        android:label="ProfilePersonalFragment" >
+        <action
+            android:id="@+id/action_profilePersonalFragment_to_profileMainFragment"
+            app:destination="@id/profileMainFragment" />
+        <action
+            android:id="@+id/action_profilePersonalFragment_to_profileWithdrawFragment"
+            app:destination="@id/profileWithdrawFragment" />
+        <action
+            android:id="@+id/action_profilePersonalFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileWithdrawFragment"
+        android:name="com.kuneosu.mintoners.ui.fragments.ProfileWithdrawFragment"
+        android:label="ProfileWithdrawFragment" >
+        <action
+            android:id="@+id/action_profileWithdrawFragment_to_profilePersonalFragment"
+            app:destination="@id/profilePersonalFragment" />
+        <action
+            android:id="@+id/action_profileWithdrawFragment_to_profileMainFragment"
+            app:destination="@id/profileMainFragment" />
+        <action
+            android:id="@+id/action_profileWithdrawFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

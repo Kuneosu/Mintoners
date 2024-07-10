@@ -140,15 +140,14 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <androidx.core.widget.NestedScrollView
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_top_bar_member">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:paddingBottom="@dimen/card_height"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -270,7 +269,7 @@
                         app:layout_constraintTop_toBottomOf="@id/profile_setting_text">
 
                         <TextView
-                            android:id="@+id/profile_setting_info"
+                            android:id="@+id/profile_setting_personal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_default"
@@ -281,12 +280,12 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <View
-                            android:id="@+id/profile_setting_info_divider"
+                            android:id="@+id/profile_setting_personal_divider"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginTop="@dimen/margin_default"
                             android:background="@color/trans_black_25"
-                            app:layout_constraintTop_toBottomOf="@id/profile_setting_info" />
+                            app:layout_constraintTop_toBottomOf="@id/profile_setting_personal" />
 
                         <TextView
                             android:id="@+id/profile_setting_password"
@@ -297,7 +296,7 @@
                             android:textColor="@color/trans_black_75"
                             android:textSize="@dimen/text_large"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/profile_setting_info_divider" />
+                            app:layout_constraintTop_toBottomOf="@+id/profile_setting_personal_divider" />
 
                         <View
                             android:id="@+id/profile_setting_password_divider"
@@ -358,7 +357,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.core.widget.NestedScrollView>
+            </ScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

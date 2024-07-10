@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentProfileMainBinding
 
@@ -29,9 +30,17 @@ class ProfileMainFragment : Fragment() {
             binding.profileMainMember.visibility = View.VISIBLE
         }
 
+        binding.profileNaverLogin.setOnClickListener{
+            findNavController().navigate(R.id.action_profileMainFragment_to_profileRegisterFragment)
+        }
+
         binding.profileSettingLogout.setOnClickListener {
             binding.profileMainMember.visibility = View.GONE
             binding.profileMainGuest.visibility = View.VISIBLE
+        }
+
+        binding.profileSettingPersonal.setOnClickListener {
+            findNavController().navigate(R.id.action_profileMainFragment_to_profilePersonalFragment)
         }
 
         return binding.root
