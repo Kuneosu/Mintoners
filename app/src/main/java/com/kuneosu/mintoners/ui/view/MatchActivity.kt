@@ -1,4 +1,4 @@
-package com.kuneosu.mintoners.ui.activities
+package com.kuneosu.mintoners.ui.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

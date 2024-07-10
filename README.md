@@ -63,3 +63,15 @@ July 2024 Personal project, match table creation and management application
     - ProfileWithdrawFragment UI 개발 완료
     - Navigation 연결 완료
     - 비밀번호 변경 삭제 고려. (KAKAKO, NAVER API를 연동하여 로그인 하기 때문에 별도 비밀번호 없음)
+- **Room Database 연동을 위한 준비**
+    - 기존 Adapter, Repository, ViewModel 삭제
+    - 새로운 데이터 클래스 생성
+        - MatchPlayer,RecentGame -> Match, Player, Game, Member, Converters(데이터베이스 사용을 위한 타입 변환)
+        - 데이터베이스에 사용하기 위해 전부 Entity로 생성
+    - Database, Dao 생성
+        - DatabaseModule을 사용해서 Database와 Dao 모듈화
+    - Hilt, Dao, Repository, Viewmodel 흐름에 대한 학습
+- **Branch를 나눠서 작업 후 Merge하는 것에 대한 경험**
+    - 기능 구현에 따라 브랜치를 나눠서 작업 (ui/match-main, ui/profile-detail, feature/setting-roomdb)
+    - 작업 완료 후 git push origin <Branch 이름> 을 통해 깃허브에 push
+    - pull request를 통해 main 브랜치에 merge
