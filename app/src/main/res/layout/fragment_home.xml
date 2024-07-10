@@ -5,16 +5,13 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.kuneosu.mintoners.viewmodels.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activities.MainActivity">
+        tools:context=".MainActivity">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.kuneosu.mintoners.ui.activities
+package com.kuneosu.mintoners
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.ActivityMainBinding
+import com.kuneosu.mintoners.ui.view.MatchActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
