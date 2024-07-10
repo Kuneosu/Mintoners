@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/match_main_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".ui.fragments.MatchMainFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/match_main_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/match_main_top_bar_height"
+            android:background="@color/main"
+            android:padding="@dimen/padding_small"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/match_main_top_back"
+                android:layout_width="@dimen/match_main_top_bar_icon_size"
+                android:layout_height="@dimen/match_main_top_bar_icon_size"
+                android:src="@drawable/chevron_left"
+                android:padding="@dimen/padding_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/match_main_top_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2024-06-28 (금) 대회"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/match_main_top_info"
+                app:layout_constraintStart_toEndOf="@+id/match_main_top_back"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/match_main_top_info"
+                android:layout_width="@dimen/match_main_top_bar_icon_size"
+                android:layout_height="@dimen/match_main_top_bar_icon_size"
+                android:padding="@dimen/padding_small"
+                android:src="@drawable/match_main_info"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/match_main_sub_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            app:layout_constraintTop_toBottomOf="@+id/match_main_top_bar">
+
+            <TextView
+                android:id="@+id/match_main_count_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="참가 인원수 : N 명\n경기 수 : N 경기"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/match_main_edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/small_button_height"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:background="@drawable/match_sub_button"
+                android:text="대진 수정"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/match_main_share_button"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/match_main_share_button"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/small_button_height"
+                android:background="@drawable/match_sub_button"
+                android:text="대진 공유"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/match_main_sub_info_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margin_default"
+            android:background="@color/trans_black_50"
+            app:layout_constraintTop_toBottomOf="@+id/match_main_sub_info" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/match_main_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/match_main_sub_info_divider"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/main"
+            app:tabIndicatorFullWidth="true"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/main"
+            app:tabTextColor="@color/trans_black_50">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="대진표"
+                android:textSize="@dimen/text_medium" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="현재 순위"
+                android:textSize="@dimen/text_medium" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/match_main_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/match_main_tab" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/match_main_end_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/small_button_height"
+            android:layout_margin="@dimen/margin_default"
+            android:background="@drawable/match_main_button"
+            android:text="경기 종료"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_large"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -47,4 +47,10 @@ July 2024 Personal project, match table creation and management application
 - **MatchInfoFragment 기능 일부 개발**
   - 대회명 힌트 기능 구현 (오늘 날짜 기반 대회명 자동 생성)
   - 대회일자 오늘 날짜 자동 입력
+
+## 2024.07.10
+- **MatchMainFragment UI 개발 완료**
+  - TabItem : MatchMainListFragment, MatchMainRankFragment UI 개발 완료
+  - RecyclerItem : match_main_list_item, match_main_rank_item UI 개발 완료
+  - Navigation 연결 완료
   

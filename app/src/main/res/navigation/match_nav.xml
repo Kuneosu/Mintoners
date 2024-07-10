@@ -30,5 +30,16 @@
         <action
             android:id="@+id/action_matchListFragment_to_matchPlayerFragment"
             app:destination="@id/matchPlayerFragment" />
+        <action
+            android:id="@+id/action_matchListFragment_to_matchMainFragment"
+            app:destination="@id/matchMainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchMainFragment"
+        android:name="com.kuneosu.mintoners.ui.fragments.MatchMainFragment"
+        android:label="MatchMainFragment" >
+        <action
+            android:id="@+id/action_matchMainFragment_to_matchListFragment"
+            app:destination="@id/matchListFragment" />
     </fragment>
 </navigation>
