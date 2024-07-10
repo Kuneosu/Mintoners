@@ -38,7 +38,10 @@ class MainActivity : AppCompatActivity() {
                     isDouble = false
                 }, 2000)
             } else {
-                binding.mainBottomNav.selectedItemId = R.id.menu_home
+                binding.mainContainer.findNavController().popBackStack()
+                if (binding.mainContainer.findNavController().currentDestination?.id == R.id.homeFragment) {
+                    binding.mainBottomNav.menu.getItem(0).isChecked = true
+                }
             }
         }
     }
@@ -77,15 +80,58 @@ class MainActivity : AppCompatActivity() {
         if (item.itemId == binding.mainBottomNav.selectedItemId) {
             return true
         }
-        when (item.itemId) {
-            R.id.menu_home -> {
+
+        when (binding.mainContainer.findNavController().currentDestination?.id) {
+            R.id.homeFragment -> {
+                binding.mainContainer.findNavController()
+                    .navigate(R.id.action_homeFragment_to_profileMainFragment)
+            }
+
+            R.id.profileMainFragment -> {
                 binding.mainContainer.findNavController()
                     .navigate(R.id.action_profileMainFragment_to_homeFragment)
             }
 
-            R.id.menu_profile -> {
-                binding.mainContainer.findNavController()
-                    .navigate(R.id.action_homeFragment_to_profileMainFragment)
+            R.id.profileRegisterFragment -> {
+                when (item.itemId) {
+                    R.id.menu_home -> {
+                        binding.mainContainer.findNavController()
+                            .navigate(R.id.action_profileRegisterFragment_to_homeFragment)
+                    }
+
+                    R.id.menu_profile -> {
+                        binding.mainContainer.findNavController()
+                            .navigate(R.id.action_profileRegisterFragment_to_profileMainFragment)
+                    }
+                }
+            }
+
+            R.id.profilePersonalFragment -> {
+                when (item.itemId) {
+                    R.id.menu_home -> {
+                        binding.mainContainer.findNavController()
+                            .navigate(R.id.action_profilePersonalFragment_to_homeFragment)
+                    }
+
+                    R.id.menu_profile -> {
+                        binding.mainContainer.findNavController()
+                            .navigate(R.id.action_profilePersonalFragment_to_profileMainFragment)
+                    }
+                }
+            }
+
+            R.id.profileWithdrawFragment -> {
+                when (item.itemId) {
+                    R.id.menu_home -> {
+                        binding.mainContainer.findNavController()
+                            .navigate(R.id.action_profileWithdrawFragment_to_homeFragment)
+                    }
+
+                    R.id.menu_profile -> {
+                        binding.mainContainer.findNavController()
+                            .navigate(R.id.action_profileWithdrawFragment_to_profileMainFragment)
+                    }
+                }
             }
         }
         return false
