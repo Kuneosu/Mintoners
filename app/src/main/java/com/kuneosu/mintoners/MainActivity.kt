@@ -3,11 +3,11 @@ package com.kuneosu.mintoners
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.kuneosu.mintoners.databinding.ActivityMainBinding
 import com.kuneosu.mintoners.ui.view.MatchActivity
@@ -49,11 +49,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = DataBindingUtil.setContentView(
-            this,
-            R.layout.activity_main
-        )
+        Log.d("MainActivity", "Activity created")
+        try {
+            // 초기화 코드
+            Log.d("MainActivity", "Initialization success")
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error in activity initialization", e)
+        }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.mainBottomNav.background = null
         binding.mainBottomNav.menu.getItem(1).isEnabled = false

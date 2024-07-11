@@ -1,6 +1,5 @@
 package com.kuneosu.mintoners.data.model
 
-import androidx.databinding.adapters.Converters
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
@@ -8,7 +7,7 @@ import androidx.room.TypeConverters
 @Entity(tableName = "games")
 @TypeConverters(Converters::class)
 data class Game(
-    @PrimaryKey val gameNumber: Int,
+    @PrimaryKey(autoGenerate = true) val gameNumber: Int = 0,
     val gameIndex: Int,
     val gameTeamA: List<Player>,
     val gameTeamB: List<Player>,

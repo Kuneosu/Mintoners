@@ -1,6 +1,5 @@
 package com.kuneosu.mintoners.data.model
 
-
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

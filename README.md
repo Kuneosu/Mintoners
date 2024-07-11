@@ -75,3 +75,27 @@ July 2024 Personal project, match table creation and management application
     - 기능 구현에 따라 브랜치를 나눠서 작업 (ui/match-main, ui/profile-detail, feature/setting-roomdb)
     - 작업 완료 후 git push origin <Branch 이름> 을 통해 깃허브에 push
     - pull request를 통해 main 브랜치에 merge
+
+## 2024.07.11
+
+- **Room Database 연동**
+    - RoomDatabase 사용 전 오류 해결 (Kapt 관련 Error)
+        - Kapt 제거 -> KSP 로 교체
+        - DataBinding 제거 -> ViewBinding 으로 교체
+        - Kotlin Version up 1.9.0 -> 2.0.0
+    - 새로운 MatchViewModel 생성
+        - 하나의 Match 와 여러 명의 Player, 여러 개의 Game 을 관리하는 ViewModel
+        - 아래는 향후 구현할 데이터 관리 흐름 (아직 미구현)
+            - MatchInfoFragment = 대회명, 대회일자, 승점, 경기수, 경기 타입을 입력받아서 ViewModel로 전달 -> 데이터베이스에 Match
+              Insert
+            - MatchPlayerFragment = 플레이어 객체를 넘겨받아서 ViewModel로 전달 -> 데이터베이스 X ViewModel 에서 players
+              관리 -> Match 에 전달
+            - MatchListFragment = ViewModel 에서 Players를 전달받아 대진표 생성(Game[]) -> 데이터베이스 X ViewModel 에서
+              games 관리 -> Match 에 전달
+            - MatchListFragment -> MatchMainFragment 로 넘어가면서 데이터베이스에 Match 최종 Insert, 데이터베이스에서 Match
+              가져와서 정보 출력
+            - MatchMainListFargment = 승점을 입력받아서 ViewModel로 전달 -> Match.Game.score 에 저장 -> 데이터베이스에
+              Insert
+            - MatchMainRankFragment = 데이터베이스에서 Score 합산 기준 Player 이름 가져와서 순서대로 출력
+    - ViewModel 완성 후 리사이클러뷰 어댑터 제작할 것.
+        - MatchPlayerAdapter는 현재 제작중.

@@ -1,14 +1,15 @@
 package com.kuneosu.mintoners.data.model
 
 
-import androidx.databinding.adapters.Converters
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import java.util.Date
 
 @Entity(tableName = "matches")
 @TypeConverters(Converters::class)
 data class Match(
-    @PrimaryKey val matchNumber: Int,
+    @PrimaryKey(autoGenerate = true) val matchNumber: Int=0,
     val matchName: String,
     val matchDate: Date,
     val matchPoint: String,

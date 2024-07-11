@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentProfileMainBinding
@@ -22,15 +21,15 @@ class ProfileMainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_profile_main, container, false)
+        _binding = FragmentProfileMainBinding.inflate(inflater, container, false)
+
 
         binding.profileKakaoLogin.setOnClickListener {
             binding.profileMainGuest.visibility = View.GONE
             binding.profileMainMember.visibility = View.VISIBLE
         }
 
-        binding.profileNaverLogin.setOnClickListener{
+        binding.profileNaverLogin.setOnClickListener {
             findNavController().navigate(R.id.action_profileMainFragment_to_profileRegisterFragment)
         }
 

@@ -9,9 +9,14 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kuneosu.mintoners.R
+import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.FragmentMatchPlayerBinding
+import com.kuneosu.mintoners.ui.adapter.MatchPlayerAdapter
+import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +24,8 @@ class MatchPlayerFragment : Fragment() {
 
     private var _binding: FragmentMatchPlayerBinding? = null
     private val binding get() = _binding!!
+    private val matchViewModel: MatchViewModel by viewModels()
+    private lateinit var adapter: MatchPlayerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +38,19 @@ class MatchPlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        adapter = MatchPlayerAdapter(matchViewModel)
+        binding.matchPlayerRecyclerView.adapter = adapter
+
+        if (matchViewModel.allPlayers.value.isNullOrEmpty()) {
+            matchViewModel.addPlayer(Player(playerName = "Player 1", playerIndex = 1))
+        }
+
+        // ViewModel 관찰 설정
+        matchViewModel.allPlayers.observe(viewLifecycleOwner) { players ->
+            adapter.updatePlayers(players)
+            // 인원 수 업데이트
+            binding.matchPlayerCountText.text = players.size.toString()
+        }
 
         // Set OnTouchListener to root layout to detect touch events
         binding.matchPlayerCard.setOnTouchListener { v, event ->
@@ -66,6 +86,17 @@ class MatchPlayerFragment : Fragment() {
 
     private fun updatePlayerCount(count: Int) {
         binding.matchPlayerCountText.text = "참가 인원수 : $count 명"
+    }
+
+    private fun onAddPlayer(
+        playerIndexInput: Int,
+        playerNameInput: String
+    ) {
+        val player = Player(
+            playerIndex = playerIndexInput,
+            playerName = playerNameInput
+        )
+        matchViewModel.addPlayer(player)
     }
 
     private fun hideKeyboard() {

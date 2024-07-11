@@ -10,18 +10,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
+import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.databinding.FragmentMatchInfoBinding
+import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
+import java.util.Date
 import java.util.Locale
 
-
+@AndroidEntryPoint
 class MatchInfoFragment : Fragment() {
     private var _binding: FragmentMatchInfoBinding? = null
     private val binding get() = _binding!!
+    private val matchViewModel: MatchViewModel by viewModels()
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
@@ -50,6 +58,16 @@ class MatchInfoFragment : Fragment() {
         }
 
         binding.matchInfoNextButton.setOnClickListener {
+            val points =
+                "${binding.matchInfoScoreWinInput.text}${binding.matchInfoScoreDrawInput.text}${binding.matchInfoScoreLoseInput.text}"
+            onNextClicked(
+                binding.matchInfoNameInput.text.toString(),
+                if (binding.matchInfoDateInput.text.toString().isEmpty()) Date() else
+                    stringToDate(binding.matchInfoDateInput.text.toString())!!,
+                points,
+                binding.matchInfoGameCountNumber.text.toString().toInt(),
+                if (binding.matchInfoGameTypeDouble.isChecked) "double" else "single"
+            )
             findNavController().navigate(R.id.action_matchInfoFragment_to_matchPlayerFragment)
         }
 
@@ -67,6 +85,25 @@ class MatchInfoFragment : Fragment() {
             .newEditable((LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))))
 
         return binding.root
+    }
+
+    private fun onNextClicked(
+        matchNameInput: String,
+        matchDateInput: Date,
+        matchPointInput: String,
+        matchCountInput: Int,
+        matchTypeInput: String
+    ) {
+        val match = Match(
+            matchName = matchNameInput,
+            matchDate = matchDateInput,
+            matchPoint = matchPointInput,
+            matchCount = matchCountInput,
+            matchType = matchTypeInput,
+            matchPlayers = emptyList(),
+            matchList = emptyList()
+        )
+        matchViewModel.createMatch(match)
     }
 
 
@@ -92,6 +129,11 @@ class MatchInfoFragment : Fragment() {
                 binding.matchInfoGameTypeSingle.setTextColor(Color.WHITE)
             }
         }
+    }
+
+    fun stringToDate(dateString: String): Date? {
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return format.parse(dateString)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

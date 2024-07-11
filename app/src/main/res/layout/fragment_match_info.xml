@@ -1,426 +1,421 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-    </data>
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.fragments.MatchInfoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/match_info_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context=".ui.fragments.MatchInfoFragment">
+        android:layout_height="160dp"
+        android:background="@color/main"
+        app:layout_constraintTop_toTopOf="parent">\
+
+        <TextView
+            android:id="@+id/match_info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="대진표 생성"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_2xlarge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/match_info_top_bar"
+            app:layout_constraintTop_toBottomOf="@id/match_info_title" />
+
+        <TextView
+            android:id="@+id/match_info_process_one"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/match_process_selected"
+            android:gravity="center"
+            android:text="1"
+            android:textAlignment="center"
+            android:textColor="@color/main"
+            android:textSize="@dimen/text_medium"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/match_info_top_bar"
+            app:layout_constraintEnd_toStartOf="@+id/match_info_process_two"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/match_info_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xsmall"
+            android:text="기본정보"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_small"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/match_info_process_one"
+            app:layout_constraintStart_toStartOf="@+id/match_info_process_one"
+            app:layout_constraintTop_toBottomOf="@id/match_info_process_one" />
+
+        <TextView
+            android:id="@+id/match_info_process_two"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginHorizontal="@dimen/margin_xlarge"
+            android:background="@drawable/match_process_unselected"
+            android:gravity="center"
+            android:text="2"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_medium"
+            app:layout_constraintBottom_toBottomOf="@+id/match_info_top_bar"
+            app:layout_constraintEnd_toStartOf="@id/match_info_process_three"
+            app:layout_constraintStart_toEndOf="@+id/match_info_process_one"
+            app:layout_constraintTop_toBottomOf="@+id/match_info_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xsmall"
+            android:text="참가자"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintEnd_toEndOf="@id/match_info_process_two"
+            app:layout_constraintStart_toStartOf="@+id/match_info_process_two"
+            app:layout_constraintTop_toBottomOf="@id/match_info_process_two" />
+
+        <TextView
+            android:id="@+id/match_info_process_three"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/match_process_unselected"
+            android:gravity="center"
+            android:text="3"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_medium"
+            app:layout_constraintBottom_toBottomOf="@+id/match_info_top_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/match_info_process_two"
+            app:layout_constraintTop_toBottomOf="@+id/match_info_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xsmall"
+            android:text="대진표작성"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintEnd_toEndOf="@id/match_info_process_three"
+            app:layout_constraintStart_toStartOf="@+id/match_info_process_three"
+            app:layout_constraintTop_toBottomOf="@id/match_info_process_three" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/match_info_top_bar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/match_info_top_bar"
+            android:id="@+id/match_info_card"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:background="@color/main"
-            app:layout_constraintTop_toTopOf="parent">\
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:paddingBottom="@dimen/bottom_app_bar_height">
 
             <TextView
-                android:id="@+id/match_info_title"
+                android:id="@+id/match_info_name_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:text="대진표 생성"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_2xlarge"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="@dimen/margin_xsmall"
+                android:text="대회명"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <View
+            <EditText
+                android:id="@+id/match_info_name_input"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="@id/match_info_top_bar"
-                app:layout_constraintTop_toBottomOf="@id/match_info_title" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/match_edittext"
+                android:hint="대회명을 입력해주세요."
+                android:inputType="text"
+                android:padding="@dimen/padding_medium"
+                android:textSize="@dimen/text_large"
+                app:layout_constraintTop_toBottomOf="@+id/match_info_name_title" />
 
             <TextView
-                android:id="@+id/match_info_process_one"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@drawable/match_process_selected"
-                android:gravity="center"
-                android:text="1"
-                android:textAlignment="center"
-                android:textColor="@color/main"
-                android:textSize="@dimen/text_medium"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/match_info_top_bar"
-                app:layout_constraintEnd_toStartOf="@+id/match_info_process_two"
+                android:id="@+id/match_info_name_hint_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@drawable/match_hint_button"
+                android:paddingHorizontal="@dimen/margin_small"
+                android:paddingVertical="@dimen/margin_xsmall"
+                android:text="2024-07-08 (월)"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_small"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/match_info_title" />
+                app:layout_constraintTop_toBottomOf="@+id/match_info_name_input" />
 
             <TextView
+                android:id="@+id/match_info_name_hint_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_xsmall"
-                android:text="기본정보"
-                android:textColor="@color/white"
+                android:layout_margin="@dimen/margin_small"
+                android:background="@drawable/match_hint_button"
+                android:paddingHorizontal="@dimen/margin_small"
+                android:paddingVertical="@dimen/margin_xsmall"
+                android:text="2024-07 월례대회"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_small"
+                app:layout_constraintStart_toEndOf="@id/match_info_name_hint_one"
+                app:layout_constraintTop_toBottomOf="@+id/match_info_name_input" />
+
+            <TextView
+                android:id="@+id/match_info_date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xsmall"
+                android:layout_marginTop="@dimen/margin_default"
+                android:text="대회일자"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_large"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/match_info_process_one"
-                app:layout_constraintStart_toStartOf="@+id/match_info_process_one"
-                app:layout_constraintTop_toBottomOf="@id/match_info_process_one" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/match_info_name_hint_two" />
 
-            <TextView
-                android:id="@+id/match_info_process_two"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginHorizontal="@dimen/margin_xlarge"
-                android:background="@drawable/match_process_unselected"
-                android:gravity="center"
-                android:text="2"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_medium"
-                app:layout_constraintBottom_toBottomOf="@+id/match_info_top_bar"
-                app:layout_constraintEnd_toStartOf="@id/match_info_process_three"
-                app:layout_constraintStart_toEndOf="@+id/match_info_process_one"
-                app:layout_constraintTop_toBottomOf="@+id/match_info_title" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_xsmall"
-                android:text="참가자"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_small"
-                app:layout_constraintEnd_toEndOf="@id/match_info_process_two"
-                app:layout_constraintStart_toStartOf="@+id/match_info_process_two"
-                app:layout_constraintTop_toBottomOf="@id/match_info_process_two" />
-
-            <TextView
-                android:id="@+id/match_info_process_three"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@drawable/match_process_unselected"
-                android:gravity="center"
-                android:text="3"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_medium"
-                app:layout_constraintBottom_toBottomOf="@+id/match_info_top_bar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/match_info_process_two"
-                app:layout_constraintTop_toBottomOf="@+id/match_info_title" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_xsmall"
-                android:text="대진표작성"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_small"
-                app:layout_constraintEnd_toEndOf="@id/match_info_process_three"
-                app:layout_constraintStart_toStartOf="@+id/match_info_process_three"
-                app:layout_constraintTop_toBottomOf="@id/match_info_process_three" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/match_info_top_bar">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/match_info_card"
+            <!--            날짜 전용 스피너라던지 나중에 바꿔야 함.-->
+            <EditText
+                android:id="@+id/match_info_date_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:paddingBottom="@dimen/bottom_app_bar_height">
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/match_edittext"
+                android:hint="2024-07-08"
+                android:inputType="datetime"
+                android:padding="@dimen/padding_medium"
+                android:textSize="@dimen/text_large"
+                app:layout_constraintTop_toBottomOf="@+id/match_info_date_title" />
+
+            <TextView
+                android:id="@+id/match_info_score_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xsmall"
+                android:layout_marginTop="@dimen/margin_default"
+                android:text="승점"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/match_info_date_input" />
+
+            <LinearLayout
+                android:id="@+id/match_info_score_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/match_info_score_title">
 
                 <TextView
-                    android:id="@+id/match_info_name_title"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/match_info_score_win"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_xsmall"
-                    android:text="대회명"
+                    android:layout_weight="1"
+                    android:text="승"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_large"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="@dimen/text_large" />
+
 
                 <EditText
-                    android:id="@+id/match_info_name_input"
-                    android:layout_width="match_parent"
+                    android:id="@+id/match_info_score_win_input"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_weight="1"
+                    android:autofillHints="1"
                     android:background="@drawable/match_edittext"
-                    android:hint="대회명을 입력해주세요."
-                    android:inputType="text"
+
+                    android:inputType="number"
                     android:padding="@dimen/padding_medium"
-                    android:textSize="@dimen/text_large"
-                    app:layout_constraintTop_toBottomOf="@+id/match_info_name_title" />
+                    android:text="1"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/text_large" />
 
                 <TextView
-                    android:id="@+id/match_info_name_hint_one"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/match_info_score_draw"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:background="@drawable/match_hint_button"
-                    android:paddingHorizontal="@dimen/margin_small"
-                    android:paddingVertical="@dimen/margin_xsmall"
-                    android:text="2024-07-08 (월)"
+                    android:layout_weight="1"
+                    android:text="무"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_small"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/match_info_name_input" />
+                    android:textSize="@dimen/text_large" />
 
-                <TextView
-                    android:id="@+id/match_info_name_hint_two"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_small"
-                    android:background="@drawable/match_hint_button"
-                    android:paddingHorizontal="@dimen/margin_small"
-                    android:paddingVertical="@dimen/margin_xsmall"
-                    android:text="2024-07 월례대회"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_small"
-                    app:layout_constraintStart_toEndOf="@id/match_info_name_hint_one"
-                    app:layout_constraintTop_toBottomOf="@+id/match_info_name_input" />
 
-                <TextView
-                    android:id="@+id/match_info_date_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_xsmall"
-                    android:layout_marginTop="@dimen/margin_default"
-                    android:text="대회일자"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_large"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/match_info_name_hint_two" />
-
-                <!--            날짜 전용 스피너라던지 나중에 바꿔야 함.-->
                 <EditText
-                    android:id="@+id/match_info_date_input"
-                    android:layout_width="match_parent"
+                    android:id="@+id/match_info_score_draw_input"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_weight="1"
+                    android:autofillHints="0"
                     android:background="@drawable/match_edittext"
-                    android:hint="2024-07-08"
-                    android:inputType="datetime"
+                    android:inputType="number"
                     android:padding="@dimen/padding_medium"
-                    android:textSize="@dimen/text_large"
-                    app:layout_constraintTop_toBottomOf="@+id/match_info_date_title" />
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/text_large" />
 
                 <TextView
-                    android:id="@+id/match_info_score_title"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/match_info_score_lose"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_xsmall"
-                    android:layout_marginTop="@dimen/margin_default"
-                    android:text="승점"
+                    android:layout_weight="1"
+                    android:text="패"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/text_large"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/match_info_date_input" />
+                    android:textSize="@dimen/text_large" />
 
-                <LinearLayout
-                    android:id="@+id/match_info_score_input"
-                    android:layout_width="match_parent"
+
+                <EditText
+                    android:id="@+id/match_info_score_lose_input"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="10dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/match_info_score_title">
+                    android:layout_weight="1"
+                    android:autofillHints="0"
+                    android:background="@drawable/match_edittext"
+                    android:inputType="number"
+                    android:padding="@dimen/padding_medium"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/text_large" />
 
-                    <TextView
-                        android:id="@+id/match_info_score_win"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="승"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_large" />
+            </LinearLayout>
+            >
 
+            <TextView
+                android:id="@+id/match_info_game_count_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xsmall"
+                android:layout_marginTop="@dimen/margin_default"
+                android:text="1인당 경기 수"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/match_info_score_input" />
 
-                    <EditText
-                        android:id="@+id/match_info_score_win_input"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:autofillHints="1"
-                        android:background="@drawable/match_edittext"
-
-                        android:inputType="number"
-                        android:padding="@dimen/padding_medium"
-                        android:text="1"
-                        android:textAlignment="center"
-                        android:textSize="@dimen/text_large" />
-
-                    <TextView
-                        android:id="@+id/match_info_score_draw"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="무"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_large" />
-
-
-                    <EditText
-                        android:id="@+id/match_info_score_draw_input"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:autofillHints="0"
-                        android:background="@drawable/match_edittext"
-                        android:inputType="number"
-                        android:padding="@dimen/padding_medium"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textSize="@dimen/text_large" />
-
-                    <TextView
-                        android:id="@+id/match_info_score_lose"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="패"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_large" />
-
-
-                    <EditText
-                        android:id="@+id/match_info_score_lose_input"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:autofillHints="0"
-                        android:background="@drawable/match_edittext"
-                        android:inputType="number"
-                        android:padding="@dimen/padding_medium"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textSize="@dimen/text_large" />
-
-                </LinearLayout>
-                >
-
-                <TextView
-                    android:id="@+id/match_info_game_count_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_xsmall"
-                    android:layout_marginTop="@dimen/margin_default"
-                    android:text="1인당 경기 수"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_large"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/match_info_score_input" />
-
-                <LinearLayout
-                    android:id="@+id/match_info_game_count_input"
-                    android:layout_width="@dimen/match_info_game_count"
-                    android:layout_height="@dimen/small_button_height"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/match_info_game_count_title">
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/match_info_game_count_minus"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/match_game_count_minus"
-                        android:padding="0dp"
-                        android:text="-"
-                        android:textColor="@color/main"
-                        android:textSize="@dimen/text_large" />
-
-                    <TextView
-                        android:id="@+id/match_info_game_count_number"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:layout_weight="1.5"
-                        android:background="@drawable/match_game_count"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="4"
-                        android:textAlignment="center"
-                        android:textColor="@color/main"
-                        android:textSize="@dimen/text_large" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/match_info_game_count_plus"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/match_game_count_plus"
-                        android:text="+"
-                        android:textColor="@color/main"
-                        android:textSize="@dimen/text_large" />
-                </LinearLayout>
-
-                <RadioGroup
-                    android:id="@+id/match_info_game_type_input"
-                    android:layout_width="@dimen/match_info_game_count"
-                    android:layout_height="@dimen/small_button_height"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/match_info_game_count_input">
-
-                    <RadioButton
-                        android:id="@+id/match_info_game_type_double"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_radio_left"
-                        android:button="@color/transparent"
-                        android:buttonTint="@color/main"
-                        android:checked="true"
-                        android:gravity="center"
-                        android:text="복식"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_large" />
-
-                    <RadioButton
-                        android:id="@+id/match_info_game_type_single"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_radio_right"
-                        android:button="@color/transparent"
-                        android:checked="false"
-                        android:gravity="center"
-                        android:text="단식"
-                        android:textColor="@color/main"
-                        android:textSize="@dimen/text_large" />
-                </RadioGroup>
+            <LinearLayout
+                android:id="@+id/match_info_game_count_input"
+                android:layout_width="@dimen/match_info_game_count"
+                android:layout_height="@dimen/small_button_height"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/match_info_game_count_title">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/match_info_next_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/small_button_height"
-                    android:layout_marginTop="@dimen/margin_xlarge"
-                    android:background="@drawable/match_main_button"
-                    android:text="다음"
+                    android:id="@+id/match_info_game_count_minus"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/match_game_count_minus"
+                    android:padding="0dp"
+                    android:text="-"
+                    android:textColor="@color/main"
+                    android:textSize="@dimen/text_large" />
+
+                <TextView
+                    android:id="@+id/match_info_game_count_number"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/match_game_count"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:text="4"
+                    android:textAlignment="center"
+                    android:textColor="@color/main"
+                    android:textSize="@dimen/text_large" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/match_info_game_count_plus"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/match_game_count_plus"
+                    android:text="+"
+                    android:textColor="@color/main"
+                    android:textSize="@dimen/text_large" />
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/match_info_game_type_input"
+                android:layout_width="@dimen/match_info_game_count"
+                android:layout_height="@dimen/small_button_height"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/match_info_game_count_input">
+
+                <RadioButton
+                    android:id="@+id/match_info_game_type_double"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_radio_left"
+                    android:button="@color/transparent"
+                    android:buttonTint="@color/main"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="복식"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_large"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/match_info_game_count_input" />
+                    android:textSize="@dimen/text_large" />
+
+                <RadioButton
+                    android:id="@+id/match_info_game_type_single"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_radio_right"
+                    android:button="@color/transparent"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:text="단식"
+                    android:textColor="@color/main"
+                    android:textSize="@dimen/text_large" />
+            </RadioGroup>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/match_info_next_button"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/small_button_height"
+                android:layout_marginTop="@dimen/margin_xlarge"
+                android:background="@drawable/match_main_button"
+                android:text="다음"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/match_info_game_count_input" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
