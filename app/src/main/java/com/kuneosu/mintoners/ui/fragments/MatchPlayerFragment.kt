@@ -2,6 +2,7 @@ package com.kuneosu.mintoners.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -9,7 +10,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kuneosu.mintoners.R
@@ -24,7 +27,7 @@ class MatchPlayerFragment : Fragment() {
 
     private var _binding: FragmentMatchPlayerBinding? = null
     private val binding get() = _binding!!
-    private val matchViewModel: MatchViewModel by viewModels()
+    private val matchViewModel: MatchViewModel by activityViewModels()
     private lateinit var adapter: MatchPlayerAdapter
 
     override fun onCreateView(
@@ -40,17 +43,17 @@ class MatchPlayerFragment : Fragment() {
 
         adapter = MatchPlayerAdapter(matchViewModel)
         binding.matchPlayerRecyclerView.adapter = adapter
+        binding.matchPlayerRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        if (matchViewModel.allPlayers.value.isNullOrEmpty()) {
-            matchViewModel.addPlayer(Player(playerName = "Player 1", playerIndex = 1))
+        matchViewModel.players.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+            updatePlayerCount(it.size)
+        })
+
+        binding.matchPlayerLoadButton.setOnClickListener {
+            Log.d("MatchPlayerFragment", "onViewCreated: ${matchViewModel.match.value}")
         }
 
-        // ViewModel 관찰 설정
-        matchViewModel.allPlayers.observe(viewLifecycleOwner) { players ->
-            adapter.updatePlayers(players)
-            // 인원 수 업데이트
-            binding.matchPlayerCountText.text = players.size.toString()
-        }
 
         // Set OnTouchListener to root layout to detect touch events
         binding.matchPlayerCard.setOnTouchListener { v, event ->
@@ -72,15 +75,18 @@ class MatchPlayerFragment : Fragment() {
                         hideKeyboard()
                     } else {
                         findNavController().popBackStack()
+                        matchViewModel.applyPlayerList()
                     }
                 }
             })
 
         binding.matchPlayerPreviousButton.setOnClickListener {
             findNavController().popBackStack()
+            matchViewModel.applyPlayerList()
         }
         binding.matchPlayerNextButton.setOnClickListener {
             findNavController().navigate(R.id.action_matchPlayerFragment_to_matchListFragment)
+            matchViewModel.applyPlayerList()
         }
     }
 

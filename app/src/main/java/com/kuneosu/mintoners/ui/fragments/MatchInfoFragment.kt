@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
@@ -28,7 +29,7 @@ import java.util.Locale
 class MatchInfoFragment : Fragment() {
     private var _binding: FragmentMatchInfoBinding? = null
     private val binding get() = _binding!!
-    private val matchViewModel: MatchViewModel by viewModels()
+    private val matchViewModel: MatchViewModel by activityViewModels()
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -131,7 +132,7 @@ class MatchInfoFragment : Fragment() {
         }
     }
 
-    fun stringToDate(dateString: String): Date? {
+    private fun stringToDate(dateString: String): Date? {
         val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return format.parse(dateString)
     }

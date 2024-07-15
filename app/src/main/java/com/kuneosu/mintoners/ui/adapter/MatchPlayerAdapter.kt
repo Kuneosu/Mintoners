@@ -1,6 +1,5 @@
 package com.kuneosu.mintoners.ui.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,62 +8,71 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.MatchPlayerItemBinding
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 
+private const val TAG = "MatchPlayerAdapter"
+
+
 class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private var players: List<Player> = emptyList()
-
+    ListAdapter<Player, MatchPlayerAdapter.PlayerViewHolder>(diffUtil) {
     companion object {
-        private const val VIEW_TYPE_PLAYER = 1
-        private const val VIEW_TYPE_ADD = 2
-    }
+        // diffUtil: currentList에 있는 각 아이템들을 비교하여 최신 상태를 유지하도록 한다.
+        val diffUtil = object : DiffUtil.ItemCallback<Player>() {
+            override fun areItemsTheSame(oldItem: Player, newItem: Player): Boolean {
+                return oldItem.playerIndex == newItem.playerIndex
+            }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (position < players.size) VIEW_TYPE_PLAYER else VIEW_TYPE_ADD
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        return if (viewType == VIEW_TYPE_PLAYER) {
-            val binding = MatchPlayerItemBinding.inflate(inflater, parent, false)
-            PlayerViewHolder(binding)
-        } else {
-            val binding = MatchPlayerItemBinding.inflate(inflater, parent, false)
-            AddPlayerViewHolder(binding)
+            override fun areContentsTheSame(oldItem: Player, newItem: Player): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is PlayerViewHolder) {
-            holder.bind(players[position], position)
-        } else if (holder is AddPlayerViewHolder) {
-            holder.bind()
-        }
+    private fun addPlayer() {
+        val playerIndex = matchViewModel.players.value?.size?.plus(1) ?: 0
+        val newPlayer = Player(playerIndex = playerIndex, playerName = "Player $playerIndex")
+        matchViewModel.addPlayer(newPlayer)
+    }
+
+    private fun deletePlayer(player: Player) {
+        matchViewModel.deletePlayer(player)
+        matchViewModel.updatePlayerIndexes()
+        notifyItemRangeChanged(0, currentList.size)
+    }
+
+    private fun updatePlayer(player: Player) {
+        matchViewModel.updatePlayer(player)
     }
 
     override fun getItemCount(): Int {
-        return players.size + 1 // Add one for the add button
+        return currentList.size + 1
     }
 
-    fun updatePlayers(newPlayers: List<Player>) {
-        val diffCallback = PlayerDiffCallback(players, newPlayers)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        players = newPlayers
-        diffResult.dispatchUpdatesTo(this)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
+        val binding =
+            MatchPlayerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PlayerViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
+        if (position < currentList.size) {
+            holder.bind(currentList[position])
+        } else {
+            holder.add()
+        }
     }
 
     inner class PlayerViewHolder(private val binding: MatchPlayerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        @SuppressLint("SetTextI18n")
-        fun bind(player: Player, position: Int) {
-            binding.matchPlayerNumber.text = (position + 1).toString()
+        fun bind(player: Player) {
             binding.matchPlayerName.text = player.playerName
+            binding.matchPlayerIndex.text = player.playerIndex.toString()
+
             binding.matchPlayerName.setOnClickListener {                // Implement player name editing logic here
                 binding.matchPlayerName.visibility = View.GONE
                 binding.editPlayerName.visibility = View.VISIBLE
@@ -90,66 +98,35 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
                     binding.matchPlayerName.visibility = View.VISIBLE
                     binding.deleteButton.visibility = View.VISIBLE
                     binding.editEmptyButton.visibility = View.GONE
-                    matchViewModel.updatePlayer(player)
-
+                    updatePlayer(player)
                 }
             }
 
             binding.deleteButton.setOnClickListener {
-                binding.root.clearFocus()
-                matchViewModel.deletePlayer(player)
+                deletePlayer(player)
             }
-            binding.addPlayerInfo.visibility = View.GONE
-            binding.matchPlayerInfo.visibility = View.VISIBLE
         }
-    }
 
-    private fun showKeyboard(view: View) {
-        val imm = ContextCompat.getSystemService(view.context, InputMethodManager::class.java)
-        imm?.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
-    }
-
-    fun getEditorActionListener(view: View): TextView.OnEditorActionListener { // 키보드에서 done(완료) 클릭 시
-        return TextView.OnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                view.clearFocus()
-            }
-            false
+        private fun showKeyboard(view: View) {
+            val imm = ContextCompat.getSystemService(view.context, InputMethodManager::class.java)
+            imm?.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         }
-    }
 
-    inner class AddPlayerViewHolder(private val binding: MatchPlayerItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind() {
-            binding.addPlayerButton.setOnClickListener {
-                val newPlayer = Player(playerName = "New Player", playerIndex = players.size + 1)
-                matchViewModel.addPlayer(newPlayer)
+        private fun getEditorActionListener(view: View): TextView.OnEditorActionListener { // 키보드에서 done(완료) 클릭 시
+            return TextView.OnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    view.clearFocus()
+                }
+                false
             }
-            binding.addPlayerInfo.visibility = View.VISIBLE
+        }
+
+        fun add() {
             binding.matchPlayerInfo.visibility = View.GONE
+            binding.addPlayerInfo.visibility = View.VISIBLE
+            binding.addPlayerButton.setOnClickListener {
+                addPlayer()
+            }
         }
-    }
-}
-
-class PlayerDiffCallback(
-    private val oldList: List<Player>,
-    private val newList: List<Player>
-) : DiffUtil.Callback() {
-
-    override fun getOldListSize(): Int {
-        return oldList.size
-    }
-
-    override fun getNewListSize(): Int {
-        return newList.size
-    }
-
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].playerIndex == newList[newItemPosition].playerIndex
-    }
-
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition] == newList[newItemPosition]
     }
 }

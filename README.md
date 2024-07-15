@@ -99,3 +99,13 @@ July 2024 Personal project, match table creation and management application
             - MatchMainRankFragment = 데이터베이스에서 Score 합산 기준 Player 이름 가져와서 순서대로 출력
     - ViewModel 완성 후 리사이클러뷰 어댑터 제작할 것.
         - MatchPlayerAdapter는 현재 제작중.
+
+## 2024.07.15
+
+- **Room Database 연동**
+  - MatchPlayer 데이터 처리 개발 완료
+      - MatchPlayerAdapter 개발 완료
+      - MatchPlayerFragment 개발 완료
+      - MatchViewModel - Player 관련 개발 완료
+      - Player 추가, 삭제, 수정 가능
+      - Player 삭제 시 Index 초기화 (1부터 정렬)
