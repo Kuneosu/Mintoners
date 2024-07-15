@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.kuneosu.mintoners.R
+import androidx.fragment.app.activityViewModels
 import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.FragmentMatchMainListBinding
@@ -18,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MatchMainListFragment : Fragment() {
     private var _binding: FragmentMatchMainListBinding? = null
     private val binding get() = _binding!!
-    private val matchViewModel: MatchViewModel by viewModels()
+    private val matchViewModel: MatchViewModel by activityViewModels()
 
 
     override fun onCreateView(

@@ -1,5 +1,6 @@
 package com.kuneosu.mintoners.ui.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -85,11 +86,12 @@ class MatchPlayerFragment : Fragment() {
             matchViewModel.applyPlayerList()
         }
         binding.matchPlayerNextButton.setOnClickListener {
-            findNavController().navigate(R.id.action_matchPlayerFragment_to_matchListFragment)
+            findNavController().navigate(R.id.action_matchPlayerFragment_to_matchGameFragment)
             matchViewModel.applyPlayerList()
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updatePlayerCount(count: Int) {
         binding.matchPlayerCountText.text = "참가 인원수 : $count 명"
     }

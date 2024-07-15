@@ -109,3 +109,21 @@ July 2024 Personal project, match table creation and management application
       - MatchViewModel - Player 관련 개발 완료
       - Player 추가, 삭제, 수정 가능
       - Player 삭제 시 Index 초기화 (1부터 정렬)
+  - MatchGame 데이터 처리 개발 
+    - MatchGameAdapter 개발 완료
+    - MatchGameFragment 개발 완료
+      - Fragment 최초 실행 시 뷰모델의 players 데이터를 통해 Game List 생성
+    - MatchViewModel - Game 관련 개발 완료
+    - Game 추가, 삭제, 수정 가능
+        - 리사이클러뷰 Swipe를 통해 삭제
+    - Game 삭제 시 Index 초기화 (1부터 정렬)
+  - Match 데이터 처리
+    - 입력이 완료된 player와 games 데이터는 화면 이동 버튼 클릭 시 match에 저장
+    - match 데이터는 MatchMainFragment에서 확인 가능
+  - 향후 개발
+    - Swipe or Drag & Drop을 통한 Player, Game 순서 변경, 아이템 삭제, 아이템 수정 등 구현
+    - MatchMainFragment에서 Match 데이터를 확인하고 수정 가능하도록 구현
+    - MatchMainListFragment에서 승점을 입력받아서 Match 데이터에 저장
+    - MatchMainRankFragment에서 Match 데이터를 가져와서 승점 순으로 정렬하여 출력
+
+
