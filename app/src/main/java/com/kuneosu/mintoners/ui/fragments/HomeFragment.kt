@@ -25,10 +25,6 @@ class HomeFragment : Fragment() {
 
         // 데이터 바인딩 객체를 인플레이트합니다
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-
-
-
 
         binding.homeCardGuest.setOnClickListener {
             updateBottomNavigationView(R.id.menu_profile)

@@ -2,14 +2,16 @@ package com.kuneosu.mintoners.di
 
 import android.content.Context
 import androidx.room.Room
-import com.kuneosu.mintoners.data.local.database.AppDatabase
 import com.kuneosu.mintoners.data.local.dao.GameDao
 import com.kuneosu.mintoners.data.local.dao.MatchDao
 import com.kuneosu.mintoners.data.local.dao.MemberDao
 import com.kuneosu.mintoners.data.local.dao.PlayerDao
+import com.kuneosu.mintoners.data.local.database.AppDatabase
+import com.kuneosu.mintoners.data.repository.MatchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -22,13 +24,9 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabase(
-        context: Context
+        @ApplicationContext context: Context
     ): AppDatabase {
-        return Room.databaseBuilder(
-            context.applicationContext,
-            AppDatabase::class.java,
-            "app_database"
-        ).build()
+        return AppDatabase.getDatabase(context, CoroutineScope(SupervisorJob()))
     }
 
     @Provides
@@ -55,5 +53,17 @@ object DatabaseModule {
     @Singleton
     fun provideCoroutineScope(): CoroutineScope {
         return CoroutineScope(SupervisorJob())
+    }
+
+    @Provides
+    @Singleton
+    fun provideMatchRepository(
+        matchDao: MatchDao,
+        playerDao: PlayerDao,
+        gameDao: GameDao,
+        memberDao: MemberDao,
+        scope: CoroutineScope
+    ): MatchRepository {
+        return MatchRepository(matchDao, playerDao, gameDao, memberDao, scope)
     }
 }

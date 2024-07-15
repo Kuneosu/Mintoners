@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.kuneosu.mintoners.ui.viewmodels.HomeViewModel" />
+            type="com.kuneosu.mintoners.ui.viewmodel.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
