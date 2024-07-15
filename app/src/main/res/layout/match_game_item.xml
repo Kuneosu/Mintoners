@@ -6,15 +6,16 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/match_list_info"
+        android:id="@+id/match_game_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/match_list_number"
+            android:id="@+id/match_game_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -25,28 +26,32 @@
             android:textSize="@dimen/text_large" />
 
         <EditText
-            android:id="@+id/match_list_player_a"
+            android:id="@+id/match_game_player_a"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_weight="2"
             android:background="@drawable/match_edittext"
+            android:inputType="textCapWords"
+            android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:text="김권수"
             android:textAlignment="center" />
 
         <EditText
-            android:id="@+id/match_list_player_b"
+            android:id="@+id/match_game_player_b"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:background="@drawable/match_edittext"
+            android:inputType="textCapWords"
+            android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:text="김권수"
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/match_list_vs"
+            android:id="@+id/match_game_vs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,23 +62,27 @@
             android:textSize="@dimen/text_medium" />
 
         <EditText
-            android:id="@+id/match_list_player_c"
+            android:id="@+id/match_game_player_c"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_weight="2"
             android:background="@drawable/match_edittext"
+            android:inputType="textCapWords"
+            android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:text="김권수"
             android:textAlignment="center" />
 
         <EditText
-            android:id="@+id/match_list_player_d"
+            android:id="@+id/match_game_player_d"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_weight="2"
             android:background="@drawable/match_edittext"
+            android:inputType="textCapWords"
+            android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:text="김권수"
             android:textAlignment="center" />
@@ -81,16 +90,23 @@
 
     </LinearLayout>
 
+    <View
+        android:id="@+id/match_game_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#26000000"
+        app:layout_constraintTop_toBottomOf="@id/match_game_info" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/add_list_info"
+        android:id="@+id/add_game_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1A4B89DC"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/add_list_button"
+            android:id="@+id/add_game_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -107,13 +123,16 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#26000000"
-            app:layout_constraintTop_toBottomOf="@id/add_list_button" />
+            app:layout_constraintTop_toBottomOf="@id/add_game_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
+        android:id="@+id/match_game_add_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:visibility="gone"
         android:background="#26000000"
-        app:layout_constraintTop_toBottomOf="@id/match_list_info" />
+        app:layout_constraintTop_toBottomOf="@id/add_game_info" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

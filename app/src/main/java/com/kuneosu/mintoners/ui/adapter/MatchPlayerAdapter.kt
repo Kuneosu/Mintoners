@@ -1,5 +1,6 @@
 package com.kuneosu.mintoners.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,10 +33,13 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
         }
     }
 
+    private var focusChecker = false
+
     private fun addPlayer() {
         val playerIndex = matchViewModel.players.value?.size?.plus(1) ?: 0
         val newPlayer = Player(playerIndex = playerIndex, playerName = "Player $playerIndex")
         matchViewModel.addPlayer(newPlayer)
+        focusChecker = true
     }
 
     private fun deletePlayer(player: Player) {
@@ -69,6 +73,7 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
 
     inner class PlayerViewHolder(private val binding: MatchPlayerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(player: Player) {
             binding.matchPlayerName.text = player.playerName
             binding.matchPlayerIndex.text = player.playerIndex.toString()
@@ -98,12 +103,22 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
                     binding.matchPlayerName.visibility = View.VISIBLE
                     binding.deleteButton.visibility = View.VISIBLE
                     binding.editEmptyButton.visibility = View.GONE
-                    updatePlayer(player)
+                    if (newName.isNotEmpty()) {
+                        updatePlayer(player)
+                    } else {
+                        deletePlayer(player)
+                    }
+
                 }
             }
 
             binding.deleteButton.setOnClickListener {
                 deletePlayer(player)
+            }
+
+            if (focusChecker) {
+                binding.matchPlayerName.performClick()
+                focusChecker = false
             }
         }
 

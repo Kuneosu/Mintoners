@@ -8,9 +8,9 @@ import androidx.room.TypeConverters
 @TypeConverters(Converters::class)
 data class Game(
     @PrimaryKey(autoGenerate = true) val gameNumber: Int = 0,
-    val gameIndex: Int,
+    var gameIndex: Int,
     val gameTeamA: List<Player>,
     val gameTeamB: List<Player>,
-    val gameAScore: Int,
-    val gameBScore: Int
+    val gameAScore: Int = 0,
+    val gameBScore: Int = 0
 )

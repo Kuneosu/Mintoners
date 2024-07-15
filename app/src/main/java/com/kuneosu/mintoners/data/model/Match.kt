@@ -16,5 +16,5 @@ data class Match(
     val matchCount: Int,
     val matchType: String,
     var matchPlayers: List<Player>,
-    val matchList: List<Game>
+    var matchList: List<Game>
 )
