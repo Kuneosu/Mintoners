@@ -126,4 +126,8 @@ July 2024 Personal project, match table creation and management application
     - MatchMainListFragment에서 승점을 입력받아서 Match 데이터에 저장
     - MatchMainRankFragment에서 Match 데이터를 가져와서 승점 순으로 정렬하여 출력
 
+## 2024.07.16
 
+- **MatchInfoDialog 개발**
+    - Custom Dialog 를 만들어서 대회 정보를 출력하는 다이얼로그 개발
+    - MatchMainFragment 에서 대회 정보를 출력하는 버튼 클릭 시 다이얼로그 출력
