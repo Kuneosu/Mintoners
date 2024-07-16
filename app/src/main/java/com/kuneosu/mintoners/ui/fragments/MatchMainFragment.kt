@@ -10,8 +10,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentMatchMainBinding
+import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @AndroidEntryPoint
 class MatchMainFragment : Fragment() {
@@ -26,16 +30,7 @@ class MatchMainFragment : Fragment() {
     ): View {
         _binding = FragmentMatchMainBinding.inflate(inflater, container, false)
 
-        Log.d(
-            "MatchMainFragment",
-            "matchName : ${matchViewModel.match.value?.matchName}\n" +
-                    "matchDate : ${matchViewModel.match.value?.matchDate}\n" +
-                    "matchPoint : ${matchViewModel.match.value?.matchPoint}\n" +
-                    "matchCount : ${matchViewModel.match.value?.matchCount}\n" +
-                    "matchType : ${matchViewModel.match.value?.matchType}\n" +
-                    "matchPlayers : ${matchViewModel.match.value?.matchPlayers}\n" +
-                    "matchGames : ${matchViewModel.match.value?.matchList}"
-        )
+        infoDialogSetting()
 
         binding.matchMainEditButton.setOnClickListener {
             findNavController().navigate(R.id.action_matchMainFragment_to_matchGameFragment)
@@ -46,6 +41,35 @@ class MatchMainFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun infoDialogSetting() {
+        binding.matchMainTopInfo.setOnClickListener {
+            val infoTitle = "대회명 : ${matchViewModel.match.value?.matchName ?: ""}"
+            val infoDate = "대회일자 : ${dateToString(matchViewModel.match.value?.matchDate)}"
+            val infoPoint = "승점 : ${matchViewModel.match.value?.matchPoint ?: ""}"
+            val infoType =
+                "경기방식 : ${if (matchViewModel.match.value?.matchType == "double") "복식" else "단식"}"
+            val infoPlayerCount = "참가자 수 : ${matchViewModel.match.value?.matchPlayers?.size ?: 0}"
+            val infoGameCount = "총 경기 수 : ${matchViewModel.match.value?.matchList?.size ?: 0}"
+
+
+            val dialog = MatchInfoDialog(
+                infoTitle,
+                infoDate,
+                infoPoint,
+                infoType,
+                infoPlayerCount,
+                infoGameCount
+            )
+            dialog.isCancelable = false
+            dialog.show(parentFragmentManager, "MatchInfoDialog")
+        }
+    }
+
+    private fun dateToString(date: Date?): String {
+        val sdf = SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREA)
+        return sdf.format(date!!)
     }
 
     override fun onDestroyView() {
