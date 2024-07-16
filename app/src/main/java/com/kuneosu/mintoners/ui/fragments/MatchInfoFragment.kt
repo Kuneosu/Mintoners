@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.databinding.FragmentMatchInfoBinding
+import com.kuneosu.mintoners.ui.customview.MatchCalendarDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -45,6 +46,10 @@ class MatchInfoFragment : Fragment() {
         }
 
 
+        binding.matchInfoDateInput.setOnClickListener {
+            val dialog = MatchCalendarDialog()
+            dialog.show(childFragmentManager, "calendar")
+        }
 
         binding.matchInfoGameCountMinus.setOnClickListener {
             val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()

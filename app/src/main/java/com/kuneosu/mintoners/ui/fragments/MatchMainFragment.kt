@@ -1,5 +1,6 @@
 package com.kuneosu.mintoners.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,23 +25,37 @@ class MatchMainFragment : Fragment() {
     private val matchViewModel: MatchViewModel by activityViewModels()
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMatchMainBinding.inflate(inflater, container, false)
 
-        infoDialogSetting()
 
+        displayInfoSetting()
+        infoDialogSetting()
+        moveButtonSetting()
+
+
+        return binding.root
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun displayInfoSetting() {
+        binding.matchMainTopTitle.text = matchViewModel.match.value?.matchName ?: ""
+        binding.matchMainCountText.text = "" +
+                "참가 인원 : ${matchViewModel.match.value?.matchPlayers?.size ?: 0}명\n" +
+                "총 경기 수 : ${matchViewModel.match.value?.matchList?.size ?: 0}경기"
+    }
+
+    private fun moveButtonSetting() {
         binding.matchMainEditButton.setOnClickListener {
             findNavController().navigate(R.id.action_matchMainFragment_to_matchGameFragment)
         }
-
         binding.matchMainEndButton.setOnClickListener {
             activity?.finish()
         }
-
-        return binding.root
     }
 
     private fun infoDialogSetting() {

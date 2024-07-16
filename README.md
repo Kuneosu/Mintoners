@@ -131,3 +131,9 @@ July 2024 Personal project, match table creation and management application
 - **MatchInfoDialog 개발**
     - Custom Dialog 를 만들어서 대회 정보를 출력하는 다이얼로그 개발
     - MatchMainFragment 에서 대회 정보를 출력하는 버튼 클릭 시 다이얼로그 출력
+- **Match Process 디테일 개발**
+  - MatchMain 정보 출력
+    - 상단바에 제목 출력
+    - 서브 타이틀에 경기 수와 참가자 수 출력
+  - Process 화면들 ScrollView 전체로 변경
+  - CalendarView 작업중
