@@ -136,4 +136,9 @@ July 2024 Personal project, match table creation and management application
     - 상단바에 제목 출력
     - 서브 타이틀에 경기 수와 참가자 수 출력
   - Process 화면들 ScrollView 전체로 변경
-  - CalendarView 작업중
+  - CalendarView 추가
+    - 대회일자를 선택할 수 있는 캘린더 뷰 추가
+    - 캘린더 뷰를 통해 대회일자를 선택하면 MatchInfoFragment 에서 대회일자 자동 입력
+    - 변경되는 대회 일자에 따라 Title hint 변경
+    - MaterialCalendarView 는 충돌이 발생하여 일반 CalendarView 사용
+    - Dialog 형식으로 출력하고 ViewModel을 통해 데이터 주고받음

@@ -9,6 +9,7 @@ import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.data.repository.MatchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.Date
 import javax.inject.Inject
 
 
@@ -28,9 +29,16 @@ class MatchViewModel @Inject constructor(
     private val _games = MutableLiveData<List<Game>>()
     val games: LiveData<List<Game>> get() = _games
 
+    private val _selectedDate = MutableLiveData<String>()
+    val selectedDate: LiveData<String> get() = _selectedDate
+
     init {
         _players.value = _match.value?.matchPlayers ?: listOf()
         _games.value = _match.value?.matchList ?: listOf()
+    }
+
+    fun setSelectedDate(date: String) {
+        _selectedDate.value = date
     }
 
 
