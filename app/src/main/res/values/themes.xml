@@ -17,6 +17,23 @@
         <item name="android:checkboxStyle">@style/customCheckboxFontStyle</item>
     </style>
 
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/main</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorControlActivated">@color/main</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@drawable/selector_match_calendar</item>
+        <item name="android:weekNumberColor">@color/black</item>
+    </style>
+
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/main</item>
+    </style>
+
+
     <style name="BottomAppBar" parent="Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@color/main</item>
         <item name="colorPrimaryVariant">@color/white</item>

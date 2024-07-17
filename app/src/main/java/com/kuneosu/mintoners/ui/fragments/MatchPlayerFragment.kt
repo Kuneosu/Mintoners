@@ -42,20 +42,16 @@ class MatchPlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = MatchPlayerAdapter(matchViewModel)
-        binding.matchPlayerRecyclerView.adapter = adapter
-        binding.matchPlayerRecyclerView.layoutManager = LinearLayoutManager(context)
-
-        matchViewModel.players.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
-            updatePlayerCount(it.size)
-        })
+        playerAdapterSetting()
 
         binding.matchPlayerLoadButton.setOnClickListener {
             Log.d("MatchPlayerFragment", "onViewCreated: ${matchViewModel.match.value}")
         }
 
+        playerNavigationSetting()
+    }
 
+    private fun playerNavigationSetting() {
         // Set OnTouchListener to root layout to detect touch events
         binding.matchPlayerCard.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
@@ -89,6 +85,17 @@ class MatchPlayerFragment : Fragment() {
             findNavController().navigate(R.id.action_matchPlayerFragment_to_matchGameFragment)
             matchViewModel.applyPlayerList()
         }
+    }
+
+    private fun playerAdapterSetting() {
+        adapter = MatchPlayerAdapter(matchViewModel)
+        binding.matchPlayerRecyclerView.adapter = adapter
+        binding.matchPlayerRecyclerView.layoutManager = LinearLayoutManager(context)
+
+        matchViewModel.players.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+            updatePlayerCount(it.size)
+        })
     }
 
     @SuppressLint("SetTextI18n")

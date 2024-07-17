@@ -7,4 +7,8 @@
     <color name="trans_black_50">#80000000</color>
     <color name="trans_black_25">#40000000</color>
     <color name="trans_black_75">#BF000000</color>
+
+    <color name="datePrimary">#804B89DC</color>
+    <color name="dateAccent">@color/main</color>
+    <color name="dateArrow">@color/black</color>
 </resources>

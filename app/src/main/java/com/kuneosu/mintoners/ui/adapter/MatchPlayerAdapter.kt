@@ -1,6 +1,8 @@
 package com.kuneosu.mintoners.ui.adapter
 
 import android.annotation.SuppressLint
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,9 +45,11 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
     }
 
     private fun deletePlayer(player: Player) {
-        matchViewModel.deletePlayer(player)
-        matchViewModel.updatePlayerIndexes()
-        notifyItemRangeChanged(0, currentList.size)
+        Handler(Looper.getMainLooper()).post {
+            matchViewModel.deletePlayer(player)
+            matchViewModel.updatePlayerIndexes()
+            notifyItemRangeChanged(0, currentList.size)
+        }
     }
 
     private fun updatePlayer(player: Player) {
@@ -106,14 +110,18 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
                     if (newName.isNotEmpty()) {
                         updatePlayer(player)
                     } else {
-                        deletePlayer(player)
+                        Handler(Looper.getMainLooper()).post {
+                            deletePlayer(player)
+                        }
                     }
 
                 }
             }
 
             binding.deleteButton.setOnClickListener {
-                deletePlayer(player)
+                Handler(Looper.getMainLooper()).post {
+                    deletePlayer(player)
+                }
             }
 
             if (focusChecker) {

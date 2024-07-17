@@ -4,18 +4,17 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.databinding.FragmentMatchInfoBinding
+import com.kuneosu.mintoners.ui.customview.MatchCalendarDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -31,33 +30,38 @@ class MatchInfoFragment : Fragment() {
     private val binding get() = _binding!!
     private val matchViewModel: MatchViewModel by activityViewModels()
 
-
     @RequiresApi(Build.VERSION_CODES.O)
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMatchInfoBinding.inflate(inflater, container, false)
 
-        binding.matchInfoGameTypeInput.setOnCheckedChangeListener { group, checkedId ->
-            matchTypeRadioChanged(checkedId)
+        matchTypeRadioChanged()
+
+        matchGameCountChanged()
+
+        saveMatchOnNextButtonClicked()
+
+        setCalendarViewEvent()
+
+        return binding.root
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setCalendarViewEvent() {
+        matchViewModel.selectedDate.observe(viewLifecycleOwner) {
+            binding.matchInfoDateInput.text = it
+            infoNameHint()
         }
 
-
-
-        binding.matchInfoGameCountMinus.setOnClickListener {
-            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
-            if (currentCount > 1) {
-                binding.matchInfoGameCountNumber.text = (currentCount - 1).toString()
-            }
+        binding.matchInfoDateInput.setOnClickListener {
+            val dialog = MatchCalendarDialog()
+            dialog.show(childFragmentManager, "MatchCalendarDialog")
         }
+    }
 
-        binding.matchInfoGameCountPlus.setOnClickListener {
-            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
-            binding.matchInfoGameCountNumber.text = (currentCount + 1).toString()
-        }
-
+    private fun saveMatchOnNextButtonClicked() {
         binding.matchInfoNextButton.setOnClickListener {
             val points =
                 "${binding.matchInfoScoreWinInput.text}${binding.matchInfoScoreDrawInput.text}${binding.matchInfoScoreLoseInput.text}"
@@ -71,21 +75,20 @@ class MatchInfoFragment : Fragment() {
             )
             findNavController().navigate(R.id.action_matchInfoFragment_to_matchPlayerFragment)
         }
+    }
 
-        binding.matchInfoNameHintOne.text = infoNameHint(1)
-        binding.matchInfoNameHintTwo.text = infoNameHint(2)
-
-        binding.matchInfoNameHintOne.setOnClickListener {
-            binding.matchInfoNameInput.setText(binding.matchInfoNameHintOne.text)
+    @SuppressLint("SetTextI18n")
+    private fun matchGameCountChanged() {
+        binding.matchInfoGameCountMinus.setOnClickListener {
+            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
+            if (currentCount > 1) {
+                binding.matchInfoGameCountNumber.text = (currentCount - 1).toString()
+            }
         }
-        binding.matchInfoNameHintTwo.setOnClickListener {
-            binding.matchInfoNameInput.setText(binding.matchInfoNameHintTwo.text)
+        binding.matchInfoGameCountPlus.setOnClickListener {
+            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
+            binding.matchInfoGameCountNumber.text = (currentCount + 1).toString()
         }
-
-        binding.matchInfoDateInput.text = Editable.Factory.getInstance()
-            .newEditable((LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))))
-
-        return binding.root
     }
 
     private fun onNextClicked(
@@ -108,28 +111,32 @@ class MatchInfoFragment : Fragment() {
     }
 
 
-    private fun matchTypeRadioChanged(checkedId: Int) {
-        when (checkedId) {
-            binding.matchInfoGameTypeDouble.id -> {
-                binding.matchInfoGameTypeDouble.setTextColor(Color.WHITE)
-                binding.matchInfoGameTypeSingle.setTextColor(
-                    resources.getColor(
-                        R.color.main,
-                        null
-                    )
-                )
-            }
+    private fun matchTypeRadioChanged() {
 
-            binding.matchInfoGameTypeSingle.id -> {
-                binding.matchInfoGameTypeDouble.setTextColor(
-                    resources.getColor(
-                        R.color.main,
-                        null
+        binding.matchInfoGameTypeInput.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                binding.matchInfoGameTypeDouble.id -> {
+                    binding.matchInfoGameTypeDouble.setTextColor(Color.WHITE)
+                    binding.matchInfoGameTypeSingle.setTextColor(
+                        resources.getColor(
+                            R.color.main,
+                            null
+                        )
                     )
-                )
-                binding.matchInfoGameTypeSingle.setTextColor(Color.WHITE)
+                }
+
+                binding.matchInfoGameTypeSingle.id -> {
+                    binding.matchInfoGameTypeDouble.setTextColor(
+                        resources.getColor(
+                            R.color.main,
+                            null
+                        )
+                    )
+                    binding.matchInfoGameTypeSingle.setTextColor(Color.WHITE)
+                }
             }
         }
+
     }
 
     private fun stringToDate(dateString: String): Date? {
@@ -138,23 +145,27 @@ class MatchInfoFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun infoNameHint(type: Int): String {
-        val today = LocalDate.now()
+    private fun infoNameHint() {
+        val date = LocalDate.parse(matchViewModel.selectedDate.value)
 
         // 날짜를 "yyyy-MM-dd" 형식으로 포맷터를 만듦
         val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val dateFormatterTwo = DateTimeFormatter.ofPattern("yyyy-MM")
         // 요일을 가져옴 (한국어로)
-        val dayOfWeek = today.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN)
+        val dayOfWeek = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN)
         // 최종 문자열을 만듦
-        val hintOne = "${today.format(dateFormatter)} ($dayOfWeek)"
-        val hintTwo = "${today.format(dateFormatterTwo)} 월례대회"
+        val hintOne = "${date.format(dateFormatter)} ($dayOfWeek)"
+        val hintTwo = "${date.format(dateFormatterTwo)} 월례대회"
 
-        when (type) {
-            1 -> return hintOne
-            2 -> return hintTwo
+        binding.matchInfoNameHintOne.text = hintOne
+        binding.matchInfoNameHintTwo.text = hintTwo
+
+        binding.matchInfoNameHintOne.setOnClickListener {
+            binding.matchInfoNameInput.setText(hintOne)
         }
-        return ""
+        binding.matchInfoNameHintTwo.setOnClickListener {
+            binding.matchInfoNameInput.setText(hintTwo)
+        }
     }
 
     override fun onDestroyView() {

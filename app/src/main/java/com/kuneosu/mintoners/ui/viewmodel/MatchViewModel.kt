@@ -9,6 +9,9 @@ import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.data.repository.MatchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 
@@ -28,9 +31,17 @@ class MatchViewModel @Inject constructor(
     private val _games = MutableLiveData<List<Game>>()
     val games: LiveData<List<Game>> get() = _games
 
+    private val _selectedDate = MutableLiveData<String>()
+    val selectedDate: LiveData<String> get() = _selectedDate
+
     init {
         _players.value = _match.value?.matchPlayers ?: listOf()
         _games.value = _match.value?.matchList ?: listOf()
+        _selectedDate.value = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+    }
+
+    fun setSelectedDate(date: String) {
+        _selectedDate.value = date
     }
 
 
@@ -40,9 +51,8 @@ class MatchViewModel @Inject constructor(
         Log.d(TAG, "createMatch: $match")
     }
 
-    fun updateMatch(match: Match) {
-        repository.updateMatch(match)
-        _match.value = match
+    fun updateMatch() {
+        repository.updateMatch(_match.value!!)
     }
 
     fun addPlayer(player: Player) {
@@ -63,6 +73,7 @@ class MatchViewModel @Inject constructor(
     fun applyPlayerList() {
         val currentList = _players.value.orEmpty().toMutableList()
         _match.value?.matchPlayers = currentList
+        updateMatch()
     }
 
     fun deletePlayer(player: Player) {
@@ -116,6 +127,7 @@ class MatchViewModel @Inject constructor(
     fun applyGameList() {
         val currentList = _games.value.orEmpty().toMutableList()
         _match.value?.matchList = currentList
+        updateMatch()
     }
 
     private fun gameMakingWithKdk(): List<Game> {
