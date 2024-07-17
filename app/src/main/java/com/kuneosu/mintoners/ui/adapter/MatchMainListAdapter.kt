@@ -12,7 +12,7 @@ import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.ItemTouchHelperListener
 
 class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
-    ListAdapter<Game, MatchMainListAdapter.MatchViewHolder>(diffUtil), ItemTouchHelperListener {
+    ListAdapter<Game, MatchMainListAdapter.MatchListViewHolder>(diffUtil), ItemTouchHelperListener {
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Game>() {
             override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
@@ -29,17 +29,17 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
         return currentList.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchListViewHolder {
         val binding =
             MatchMainListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MatchViewHolder(binding)
+        return MatchListViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MatchViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MatchListViewHolder, position: Int) {
         holder.bind(currentList[position])
     }
 
-    inner class MatchViewHolder(private val binding: MatchMainListItemBinding) :
+    inner class MatchListViewHolder(private val binding: MatchMainListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(game: Game) {
             binding.matchMainListPlayerA.text = game.gameTeamA[0].playerName

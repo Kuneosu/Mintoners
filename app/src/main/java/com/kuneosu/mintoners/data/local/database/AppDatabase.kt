@@ -1,6 +1,7 @@
 package com.kuneosu.mintoners.data.local.database
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -17,7 +18,11 @@ import com.kuneosu.mintoners.data.model.Player
 import kotlinx.coroutines.CoroutineScope
 
 
-@Database(entities = [Match::class, Player::class, Game::class, Member::class], version = 1, exportSchema = false)
+@Database(
+    entities = [Match::class, Player::class, Game::class, Member::class],
+    version = 1,
+    exportSchema = false
+)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -39,6 +44,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "app_database"
                 ).build()
+                Log.d("DATABASE", "getDatabase: instance created")
                 INSTANCE = instance
                 instance
             }

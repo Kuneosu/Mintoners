@@ -9,7 +9,7 @@ import java.util.Date
 @Entity(tableName = "matches")
 @TypeConverters(Converters::class)
 data class Match(
-    @PrimaryKey(autoGenerate = true) val matchNumber: Int=0,
+    @PrimaryKey(autoGenerate = true) var matchNumber: Int = 0,
     val matchName: String,
     val matchDate: Date,
     val matchPoint: String,

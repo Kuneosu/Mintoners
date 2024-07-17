@@ -44,7 +44,7 @@ class MatchMainFragment : Fragment() {
         initPager()
 
         binding.matchMainEndButton.setOnClickListener {
-
+            matchViewModel.updateMatchByNumber(matchViewModel.match.value?.matchNumber!!)
             activity?.finish()
         }
 

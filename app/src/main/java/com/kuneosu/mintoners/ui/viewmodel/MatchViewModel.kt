@@ -4,16 +4,19 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.data.repository.MatchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
+private const val TAG = "MatchViewModel"
 
 @HiltViewModel
 class MatchViewModel @Inject constructor(
@@ -21,7 +24,6 @@ class MatchViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    private val TAG = "MatchViewModel"
     private val _match = MutableLiveData<Match>()
     val match: LiveData<Match> get() = _match
 
@@ -40,20 +42,30 @@ class MatchViewModel @Inject constructor(
         _selectedDate.value = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
     }
 
+    fun getMaxMatchNumber(): Int {
+        return repository.getMaxMatchNumber()
+    }
+
     fun setSelectedDate(date: String) {
         _selectedDate.value = date
     }
 
+    fun deleteAllMatches() {
+        viewModelScope.launch {
+            repository.deleteAllMatches()
+        }
+    }
 
     fun createMatch(match: Match) {
-        repository.insertMatch(match)
-        _match.value = match
-        Log.d(TAG, "createMatch: $match")
+        viewModelScope.launch {
+            repository.insertMatch(match)
+            _match.value = match
+            Log.d(TAG, "createMatch: $match")
+            _match.value?.matchNumber = repository.getMaxMatchNumber()
+        }
+
     }
 
-    fun updateMatch() {
-        repository.updateMatch(_match.value!!)
-    }
 
     fun addPlayer(player: Player) {
         val currentList = _players.value.orEmpty().toMutableList()
@@ -73,7 +85,7 @@ class MatchViewModel @Inject constructor(
     fun applyPlayerList() {
         val currentList = _players.value.orEmpty().toMutableList()
         _match.value?.matchPlayers = currentList
-        updateMatch()
+        updateMatchByNumber(_match.value?.matchNumber!!)
     }
 
     fun deletePlayer(player: Player) {
@@ -103,10 +115,6 @@ class MatchViewModel @Inject constructor(
         _games.value = currentList
     }
 
-    fun updateAllGames(games: List<Game>) {
-        _games.value = games
-    }
-
     fun updateGame(game: Game) {
         val currentList = _games.value.orEmpty().toMutableList()
         val index = currentList.indexOfFirst { it.gameIndex == game.gameIndex }
@@ -127,7 +135,7 @@ class MatchViewModel @Inject constructor(
     fun applyGameList() {
         val currentList = _games.value.orEmpty().toMutableList()
         _match.value?.matchList = currentList
-        updateMatch()
+        updateMatchByNumber(_match.value?.matchNumber!!)
     }
 
     private fun gameMakingWithKdk(): List<Game> {
@@ -409,6 +417,12 @@ class MatchViewModel @Inject constructor(
                     )
                 )
             }
+        }
+    }
+
+    fun updateMatchByNumber(number: Int) {
+        viewModelScope.launch {
+            repository.updateByNumber(number, _match.value!!)
         }
     }
 }
