@@ -1,16 +1,22 @@
 package com.kuneosu.mintoners.ui.fragments
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentMatchMainBinding
+import com.kuneosu.mintoners.ui.adapter.MatchMainPagerAdapter
 import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +31,6 @@ class MatchMainFragment : Fragment() {
     private val matchViewModel: MatchViewModel by activityViewModels()
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,9 +41,37 @@ class MatchMainFragment : Fragment() {
         displayInfoSetting()
         infoDialogSetting()
         moveButtonSetting()
+        initPager()
+
+        binding.matchMainEndButton.setOnClickListener {
+
+            activity?.finish()
+        }
 
 
         return binding.root
+    }
+
+    private fun initPager() {
+        val viewPager = binding.matchMainViewPager
+        val tabLayout = binding.matchMainTab
+
+        val fragmentList = listOf(
+            MatchMainListFragment(),
+            MatchMainRankFragment(),
+        )
+
+
+        viewPager.adapter =
+            MatchMainPagerAdapter(fragmentList, this)
+
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = "대진표"
+                1 -> tab.text = "현재 순위"
+            }
+        }.attach()
+
     }
 
     @SuppressLint("SetTextI18n")

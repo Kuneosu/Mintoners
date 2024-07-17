@@ -136,9 +136,23 @@ July 2024 Personal project, match table creation and management application
     - 상단바에 제목 출력
     - 서브 타이틀에 경기 수와 참가자 수 출력
   - Process 화면들 ScrollView 전체로 변경
+
+## 2024.07.17
+- **Match Process 디테일 개발**
   - CalendarView 추가
     - 대회일자를 선택할 수 있는 캘린더 뷰 추가
     - 캘린더 뷰를 통해 대회일자를 선택하면 MatchInfoFragment 에서 대회일자 자동 입력
     - 변경되는 대회 일자에 따라 Title hint 변경
     - MaterialCalendarView 는 충돌이 발생하여 일반 CalendarView 사용
     - Dialog 형식으로 출력하고 ViewModel을 통해 데이터 주고받음
+  - Player, Game, Main Fragment 코드 정리
+  - Game, Main Fragment에서 네비게이션이 꼬이던 문제 해결
+  - MatchMainFragment 개발 완료
+    - ViewPager2 를 사용한 Tab 전환
+    - MatchMainListFragment, MatchMainRankFragment 연결
+  - MatchMainFragment 에서 Match 데이터를 가져와서 출력
+    - Match.matchList 를 가져와서 대진표 출력 (MatchMainListFragment)
+    - MatchMainListItem 디자인 수정 
+    - Match.players 를 가져와서 플레이어 목록 출력 (MatchMainRankFragment)
+      - 각 플레이어 별 승점에 따라 정렬 기능 구현 필요.
+  

@@ -1,23 +1,29 @@
 package com.kuneosu.mintoners.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.FragmentMatchMainListBinding
+import com.kuneosu.mintoners.ui.adapter.MatchMainListAdapter
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
+private const val TAG = "MatchMainListFragment"
 
 @AndroidEntryPoint
 class MatchMainListFragment : Fragment() {
     private var _binding: FragmentMatchMainListBinding? = null
     private val binding get() = _binding!!
     private val matchViewModel: MatchViewModel by activityViewModels()
+    private lateinit var matchMainListAdapter: MatchMainListAdapter
 
 
     override fun onCreateView(
@@ -26,29 +32,16 @@ class MatchMainListFragment : Fragment() {
     ): View {
         _binding = FragmentMatchMainListBinding.inflate(inflater, container, false)
 
-        onGenerateGames()
+        matchMainListAdapter = MatchMainListAdapter(matchViewModel)
+        binding.matchMainListRecyclerView.adapter = matchMainListAdapter
+        matchViewModel.match.observe(viewLifecycleOwner) {
+            matchMainListAdapter.submitList(it.matchList)
+        }
 
-        // adapter 를 통해 게임 목록을 표시
+        binding.matchMainListRecyclerView.layoutManager = LinearLayoutManager(context)
 
 
         return binding.root
-    }
-
-    private fun onGenerateGames() {
-        val players = matchViewModel.match.value?.matchPlayers ?: return
-
-        // Generate games based on players
-        val games = generateGames(players)
-
-        games.forEach { game ->
-            matchViewModel.addGame(game)
-        }
-    }
-
-    private fun generateGames(players: List<Player>): List<Game> {
-        // Game generation logic
-        // 대진표 생성 알고리즘을 통해 게임 목록 반환
-        return emptyList()
     }
 
 

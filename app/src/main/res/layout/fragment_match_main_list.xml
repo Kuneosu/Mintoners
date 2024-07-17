@@ -1,8 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/match_main_list_recycler_view"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white" />
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.fragments.MatchMainListFragment">
+
+    <LinearLayout
+        android:id="@+id/match_main_list_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingVertical="@dimen/padding_medium"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="순서"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_medium" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="팀 A"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_medium" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:text="점수"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_medium" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="팀 B"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_medium" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/match_main_list_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/trans_black_50"
+        app:layout_constraintTop_toBottomOf="@+id/match_main_list_header" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/match_main_list_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@+id/match_main_list_divider" />
+</androidx.constraintlayout.widget.ConstraintLayout>

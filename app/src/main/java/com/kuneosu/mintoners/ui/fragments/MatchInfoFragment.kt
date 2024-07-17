@@ -43,7 +43,6 @@ class MatchInfoFragment : Fragment() {
 
         saveMatchOnNextButtonClicked()
 
-
         setCalendarViewEvent()
 
         return binding.root
