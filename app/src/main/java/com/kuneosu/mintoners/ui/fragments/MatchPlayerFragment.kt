@@ -3,12 +3,14 @@ package com.kuneosu.mintoners.ui.fragments
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -42,12 +44,14 @@ class MatchPlayerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Player RecyclerView Adapter 설정
         playerAdapterSetting()
 
         binding.matchPlayerLoadButton.setOnClickListener {
-            Log.d("MatchPlayerFragment", "onViewCreated: ${matchViewModel.match.value}")
+            // 선수 불러오기 버튼, 이벤트 아직 미구현
         }
 
+        // Player Fragment Navigation 설정
         playerNavigationSetting()
     }
 
@@ -63,19 +67,7 @@ class MatchPlayerFragment : Fragment() {
         }
 
         // Handle back button press to clear focus
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (binding.matchPlayerRoot.hasFocus()) {
-                        binding.matchPlayerRoot.clearFocus()
-                        hideKeyboard()
-                    } else {
-                        findNavController().popBackStack()
-                        matchViewModel.applyPlayerList()
-                    }
-                }
-            })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         binding.matchPlayerPreviousButton.setOnClickListener {
             findNavController().popBackStack()
@@ -118,6 +110,18 @@ class MatchPlayerFragment : Fragment() {
         val inputMethodManager =
             activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (binding.matchPlayerRoot.hasFocus()) {
+                binding.matchPlayerRoot.clearFocus()
+                hideKeyboard()
+            } else {
+                findNavController().popBackStack()
+                matchViewModel.applyPlayerList()
+            }
+        }
     }
 
     override fun onDestroyView() {

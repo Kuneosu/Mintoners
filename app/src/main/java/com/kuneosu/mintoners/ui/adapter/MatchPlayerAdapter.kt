@@ -39,7 +39,7 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
 
     private fun addPlayer() {
         val playerIndex = matchViewModel.players.value?.size?.plus(1) ?: 0
-        val newPlayer = Player(playerIndex = playerIndex, playerName = "Player $playerIndex")
+        val newPlayer = Player(playerIndex = playerIndex, playerName = "$playerIndex")
         matchViewModel.addPlayer(newPlayer)
         focusChecker = true
     }

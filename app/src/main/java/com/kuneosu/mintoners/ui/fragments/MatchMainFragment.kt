@@ -3,10 +3,13 @@ package com.kuneosu.mintoners.ui.fragments
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -42,11 +45,6 @@ class MatchMainFragment : Fragment() {
         infoDialogSetting()
         moveButtonSetting()
         initPager()
-
-        binding.matchMainEndButton.setOnClickListener {
-            matchViewModel.updateMatchByNumber(matchViewModel.match.value?.matchNumber!!)
-            activity?.finish()
-        }
 
 
         return binding.root
@@ -87,8 +85,15 @@ class MatchMainFragment : Fragment() {
             findNavController().popBackStack()
         }
         binding.matchMainEndButton.setOnClickListener {
+            binding.root.clearFocus()
+            matchViewModel.applyPlayerList()
+            matchViewModel.applyGameList()
+            matchViewModel.updateMatchByNumber(matchViewModel.match.value?.matchNumber!!)
+            Toast.makeText(context, "대회 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
             activity?.finish()
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun infoDialogSetting() {
@@ -112,6 +117,32 @@ class MatchMainFragment : Fragment() {
             )
             dialog.isCancelable = false
             dialog.show(parentFragmentManager, "MatchInfoDialog")
+        }
+    }
+
+    private var isDouble = false
+    private fun backPressToast() {
+        Toast.makeText(requireContext(), "종료하시려면 뒤로가기를 한번 더 눌러주세요.", Toast.LENGTH_SHORT).show()
+    }
+
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            when {
+                isDouble -> {
+                    binding.root.clearFocus()
+                    matchViewModel.applyPlayerList()
+                    matchViewModel.applyGameList()
+                    matchViewModel.updateMatchByNumber(matchViewModel.match.value?.matchNumber!!)
+                    Toast.makeText(context, "대회 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
+                    activity?.finish()
+                }
+            }
+            backPressToast()
+
+            isDouble = true
+            Handler().postDelayed({
+                isDouble = false
+            }, 2000)
         }
     }
 

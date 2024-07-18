@@ -1,5 +1,7 @@
 package com.kuneosu.mintoners.ui.adapter
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -41,6 +43,7 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
 
     inner class MatchListViewHolder(private val binding: MatchMainListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(game: Game) {
             binding.matchMainListPlayerA.text = game.gameTeamA[0].playerName
             binding.matchMainListPlayerB.text = game.gameTeamA[1].playerName
@@ -50,6 +53,39 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
             binding.matchMainListTeamAScore.setText(game.gameAScore.toString())
             binding.matchMainListTeamBScore.setText(game.gameBScore.toString())
             binding.matchMainListNumber.text = game.gameIndex.toString()
+
+            binding.matchMainListTeamAScore.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    val score = binding.matchMainListTeamAScore.text.toString().toIntOrNull() ?: 0
+                    Log.d("score", "score change, old : ${game.gameAScore}, new : $score")
+                    matchViewModel.updateGameScore(game.copy(gameAScore = score))
+                    game.gameAScore = score
+                    Log.d("score", "gameAScore : ${game.gameAScore}")
+                    if (binding.matchMainListTeamAScore.text.toString().isEmpty()) {
+                        binding.matchMainListTeamAScore.setText("0")
+                    }
+                } else {
+                    if (binding.matchMainListTeamAScore.text.toString() == "0") {
+                        binding.matchMainListTeamAScore.text.clear()
+                    }
+                }
+            }
+            binding.matchMainListTeamBScore.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    val score = binding.matchMainListTeamBScore.text.toString().toIntOrNull() ?: 0
+                    Log.d("score", "score change, old : ${game.gameBScore}, new : $score")
+                    matchViewModel.updateGameScore(game.copy(gameBScore = score))
+                    game.gameBScore = score
+                    Log.d("score", "gameBScore : ${game.gameBScore}")
+                    if (binding.matchMainListTeamBScore.text.toString().isEmpty()) {
+                        binding.matchMainListTeamBScore.setText("0")
+                    }
+                } else {
+                    if (binding.matchMainListTeamBScore.text.toString() == "0") {
+                        binding.matchMainListTeamBScore.text.clear()
+                    }
+                }
+            }
         }
     }
 

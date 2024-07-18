@@ -4,14 +4,18 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Match
@@ -47,7 +51,26 @@ class MatchInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Match 데이터 변경 관찰
+        // 넘겨받은 MatchNumber가 있을 경우 기존 데이터 기반 UI 업데이트
+        loadUIbyMatchNumber()
+
+        // 복식, 단식 라디오 버튼 선택에 따른 텍스트 색 변화
+        matchTypeRadioChanged()
+
+        // 경기수 변경 버튼 클릭 이벤트
+        matchGameCountChanged()
+
+        // 경기 정보 저장, 새로운 경기일 경우 create 아닐 경우 update
+        saveMatchOnNextButtonClicked()
+
+        // 날짜 선택 이벤트, 날짜 클릭 시 다이얼로그 출력, 날짜에 따라 Title Hint 변경
+        setCalendarViewEvent()
+
+        // 뒤로가기 버튼 두번 눌러 종료
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+    }
+
+    private fun loadUIbyMatchNumber() {
         matchViewModel.match.observe(viewLifecycleOwner) { match ->
             match?.let {
                 updateUI(it)
@@ -59,14 +82,6 @@ class MatchInfoFragment : Fragment() {
                 matchViewModel.loadMatchByNumber(matchViewModel.matchNumber.value!!)
             }
         }
-
-        matchTypeRadioChanged()
-
-        matchGameCountChanged()
-
-        saveMatchOnNextButtonClicked()
-
-        setCalendarViewEvent()
     }
 
     private fun updateUI(match: Match) {
@@ -173,7 +188,6 @@ class MatchInfoFragment : Fragment() {
 
     }
 
-
     private fun matchTypeRadioChanged() {
 
         binding.matchInfoGameTypeInput.setOnCheckedChangeListener { _, checkedId ->
@@ -230,6 +244,30 @@ class MatchInfoFragment : Fragment() {
             binding.matchInfoNameInput.setText(hintTwo)
         }
     }
+
+    private var isDouble = false
+    private fun backPressToast() {
+        Toast.makeText(requireContext(), "종료하시려면 뒤로가기를 한번 더 눌러주세요.", Toast.LENGTH_SHORT).show()
+    }
+
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            when {
+                isDouble -> {
+                    activity?.finish()
+                }
+            }
+            backPressToast()
+
+            matchViewModel.updateMatchByNumber(matchViewModel.match.value?.matchNumber!!)
+
+            isDouble = true
+            Handler().postDelayed({
+                isDouble = false
+            }, 2000)
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
