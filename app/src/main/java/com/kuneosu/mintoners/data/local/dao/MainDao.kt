@@ -19,7 +19,7 @@ interface MatchDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMatch(match: Match)
 
-    @Query("SELECT * FROM matches")
+    @Query("SELECT * FROM matches ORDER BY matchNumber DESC")
     suspend fun getAllMatchesList(): List<Match>
 
     @Delete

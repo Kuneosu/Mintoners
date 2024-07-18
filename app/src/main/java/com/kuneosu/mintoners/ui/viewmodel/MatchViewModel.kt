@@ -50,6 +50,16 @@ class MatchViewModel @Inject constructor(
         _matchNumber.value = 0
     }
 
+    fun updateGameScore(game: Game) {
+        val currentList = _games.value.orEmpty().toMutableList()
+        val index = currentList.indexOfFirst { it.gameIndex == game.gameIndex }
+        if (index != -1) {
+            currentList[index] = game
+            _games.value = currentList
+            Log.d("score", "updateGameScore: $game")
+        }
+    }
+
     fun setMatchNumber(number: Int) {
         _matchNumber.value = number
         loadMatchByNumber(number)

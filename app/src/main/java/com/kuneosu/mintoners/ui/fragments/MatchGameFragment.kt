@@ -36,7 +36,7 @@ class MatchGameFragment : Fragment() {
 
         gameAdapterSetting()
 
-        binding.matchGameLoadButton.setOnClickListener {
+        binding.matchGameCreateButton.setOnClickListener {
             matchViewModel.generateGames()
         }
 
@@ -46,19 +46,7 @@ class MatchGameFragment : Fragment() {
     }
 
     private fun gameNavigationSetting() {
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (binding.matchGameRoot.hasFocus()) {
-                        binding.matchGameRoot.clearFocus()
-                        hideKeyboard()
-                    } else {
-                        findNavController().popBackStack()
-                        matchViewModel.applyGameList()
-                    }
-                }
-            })
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         binding.matchGamePreviousButton.setOnClickListener {
             findNavController().popBackStack()
@@ -98,6 +86,18 @@ class MatchGameFragment : Fragment() {
     private fun updateGameCount(matchCount: Int) {
         val playerCount = matchViewModel.players.value?.size ?: 0
         binding.matchGameCountText.text = "참가 인원수 : $playerCount 명\n경기 수 : $matchCount 경기"
+    }
+
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (binding.matchGameRoot.hasFocus()) {
+                binding.matchGameRoot.clearFocus()
+                hideKeyboard()
+            } else {
+                findNavController().popBackStack()
+                matchViewModel.applyGameList()
+            }
+        }
     }
 
     override fun onDestroyView() {

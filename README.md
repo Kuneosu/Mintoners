@@ -170,4 +170,11 @@ July 2024 Personal project, match table creation and management application
       (자동으로 생성된 MatchNumber = 가장 높은 MatchNumber)
 - **MatchProcess Detail**
   - KDK 대진표 알고리즘 함수 분리(5~16명 까지)
-  - 
+  - 최근 경기 출력 순서 변경 (Order by matchNumber DESC)
+  - Match Process 각 페이지 별 Backpress Callback 추가
+  - MatchMain 에서 뒤로가기로 종료 해도 변경 사항 저장
+  - MatchMainListFragment 에서 승점 입력 시 Match 데이터에 저장
+  - 편의성 일부 수정
+    - MatchMainListFragment 에서 승점 입력 시 승점이 0일 경우 빈 칸으로 자동 변경
+    - MatchMainListFragment 에서 승점 입력 시 승점이 빈 칸일 경우 0으로 자동 변경
+  

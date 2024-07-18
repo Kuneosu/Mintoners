@@ -153,17 +153,31 @@
                         android:text="참가 인원수 : N 명\n경기 수 : N 경기"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_large"
-                        app:layout_constraintBottom_toBottomOf="@+id/match_game_load_button"
+                        app:layout_constraintBottom_toBottomOf="@+id/match_game_create_button"
+
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/match_game_load_button" />
+                        app:layout_constraintTop_toTopOf="@+id/match_game_create_button" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/match_game_load_button"
+                        android:id="@+id/match_game_create_button"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/small_button_height"
                         android:background="@drawable/match_main_button"
                         android:paddingHorizontal="@dimen/padding_small"
-                        android:text="대진 순서 섞기"
+                        android:text="재생성"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_large"
+                        app:layout_constraintEnd_toStartOf="@+id/match_game_random_button"
+                        app:layout_constraintStart_toEndOf="@id/match_game_count_text"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/match_game_random_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/small_button_height"
+                        android:background="@drawable/match_main_button"
+                        android:paddingHorizontal="@dimen/padding_small"
+                        android:text="랜덤"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_large"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -205,7 +219,7 @@
                     android:layout_marginEnd="@dimen/margin_default"
                     android:background="@drawable/match_main_button"
                     android:paddingHorizontal="@dimen/padding_small"
-                    android:text="대진표 생성"
+                    android:text="대진표 확정"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_large"
                     app:layout_constraintEnd_toEndOf="parent"

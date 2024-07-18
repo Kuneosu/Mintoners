@@ -11,6 +11,6 @@ data class Game(
     var gameIndex: Int,
     val gameTeamA: List<Player>,
     val gameTeamB: List<Player>,
-    val gameAScore: Int = 0,
-    val gameBScore: Int = 0
+    var gameAScore: Int = 0,
+    var gameBScore: Int = 0
 )

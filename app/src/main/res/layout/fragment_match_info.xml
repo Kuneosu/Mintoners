@@ -209,8 +209,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:background="@drawable/match_edittext"
-                    android:text="2024-07-08"
                     android:padding="@dimen/padding_medium"
+                    android:text="2024-07-08"
                     android:textSize="@dimen/text_large"
                     app:layout_constraintTop_toBottomOf="@+id/match_info_date_title" />
 
@@ -255,8 +255,8 @@
                         android:layout_weight="1"
                         android:autofillHints="1"
                         android:background="@drawable/match_edittext"
-
                         android:inputType="number"
+                        android:maxLength="1"
                         android:padding="@dimen/padding_medium"
                         android:text="1"
                         android:textAlignment="center"
@@ -281,6 +281,7 @@
                         android:autofillHints="0"
                         android:background="@drawable/match_edittext"
                         android:inputType="number"
+                        android:maxLength="1"
                         android:padding="@dimen/padding_medium"
                         android:text="0"
                         android:textAlignment="center"
@@ -305,6 +306,7 @@
                         android:autofillHints="0"
                         android:background="@drawable/match_edittext"
                         android:inputType="number"
+                        android:maxLength="1"
                         android:padding="@dimen/padding_medium"
                         android:text="0"
                         android:textAlignment="center"
@@ -355,6 +357,7 @@
                         android:background="@drawable/match_game_count"
                         android:gravity="center"
                         android:inputType="number"
+                        android:maxLength="1"
                         android:text="4"
                         android:textAlignment="center"
                         android:textColor="@color/main"
