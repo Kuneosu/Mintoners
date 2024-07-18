@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Match
@@ -17,6 +19,7 @@ import com.kuneosu.mintoners.databinding.FragmentMatchInfoBinding
 import com.kuneosu.mintoners.ui.customview.MatchCalendarDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -24,19 +27,38 @@ import java.time.format.TextStyle
 import java.util.Date
 import java.util.Locale
 
+private const val TAG = "MatchInfoFragment"
+
 @AndroidEntryPoint
 class MatchInfoFragment : Fragment() {
     private var _binding: FragmentMatchInfoBinding? = null
     private val binding get() = _binding!!
     private val matchViewModel: MatchViewModel by activityViewModels()
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMatchInfoBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Match 데이터 변경 관찰
+        matchViewModel.match.observe(viewLifecycleOwner) { match ->
+            match?.let {
+                updateUI(it)
+            }
+        }
+
+        if (matchViewModel.matchNumber.value != 0) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                matchViewModel.loadMatchByNumber(matchViewModel.matchNumber.value!!)
+            }
+        }
 
         matchTypeRadioChanged()
 
@@ -45,8 +67,37 @@ class MatchInfoFragment : Fragment() {
         saveMatchOnNextButtonClicked()
 
         setCalendarViewEvent()
+    }
 
-        return binding.root
+    private fun updateUI(match: Match) {
+        Log.d(TAG, "updateUI: ${match.matchNumber}")
+        binding.matchInfoNameInput.setText(match.matchName)
+
+        val inputDateStr = match.matchDate
+
+        // 입력 문자열의 형식을 지정
+        val inputFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH)
+
+        // 입력 문자열을 Date 객체로 변환
+        val date: Date? = inputFormat.parse(inputDateStr.toString())
+
+        // 출력 형식을 지정
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+
+        // Date 객체를 지정된 형식의 문자열로 변환
+        val outputDateStr: String = outputFormat.format(date!!)
+
+        // 결과 출력
+        binding.matchInfoDateInput.text = outputDateStr
+        binding.matchInfoScoreWinInput.setText(match.matchPoint[0].toString())
+        binding.matchInfoScoreDrawInput.setText(match.matchPoint[1].toString())
+        binding.matchInfoScoreLoseInput.setText(match.matchPoint[2].toString())
+        binding.matchInfoGameCountNumber.text = match.matchCount.toString()
+        if (match.matchType == "double") {
+            binding.matchInfoGameTypeDouble.isChecked = true
+        } else {
+            binding.matchInfoGameTypeSingle.isChecked = true
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -111,7 +162,13 @@ class MatchInfoFragment : Fragment() {
             )
             matchViewModel.createMatch(match)
         } else {
-            matchViewModel.updateMatchByNumber(matchViewModel.match.value?.matchNumber!!)
+            matchViewModel.updateMatch(
+                matchNameInput,
+                matchDateInput,
+                matchPointInput,
+                matchCountInput,
+                matchTypeInput
+            )
         }
 
     }

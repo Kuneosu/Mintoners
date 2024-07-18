@@ -84,7 +84,7 @@ class MatchMainFragment : Fragment() {
 
     private fun moveButtonSetting() {
         binding.matchMainEditButton.setOnClickListener {
-            findNavController().navigate(R.id.action_matchMainFragment_to_matchGameFragment)
+            findNavController().popBackStack()
         }
         binding.matchMainEndButton.setOnClickListener {
             activity?.finish()

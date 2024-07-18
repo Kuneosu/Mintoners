@@ -55,6 +55,26 @@ class HomeRecentGameAdapter(private val homeViewModel: HomeViewModel) :
         fun bind(match: Match) {
             binding.recentGameTitle.text = match.matchName
 
+            binding.recentGameInfoImage.setOnClickListener {
+                homeViewModel.deleteMatchByNumber(match.matchNumber)
+                homeViewModel.getAllMatches()
+            }
+
+            val outputDateStr: String = dateToString(match)
+
+            // 결과 출력
+            binding.recentGameDate.text = outputDateStr
+
+            binding.recentGameCard.setOnClickListener {
+                val intent = Intent(binding.root.context, MatchActivity::class.java)
+                intent.putExtra("matchNumber", match.matchNumber)
+                binding.root.context.startActivity(intent)
+            }
+
+
+        }
+
+        private fun dateToString(match: Match): String {
             val inputDateStr = match.matchDate
 
             // 입력 문자열의 형식을 지정
@@ -68,25 +88,7 @@ class HomeRecentGameAdapter(private val homeViewModel: HomeViewModel) :
 
             // Date 객체를 지정된 형식의 문자열로 변환
             val outputDateStr: String = outputFormat.format(date!!)
-
-            // 결과 출력
-            binding.recentGameDate.text = outputDateStr
-
-            binding.recentGameCard.setOnClickListener {
-                val intent = Intent(binding.root.context, MatchActivity::class.java)
-                intent.putExtra("matchNumber", match.matchNumber)
-                binding.root.context.startActivity(intent)
-                
-                Toast.makeText(
-                    binding.root.context, "${match.matchNumber}\n" +
-                            "${match.matchName}\n" +
-                            "${match.matchPlayers}\n" +
-                            "${match.matchList}", Toast.LENGTH_LONG
-                )
-                    .show()
-            }
-
-
+            return outputDateStr
         }
     }
 

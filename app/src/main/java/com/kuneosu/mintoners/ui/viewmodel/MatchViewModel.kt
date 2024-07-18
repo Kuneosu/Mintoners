@@ -10,7 +10,9 @@ import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.data.repository.MatchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -23,6 +25,10 @@ class MatchViewModel @Inject constructor(
     private val repository: MatchRepository
 
 ) : ViewModel() {
+
+    private val _matchNumber = MutableLiveData<Int>()
+    val matchNumber: LiveData<Int> get() = _matchNumber
+
 
     private val _match = MutableLiveData<Match>()
     val match: LiveData<Match> get() = _match
@@ -40,28 +46,29 @@ class MatchViewModel @Inject constructor(
         _players.value = _match.value?.matchPlayers ?: listOf()
         _games.value = _match.value?.matchList ?: listOf()
         _selectedDate.value = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        _matchNumber.value = 0
     }
 
-    fun getMaxMatchNumber(): Int {
-        return repository.getMaxMatchNumber()
+    fun setMatchNumber(number: Int) {
+        _matchNumber.value = number
+        loadMatchByNumber(number)
     }
+
 
     fun setSelectedDate(date: String) {
         _selectedDate.value = date
     }
 
-    fun deleteAllMatches() {
-        viewModelScope.launch {
-            repository.deleteAllMatches()
-        }
-    }
-
     fun createMatch(match: Match) {
         viewModelScope.launch {
-            repository.insertMatch(match)
+            withContext(Dispatchers.IO) {
+                repository.insertMatch(match)
+            }
             _match.value = match
-            Log.d(TAG, "createMatch: $match")
-            _match.value?.matchNumber = repository.getMaxMatchNumber()
+            val maxMatchNumber = withContext(Dispatchers.IO) {
+                repository.getMaxMatchNumber()
+            }
+            _match.value?.matchNumber = maxMatchNumber
         }
 
     }
@@ -83,9 +90,11 @@ class MatchViewModel @Inject constructor(
     }
 
     fun applyPlayerList() {
-        val currentList = _players.value.orEmpty().toMutableList()
-        _match.value?.matchPlayers = currentList
-        updateMatchByNumber(_match.value?.matchNumber!!)
+        viewModelScope.launch {
+            val currentList = _players.value.orEmpty().toMutableList()
+            _match.value?.matchPlayers = currentList
+            updateMatchByNumber(_match.value?.matchNumber!!)
+        }
     }
 
     fun deletePlayer(player: Player) {
@@ -420,9 +429,43 @@ class MatchViewModel @Inject constructor(
         }
     }
 
+    fun updateMatch(
+        matchName: String,
+        matchDate: Date,
+        matchPoint: String,
+        matchCount: Int,
+        matchType: String,
+    ) {
+        _match.value = _match.value?.copy(
+            matchName = matchName,
+            matchDate = matchDate,
+            matchPoint = matchPoint,
+            matchCount = matchCount,
+            matchType = matchType
+        )
+        updateMatchByNumber(_match.value?.matchNumber!!)
+    }
+
     fun updateMatchByNumber(number: Int) {
         viewModelScope.launch {
-            repository.updateByNumber(number, _match.value!!)
+            withContext(Dispatchers.IO) {
+                repository.updateByNumber(number, _match.value!!)
+            }
+        }
+    }
+
+    fun loadMatchByNumber(number: Int) {
+        Log.d(TAG, "loadMatchByNumber: $number")
+        viewModelScope.launch {
+            val loadMatch = withContext(Dispatchers.IO) {
+                repository.getMatchByNumber(number)
+            }
+            // UI 업데이트는 메인 디스패처에서 수행
+            Log.d(TAG, "loadMatchByNumber: $loadMatch")
+            _match.value = loadMatch
+            Log.d(TAG, "loadMatchByNumber: ${match.value}")
+            _players.value = _match.value?.matchPlayers ?: listOf()
+            _games.value = _match.value?.matchList ?: listOf()
         }
     }
 }

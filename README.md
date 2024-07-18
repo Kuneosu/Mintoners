@@ -103,28 +103,28 @@ July 2024 Personal project, match table creation and management application
 ## 2024.07.15
 
 - **Room Database 연동**
-  - MatchPlayer 데이터 처리 개발 완료
-      - MatchPlayerAdapter 개발 완료
-      - MatchPlayerFragment 개발 완료
-      - MatchViewModel - Player 관련 개발 완료
-      - Player 추가, 삭제, 수정 가능
-      - Player 삭제 시 Index 초기화 (1부터 정렬)
-  - MatchGame 데이터 처리 개발 
-    - MatchGameAdapter 개발 완료
-    - MatchGameFragment 개발 완료
-      - Fragment 최초 실행 시 뷰모델의 players 데이터를 통해 Game List 생성
-    - MatchViewModel - Game 관련 개발 완료
-    - Game 추가, 삭제, 수정 가능
-        - 리사이클러뷰 Swipe를 통해 삭제
-    - Game 삭제 시 Index 초기화 (1부터 정렬)
-  - Match 데이터 처리
-    - 입력이 완료된 player와 games 데이터는 화면 이동 버튼 클릭 시 match에 저장
-    - match 데이터는 MatchMainFragment에서 확인 가능
-  - 향후 개발
-    - Swipe or Drag & Drop을 통한 Player, Game 순서 변경, 아이템 삭제, 아이템 수정 등 구현
-    - MatchMainFragment에서 Match 데이터를 확인하고 수정 가능하도록 구현
-    - MatchMainListFragment에서 승점을 입력받아서 Match 데이터에 저장
-    - MatchMainRankFragment에서 Match 데이터를 가져와서 승점 순으로 정렬하여 출력
+    - MatchPlayer 데이터 처리 개발 완료
+        - MatchPlayerAdapter 개발 완료
+        - MatchPlayerFragment 개발 완료
+        - MatchViewModel - Player 관련 개발 완료
+        - Player 추가, 삭제, 수정 가능
+        - Player 삭제 시 Index 초기화 (1부터 정렬)
+    - MatchGame 데이터 처리 개발
+        - MatchGameAdapter 개발 완료
+        - MatchGameFragment 개발 완료
+            - Fragment 최초 실행 시 뷰모델의 players 데이터를 통해 Game List 생성
+        - MatchViewModel - Game 관련 개발 완료
+        - Game 추가, 삭제, 수정 가능
+            - 리사이클러뷰 Swipe를 통해 삭제
+        - Game 삭제 시 Index 초기화 (1부터 정렬)
+    - Match 데이터 처리
+        - 입력이 완료된 player와 games 데이터는 화면 이동 버튼 클릭 시 match에 저장
+        - match 데이터는 MatchMainFragment에서 확인 가능
+    - 향후 개발
+        - Swipe or Drag & Drop을 통한 Player, Game 순서 변경, 아이템 삭제, 아이템 수정 등 구현
+        - MatchMainFragment에서 Match 데이터를 확인하고 수정 가능하도록 구현
+        - MatchMainListFragment에서 승점을 입력받아서 Match 데이터에 저장
+        - MatchMainRankFragment에서 Match 데이터를 가져와서 승점 순으로 정렬하여 출력
 
 ## 2024.07.16
 
@@ -132,33 +132,39 @@ July 2024 Personal project, match table creation and management application
     - Custom Dialog 를 만들어서 대회 정보를 출력하는 다이얼로그 개발
     - MatchMainFragment 에서 대회 정보를 출력하는 버튼 클릭 시 다이얼로그 출력
 - **Match Process 디테일 개발**
-  - MatchMain 정보 출력
-    - 상단바에 제목 출력
-    - 서브 타이틀에 경기 수와 참가자 수 출력
-  - Process 화면들 ScrollView 전체로 변경
+    - MatchMain 정보 출력
+        - 상단바에 제목 출력
+        - 서브 타이틀에 경기 수와 참가자 수 출력
+    - Process 화면들 ScrollView 전체로 변경
 
 ## 2024.07.17
+
 - **Match Process 디테일 개발**
-  - CalendarView 추가
-    - 대회일자를 선택할 수 있는 캘린더 뷰 추가
-    - 캘린더 뷰를 통해 대회일자를 선택하면 MatchInfoFragment 에서 대회일자 자동 입력
-    - 변경되는 대회 일자에 따라 Title hint 변경
-    - MaterialCalendarView 는 충돌이 발생하여 일반 CalendarView 사용
-    - Dialog 형식으로 출력하고 ViewModel을 통해 데이터 주고받음
-  - Player, Game, Main Fragment 코드 정리
-  - Game, Main Fragment에서 네비게이션이 꼬이던 문제 해결
-  - MatchMainFragment 개발 완료
-    - ViewPager2 를 사용한 Tab 전환
-    - MatchMainListFragment, MatchMainRankFragment 연결
-  - MatchMainFragment 에서 Match 데이터를 가져와서 출력
-    - Match.matchList 를 가져와서 대진표 출력 (MatchMainListFragment)
-    - MatchMainListItem 디자인 수정 
-    - Match.players 를 가져와서 플레이어 목록 출력 (MatchMainRankFragment)
-      - 각 플레이어 별 승점에 따라 정렬 기능 구현 필요.
-  - HomeFragment 리사이클러뷰 아이템 출력
-    - Database에서 matches 테이블 데이터를 조회하여 출력
-- **향후 개발**
-  - 기존에 생성한 Match와 새로운 Match를 구별하고 기존의 Match 간에도 MatchNumber를 통해 구별할 수 있도록 개발해야함.
-  - updateMatch가 정상적으로 작동하지 않기 때문에 updateMatchByNumber 사용
-  - MatchNumber를 자유롭게 사용할 수 있도록 개발하는 것이 최종목표.
-  - New Create Match 와 기존 Match Activity를 구분할까도 생각중.
+    - CalendarView 추가
+        - 대회일자를 선택할 수 있는 캘린더 뷰 추가
+        - 캘린더 뷰를 통해 대회일자를 선택하면 MatchInfoFragment 에서 대회일자 자동 입력
+        - 변경되는 대회 일자에 따라 Title hint 변경
+        - MaterialCalendarView 는 충돌이 발생하여 일반 CalendarView 사용
+        - Dialog 형식으로 출력하고 ViewModel을 통해 데이터 주고받음
+    - Player, Game, Main Fragment 코드 정리
+    - Game, Main Fragment에서 네비게이션이 꼬이던 문제 해결
+    - MatchMainFragment 개발 완료
+        - ViewPager2 를 사용한 Tab 전환
+        - MatchMainListFragment, MatchMainRankFragment 연결
+    - MatchMainFragment 에서 Match 데이터를 가져와서 출력
+        - Match.matchList 를 가져와서 대진표 출력 (MatchMainListFragment)
+        - MatchMainListItem 디자인 수정
+        - Match.players 를 가져와서 플레이어 목록 출력 (MatchMainRankFragment)
+            - 각 플레이어 별 승점에 따라 정렬 기능 구현 필요.
+    - HomeFragment 리사이클러뷰 아이템 출력
+        - Database에서 matches 테이블 데이터를 조회하여 출력
+
+## 2024.07.18
+
+- **Match Number를 통한 데이터 저장 및 불러오기**
+    - MatchNumber 변수를 ViewModel에 별도로 선언하여 현재 선택된 Match의 MatchNumber를 식별
+    - 식별된 MatchNumber를 통해 데이터를 불러오거나 저장
+    - MatchNumber가 0이라면 새로운 Match, 아니라면 기존 Match를 불러옴
+    - MatchGameFragment에서 Game명 변경 시 대진표에 반영되도록 수정
+    - 새로운 Match의 경우 현재 존재하는 MatchNumber 중 가장 높은 MatchNumber를 찾아서 사용
+      (자동으로 생성된 MatchNumber = 가장 높은 MatchNumber)
