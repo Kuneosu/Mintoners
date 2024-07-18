@@ -168,3 +168,6 @@ July 2024 Personal project, match table creation and management application
     - MatchGameFragment에서 Game명 변경 시 대진표에 반영되도록 수정
     - 새로운 Match의 경우 현재 존재하는 MatchNumber 중 가장 높은 MatchNumber를 찾아서 사용
       (자동으로 생성된 MatchNumber = 가장 높은 MatchNumber)
+- **MatchProcess Detail**
+  - KDK 대진표 알고리즘 함수 분리(5~16명 까지)
+  - 
