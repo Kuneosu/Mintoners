@@ -155,7 +155,7 @@ class MatchInfoFragment : Fragment() {
                 if (binding.matchInfoGameTypeDouble.isChecked) "double" else "single"
             )
             findNavController().navigate(R.id.action_matchInfoFragment_to_matchPlayerFragment)
-            matchViewModel.updateMatchState(1)
+            matchViewModel.setMatchState(1)
         }
     }
 
