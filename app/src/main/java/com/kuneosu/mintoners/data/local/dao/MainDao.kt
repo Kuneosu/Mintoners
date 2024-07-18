@@ -25,7 +25,7 @@ interface MatchDao {
     @Delete
     fun deleteMatch(match: Match)
 
-    @Query("UPDATE matches SET matchName = :matchName, matchDate = :matchDate, matchPoint = :matchPoint, matchCount = :matchCount, matchType = :matchType, matchPlayers = :matchPlayers, matchList = :matchList WHERE matchNumber = :matchNumber")
+    @Query("UPDATE matches SET matchName = :matchName, matchDate = :matchDate, matchPoint = :matchPoint, matchCount = :matchCount, matchType = :matchType, matchPlayers = :matchPlayers, matchList = :matchList, matchState = :matchState WHERE matchNumber = :matchNumber")
     fun updateMatch(
         matchName: String,
         matchDate: Date,
@@ -34,6 +34,7 @@ interface MatchDao {
         matchType: String,
         matchPlayers: List<Player>,
         matchList: List<Game>,
+        matchState: Int,
         matchNumber: Int
     )
 
@@ -43,7 +44,7 @@ interface MatchDao {
     @Query("DELETE FROM matches WHERE matchNumber = :number")
     fun deleteMatchByNumber(number: Int)
 
-    @Query("UPDATE matches SET matchName = :matchName, matchDate = :matchDate, matchPoint = :matchPoint, matchCount = :matchCount, matchType = :matchType, matchPlayers = :matchPlayers, matchList = :matchList WHERE matchNumber = :number")
+    @Query("UPDATE matches SET matchName = :matchName, matchDate = :matchDate, matchPoint = :matchPoint, matchCount = :matchCount, matchType = :matchType, matchPlayers = :matchPlayers, matchList = :matchList, matchState = :matchState WHERE matchNumber = :number")
     fun updateMatchByNumber(
         matchName: String,
         matchDate: Date,
@@ -52,6 +53,7 @@ interface MatchDao {
         matchType: String,
         matchPlayers: List<Player>,
         matchList: List<Game>,
+        matchState: Int,
         number: Int
     )
 

@@ -177,4 +177,8 @@ July 2024 Personal project, match table creation and management application
   - 편의성 일부 수정
     - MatchMainListFragment 에서 승점 입력 시 승점이 0일 경우 빈 칸으로 자동 변경
     - MatchMainListFragment 에서 승점 입력 시 승점이 빈 칸일 경우 0으로 자동 변경
-  
+- **Match State 추가**
+  - Match 데이터 수정, matchState 추가
+  - MatchInfoFragment 에서 matchState에 따라 Fragment 이동
+  - Fragment 전환 시 matchState 업데이트
+  - MatchNumber와 동일하게 기존 카드 클릭 시 intent로 matchState 전달

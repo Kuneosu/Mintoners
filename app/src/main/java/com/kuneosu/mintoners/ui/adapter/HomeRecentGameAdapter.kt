@@ -2,6 +2,7 @@ package com.kuneosu.mintoners.ui.adapter
 
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -68,6 +69,9 @@ class HomeRecentGameAdapter(private val homeViewModel: HomeViewModel) :
             binding.recentGameCard.setOnClickListener {
                 val intent = Intent(binding.root.context, MatchActivity::class.java)
                 intent.putExtra("matchNumber", match.matchNumber)
+                Log.d("matchState", "matchNumber: ${match.matchNumber}")
+                Log.d("matchState", "matchState: ${match.matchState}")
+                intent.putExtra("matchState", match.matchState)
                 binding.root.context.startActivity(intent)
             }
 

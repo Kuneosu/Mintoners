@@ -30,6 +30,9 @@ class MatchViewModel @Inject constructor(
     private val _matchNumber = MutableLiveData<Int>()
     val matchNumber: LiveData<Int> get() = _matchNumber
 
+    private val _matchState = MutableLiveData<Int>()
+    val matchState: LiveData<Int> get() = _matchState
+
 
     private val _match = MutableLiveData<Match>()
     val match: LiveData<Match> get() = _match
@@ -48,6 +51,21 @@ class MatchViewModel @Inject constructor(
         _games.value = _match.value?.matchList ?: listOf()
         _selectedDate.value = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         _matchNumber.value = 0
+        _matchState.value = 0
+    }
+
+    fun setMatchState(state: Int) {
+        _matchState.value = state
+    }
+
+    fun updateMatchState(state: Int) {
+        viewModelScope.launch {
+            _matchState.value = state
+            _match.value = _match.value?.copy(matchState = state)
+            updateMatchByNumber(_match.value?.matchNumber!!)
+            Log.d(TAG, "updateMatchState: ${match.value}")
+        }
+
     }
 
     fun updateGameScore(game: Game) {

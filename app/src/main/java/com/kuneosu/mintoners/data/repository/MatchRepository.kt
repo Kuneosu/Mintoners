@@ -1,18 +1,15 @@
 package com.kuneosu.mintoners.data.repository
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.kuneosu.mintoners.data.local.dao.GameDao
 import com.kuneosu.mintoners.data.local.dao.MatchDao
 import com.kuneosu.mintoners.data.local.dao.MemberDao
 import com.kuneosu.mintoners.data.local.dao.PlayerDao
-import com.kuneosu.mintoners.data.local.database.AppDatabase
 import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.data.model.Member
 import com.kuneosu.mintoners.data.model.Player
-import com.kuneosu.mintoners.di.DatabaseModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -96,6 +93,7 @@ class MatchRepository @Inject constructor(
                 match.matchType,
                 match.matchPlayers,
                 match.matchList,
+                match.matchState,
                 match.matchNumber
             )
         }
@@ -135,6 +133,7 @@ class MatchRepository @Inject constructor(
                 value.matchType,
                 value.matchPlayers,
                 value.matchList,
+                value.matchState,
                 number
             )
         }

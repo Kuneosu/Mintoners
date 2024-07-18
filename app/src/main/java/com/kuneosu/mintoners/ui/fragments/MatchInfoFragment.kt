@@ -23,6 +23,7 @@ import com.kuneosu.mintoners.databinding.FragmentMatchInfoBinding
 import com.kuneosu.mintoners.ui.customview.MatchCalendarDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -51,6 +52,8 @@ class MatchInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         // 넘겨받은 MatchNumber가 있을 경우 기존 데이터 기반 UI 업데이트
         loadUIbyMatchNumber()
 
@@ -68,6 +71,8 @@ class MatchInfoFragment : Fragment() {
 
         // 뒤로가기 버튼 두번 눌러 종료
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+
     }
 
     private fun loadUIbyMatchNumber() {
@@ -80,6 +85,15 @@ class MatchInfoFragment : Fragment() {
         if (matchViewModel.matchNumber.value != 0) {
             viewLifecycleOwner.lifecycleScope.launch {
                 matchViewModel.loadMatchByNumber(matchViewModel.matchNumber.value!!)
+
+                // matchState에 따라 Fragment 이동
+                Handler().postDelayed({
+                    when (matchViewModel.matchState.value) {
+                        1 -> findNavController().navigate(R.id.action_matchInfoFragment_to_matchPlayerFragment)
+                        2 -> findNavController().navigate(R.id.action_matchInfoFragment_to_matchGameFragment)
+                        3 -> findNavController().navigate(R.id.action_matchInfoFragment_to_matchMainFragment)
+                    }
+                }, 1)
             }
         }
     }
@@ -141,6 +155,7 @@ class MatchInfoFragment : Fragment() {
                 if (binding.matchInfoGameTypeDouble.isChecked) "double" else "single"
             )
             findNavController().navigate(R.id.action_matchInfoFragment_to_matchPlayerFragment)
+            matchViewModel.updateMatchState(1)
         }
     }
 
@@ -193,6 +208,11 @@ class MatchInfoFragment : Fragment() {
         binding.matchInfoGameTypeInput.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 binding.matchInfoGameTypeDouble.id -> {
+                    Toast.makeText(
+                        requireContext(),
+                        "${matchViewModel.match.value}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     binding.matchInfoGameTypeDouble.setTextColor(Color.WHITE)
                     binding.matchInfoGameTypeSingle.setTextColor(
                         resources.getColor(
@@ -258,9 +278,6 @@ class MatchInfoFragment : Fragment() {
                 }
             }
             backPressToast()
-
-            matchViewModel.updateMatchByNumber(matchViewModel.match.value?.matchNumber!!)
-
             isDouble = true
             Handler().postDelayed({
                 isDouble = false

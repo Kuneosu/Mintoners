@@ -71,10 +71,12 @@ class MatchPlayerFragment : Fragment() {
 
         binding.matchPlayerPreviousButton.setOnClickListener {
             findNavController().popBackStack()
+            matchViewModel.updateMatchState(0)
             matchViewModel.applyPlayerList()
         }
         binding.matchPlayerNextButton.setOnClickListener {
             findNavController().navigate(R.id.action_matchPlayerFragment_to_matchGameFragment)
+            matchViewModel.updateMatchState(2)
             matchViewModel.applyPlayerList()
         }
     }
@@ -119,6 +121,7 @@ class MatchPlayerFragment : Fragment() {
                 hideKeyboard()
             } else {
                 findNavController().popBackStack()
+                matchViewModel.updateMatchState(0)
                 matchViewModel.applyPlayerList()
             }
         }
