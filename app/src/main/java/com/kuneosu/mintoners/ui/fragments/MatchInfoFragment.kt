@@ -37,6 +37,7 @@ class MatchInfoFragment : Fragment() {
     ): View {
         _binding = FragmentMatchInfoBinding.inflate(inflater, container, false)
 
+
         matchTypeRadioChanged()
 
         matchGameCountChanged()
@@ -98,16 +99,21 @@ class MatchInfoFragment : Fragment() {
         matchCountInput: Int,
         matchTypeInput: String
     ) {
-        val match = Match(
-            matchName = matchNameInput,
-            matchDate = matchDateInput,
-            matchPoint = matchPointInput,
-            matchCount = matchCountInput,
-            matchType = matchTypeInput,
-            matchPlayers = emptyList(),
-            matchList = emptyList()
-        )
-        matchViewModel.createMatch(match)
+        if (matchViewModel.match.value == null) {
+            val match = Match(
+                matchName = matchNameInput,
+                matchDate = matchDateInput,
+                matchPoint = matchPointInput,
+                matchCount = matchCountInput,
+                matchType = matchTypeInput,
+                matchPlayers = emptyList(),
+                matchList = emptyList()
+            )
+            matchViewModel.createMatch(match)
+        } else {
+            matchViewModel.updateMatchByNumber(matchViewModel.match.value?.matchNumber!!)
+        }
+
     }
 
 

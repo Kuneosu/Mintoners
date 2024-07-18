@@ -7,6 +7,7 @@ import com.kuneosu.mintoners.data.local.dao.MatchDao
 import com.kuneosu.mintoners.data.local.dao.MemberDao
 import com.kuneosu.mintoners.data.local.dao.PlayerDao
 import com.kuneosu.mintoners.data.local.database.AppDatabase
+import com.kuneosu.mintoners.data.repository.HomeRepository
 import com.kuneosu.mintoners.data.repository.MatchRepository
 import dagger.Module
 import dagger.Provides
@@ -65,5 +66,14 @@ object DatabaseModule {
         scope: CoroutineScope
     ): MatchRepository {
         return MatchRepository(matchDao, playerDao, gameDao, memberDao, scope)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHomeRepository(
+        matchDao: MatchDao,
+        scope: CoroutineScope
+    ): HomeRepository {
+        return HomeRepository(matchDao, scope)
     }
 }

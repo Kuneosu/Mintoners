@@ -1,15 +1,18 @@
 package com.kuneosu.mintoners.data.repository
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.kuneosu.mintoners.data.local.dao.GameDao
 import com.kuneosu.mintoners.data.local.dao.MatchDao
 import com.kuneosu.mintoners.data.local.dao.MemberDao
 import com.kuneosu.mintoners.data.local.dao.PlayerDao
+import com.kuneosu.mintoners.data.local.database.AppDatabase
 import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.data.model.Member
 import com.kuneosu.mintoners.data.model.Player
+import com.kuneosu.mintoners.di.DatabaseModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,9 +26,8 @@ class MatchRepository @Inject constructor(
     private val playerDao: PlayerDao,
     private val gameDao: GameDao,
     private val memberDao: MemberDao,
-    private val scope: CoroutineScope
+    private val scope: CoroutineScope,
 ) {
-
     fun insertTestData() {
         scope.launch(Dispatchers.IO) {
             // Create test data
@@ -71,22 +73,41 @@ class MatchRepository @Inject constructor(
         }
     }
 
+    fun deleteAllMatches(){
+        scope.launch(Dispatchers.IO) {
+            matchDao.deleteAllMatches()
+        }
+    }
+
     fun insertMatch(match: Match) {
         scope.launch(Dispatchers.IO) {
+            Log.d("repository", "insertMatch")
             matchDao.insertMatch(match)
         }
     }
 
     fun updateMatch(match: Match) {
         scope.launch(Dispatchers.IO) {
-            matchDao.updateMatch(match)
+            matchDao.updateMatch(
+                match.matchName,
+                match.matchDate,
+                match.matchPoint,
+                match.matchCount,
+                match.matchType,
+                match.matchPlayers,
+                match.matchList,
+                match.matchNumber
+            )
         }
+    }
+
+    fun getMaxMatchNumber(): Int {
+        return matchDao.getMaxMatchNumber()
     }
 
     fun getMatchByNumber(number:Int): LiveData<Match> {
         return matchDao.getMatchByNumber(number)
     }
-
 
     fun getAllMatches(): LiveData<List<Match>> {
         return matchDao.getAllMatches()
@@ -103,4 +124,20 @@ class MatchRepository @Inject constructor(
     fun getAllMembers(): LiveData<List<Member>> {
         return memberDao.getAllMembers()
     }
+
+    fun updateByNumber(number: Int, value: Match) {
+        scope.launch(Dispatchers.IO) {
+            matchDao.updateMatchByNumber(
+                value.matchName,
+                value.matchDate,
+                value.matchPoint,
+                value.matchCount,
+                value.matchType,
+                value.matchPlayers,
+                value.matchList,
+                number
+            )
+        }
+    }
+
 }

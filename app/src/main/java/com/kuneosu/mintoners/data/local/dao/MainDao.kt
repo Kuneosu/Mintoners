@@ -6,6 +6,7 @@ import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.data.model.Member
 import com.kuneosu.mintoners.data.model.Player
+import java.util.Date
 
 @Dao
 interface MatchDao {
@@ -18,11 +19,44 @@ interface MatchDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMatch(match: Match)
 
+    @Query("SELECT * FROM matches")
+    suspend fun getAllMatchesList(): List<Match>
+
     @Delete
     fun deleteMatch(match: Match)
 
-    @Update
-    fun updateMatch(match: Match)
+    @Query("UPDATE matches SET matchName = :matchName, matchDate = :matchDate, matchPoint = :matchPoint, matchCount = :matchCount, matchType = :matchType, matchPlayers = :matchPlayers, matchList = :matchList WHERE matchNumber = :matchNumber")
+    fun updateMatch(
+        matchName: String,
+        matchDate: Date,
+        matchPoint: String,
+        matchCount: Int,
+        matchType: String,
+        matchPlayers: List<Player>,
+        matchList: List<Game>,
+        matchNumber: Int
+    )
+
+    @Query("DELETE FROM matches")
+    fun deleteAllMatches()
+
+    @Query("DELETE FROM matches WHERE matchNumber = :number")
+    fun deleteMatchByNumber(number: Int)
+
+    @Query("UPDATE matches SET matchName = :matchName, matchDate = :matchDate, matchPoint = :matchPoint, matchCount = :matchCount, matchType = :matchType, matchPlayers = :matchPlayers, matchList = :matchList WHERE matchNumber = :number")
+    fun updateMatchByNumber(
+        matchName: String,
+        matchDate: Date,
+        matchPoint: String,
+        matchCount: Int,
+        matchType: String,
+        matchPlayers: List<Player>,
+        matchList: List<Game>,
+        number: Int
+    )
+
+    @Query("SELECT MAX(matchNumber) FROM matches")
+    fun getMaxMatchNumber(): Int
 }
 
 @Dao

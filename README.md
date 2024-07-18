@@ -155,4 +155,10 @@ July 2024 Personal project, match table creation and management application
     - MatchMainListItem 디자인 수정 
     - Match.players 를 가져와서 플레이어 목록 출력 (MatchMainRankFragment)
       - 각 플레이어 별 승점에 따라 정렬 기능 구현 필요.
-  
+  - HomeFragment 리사이클러뷰 아이템 출력
+    - Database에서 matches 테이블 데이터를 조회하여 출력
+- **향후 개발**
+  - 기존에 생성한 Match와 새로운 Match를 구별하고 기존의 Match 간에도 MatchNumber를 통해 구별할 수 있도록 개발해야함.
+  - updateMatch가 정상적으로 작동하지 않기 때문에 updateMatchByNumber 사용
+  - MatchNumber를 자유롭게 사용할 수 있도록 개발하는 것이 최종목표.
+  - New Create Match 와 기존 Match Activity를 구분할까도 생각중.
