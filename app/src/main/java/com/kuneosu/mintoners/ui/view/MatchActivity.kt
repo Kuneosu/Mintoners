@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.kuneosu.mintoners.databinding.ActivityMatchBinding
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,5 +21,8 @@ class MatchActivity : AppCompatActivity() {
 
         val matchNumber = intent.getIntExtra("matchNumber", 0)
 
+        if (matchNumber != 0) {
+            matchViewModel.setMatchNumber(matchNumber)
+        }
     }
 }

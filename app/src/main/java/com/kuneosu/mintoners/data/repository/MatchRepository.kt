@@ -73,7 +73,7 @@ class MatchRepository @Inject constructor(
         }
     }
 
-    fun deleteAllMatches(){
+    fun deleteAllMatches() {
         scope.launch(Dispatchers.IO) {
             matchDao.deleteAllMatches()
         }
@@ -105,7 +105,7 @@ class MatchRepository @Inject constructor(
         return matchDao.getMaxMatchNumber()
     }
 
-    fun getMatchByNumber(number:Int): LiveData<Match> {
+    fun getMatchByNumber(number: Int): Match {
         return matchDao.getMatchByNumber(number)
     }
 

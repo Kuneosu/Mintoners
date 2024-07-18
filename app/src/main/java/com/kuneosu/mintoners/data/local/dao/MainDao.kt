@@ -14,7 +14,7 @@ interface MatchDao {
     fun getAllMatches(): LiveData<List<Match>>
 
     @Query("SELECT * FROM matches WHERE matchNumber = :matchNumber")
-    fun getMatchByNumber(matchNumber: Int): LiveData<Match>
+    fun getMatchByNumber(matchNumber: Int): Match
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMatch(match: Match)

@@ -85,21 +85,37 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
 
             binding.matchGamePlayerA.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
+                    val oldName = game.gameTeamA[0].playerName
+                    val newName = binding.matchGamePlayerA.text.toString()
+                    game.gameTeamA[0].playerName = newName
+//                    changePlayerName(oldName, newName)
                     updateGame(game)
                 }
             }
             binding.matchGamePlayerB.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
+                    val oldName = game.gameTeamA[1].playerName
+                    val newName = binding.matchGamePlayerB.text.toString()
+                    game.gameTeamA[1].playerName = newName
+//                    changePlayerName(oldName, newName)
                     updateGame(game)
                 }
             }
             binding.matchGamePlayerC.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
+                    val oldName = game.gameTeamB[0].playerName
+                    val newName = binding.matchGamePlayerC.text.toString()
+                    game.gameTeamB[0].playerName = newName
+//                    changePlayerName(oldName, newName)
                     updateGame(game)
                 }
             }
             binding.matchGamePlayerD.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
+                    val oldName = game.gameTeamB[1].playerName
+                    val newName = binding.matchGamePlayerD.text.toString()
+                    game.gameTeamB[1].playerName = newName
+//                    changePlayerName(oldName, newName)
                     updateGame(game)
                 }
             }
@@ -108,6 +124,13 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
             binding.matchGamePlayerC.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerC))
             binding.matchGamePlayerD.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerD))
 
+        }
+
+        private fun changePlayerName(oldName: String, newName: String) {
+            matchViewModel.players.value?.find { it.playerName == oldName }?.let {
+                it.playerName = newName
+            }
+            matchViewModel.applyPlayerList()
         }
 
         private fun getEditorActionListener(view: View): TextView.OnEditorActionListener { // 키보드에서 done(완료) 클릭 시
