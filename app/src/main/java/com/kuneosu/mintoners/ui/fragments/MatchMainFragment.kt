@@ -40,7 +40,6 @@ class MatchMainFragment : Fragment() {
     ): View {
         _binding = FragmentMatchMainBinding.inflate(inflater, container, false)
 
-
         displayInfoSetting()
         infoDialogSetting()
         moveButtonSetting()
@@ -83,6 +82,7 @@ class MatchMainFragment : Fragment() {
     private fun moveButtonSetting() {
         binding.matchMainEditButton.setOnClickListener {
             findNavController().popBackStack()
+            matchViewModel.updateMatchState(2)
         }
         binding.matchMainEndButton.setOnClickListener {
             binding.root.clearFocus()

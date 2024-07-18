@@ -2,10 +2,12 @@ package com.kuneosu.mintoners.ui.view
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
@@ -29,9 +31,11 @@ class MatchActivity : AppCompatActivity() {
 
     private fun matchNumberSetting() {
         val matchNumber = intent.getIntExtra("matchNumber", 0)
-        if (matchNumber != 0) {
-            matchViewModel.setMatchNumber(matchNumber)
-        }
+        val matchState = intent.getIntExtra("matchState", 0)
+
+        matchViewModel.setMatchNumber(matchNumber)
+        matchViewModel.setMatchState(matchState)
+
     }
 
 }

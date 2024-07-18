@@ -50,11 +50,13 @@ class MatchGameFragment : Fragment() {
 
         binding.matchGamePreviousButton.setOnClickListener {
             findNavController().popBackStack()
+            matchViewModel.updateMatchState(1)
             matchViewModel.applyGameList()
         }
 
         binding.matchGameNextButton.setOnClickListener {
             findNavController().navigate(R.id.action_matchGameFragment_to_matchMainFragment)
+            matchViewModel.updateMatchState(3)
             matchViewModel.applyGameList()
         }
     }
@@ -95,6 +97,7 @@ class MatchGameFragment : Fragment() {
                 hideKeyboard()
             } else {
                 findNavController().popBackStack()
+                matchViewModel.updateMatchState(1)
                 matchViewModel.applyGameList()
             }
         }

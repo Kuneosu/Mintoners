@@ -12,6 +12,12 @@
         <action
             android:id="@+id/action_matchInfoFragment_to_matchPlayerFragment"
             app:destination="@id/matchPlayerFragment" />
+        <action
+            android:id="@+id/action_matchInfoFragment_to_matchGameFragment"
+            app:destination="@id/matchGameFragment" />
+        <action
+            android:id="@+id/action_matchInfoFragment_to_matchMainFragment"
+            app:destination="@id/matchMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/matchPlayerFragment"
