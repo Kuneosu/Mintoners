@@ -2,6 +2,29 @@
 
 July 2024 Personal project, match table creation and management application
 
+
+# 프로젝트 개요
+
+### 프로젝트 진행 기간
+- 2024.06.25 ~ 진행중
+### 프로젝트 목표
+<b>배드민턴 또는 테니스 동호인들이 사용하기에 편리한 대진표 생성 및 관리 어플리케이션을 제공하는 것</b>이 목표입니다. 
+<br>기존에 존재하는 몇몇 앱들은 출시된지 오래되거나 업데이트 지원이 끊긴 어플들 뿐이기에
+<br>기존 어플 대비 <b>직관적인 UI와 문제점들이 개선</b>된 어플을 제작해보고자 하였습니다.
+### 역할 및 책임
+개인 프로젝트로 진행하였기 때문에 기획부터 디자인, 개발 QA, 배포, 운영 등 모든 과정을 직접 진행하였습니다.
+
+
+# 기획 및 UI, Database 디자인
+
+### 👉🏻 [FIGMA](https://www.figma.com/design/UdR7poMiFqJ9mWknKeSNg2/MIntoners?node-id=0-1&t=d1U0RAl7U4o8rFvT-1)
+
+
+# Portfolio Page
+
+### 👉🏻 [Notion](https://kimkwonsu.notion.site/KDK-9aaaa8c7aa914d8e80a8b49367b6ca99?pvs=4)
+
+
 # 개발 일지
 
 ## 2024.07.08
