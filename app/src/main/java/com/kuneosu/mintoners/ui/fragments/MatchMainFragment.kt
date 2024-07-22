@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -58,9 +59,13 @@ class MatchMainFragment : Fragment() {
             MatchMainRankFragment(),
         )
 
-
         viewPager.adapter =
             MatchMainPagerAdapter(fragmentList, this)
+
+        matchViewModel.updateCount.observe(viewLifecycleOwner, Observer {
+            viewPager.adapter =
+                MatchMainPagerAdapter(fragmentList, this)
+        })
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {

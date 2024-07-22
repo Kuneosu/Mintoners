@@ -22,7 +22,7 @@ import kotlinx.coroutines.CoroutineScope
 
 @Database(
     entities = [Match::class, Player::class, Game::class, Member::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -45,8 +45,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
-                ).addMigrations(MIGRATION_1_2).build()
-                Log.d("DATABASE", "getDatabase: instance created")
+                ).addMigrations(MIGRATION_2_3).build()
                 INSTANCE = instance
                 instance
             }
@@ -55,6 +54,15 @@ abstract class AppDatabase : RoomDatabase() {
         private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {
                 db.execSQL("ALTER TABLE matches ADD COLUMN matchState INTEGER NOT NULL DEFAULT 0")
+            }
+        }
+
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE players ADD COLUMN playerWin INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE players ADD COLUMN playerDraw INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE players ADD COLUMN playerLose INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE players ADD COLUMN playerScore INTEGER NOT NULL DEFAULT 0")
             }
         }
     }

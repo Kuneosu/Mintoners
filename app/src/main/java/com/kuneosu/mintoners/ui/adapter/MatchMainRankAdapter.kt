@@ -1,6 +1,7 @@
 package com.kuneosu.mintoners.ui.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -45,8 +46,13 @@ class MatchMainRankAdapter(private val matchViewModel: MatchViewModel) :
         fun bind(player: Player) {
             binding.matchMainRankName.text = player.playerName
             binding.matchMainRankNumber.text = (adapterPosition + 1).toString()
+            binding.matchMainRankWin.text = player.playerWin.toString()
+            binding.matchMainRankLose.text = player.playerLose.toString()
+            binding.matchMainRankDraw.text = player.playerDraw.toString()
+            binding.matchMainRankScoreDiff.text = player.playerScore.toString()
         }
     }
+
 
     override fun onSwiped(position: Int) {
         TODO("Not yet implemented")

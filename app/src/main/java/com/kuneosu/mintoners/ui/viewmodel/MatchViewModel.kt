@@ -27,6 +27,9 @@ class MatchViewModel @Inject constructor(
 
 ) : ViewModel() {
 
+    private val _updateCount = MutableLiveData<Int>()
+    val updateCount: LiveData<Int> get() = _updateCount
+
     private val _matchNumber = MutableLiveData<Int>()
     val matchNumber: LiveData<Int> get() = _matchNumber
 
@@ -52,7 +55,9 @@ class MatchViewModel @Inject constructor(
         _selectedDate.value = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         _matchNumber.value = 0
         _matchState.value = 0
+        _updateCount.value = 0
     }
+
 
     fun setMatchState(state: Int) {
         _matchState.value = state
@@ -68,13 +73,73 @@ class MatchViewModel @Inject constructor(
 
     }
 
-    fun updateGameScore(game: Game) {
+    fun updateTeamAGameScore(game: Game) {
+        val currentList = _games.value.orEmpty().toMutableList()
+        val index = currentList.indexOfFirst { it.gameIndex == game.gameIndex }
+        if (index != -1) {
+            Log.d(TAG, "updateTeamAGameScore: $game")
+            Log.d(TAG, "updateTeamAGameScore: ${_games.value!![index]}")
+            Log.d(TAG, "updateTeamAGameScore: ${currentList[index]}")
+            currentList[index] = game
+            val scoreDiff = game.gameAScore - _games.value!![index].gameAScore
+            _games.value = currentList
+            game.gameTeamA.forEach {
+                _players.value!!.forEach { player ->
+                    if (player.playerIndex == it.playerIndex) {
+                        Log.d(TAG, "updateTeamAGameScore: $player")
+                        Log.d(TAG, "updateTeamAGameScore: $it")
+                        Log.d(TAG, "updateTeamAGameScore: $scoreDiff")
+                        player.playerScore += scoreDiff
+                    }
+                }
+            }
+            game.gameTeamB.forEach {
+                _players.value!!.forEach { player ->
+                    if (player.playerIndex == it.playerIndex) {
+                        player.playerScore -= scoreDiff
+                    }
+                }
+            }
+            applyGameScore()
+        }
+    }
+
+    fun updateTeamBGameScore(game: Game) {
         val currentList = _games.value.orEmpty().toMutableList()
         val index = currentList.indexOfFirst { it.gameIndex == game.gameIndex }
         if (index != -1) {
             currentList[index] = game
+            val scoreDiff = game.gameBScore - _games.value!![index].gameBScore
             _games.value = currentList
-            Log.d("score", "updateGameScore: $game")
+            Log.d(TAG, "updateTeamBGameScore: ${players.value}")
+            game.gameTeamB.forEach {
+                _players.value!!.forEach { player ->
+                    if (player.playerIndex == it.playerIndex) {
+                        player.playerScore += scoreDiff
+                    }
+                }
+            }
+            game.gameTeamA.forEach {
+                _players.value!!.forEach { player ->
+                    if (player.playerIndex == it.playerIndex) {
+                        player.playerScore -= scoreDiff
+                    }
+                }
+            }
+            Log.d(TAG, "updateTeamBGameScore: ${players.value}")
+            applyGameScore()
+        }
+    }
+
+    private fun applyGameScore() {
+        viewModelScope.launch {
+            val currentGameList = _games.value.orEmpty().toMutableList()
+            val currentPlayerList = _players.value.orEmpty().toMutableList()
+            _match.value?.matchList = currentGameList
+            _match.value?.matchPlayers = currentPlayerList
+            updateMatchByNumber(_match.value?.matchNumber!!)
+            _updateCount.value = _updateCount.value?.plus(1)
+            Log.d(TAG, "applyGameScore: ${match.value}")
         }
     }
 
@@ -167,6 +232,9 @@ class MatchViewModel @Inject constructor(
     }
 
     fun generateGames() {
+        _players.value!!.forEach {
+            it.playerScore = 0
+        }
         _games.value = KdkGameMaker(_players.value!!).gameMakingWithKdk()
     }
 

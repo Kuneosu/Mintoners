@@ -1,6 +1,8 @@
 package com.kuneosu.mintoners.ui.adapter
 
 import android.annotation.SuppressLint
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -58,11 +60,12 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
                 if (!hasFocus) {
                     val score = binding.matchMainListTeamAScore.text.toString().toIntOrNull() ?: 0
                     Log.d("score", "score change, old : ${game.gameAScore}, new : $score")
-                    matchViewModel.updateGameScore(game.copy(gameAScore = score))
-                    game.gameAScore = score
-                    Log.d("score", "gameAScore : ${game.gameAScore}")
-                    if (binding.matchMainListTeamAScore.text.toString().isEmpty()) {
-                        binding.matchMainListTeamAScore.setText("0")
+                    if (game.gameAScore != score) {
+                        matchViewModel.updateTeamAGameScore(game.copy(gameAScore = score))
+                        game.gameAScore = score
+                        if (binding.matchMainListTeamAScore.text.toString().isEmpty()) {
+                            binding.matchMainListTeamAScore.setText("0")
+                        }
                     }
                 } else {
                     if (binding.matchMainListTeamAScore.text.toString() == "0") {
@@ -74,11 +77,12 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
                 if (!hasFocus) {
                     val score = binding.matchMainListTeamBScore.text.toString().toIntOrNull() ?: 0
                     Log.d("score", "score change, old : ${game.gameBScore}, new : $score")
-                    matchViewModel.updateGameScore(game.copy(gameBScore = score))
-                    game.gameBScore = score
-                    Log.d("score", "gameBScore : ${game.gameBScore}")
-                    if (binding.matchMainListTeamBScore.text.toString().isEmpty()) {
-                        binding.matchMainListTeamBScore.setText("0")
+                    if (game.gameBScore != score) {
+                        matchViewModel.updateTeamBGameScore(game.copy(gameBScore = score))
+                        game.gameBScore = score
+                        if (binding.matchMainListTeamBScore.text.toString().isEmpty()) {
+                            binding.matchMainListTeamBScore.setText("0")
+                        }
                     }
                 } else {
                     if (binding.matchMainListTeamBScore.text.toString() == "0") {
