@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.data.model.Player
@@ -32,16 +33,16 @@ class MatchMainListFragment : Fragment() {
     ): View {
         _binding = FragmentMatchMainListBinding.inflate(inflater, container, false)
 
-        matchMainListAdapter = MatchMainListAdapter(matchViewModel)
-        binding.matchMainListRecyclerView.adapter = matchMainListAdapter
-        matchViewModel.match.observe(viewLifecycleOwner) {
-            matchMainListAdapter.submitList(it.matchList)
-        }
-
-        binding.matchMainListRecyclerView.layoutManager = LinearLayoutManager(context)
-
+        matchMainAdapterSetting()
 
         return binding.root
+    }
+
+    private fun matchMainAdapterSetting() {
+        matchMainListAdapter = MatchMainListAdapter(matchViewModel)
+        binding.matchMainListRecyclerView.adapter = matchMainListAdapter
+        matchMainListAdapter.submitList(matchViewModel.games.value)
+        binding.matchMainListRecyclerView.layoutManager = LinearLayoutManager(context)
     }
 
 

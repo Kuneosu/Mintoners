@@ -27,6 +27,9 @@ class MatchViewModel @Inject constructor(
 
 ) : ViewModel() {
 
+    private val _updateCount = MutableLiveData<Int>()
+    val updateCount: LiveData<Int> get() = _updateCount
+
     private val _matchNumber = MutableLiveData<Int>()
     val matchNumber: LiveData<Int> get() = _matchNumber
 
@@ -52,7 +55,9 @@ class MatchViewModel @Inject constructor(
         _selectedDate.value = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         _matchNumber.value = 0
         _matchState.value = 0
+        _updateCount.value = 0
     }
+
 
     fun setMatchState(state: Int) {
         _matchState.value = state
@@ -68,13 +73,71 @@ class MatchViewModel @Inject constructor(
 
     }
 
-    fun updateGameScore(game: Game) {
+    fun updateTeamAGameScore(game: Game) {
+        val currentList = _games.value.orEmpty().toMutableList()
+        val index = currentList.indexOfFirst { it.gameIndex == game.gameIndex }
+        if (index != -1) {
+            Log.d(TAG, "updateTeamAGameScore: $game")
+            Log.d(TAG, "updateTeamAGameScore: ${_games.value!![index]}")
+            Log.d(TAG, "updateTeamAGameScore: ${currentList[index]}")
+            currentList[index] = game
+            val scoreDiff = game.gameAScore - _games.value!![index].gameAScore
+            _games.value = currentList
+            game.gameTeamA.forEach {
+                _players.value!!.forEach { player ->
+                    if (player.playerIndex == it.playerIndex) {
+                        Log.d(TAG, "updateTeamAGameScore: $player")
+                        Log.d(TAG, "updateTeamAGameScore: $it")
+                        Log.d(TAG, "updateTeamAGameScore: $scoreDiff")
+                        player.playerScore += scoreDiff
+                    }
+                }
+            }
+            game.gameTeamB.forEach {
+                _players.value!!.forEach { player ->
+                    if (player.playerIndex == it.playerIndex) {
+                        player.playerScore -= scoreDiff
+                    }
+                }
+            }
+        }
+    }
+
+    fun updateTeamBGameScore(game: Game) {
         val currentList = _games.value.orEmpty().toMutableList()
         val index = currentList.indexOfFirst { it.gameIndex == game.gameIndex }
         if (index != -1) {
             currentList[index] = game
+            val scoreDiff = game.gameBScore - _games.value!![index].gameBScore
             _games.value = currentList
-            Log.d("score", "updateGameScore: $game")
+            Log.d(TAG, "updateTeamBGameScore: ${players.value}")
+            game.gameTeamB.forEach {
+                _players.value!!.forEach { player ->
+                    if (player.playerIndex == it.playerIndex) {
+                        player.playerScore += scoreDiff
+                    }
+                }
+            }
+            game.gameTeamA.forEach {
+                _players.value!!.forEach { player ->
+                    if (player.playerIndex == it.playerIndex) {
+                        player.playerScore -= scoreDiff
+                    }
+                }
+            }
+            Log.d(TAG, "updateTeamBGameScore: ${players.value}")
+        }
+    }
+
+    private fun applyGameScore() {
+        viewModelScope.launch {
+            val currentGameList = _games.value.orEmpty().toMutableList()
+            val currentPlayerList = _players.value.orEmpty().toMutableList()
+            _match.value?.matchList = currentGameList
+            _match.value?.matchPlayers = currentPlayerList
+            updateMatchByNumber(_match.value?.matchNumber!!)
+            _updateCount.value = _updateCount.value?.plus(1)
+            Log.d(TAG, "applyGameScore: ${match.value}")
         }
     }
 
@@ -167,6 +230,9 @@ class MatchViewModel @Inject constructor(
     }
 
     fun generateGames() {
+        _players.value!!.forEach {
+            it.playerScore = 0
+        }
         _games.value = KdkGameMaker(_players.value!!).gameMakingWithKdk()
     }
 
@@ -214,5 +280,63 @@ class MatchViewModel @Inject constructor(
             _players.value = _match.value?.matchPlayers ?: listOf()
             _games.value = _match.value?.matchList ?: listOf()
         }
+    }
+
+    fun updatePoint(string: String) {
+        Log.d(TAG, "updatePoint : $string")
+        Log.d(TAG, "updatePoint: ${players.value}")
+
+        // 승 무 패 초기화
+        _players.value?.forEach {
+            it.playerWin = 0
+            it.playerLose = 0
+            it.playerDraw = 0
+        }
+
+        val currentList = _games.value.orEmpty().toMutableList()
+        currentList.forEach {
+            Log.d(TAG, "updatePoint: ${it.gameIndex}")
+            val winTeam =
+                if (it.gameAScore > it.gameBScore) "A" else if (it.gameAScore < it.gameBScore) "B" else "D"
+            val a1 = it.gameTeamA[0].playerIndex
+            val a2 = it.gameTeamA[1].playerIndex
+            val b1 = it.gameTeamB[0].playerIndex
+            val b2 = it.gameTeamB[1].playerIndex
+            Log.d(TAG, "updatePoint BEFORE : ${players.value}")
+
+            when (winTeam) {
+                "A" -> {
+                    _players.value?.forEach { player ->
+                        val index = player.playerIndex
+                        if (index == a1 || index == a2) {
+                            player.playerWin += 1
+                        } else if (index == b1 || index == b2) {
+                            player.playerLose += 1
+                        }
+                    }
+                }
+
+                "B" -> {
+                    _players.value?.forEach { player ->
+                        val index = player.playerIndex
+                        if (index == b1 || index == b2) {
+                            player.playerWin += 1
+                        } else if (index == a1 || index == a2) {
+                            player.playerLose += 1
+                        }
+                    }
+                }
+
+                "D" -> {
+                    _players.value?.forEach { player ->
+                        val index = player.playerIndex
+                        if (index == a1 || index == a2 || index == b1 || index == b2) {
+                            player.playerDraw += 1
+                        }
+                    }
+                }
+            }
+        }
+        applyGameScore()
     }
 }

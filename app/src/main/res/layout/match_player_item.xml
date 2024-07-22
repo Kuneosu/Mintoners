@@ -2,6 +2,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -29,6 +30,7 @@
             android:id="@+id/match_player_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/padding_large"
             android:paddingVertical="@dimen/padding_medium"
             android:text="Player Name"
             android:textColor="@color/black"
@@ -41,23 +43,26 @@
 
         <EditText
             android:id="@+id/edit_player_name"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/match_main_top_view_height"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_large"
+            android:autofillHints="이름"
             android:background="@drawable/match_edittext"
-            android:padding="@dimen/padding_medium"
             android:inputType="text"
-            android:text="Player Name"
+            android:padding="@dimen/padding_medium"
+            android:paddingHorizontal="@dimen/padding_large"
             android:textColor="@color/black"
             android:textSize="@dimen/text_large"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/match_player_index"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="LabelFor" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/edit_empty_button"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/small_button_height"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
             android:text="X"

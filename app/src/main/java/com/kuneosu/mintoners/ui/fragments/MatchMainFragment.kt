@@ -1,19 +1,23 @@
 package com.kuneosu.mintoners.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -45,8 +49,23 @@ class MatchMainFragment : Fragment() {
         moveButtonSetting()
         initPager()
 
+        binding.matchMainRoot.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                v.clearFocus()
+                hideKeyboard()
+                v.performClick()
+            }
+            false
+        }
+
 
         return binding.root
+    }
+
+    private fun hideKeyboard() {
+        val inputMethodManager =
+            activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
     private fun initPager() {
@@ -58,9 +77,15 @@ class MatchMainFragment : Fragment() {
             MatchMainRankFragment(),
         )
 
-
         viewPager.adapter =
             MatchMainPagerAdapter(fragmentList, this)
+
+        matchViewModel.updateCount.observe(viewLifecycleOwner, Observer {
+            val currentItem = viewPager.currentItem
+            viewPager.adapter =
+                MatchMainPagerAdapter(fragmentList, this)
+            viewPager.setCurrentItem(currentItem, false)
+        })
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {

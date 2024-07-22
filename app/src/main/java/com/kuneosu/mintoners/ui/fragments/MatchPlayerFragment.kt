@@ -97,17 +97,6 @@ class MatchPlayerFragment : Fragment() {
         binding.matchPlayerCountText.text = "참가 인원수 : $count 명"
     }
 
-    private fun onAddPlayer(
-        playerIndexInput: Int,
-        playerNameInput: String
-    ) {
-        val player = Player(
-            playerIndex = playerIndexInput,
-            playerName = playerNameInput
-        )
-        matchViewModel.addPlayer(player)
-    }
-
     private fun hideKeyboard() {
         val inputMethodManager =
             activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
