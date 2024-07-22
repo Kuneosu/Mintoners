@@ -210,9 +210,20 @@ July 2024 Personal project, match table creation and management application
 
 - **현재 순위 출력 기능 추가**
   - Player 데이터 클래스에 playerWin, playerDraw, playerLose, playerScore 추가
-  - 대진표에서 점수 입력 시 playerScore(득실) 업데이트
+  - ~~대진표에서 점수 입력 시 playerScore(득실) 업데이트~~
+    - 현재 순위로 이동해서 Sync 버튼 클릭 시 playerScore, playerWin, playerDraw, playerLose 업데이트
   - MatchMainRankFragment 에 이름, 승점, 득실 RadioGroup 추가
   - RadioGroup 선택 시 해당하는 항목의 순서대로 정렬
   - matchViewModel에 updateCount 변수 추가.
     - playerScore 업데이트 시 updateCount 증가 -> viewPagerAdapter Update = 득실 실시간 업데이트
     - observer 가 players 의 playerScore 의 변화를 감지하지 못해서 차선책으로 updateCount 도입
+  - playerWin, playerDraw, playerLose, match.matchPoint 기반으로 승점 계산
+  - Sync 버튼 클릭 시 순위 최신화 및 정렬 순서 업데이트
+  - Game 데이터 클래스에 gameState 변수 추가.(true,false)
+    - false = 경기 진행 중. 점수 수정 가능
+    - true = 경기 종료. 점수 수정 불가능
+  - 대진표의 경기 순서를 클릭하여 해당 게임의 gameState 변경 가능
+- **몇가지 작은 업데이트**
+  - Player 추가 Fragment 디자인 일부 변경
+  - Player 수정 시 기존 이름 비움.
+  - Player 수정 시 빈 이름일 경우 P+(position+1) 로 기본 이름 설정

@@ -10,13 +10,61 @@
     android:background="@color/white"
     tools:context=".ui.fragments.MatchMainRankFragment">
 
+
+    <LinearLayout
+        android:id="@+id/match_main_rank_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <RadioGroup
+            android:id="@+id/match_main_rank_sort_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/match_main_rank_sort_name_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름" />
+
+            <RadioButton
+                android:id="@+id/match_main_rank_sort_point_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="승점" />
+
+            <RadioButton
+                android:id="@+id/match_main_rank_sort_score_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="득실" />
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/match_main_rank_sync_button"
+            android:layout_width="@dimen/match_main_top_bar_icon_size"
+            android:layout_height="@dimen/match_main_top_bar_icon_size"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:contentDescription="@string/sync_button"
+            android:padding="@dimen/padding_small"
+            android:src="@drawable/sync"
+            android:textSize="@dimen/text_medium" />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/match_main_rank_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingVertical="@dimen/padding_medium"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/match_main_rank_setting">
 
         <TextView
             android:layout_width="0dp"
@@ -89,40 +137,12 @@
         android:background="@color/trans_black_50"
         app:layout_constraintTop_toBottomOf="@+id/match_main_rank_header" />
 
-    <RadioGroup
-        android:id="@+id/match_main_rank_sort_radio_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margin_default"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/match_main_rank_divider">
-
-        <RadioButton
-            android:id="@+id/match_main_rank_sort_name_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="이름" />
-
-        <RadioButton
-            android:id="@+id/match_main_rank_sort_point_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="승점" />
-
-        <RadioButton
-            android:id="@+id/match_main_rank_sort_score_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="득실" />
-    </RadioGroup>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/match_main_rank_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/match_main_rank_sort_radio_group" />
+        app:layout_constraintTop_toBottomOf="@id/match_main_rank_divider" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

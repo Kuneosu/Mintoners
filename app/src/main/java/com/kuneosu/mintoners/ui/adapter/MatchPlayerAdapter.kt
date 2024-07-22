@@ -69,7 +69,7 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
 
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
         if (position < currentList.size) {
-            holder.bind(currentList[position])
+            holder.bind(currentList[position], position)
         } else {
             holder.add()
         }
@@ -78,7 +78,7 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
     inner class PlayerViewHolder(private val binding: MatchPlayerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(player: Player) {
+        fun bind(player: Player, position: Int) {
             binding.matchPlayerName.text = player.playerName
             binding.matchPlayerIndex.text = player.playerIndex.toString()
 
@@ -110,11 +110,12 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
                     if (newName.isNotEmpty()) {
                         updatePlayer(player)
                     } else {
-                        Handler(Looper.getMainLooper()).post {
-                            deletePlayer(player)
-                        }
+                        player.playerName = "P${position + 1}"
+                        binding.matchPlayerName.text = player.playerName
+                        updatePlayer(player)
                     }
-
+                } else {
+                    binding.editPlayerName.setText("")
                 }
             }
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -38,6 +39,15 @@ class MatchGameFragment : Fragment() {
 
         binding.matchGameCreateButton.setOnClickListener {
             matchViewModel.generateGames()
+        }
+
+        binding.matchGameRoot.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                v.clearFocus()
+                hideKeyboard()
+                v.performClick()
+            }
+            false
         }
 
         gameNavigationSetting()

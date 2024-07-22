@@ -37,22 +37,32 @@ class MatchMainRankAdapter(private val matchViewModel: MatchViewModel) :
     }
 
     override fun onBindViewHolder(holder: RankViewHolder, position: Int) {
-        holder.bind(currentList[position])
+        Log.d("RAdapter", "onBindViewHolder: position = $position")
+        holder.bind(currentList[position], position)
     }
 
     inner class RankViewHolder(private val binding: MatchMainRankItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(player: Player) {
+        fun bind(player: Player, position: Int) {
             binding.matchMainRankName.text = player.playerName
-            binding.matchMainRankNumber.text = (adapterPosition + 1).toString()
+            binding.matchMainRankNumber.text = (position + 1).toString()
             binding.matchMainRankWin.text = player.playerWin.toString()
             binding.matchMainRankLose.text = player.playerLose.toString()
             binding.matchMainRankDraw.text = player.playerDraw.toString()
+            val winPoint =
+                player.playerWin * (matchViewModel.match.value?.matchPoint!![0]).digitToInt()
+            Log.d("rankAdapter", "bind: $winPoint")
+            val drawPoint =
+                player.playerDraw * (matchViewModel.match.value?.matchPoint!![1]).digitToInt()
+            Log.d("rankAdapter", "bind: $drawPoint")
+            val losePoint =
+                player.playerLose * (matchViewModel.match.value?.matchPoint!![2]).digitToInt()
+            Log.d("rankAdapter", "bind: $losePoint")
+            binding.matchMainRankPoints.text = (winPoint + drawPoint - losePoint).toString()
             binding.matchMainRankScoreDiff.text = player.playerScore.toString()
         }
     }
-
 
     override fun onSwiped(position: Int) {
         TODO("Not yet implemented")

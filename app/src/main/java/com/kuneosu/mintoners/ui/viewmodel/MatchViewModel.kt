@@ -100,7 +100,6 @@ class MatchViewModel @Inject constructor(
                     }
                 }
             }
-            applyGameScore()
         }
     }
 
@@ -127,7 +126,6 @@ class MatchViewModel @Inject constructor(
                 }
             }
             Log.d(TAG, "updateTeamBGameScore: ${players.value}")
-            applyGameScore()
         }
     }
 
@@ -282,5 +280,63 @@ class MatchViewModel @Inject constructor(
             _players.value = _match.value?.matchPlayers ?: listOf()
             _games.value = _match.value?.matchList ?: listOf()
         }
+    }
+
+    fun updatePoint(string: String) {
+        Log.d(TAG, "updatePoint : $string")
+        Log.d(TAG, "updatePoint: ${players.value}")
+
+        // 승 무 패 초기화
+        _players.value?.forEach {
+            it.playerWin = 0
+            it.playerLose = 0
+            it.playerDraw = 0
+        }
+
+        val currentList = _games.value.orEmpty().toMutableList()
+        currentList.forEach {
+            Log.d(TAG, "updatePoint: ${it.gameIndex}")
+            val winTeam =
+                if (it.gameAScore > it.gameBScore) "A" else if (it.gameAScore < it.gameBScore) "B" else "D"
+            val a1 = it.gameTeamA[0].playerIndex
+            val a2 = it.gameTeamA[1].playerIndex
+            val b1 = it.gameTeamB[0].playerIndex
+            val b2 = it.gameTeamB[1].playerIndex
+            Log.d(TAG, "updatePoint BEFORE : ${players.value}")
+
+            when (winTeam) {
+                "A" -> {
+                    _players.value?.forEach { player ->
+                        val index = player.playerIndex
+                        if (index == a1 || index == a2) {
+                            player.playerWin += 1
+                        } else if (index == b1 || index == b2) {
+                            player.playerLose += 1
+                        }
+                    }
+                }
+
+                "B" -> {
+                    _players.value?.forEach { player ->
+                        val index = player.playerIndex
+                        if (index == b1 || index == b2) {
+                            player.playerWin += 1
+                        } else if (index == a1 || index == a2) {
+                            player.playerLose += 1
+                        }
+                    }
+                }
+
+                "D" -> {
+                    _players.value?.forEach { player ->
+                        val index = player.playerIndex
+                        if (index == a1 || index == a2 || index == b1 || index == b2) {
+                            player.playerDraw += 1
+                        }
+                    }
+                }
+            }
+        }
+        applyGameScore()
     }
 }

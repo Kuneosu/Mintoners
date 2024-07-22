@@ -1,5 +1,6 @@
 package com.kuneosu.mintoners.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -46,31 +47,41 @@ class MatchMainRankFragment : Fragment() {
         binding.matchMainRankSortRadioGroup.setOnCheckedChangeListener { _, radio ->
             rankAdapterSetting(radio)
         }
+        binding.matchMainRankSyncButton.setOnClickListener {
+            matchViewModel.updatePoint(string = "Sync Button")
+        }
     }
 
     private fun rankAdapterSetting(radio: Int) {
-        when (radio) {
+        val list =
+            matchViewModel.players.value!!.sortedByDescending { player -> player.playerScore }
+        val sortedList = when (radio) {
             binding.matchMainRankSortNameRadio.id -> {
-                matchViewModel.players.observe(viewLifecycleOwner, Observer {
-                    matchMainRankAdapter.submitList(it)
-                })
-                Toast.makeText(context, "Name", Toast.LENGTH_SHORT).show()
+                (list.sortedBy { player -> player.playerName })
             }
 
             binding.matchMainRankSortScoreRadio.id -> {
-                matchViewModel.players.observe(viewLifecycleOwner, Observer {
-                    matchMainRankAdapter.submitList(it.sortedBy { player -> -player.playerScore })
-                })
-                Toast.makeText(context, "Score", Toast.LENGTH_SHORT).show()
+                (list.sortedByDescending { player -> player.playerScore })
             }
 
             binding.matchMainRankSortPointRadio.id -> {
-                matchViewModel.players.observe(viewLifecycleOwner, Observer {
-                    matchMainRankAdapter.submitList(it)
+                (list.sortedByDescending { player ->
+                    val winPoint =
+                        player.playerWin * (matchViewModel.match.value?.matchPoint!![0]).digitToInt()
+                    val drawPoint =
+                        player.playerDraw * (matchViewModel.match.value?.matchPoint!![1]).digitToInt()
+                    val losePoint =
+                        player.playerLose * (matchViewModel.match.value?.matchPoint!![2]).digitToInt()
+                    (winPoint + drawPoint - losePoint)
                 })
-                Toast.makeText(context, "Point", Toast.LENGTH_SHORT).show()
+            }
+
+            else -> {
+                matchViewModel.players.value!!
             }
         }
+        matchMainRankAdapter.submitList(emptyList())
+        matchMainRankAdapter.submitList(sortedList.toList())
     }
 
     override fun onDestroyView() {

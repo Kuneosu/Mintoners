@@ -36,4 +36,5 @@
     <string name="match_main">match_main</string>
     <string name="personal_back_button">personal_back_button</string>
     <string name="withdraw_warning_text">회원 탈퇴 시 데이터가 전부 삭제됩니다.\n삭제된 데이터는 복구할 수 없으니 주의 바랍니다.</string>
+    <string name="sync_button">sync_button</string>
 </resources>

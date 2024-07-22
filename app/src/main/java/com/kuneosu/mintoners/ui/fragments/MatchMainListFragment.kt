@@ -33,16 +33,16 @@ class MatchMainListFragment : Fragment() {
     ): View {
         _binding = FragmentMatchMainListBinding.inflate(inflater, container, false)
 
-        matchMainListAdapter = MatchMainListAdapter(matchViewModel)
-        binding.matchMainListRecyclerView.adapter = matchMainListAdapter
-        matchViewModel.games.observe(viewLifecycleOwner, Observer {
-            matchMainListAdapter.submitList(it)
-        })
-
-        binding.matchMainListRecyclerView.layoutManager = LinearLayoutManager(context)
-
+        matchMainAdapterSetting()
 
         return binding.root
+    }
+
+    private fun matchMainAdapterSetting() {
+        matchMainListAdapter = MatchMainListAdapter(matchViewModel)
+        binding.matchMainListRecyclerView.adapter = matchMainListAdapter
+        matchMainListAdapter.submitList(matchViewModel.games.value)
+        binding.matchMainListRecyclerView.layoutManager = LinearLayoutManager(context)
     }
 
 
