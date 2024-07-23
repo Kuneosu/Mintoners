@@ -36,7 +36,7 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
     private lateinit var itemTouchHelper: ItemTouchHelper
 
     fun setItemTouchHelper(recyclerView: RecyclerView) {
-        itemTouchHelper = ItemTouchHelper(SimpleSwipeHelperCallback(this))
+        itemTouchHelper = ItemTouchHelper(SimpleSwipeHelperCallback(this, ItemTouchHelper.LEFT))
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 

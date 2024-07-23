@@ -56,6 +56,10 @@ class MatchMainFragment : Fragment() {
         moveButtonSetting()
         initPager()
 
+        binding.matchMainTopSync.setOnClickListener {
+            matchViewModel.updatePoint(string = "Sync Button")
+        }
+
         binding.matchMainTopBack.setOnClickListener {
             callback.handleOnBackPressed()
         }
@@ -179,7 +183,7 @@ class MatchMainFragment : Fragment() {
     }
 
     private fun infoDialogSetting() {
-        binding.matchMainTopInfo.setOnClickListener {
+        binding.matchMainTopTitle.setOnClickListener {
             val infoTitle = "대회명 : ${matchViewModel.match.value?.matchName ?: ""}"
             val infoDate = "대회일자 : ${dateToString(matchViewModel.match.value?.matchDate)}"
             val infoPoint = "승점 : ${matchViewModel.match.value?.matchPoint ?: ""}"

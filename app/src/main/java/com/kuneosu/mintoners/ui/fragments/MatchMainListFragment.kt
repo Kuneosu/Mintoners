@@ -41,7 +41,10 @@ class MatchMainListFragment : Fragment() {
     private fun matchMainAdapterSetting() {
         matchMainListAdapter = MatchMainListAdapter(matchViewModel)
         binding.matchMainListRecyclerView.adapter = matchMainListAdapter
-        matchMainListAdapter.submitList(matchViewModel.games.value)
+        matchMainListAdapter.setItemTouchHelper(binding.matchMainListRecyclerView)
+        matchViewModel.games.observe(viewLifecycleOwner, Observer {
+            matchMainListAdapter.submitList(it)
+        })
         binding.matchMainListRecyclerView.layoutManager = LinearLayoutManager(context)
     }
 

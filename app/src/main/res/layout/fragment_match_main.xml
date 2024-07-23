@@ -34,16 +34,16 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_large"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/match_main_top_info"
+            app:layout_constraintEnd_toStartOf="@+id/match_main_top_sync"
             app:layout_constraintStart_toEndOf="@+id/match_main_top_back"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/match_main_top_info"
+            android:id="@+id/match_main_top_sync"
             android:layout_width="@dimen/match_main_top_bar_icon_size"
             android:layout_height="@dimen/match_main_top_bar_icon_size"
             android:padding="@dimen/padding_small"
-            android:src="@drawable/match_main_info"
+            android:src="@drawable/syncronize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
