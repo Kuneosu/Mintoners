@@ -25,8 +25,15 @@ class SimpleSwipeHelperCallback(
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-//        listener.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
-        return false
+        listener.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+        return true
+    }
+
+    override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+        super.onSelectedChanged(viewHolder, actionState)
+        when (actionState) {
+            ItemTouchHelper.ACTION_STATE_IDLE -> listener.onStopDrag()
+        }
     }
 
 
@@ -45,7 +52,7 @@ class SimpleSwipeHelperCallback(
     ) {
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
         val itemView = viewHolder.itemView
-        val background = ColorDrawable(Color.RED)
+        val background = ColorDrawable(Color.rgb(236, 92, 87))
         background.setBounds(
             itemView.right + dX.toInt(),
             itemView.top,

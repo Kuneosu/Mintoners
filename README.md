@@ -235,7 +235,10 @@ July 2024 Personal project, match table creation and management application
   - ScrollView의 전체를 찍어서 공유하기 때문에 화면을 넘어가는 영역도 캡쳐
   - 캡쳐시 불필요한 버튼은 디스플레이에서 제거
   - 캡쳐와 동시에 공유까지 바로 가능
+- **MatchGameFragment Drag&Drop 기능 추가**
+  - fromPosition, toPosition을 통해 아이템의 위치를 변경
 
-- **Bug fix**
+- **Small Update**
   - ViewPager 화면 전환 시 RecyclerView 의 내용이 짤리는 문제 해결 (화면 전환 시 ViewPager 높이 재설정)
   - MatchMainRankFragment 이름 순 출력 정규식 도입
+  - _games.value.shuffle() 을 통해 게임 순서 랜덤화 기능 추가

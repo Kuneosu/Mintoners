@@ -2,22 +2,18 @@ package com.kuneosu.mintoners.ui.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kuneosu.mintoners.data.model.Game
-import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.databinding.MatchMainListItemBinding
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.ItemTouchHelperListener
 
 class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
-    ListAdapter<Game, MatchMainListAdapter.MatchListViewHolder>(diffUtil), ItemTouchHelperListener {
+    ListAdapter<Game, MatchMainListAdapter.MatchListViewHolder>(diffUtil) {
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Game>() {
             override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
@@ -110,7 +106,4 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
         }
     }
 
-    override fun onSwiped(position: Int) {
-        TODO("Not yet implemented")
-    }
 }

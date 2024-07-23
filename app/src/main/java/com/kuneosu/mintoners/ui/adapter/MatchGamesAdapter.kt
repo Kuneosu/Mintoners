@@ -1,11 +1,13 @@
 package com.kuneosu.mintoners.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kuneosu.mintoners.data.model.Game
@@ -13,6 +15,8 @@ import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.MatchGameItemBinding
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.ItemTouchHelperListener
+import com.kuneosu.mintoners.util.SimpleSwipeHelperCallback
+import java.util.Collections
 
 class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
     ListAdapter<Game, MatchGamesAdapter.GameViewHolder>(diffUtil), ItemTouchHelperListener {
@@ -28,6 +32,16 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
             }
         }
     }
+
+    private lateinit var itemTouchHelper: ItemTouchHelper
+
+    fun setItemTouchHelper(recyclerView: RecyclerView) {
+        itemTouchHelper = ItemTouchHelper(SimpleSwipeHelperCallback(this))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
+
+    private var fromPosition = -1
+    private var toPosition = -1
 
     private fun addGame() {
         val gameIndex = matchViewModel.games.value?.size?.plus(1) ?: 0
@@ -76,6 +90,15 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
 
     inner class GameViewHolder(private val binding: MatchGameItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            // 뷰 홀더 초기화 시 드래그 핸들러 설정
+            binding.root.setOnLongClickListener {
+                itemTouchHelper.startDrag(this)
+                true
+            }
+        }
+
         fun bind(game: Game) {
             binding.matchGameNumber.text = game.gameIndex.toString()
             binding.matchGamePlayerA.setText(game.gameTeamA[0].playerName)
@@ -153,14 +176,29 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
         }
     }
 
-//    override fun onItemMove(from: Int, to: Int) {
-//        val gameList = currentList.toMutableList()
-//        val game = gameList[from]
-//        gameList.removeAt(from)
-//        gameList.add(to, game)
-//        matchViewModel.updateAllGames(gameList)
-//        notifyItemMoved(from, to)
-//    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
+        if (fromPosition < currentList.size && toPosition < currentList.size) {
+            this.fromPosition = fromPosition
+            this.toPosition = toPosition
+            Log.d("onMove", "onItemMove: fromPosition = $fromPosition, toPosition = $toPosition")
+            return true
+        }
+        return false
+    }
+
+    override fun onStopDrag() {
+        if (fromPosition < 0 || toPosition < 0) {
+            return
+        } else {
+            val list = currentList.toMutableList()
+            Collections.swap(list, fromPosition, toPosition)
+            matchViewModel.updateGameList(list)
+            fromPosition = -1
+            toPosition = -1
+        }
+    }
+
 
     override fun onSwiped(position: Int) {
         deleteGame(currentList[position])
