@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kuneosu.mintoners.R
+import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.FragmentMatchMainRankBinding
 import com.kuneosu.mintoners.ui.adapter.MatchMainRankAdapter
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
@@ -52,12 +53,45 @@ class MatchMainRankFragment : Fragment() {
         }
     }
 
+    fun String.toNaturalSortKey(): List<Any> {
+        val regex = "\\d+|\\D+".toRegex()
+        return regex.findAll(this).map {
+            it.value.toIntOrNull() ?: it.value
+        }.toList()
+    }
+
+    inner class NaturalOrderComparator : Comparator<Player> {
+        override fun compare(p1: Player, p2: Player): Int {
+            val key1 = p1.playerName.toNaturalSortKey()
+            val key2 = p2.playerName.toNaturalSortKey()
+
+            for (i in 0 until minOf(key1.size, key2.size)) {
+                val result = when {
+                    key1[i] is Int && key2[i] is Int -> (key1[i] as Int).compareTo(key2[i] as Int)
+                    key1[i] is String && key2[i] is String -> (key1[i] as String).compareTo(key2[i] as String)
+                    key1[i] is Int -> 1 // Integers are considered larger than strings
+                    else -> -1 // Strings are considered smaller than integers
+                }
+
+                if (result != 0) {
+                    return result
+                }
+            }
+            return key1.size.compareTo(key2.size)
+        }
+    }
+
+    private fun List<Player>.sortNaturallyByName(): List<Player> {
+        return sortedWith(NaturalOrderComparator())
+    }
+
+
     private fun rankAdapterSetting(radio: Int) {
         val list =
             matchViewModel.players.value!!.sortedByDescending { player -> player.playerScore }
         val sortedList = when (radio) {
             binding.matchMainRankSortNameRadio.id -> {
-                (list.sortedBy { player -> player.playerName })
+                (list.sortNaturallyByName())
             }
 
             binding.matchMainRankSortScoreRadio.id -> {

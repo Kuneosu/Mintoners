@@ -238,3 +238,4 @@ July 2024 Personal project, match table creation and management application
 
 - **Bug fix**
   - ViewPager 화면 전환 시 RecyclerView 의 내용이 짤리는 문제 해결 (화면 전환 시 ViewPager 높이 재설정)
+  - MatchMainRankFragment 이름 순 출력 정규식 도입
