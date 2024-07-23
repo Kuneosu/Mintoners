@@ -22,6 +22,7 @@ import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.FragmentMatchPlayerBinding
 import com.kuneosu.mintoners.ui.adapter.MatchPlayerAdapter
+import com.kuneosu.mintoners.ui.customview.MatchPlayerAddDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,7 +49,7 @@ class MatchPlayerFragment : Fragment() {
         playerAdapterSetting()
 
         binding.matchPlayerLoadButton.setOnClickListener {
-            // 선수 불러오기 버튼, 이벤트 아직 미구현
+            MatchPlayerAddDialog().show(childFragmentManager, "MatchPlayerLoadDialog")
         }
 
         // Player Fragment Navigation 설정

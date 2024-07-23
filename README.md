@@ -247,6 +247,11 @@ July 2024 Personal project, match table creation and management application
   - 최근 경기 타이틀 우측에 새로고침 아이콘 삽입 (가시성 향상)
   - 선수 추가 시 Focus 변경이 자연스럽게 흘러가도록 변경
 
+- **선수 여러명 동시 입력 기능 추가** branch : (feature/player-add-dialog)
+  - MatchPlayerAddDialog 추가
+  - MatchPlayerFragment 에서 여러명의 선수를 한번에 추가 가능
+  - MatchPlayerAddDialog 에서 이름을 띄어쓰기로 구분해서 입력받아 동시에 선수 추가
+
 - **Small Update**
   - ViewPager 화면 전환 시 RecyclerView 의 내용이 짤리는 문제 해결 (화면 전환 시 ViewPager 높이 재설정)
   - MatchMainRankFragment 이름 순 출력 정규식 도입

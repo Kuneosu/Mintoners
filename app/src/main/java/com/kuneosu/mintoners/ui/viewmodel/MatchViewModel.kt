@@ -351,4 +351,12 @@ class MatchViewModel @Inject constructor(
         updateGameIndexes()
         applyGameList()
     }
+
+    fun addPlayerList(playerList: MutableList<Player>) {
+        val currentList = _players.value.orEmpty().toMutableList()
+        playerList.forEach { player ->
+            currentList.add(player)
+        }
+        _players.value = currentList
+    }
 }
