@@ -241,6 +241,12 @@ July 2024 Personal project, match table creation and management application
   - Drag&Drop을 통해 아이템의 위치를 변경
   - Swipe를 이벤트는 구현 하였으나 ItemTouchHelper.RIGHT를 막아서 이벤트 발생이 안되도록 해둠(기능 구상중)
 
+- **Release 1.0.0-beta.1**
+  - 미구현 기능(로그인, 경기 수 조정, 복식/단식) 접근 제어. 베타 텍스트 출력
+  - 최근 경기 아이템 디자인 변경 (info -> trash bin)
+  - 최근 경기 타이틀 우측에 새로고침 아이콘 삽입 (가시성 향상)
+  - 선수 추가 시 Focus 변경이 자연스럽게 흘러가도록 변경
+
 - **Small Update**
   - ViewPager 화면 전환 시 RecyclerView 의 내용이 짤리는 문제 해결 (화면 전환 시 ViewPager 높이 재설정)
   - MatchMainRankFragment 이름 순 출력 정규식 도입

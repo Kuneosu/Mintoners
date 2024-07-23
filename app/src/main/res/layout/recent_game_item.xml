@@ -61,7 +61,7 @@
             android:layout_width="@dimen/margin_large"
             android:layout_height="@dimen/margin_large"
             android:contentDescription="@string/recent_game_info"
-            android:src="@drawable/recent_game_info"
+            android:src="@drawable/trashbin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/recent_game_divider"

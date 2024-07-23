@@ -53,7 +53,6 @@ class MatchInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         // 넘겨받은 MatchNumber가 있을 경우 기존 데이터 기반 UI 업데이트
         loadUIbyMatchNumber()
 
@@ -162,14 +161,25 @@ class MatchInfoFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun matchGameCountChanged() {
         binding.matchInfoGameCountMinus.setOnClickListener {
-            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
-            if (currentCount > 1) {
-                binding.matchInfoGameCountNumber.text = (currentCount - 1).toString()
-            }
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.beta_feature_message),
+                Toast.LENGTH_SHORT
+            ).show()
+//            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
+//            if (currentCount > 1) {
+//                binding.matchInfoGameCountNumber.text = (currentCount - 1).toString()
+//            }
         }
+
         binding.matchInfoGameCountPlus.setOnClickListener {
-            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
-            binding.matchInfoGameCountNumber.text = (currentCount + 1).toString()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.beta_feature_message),
+                Toast.LENGTH_SHORT
+            ).show()
+//            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
+//            binding.matchInfoGameCountNumber.text = (currentCount + 1).toString()
         }
     }
 
@@ -208,11 +218,6 @@ class MatchInfoFragment : Fragment() {
         binding.matchInfoGameTypeInput.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 binding.matchInfoGameTypeDouble.id -> {
-                    Toast.makeText(
-                        requireContext(),
-                        "${matchViewModel.match.value}",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     binding.matchInfoGameTypeDouble.setTextColor(Color.WHITE)
                     binding.matchInfoGameTypeSingle.setTextColor(
                         resources.getColor(
@@ -223,13 +228,18 @@ class MatchInfoFragment : Fragment() {
                 }
 
                 binding.matchInfoGameTypeSingle.id -> {
-                    binding.matchInfoGameTypeDouble.setTextColor(
-                        resources.getColor(
-                            R.color.main,
-                            null
-                        )
-                    )
-                    binding.matchInfoGameTypeSingle.setTextColor(Color.WHITE)
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.beta_feature_message),
+                        Toast.LENGTH_SHORT
+                    ).show()
+//                    binding.matchInfoGameTypeDouble.setTextColor(
+//                        resources.getColor(
+//                            R.color.main,
+//                            null
+//                        )
+//                    )
+//                    binding.matchInfoGameTypeSingle.setTextColor(Color.WHITE)
                 }
             }
         }

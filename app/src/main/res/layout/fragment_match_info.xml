@@ -313,7 +313,6 @@
                         android:textSize="@dimen/text_large" />
 
                 </LinearLayout>
-                >
 
                 <TextView
                     android:id="@+id/match_info_game_count_title"
@@ -358,6 +357,7 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:maxLength="1"
+                        android:enabled="false"
                         android:text="4"
                         android:textAlignment="center"
                         android:textColor="@color/main"
@@ -406,6 +406,7 @@
                         android:checked="false"
                         android:gravity="center"
                         android:text="단식"
+                        android:enabled="false"
                         android:textColor="@color/main"
                         android:textSize="@dimen/text_large" />
                 </RadioGroup>
