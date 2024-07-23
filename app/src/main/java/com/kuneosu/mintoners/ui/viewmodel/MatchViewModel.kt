@@ -339,4 +339,16 @@ class MatchViewModel @Inject constructor(
         }
         applyGameScore()
     }
+
+    fun updateGameList(gameList: List<Game>) {
+        _games.value = gameList
+        updateGameIndexes()
+        applyGameList()
+    }
+
+    fun randomizeGames() {
+        _games.value = _games.value?.shuffled()
+        updateGameIndexes()
+        applyGameList()
+    }
 }

@@ -5,7 +5,6 @@ import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,13 +15,11 @@ import com.kuneosu.mintoners.ui.view.MatchActivity
 import com.kuneosu.mintoners.ui.viewmodel.HomeViewModel
 import com.kuneosu.mintoners.util.ItemTouchHelperListener
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
 class HomeRecentGameAdapter(private val homeViewModel: HomeViewModel) :
-    ListAdapter<Match, HomeRecentGameAdapter.MatchViewHolder>(diffUtil), ItemTouchHelperListener {
+    ListAdapter<Match, HomeRecentGameAdapter.MatchViewHolder>(diffUtil) {
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Match>() {
             override fun areItemsTheSame(oldItem: Match, newItem: Match): Boolean {
@@ -96,7 +93,4 @@ class HomeRecentGameAdapter(private val homeViewModel: HomeViewModel) :
         }
     }
 
-    override fun onSwiped(position: Int) {
-        TODO("Not yet implemented")
-    }
 }

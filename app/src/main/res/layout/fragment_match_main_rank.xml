@@ -25,6 +25,7 @@
             android:id="@+id/match_main_rank_sort_radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_default"
             android:orientation="horizontal">
 
             <RadioButton
@@ -47,15 +48,6 @@
                 android:text="득실" />
         </RadioGroup>
 
-        <ImageView
-            android:id="@+id/match_main_rank_sync_button"
-            android:layout_width="@dimen/match_main_top_bar_icon_size"
-            android:layout_height="@dimen/match_main_top_bar_icon_size"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:contentDescription="@string/sync_button"
-            android:padding="@dimen/padding_small"
-            android:src="@drawable/sync"
-            android:textSize="@dimen/text_medium" />
     </LinearLayout>
 
     <LinearLayout

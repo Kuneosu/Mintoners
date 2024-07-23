@@ -37,6 +37,10 @@ class MatchGameFragment : Fragment() {
 
         gameAdapterSetting()
 
+        binding.matchGameRandomButton.setOnClickListener {
+            matchViewModel.randomizeGames()
+        }
+
         binding.matchGameCreateButton.setOnClickListener {
             matchViewModel.generateGames()
         }
@@ -74,10 +78,8 @@ class MatchGameFragment : Fragment() {
     private fun gameAdapterSetting() {
         adapter = MatchGamesAdapter(matchViewModel)
         binding.matchGameRecyclerView.adapter = adapter
+        adapter.setItemTouchHelper(binding.matchGameRecyclerView)
         binding.matchGameRecyclerView.layoutManager = LinearLayoutManager(context)
-
-        val swipeHelper = ItemTouchHelper(SimpleSwipeHelperCallback(adapter))
-        swipeHelper.attachToRecyclerView(binding.matchGameRecyclerView)
 
         matchViewModel.games.observe(viewLifecycleOwner, Observer {
             if (it.isEmpty()) {

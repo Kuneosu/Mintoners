@@ -13,7 +13,7 @@ import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.ItemTouchHelperListener
 
 class MatchMainRankAdapter(private val matchViewModel: MatchViewModel) :
-    ListAdapter<Player, MatchMainRankAdapter.RankViewHolder>(diffUtil), ItemTouchHelperListener {
+    ListAdapter<Player, MatchMainRankAdapter.RankViewHolder>(diffUtil) {
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Player>() {
             override fun areItemsTheSame(oldItem: Player, newItem: Player): Boolean {
@@ -62,9 +62,5 @@ class MatchMainRankAdapter(private val matchViewModel: MatchViewModel) :
             binding.matchMainRankPoints.text = (winPoint + drawPoint - losePoint).toString()
             binding.matchMainRankScoreDiff.text = player.playerScore.toString()
         }
-    }
-
-    override fun onSwiped(position: Int) {
-        TODO("Not yet implemented")
     }
 }

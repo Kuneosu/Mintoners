@@ -48,9 +48,6 @@ class MatchMainRankFragment : Fragment() {
         binding.matchMainRankSortRadioGroup.setOnCheckedChangeListener { _, radio ->
             rankAdapterSetting(radio)
         }
-        binding.matchMainRankSyncButton.setOnClickListener {
-            matchViewModel.updatePoint(string = "Sync Button")
-        }
     }
 
     fun String.toNaturalSortKey(): List<Any> {

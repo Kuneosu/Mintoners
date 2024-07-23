@@ -9,15 +9,18 @@ import com.kuneosu.mintoners.ui.adapter.MatchGamesAdapter
 import java.util.Collections
 
 class SimpleSwipeHelperCallback(
-    private val listener: ItemTouchHelperListener
+    private val listener: ItemTouchHelperListener,
+    private val swipeDirection: Int
 ) : ItemTouchHelper.Callback() {
     override fun getMovementFlags(
         recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder
+        viewHolder: RecyclerView.ViewHolder,
     ): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
-        val swipeFlags = ItemTouchHelper.LEFT
-        return makeMovementFlags(dragFlags, swipeFlags)
+        val swipeFlags = swipeDirection
+
+        return if (swipeDirection == ItemTouchHelper.LEFT) makeMovementFlags(dragFlags, swipeFlags)
+        else makeMovementFlags(dragFlags, 0)
     }
 
     override fun onMove(
@@ -25,8 +28,15 @@ class SimpleSwipeHelperCallback(
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-//        listener.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
-        return false
+        listener.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+        return true
+    }
+
+    override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+        super.onSelectedChanged(viewHolder, actionState)
+        when (actionState) {
+            ItemTouchHelper.ACTION_STATE_IDLE -> listener.onStopDrag()
+        }
     }
 
 
@@ -45,13 +55,23 @@ class SimpleSwipeHelperCallback(
     ) {
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
         val itemView = viewHolder.itemView
-        val background = ColorDrawable(Color.RED)
+        var background = ColorDrawable(Color.rgb(236, 92, 87))
         background.setBounds(
             itemView.right + dX.toInt(),
             itemView.top,
             itemView.right,
             itemView.bottom
         )
+
+        if (swipeDirection == ItemTouchHelper.RIGHT) {
+            background = ColorDrawable(Color.rgb(92, 87, 236))
+            background.setBounds(
+                itemView.left,
+                itemView.top,
+                itemView.left + dX.toInt(),
+                itemView.bottom
+            )
+        }
         background.draw(c)
     }
 }

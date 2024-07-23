@@ -2,22 +2,22 @@ package com.kuneosu.mintoners.ui.adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kuneosu.mintoners.data.model.Game
-import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.databinding.MatchMainListItemBinding
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.ItemTouchHelperListener
+import com.kuneosu.mintoners.util.SimpleSwipeHelperCallback
+import java.util.Collections
 
 class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
-    ListAdapter<Game, MatchMainListAdapter.MatchListViewHolder>(diffUtil), ItemTouchHelperListener {
+    ListAdapter<Game, MatchMainListAdapter.MatchListViewHolder>(diffUtil), ItemTouchHelperListener{
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Game>() {
             override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
@@ -28,6 +28,15 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
                 return oldItem == newItem
             }
         }
+    }
+
+    private lateinit var itemTouchHelper: ItemTouchHelper
+    private var fromPosition = -1
+    private var toPosition = -1
+
+    fun setItemTouchHelper(recyclerView: RecyclerView) {
+        itemTouchHelper = ItemTouchHelper(SimpleSwipeHelperCallback(this, ItemTouchHelper.RIGHT))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     override fun getItemCount(): Int {
@@ -46,6 +55,14 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
 
     inner class MatchListViewHolder(private val binding: MatchMainListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            // 뷰 홀더 초기화 시 드래그 핸들러 설정
+            binding.root.setOnLongClickListener {
+                itemTouchHelper.startDrag(this)
+                true
+            }
+        }
         @SuppressLint("SetTextI18n")
         fun bind(game: Game) {
             displayWithGameState(game)
@@ -110,7 +127,30 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
         }
     }
 
-    override fun onSwiped(position: Int) {
-        TODO("Not yet implemented")
+    override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
+        if (fromPosition < currentList.size && toPosition < currentList.size) {
+            this.fromPosition = fromPosition
+            this.toPosition = toPosition
+            Log.d("onMove", "onItemMove: fromPosition = $fromPosition, toPosition = $toPosition")
+            return true
+        }
+        return false
     }
+
+    override fun onStopDrag() {
+        if (fromPosition < 0 || toPosition < 0) {
+            return
+        } else {
+            val list = currentList.toMutableList()
+            Collections.swap(list, fromPosition, toPosition)
+            matchViewModel.updateGameList(list)
+            fromPosition = -1
+            toPosition = -1
+        }
+    }
+
+    override fun onSwiped(position: Int) {
+//        Log.d("ItemTouch", "onSwiped: ")
+    }
+
 }
