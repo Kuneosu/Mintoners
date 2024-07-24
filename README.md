@@ -2,28 +2,29 @@
 
 July 2024 Personal project, match table creation and management application
 
-
 # 프로젝트 개요
 
 ### 프로젝트 진행 기간
+
 - 2024.06.25 ~ 진행중
+
 ### 프로젝트 목표
-<b>배드민턴 또는 테니스 동호인들이 사용하기에 편리한 대진표 생성 및 관리 어플리케이션을 제공하는 것</b>이 목표입니다. 
+
+<b>배드민턴 또는 테니스 동호인들이 사용하기에 편리한 대진표 생성 및 관리 어플리케이션을 제공하는 것</b>이 목표입니다.
 <br>기존에 존재하는 몇몇 앱들은 출시된지 오래되거나 업데이트 지원이 끊긴 어플들 뿐이기에
 <br>기존 어플 대비 <b>직관적인 UI와 문제점들이 개선</b>된 어플을 제작해보고자 하였습니다.
-### 역할 및 책임
-개인 프로젝트로 진행하였기 때문에 기획부터 디자인, 개발 QA, 배포, 운영 등 모든 과정을 직접 진행하였습니다.
 
+### 역할 및 책임
+
+개인 프로젝트로 진행하였기 때문에 기획부터 디자인, 개발 QA, 배포, 운영 등 모든 과정을 직접 진행하였습니다.
 
 # 기획 및 UI, Database 디자인
 
 ### 👉🏻 [FIGMA](https://www.figma.com/design/UdR7poMiFqJ9mWknKeSNg2/MIntoners?node-id=0-1&t=d1U0RAl7U4o8rFvT-1)
 
-
 # Portfolio Page
 
 ### 👉🏻 [Notion](https://kimkwonsu.notion.site/KDK-9aaaa8c7aa914d8e80a8b49367b6ca99?pvs=4)
-
 
 # 개발 일지
 
@@ -192,96 +193,99 @@ July 2024 Personal project, match table creation and management application
     - 새로운 Match의 경우 현재 존재하는 MatchNumber 중 가장 높은 MatchNumber를 찾아서 사용
       (자동으로 생성된 MatchNumber = 가장 높은 MatchNumber)
 - **MatchProcess Detail**
-  - KDK 대진표 알고리즘 함수 분리(5~16명 까지)
-  - 최근 경기 출력 순서 변경 (Order by matchNumber DESC)
-  - Match Process 각 페이지 별 Backpress Callback 추가
-  - MatchMain 에서 뒤로가기로 종료 해도 변경 사항 저장
-  - MatchMainListFragment 에서 승점 입력 시 Match 데이터에 저장
-  - 편의성 일부 수정
-    - MatchMainListFragment 에서 승점 입력 시 승점이 0일 경우 빈 칸으로 자동 변경
-    - MatchMainListFragment 에서 승점 입력 시 승점이 빈 칸일 경우 0으로 자동 변경
+    - KDK 대진표 알고리즘 함수 분리(5~16명 까지)
+    - 최근 경기 출력 순서 변경 (Order by matchNumber DESC)
+    - Match Process 각 페이지 별 Backpress Callback 추가
+    - MatchMain 에서 뒤로가기로 종료 해도 변경 사항 저장
+    - MatchMainListFragment 에서 승점 입력 시 Match 데이터에 저장
+    - 편의성 일부 수정
+        - MatchMainListFragment 에서 승점 입력 시 승점이 0일 경우 빈 칸으로 자동 변경
+        - MatchMainListFragment 에서 승점 입력 시 승점이 빈 칸일 경우 0으로 자동 변경
 - **Match State 추가**
-  - Match 데이터 수정, matchState 추가
-  - MatchInfoFragment 에서 matchState에 따라 Fragment 이동
-  - Fragment 전환 시 matchState 업데이트
-  - MatchNumber와 동일하게 기존 카드 클릭 시 intent로 matchState 전달
+    - Match 데이터 수정, matchState 추가
+    - MatchInfoFragment 에서 matchState에 따라 Fragment 이동
+    - Fragment 전환 시 matchState 업데이트
+    - MatchNumber와 동일하게 기존 카드 클릭 시 intent로 matchState 전달
 
 ## 2024.07.22
 
 - **현재 순위 출력 기능 추가**
-  - Player 데이터 클래스에 playerWin, playerDraw, playerLose, playerScore 추가
-  - ~~대진표에서 점수 입력 시 playerScore(득실) 업데이트~~
-    - 현재 순위로 이동해서 Sync 버튼 클릭 시 playerScore, playerWin, playerDraw, playerLose 업데이트
-  - MatchMainRankFragment 에 이름, 승점, 득실 RadioGroup 추가
-  - RadioGroup 선택 시 해당하는 항목의 순서대로 정렬
-  - matchViewModel에 updateCount 변수 추가.
-    - playerScore 업데이트 시 updateCount 증가 -> viewPagerAdapter Update = 득실 실시간 업데이트
-    - observer 가 players 의 playerScore 의 변화를 감지하지 못해서 차선책으로 updateCount 도입
-  - playerWin, playerDraw, playerLose, match.matchPoint 기반으로 승점 계산
-  - Sync 버튼 클릭 시 순위 최신화 및 정렬 순서 업데이트
-  - Game 데이터 클래스에 gameState 변수 추가.(true,false)
-    - false = 경기 진행 중. 점수 수정 가능
-    - true = 경기 종료. 점수 수정 불가능
-  - 대진표의 경기 순서를 클릭하여 해당 게임의 gameState 변경 가능
+    - Player 데이터 클래스에 playerWin, playerDraw, playerLose, playerScore 추가
+    - ~~대진표에서 점수 입력 시 playerScore(득실) 업데이트~~
+        - 현재 순위로 이동해서 Sync 버튼 클릭 시 playerScore, playerWin, playerDraw, playerLose 업데이트
+    - MatchMainRankFragment 에 이름, 승점, 득실 RadioGroup 추가
+    - RadioGroup 선택 시 해당하는 항목의 순서대로 정렬
+    - matchViewModel에 updateCount 변수 추가.
+        - playerScore 업데이트 시 updateCount 증가 -> viewPagerAdapter Update = 득실 실시간 업데이트
+        - observer 가 players 의 playerScore 의 변화를 감지하지 못해서 차선책으로 updateCount 도입
+    - playerWin, playerDraw, playerLose, match.matchPoint 기반으로 승점 계산
+    - Sync 버튼 클릭 시 순위 최신화 및 정렬 순서 업데이트
+    - Game 데이터 클래스에 gameState 변수 추가.(true,false)
+        - false = 경기 진행 중. 점수 수정 가능
+        - true = 경기 종료. 점수 수정 불가능
+    - 대진표의 경기 순서를 클릭하여 해당 게임의 gameState 변경 가능
 - **몇가지 작은 업데이트**
-  - Player 추가 Fragment 디자인 일부 변경
-  - Player 수정 시 기존 이름 비움.
-  - Player 수정 시 빈 이름일 경우 P+(position+1) 로 기본 이름 설정
+    - Player 추가 Fragment 디자인 일부 변경
+    - Player 수정 시 기존 이름 비움.
+    - Player 수정 시 빈 이름일 경우 P+(position+1) 로 기본 이름 설정
 
 ## 2024.07.23
 
 - **대진표 및 순위 캡쳐/공유 기능 추가**
-  - 대진표 및 순위를 캡쳐하여 공유할 수 있는 기능 추가
-  - ScrollView의 전체를 찍어서 공유하기 때문에 화면을 넘어가는 영역도 캡쳐
-  - 캡쳐시 불필요한 버튼은 디스플레이에서 제거
-  - 캡쳐와 동시에 공유까지 바로 가능
+    - 대진표 및 순위를 캡쳐하여 공유할 수 있는 기능 추가
+    - ScrollView의 전체를 찍어서 공유하기 때문에 화면을 넘어가는 영역도 캡쳐
+    - 캡쳐시 불필요한 버튼은 디스플레이에서 제거
+    - 캡쳐와 동시에 공유까지 바로 가능
 - **MatchGameFragment Drag&Drop 기능 추가**
-  - fromPosition, toPosition을 통해 아이템의 위치를 변경
+    - fromPosition, toPosition을 통해 아이템의 위치를 변경
 - **MatchMainListFragment Drag&Drop, Swipe 기능 추가**
-  - Drag&Drop을 통해 아이템의 위치를 변경
-  - Swipe를 이벤트는 구현 하였으나 ItemTouchHelper.RIGHT를 막아서 이벤트 발생이 안되도록 해둠(기능 구상중)
+    - Drag&Drop을 통해 아이템의 위치를 변경
+    - Swipe를 이벤트는 구현 하였으나 ItemTouchHelper.RIGHT를 막아서 이벤트 발생이 안되도록 해둠(기능 구상중)
 
 - **Release 1.0.0-beta.1**
-  - 미구현 기능(로그인, 경기 수 조정, 복식/단식) 접근 제어. 베타 텍스트 출력
-  - 최근 경기 아이템 디자인 변경 (info -> trash bin)
-  - 최근 경기 타이틀 우측에 새로고침 아이콘 삽입 (가시성 향상)
-  - 선수 추가 시 Focus 변경이 자연스럽게 흘러가도록 변경
+    - 미구현 기능(로그인, 경기 수 조정, 복식/단식) 접근 제어. 베타 텍스트 출력
+    - 최근 경기 아이템 디자인 변경 (info -> trash bin)
+    - 최근 경기 타이틀 우측에 새로고침 아이콘 삽입 (가시성 향상)
+    - 선수 추가 시 Focus 변경이 자연스럽게 흘러가도록 변경
 
 - **선수 여러명 동시 입력 기능 추가** branch : (feature/player-add-dialog)
-  - MatchPlayerAddDialog 추가
-  - MatchPlayerFragment 에서 여러명의 선수를 한번에 추가 가능
-  - MatchPlayerAddDialog 에서 이름을 띄어쓰기로 구분해서 입력받아 동시에 선수 추가
+    - MatchPlayerAddDialog 추가
+    - MatchPlayerFragment 에서 여러명의 선수를 한번에 추가 가능
+    - MatchPlayerAddDialog 에서 이름을 띄어쓰기로 구분해서 입력받아 동시에 선수 추가
 
 - **Small Update**
-  - ViewPager 화면 전환 시 RecyclerView 의 내용이 짤리는 문제 해결 (화면 전환 시 ViewPager 높이 재설정)
-  - MatchMainRankFragment 이름 순 출력 정규식 도입
-  - _games.value.shuffle() 을 통해 게임 순서 랜덤화 기능 추가
-  - MatchMainRankFragment 에 있던 Sync Button 을 MatchMainFragment 의 TopInfo 로 이동
-  - InfoDialog 는 MatchMainTitle 클릭 시 출력
+    - ViewPager 화면 전환 시 RecyclerView 의 내용이 짤리는 문제 해결 (화면 전환 시 ViewPager 높이 재설정)
+    - MatchMainRankFragment 이름 순 출력 정규식 도입
+    - _games.value.shuffle() 을 통해 게임 순서 랜덤화 기능 추가
+    - MatchMainRankFragment 에 있던 Sync Button 을 MatchMainFragment 의 TopInfo 로 이동
+    - InfoDialog 는 MatchMainTitle 클릭 시 출력
 
 ## 2024.07.24
 
 - **Release 1.0.0-beta.2**
-  - MatchPlayerFragment 와 MatchGameFragment 에서 Item 이 Recycle 되면서 잘못 출력되던 오류 해결
-    - ScrollView 를 NestedScrollView 로 바꾸고 RecyclerView 에 속성을 부여 하여 Recycle 방지
-  - HomeRecentGame Card 의 클릭 이벤트 발생 범위 변경
-    - Title 영역을 클릭해야 해당 Match Activity 로 이동
-    - Delete 버튼 영역 확장
+    - MatchPlayerFragment 와 MatchGameFragment 에서 Item 이 Recycle 되면서 잘못 출력되던 오류 해결
+        - ScrollView 를 NestedScrollView 로 바꾸고 RecyclerView 에 속성을 부여 하여 Recycle 방지
+    - HomeRecentGame Card 의 클릭 이벤트 발생 범위 변경
+        - Title 영역을 클릭해야 해당 Match Activity 로 이동
+        - Delete 버튼 영역 확장
 
 - **1인당 경기 수에 따른 대진표 생성 알고리즘 추가**
-  - MatchInfoFragment 에서 입력할 수 있는 1인당 경기 수를 3,4 로 제한
-  - 1인당 경기 수 입력 제목 우측에 주의사항 버튼 추가
-  - MatchPlayerFragment 에서 1인당 경기 수 및 참가 인원 수 판별 알고리즘 추가
-  - 3경기 알고리즘 추가
+    - MatchInfoFragment 에서 입력할 수 있는 1인당 경기 수를 3,4 로 제한
+    - 1인당 경기 수 입력 제목 우측에 주의사항 버튼 추가
+    - MatchPlayerFragment 에서 1인당 경기 수 및 참가 인원 수 판별 알고리즘 추가
+    - 3경기 알고리즘 추가
 
 - **복식/단식 선택 기능 추가**
-  - MatchInfoFragment 에서 복식/단식 선택 가능
-  - 단식 선택 시 1인당 경기 수 입력란 제거(사용안함)
-  - 복식/단식 변경 시 존재하는 GameList 는 초기화됨.
-  - 단식 대진은 모든 사람과 한 번씩 매칭되는 방식으로 설정
-  - 단식은 최소 2명, 최대 8명 설정 가능
-  - 복식은 최소 5명, 최대 16명 설정 가능
-  - 단식용 list_item, adapter 코드 추가
+    - MatchInfoFragment 에서 복식/단식 선택 가능
+    - 단식 선택 시 1인당 경기 수 입력란 제거(사용안함)
+    - 복식/단식 변경 시 존재하는 GameList 는 초기화됨.
+    - 단식 대진은 모든 사람과 한 번씩 매칭되는 방식으로 설정
+    - 단식은 최소 2명, 최대 8명 설정 가능
+    - 복식은 최소 5명, 최대 16명 설정 가능
+    - 단식용 list_item, adapter 코드 추가
 
 - **Small Update**
-  - Sync 버튼 클릭 시 Sync 이미지가 360도 회전하도록 설정
+    - Sync 버튼 클릭 시 Sync 이미지가 360도 회전하도록 설정
+    - HomeFragment, BottomNavigationView Ripple 효과 삭제
+    - HomeFragment, 최근 경기 Sync 버튼 영역 확장
+    - PlayerFragment Empty 버튼 제거, 입력 시에도 제거할 수 있도록 제거 버튼 제공

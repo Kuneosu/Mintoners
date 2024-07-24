@@ -86,14 +86,8 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
             binding.matchPlayerName.setOnClickListener {                // Implement player name editing logic here
                 binding.matchPlayerName.visibility = View.GONE
                 binding.editPlayerName.visibility = View.VISIBLE
-                binding.deleteButton.visibility = View.GONE
                 binding.editPlayerName.setText(player.playerName)  // EditText에 초기값 설정
-                if (binding.editPlayerName.text.isNotEmpty()) {
-                    binding.editEmptyButton.visibility = View.VISIBLE
-                    binding.editEmptyButton.setOnClickListener {
-                        binding.editPlayerName.setText("")
-                    }
-                }
+
                 binding.editPlayerName.requestFocus()
                 showKeyboard(binding.editPlayerName)
 
