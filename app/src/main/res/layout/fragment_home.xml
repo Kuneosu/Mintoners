@@ -150,11 +150,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginBottom="@dimen/margin_xsmall"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_card"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/margin_xsmall"
+                android:paddingStart="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_default"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_card">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -162,12 +165,13 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_medium"
                     android:textStyle="bold" />
+
                 <ImageView
                     android:id="@+id/home_recent_game_sync"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginStart="@dimen/margin_xsmall"
-                    android:src="@drawable/syncronize"/>
+                    android:src="@drawable/syncronize" />
             </LinearLayout>
 
 

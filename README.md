@@ -285,3 +285,5 @@ July 2024 Personal project, match table creation and management application
 
 - **Small Update**
   - Sync 버튼 클릭 시 Sync 이미지가 360도 회전하도록 설정
+  - HomeFragment, BottomNavigationView Ripple 효과 삭제
+  - HomeFragment, 최근 경기 Sync 버튼 영역 확장

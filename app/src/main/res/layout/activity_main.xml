@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_medium"
+            app:itemBackground="@color/white"
             android:background="@android:color/transparent"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/menu_bottom_nav" />
