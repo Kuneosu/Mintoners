@@ -53,9 +53,12 @@ class HomeRecentGameAdapter(private val homeViewModel: HomeViewModel) :
         fun bind(match: Match) {
             binding.recentGameTitle.text = match.matchName
 
-            binding.recentGameInfoImage.setOnClickListener {
-                homeViewModel.deleteMatchByNumber(match.matchNumber)
-                homeViewModel.getAllMatches()
+            binding.recentGameDeleteImage.setOnClickListener {
+                deleteMatch(match)
+            }
+
+            binding.recentGameDeleteButton.setOnClickListener {
+                deleteMatch(match)
             }
 
             val outputDateStr: String = dateToString(match)
@@ -63,7 +66,7 @@ class HomeRecentGameAdapter(private val homeViewModel: HomeViewModel) :
             // 결과 출력
             binding.recentGameDate.text = outputDateStr
 
-            binding.recentGameCard.setOnClickListener {
+            binding.recentGameInfo.setOnClickListener {
                 val intent = Intent(binding.root.context, MatchActivity::class.java)
                 intent.putExtra("matchNumber", match.matchNumber)
                 Log.d("matchState", "matchNumber: ${match.matchNumber}")
@@ -73,6 +76,11 @@ class HomeRecentGameAdapter(private val homeViewModel: HomeViewModel) :
             }
 
 
+        }
+
+        private fun deleteMatch(match: Match) {
+            homeViewModel.deleteMatchByNumber(match.matchNumber)
+            homeViewModel.getAllMatches()
         }
 
         private fun dateToString(match: Match): String {
