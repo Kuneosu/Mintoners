@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/match_game_info"
+        android:id="@+id/match_game_double_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/match_game_number"
+            android:id="@+id/match_game_double_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -26,7 +26,7 @@
             android:textSize="@dimen/text_large" />
 
         <EditText
-            android:id="@+id/match_game_player_a"
+            android:id="@+id/match_game_player_double_a"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small"
@@ -39,7 +39,7 @@
             android:textAlignment="center" />
 
         <EditText
-            android:id="@+id/match_game_player_b"
+            android:id="@+id/match_game_player_double_b"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -51,7 +51,7 @@
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/match_game_vs"
+            android:id="@+id/match_game_double_vs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -62,7 +62,7 @@
             android:textSize="@dimen/text_medium" />
 
         <EditText
-            android:id="@+id/match_game_player_c"
+            android:id="@+id/match_game_player_double_c"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small"
@@ -75,7 +75,7 @@
             android:textAlignment="center" />
 
         <EditText
-            android:id="@+id/match_game_player_d"
+            android:id="@+id/match_game_player_double_d"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small"
@@ -91,11 +91,80 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/match_game_divider"
+        android:id="@+id/match_game_double_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#26000000"
-        app:layout_constraintTop_toBottomOf="@id/match_game_info" />
+        app:layout_constraintTop_toBottomOf="@id/match_game_double_item" />
+
+    <LinearLayout
+        android:id="@+id/match_game_single_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/match_game_single_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="@dimen/padding_medium"
+            android:text="1"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_large" />
+
+        <EditText
+            android:id="@+id/match_game_player_single_a"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_weight="2"
+            android:background="@drawable/match_edittext"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:padding="@dimen/padding_small"
+            android:text="김권수"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/match_game_single_vs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="@dimen/padding_medium"
+            android:text="vs"
+            android:textAlignment="center"
+            android:textColor="@color/trans_black_50"
+            android:textSize="@dimen/text_medium" />
+
+        <EditText
+            android:id="@+id/match_game_player_single_b"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_weight="2"
+            android:background="@drawable/match_edittext"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:padding="@dimen/padding_small"
+            android:text="김권수"
+            android:textAlignment="center" />
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/match_game_single_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#26000000"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/match_game_single_item" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/add_game_info"
@@ -136,3 +205,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

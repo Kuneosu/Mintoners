@@ -273,3 +273,15 @@ July 2024 Personal project, match table creation and management application
   - 1인당 경기 수 입력 제목 우측에 주의사항 버튼 추가
   - MatchPlayerFragment 에서 1인당 경기 수 및 참가 인원 수 판별 알고리즘 추가
   - 3경기 알고리즘 추가
+
+- **복식/단식 선택 기능 추가**
+  - MatchInfoFragment 에서 복식/단식 선택 가능
+  - 단식 선택 시 1인당 경기 수 입력란 제거(사용안함)
+  - 복식/단식 변경 시 존재하는 GameList 는 초기화됨.
+  - 단식 대진은 모든 사람과 한 번씩 매칭되는 방식으로 설정
+  - 단식은 최소 2명, 최대 8명 설정 가능
+  - 복식은 최소 5명, 최대 16명 설정 가능
+  - 단식용 list_item, adapter 코드 추가
+
+- **Small Update**
+  - Sync 버튼 클릭 시 Sync 이미지가 360도 회전하도록 설정

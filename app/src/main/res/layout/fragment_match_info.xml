@@ -414,7 +414,6 @@
                         android:background="@drawable/selector_radio_right"
                         android:button="@color/transparent"
                         android:checked="false"
-                        android:enabled="false"
                         android:gravity="center"
                         android:text="단식"
                         android:textColor="@color/main"

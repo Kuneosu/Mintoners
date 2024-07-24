@@ -219,6 +219,11 @@ class MatchInfoFragment : Fragment() {
     private fun matchTypeRadioChanged() {
 
         binding.matchInfoGameTypeInput.setOnCheckedChangeListener { _, checkedId ->
+            try {
+                matchViewModel.resetGames()
+            } catch (e: Exception) {
+                Log.d(TAG, "matchTypeRadioChanged: ${e.message}")
+            }
             when (checkedId) {
                 binding.matchInfoGameTypeDouble.id -> {
                     binding.matchInfoGameTypeDouble.setTextColor(Color.WHITE)
@@ -228,25 +233,31 @@ class MatchInfoFragment : Fragment() {
                             null
                         )
                     )
+                    matchInfoGameCountVisibility(View.VISIBLE)
                 }
 
                 binding.matchInfoGameTypeSingle.id -> {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.beta_feature_message),
-                        Toast.LENGTH_SHORT
-                    ).show()
-//                    binding.matchInfoGameTypeDouble.setTextColor(
-//                        resources.getColor(
-//                            R.color.main,
-//                            null
-//                        )
-//                    )
-//                    binding.matchInfoGameTypeSingle.setTextColor(Color.WHITE)
+                    binding.matchInfoGameTypeDouble.setTextColor(
+                        resources.getColor(
+                            R.color.main,
+                            null
+                        )
+                    )
+                    binding.matchInfoGameTypeSingle.setTextColor(Color.WHITE)
+                    matchInfoGameCountVisibility(View.INVISIBLE)
                 }
             }
         }
 
+    }
+
+    private fun matchInfoGameCountVisibility(visibility: Int) {
+        binding.matchInfoGameCountInput.visibility = visibility
+        binding.matchInfoGameCountTitle.visibility = visibility
+        binding.matchInfoGameCountNumber.visibility = visibility
+        binding.matchInfoGameCountMinus.visibility = visibility
+        binding.matchInfoGameCountPlus.visibility = visibility
+        binding.matchInfoGameCountWarning.visibility = visibility
     }
 
     private fun stringToDate(dateString: String): Date? {

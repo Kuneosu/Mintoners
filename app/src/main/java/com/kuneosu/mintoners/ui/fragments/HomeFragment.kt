@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -40,6 +41,8 @@ class HomeFragment : Fragment() {
         // 데이터 바인딩 객체를 인플레이트합니다
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        val rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.sync_rotate)
+
 
         binding.homeCardGuest.setOnClickListener {
             updateBottomNavigationView(R.id.menu_profile)
@@ -47,6 +50,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.getAllMatches()
         binding.homeRecentGameTitle.setOnClickListener {
+            binding.homeRecentGameSync.startAnimation(rotateAnimation)
             homeViewModel.getAllMatches()
         }
 

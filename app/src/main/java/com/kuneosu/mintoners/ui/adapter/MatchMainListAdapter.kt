@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,7 +18,7 @@ import com.kuneosu.mintoners.util.SimpleSwipeHelperCallback
 import java.util.Collections
 
 class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
-    ListAdapter<Game, MatchMainListAdapter.MatchListViewHolder>(diffUtil), ItemTouchHelperListener{
+    ListAdapter<Game, MatchMainListAdapter.MatchListViewHolder>(diffUtil), ItemTouchHelperListener {
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Game>() {
             override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
@@ -63,66 +64,151 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
                 true
             }
         }
+
         @SuppressLint("SetTextI18n")
         fun bind(game: Game) {
-            displayWithGameState(game)
-            binding.matchMainListNumber.setOnClickListener {
+            if (matchViewModel.match.value?.matchType == "double") {
+                displayWithGameStateTypeDouble(game)
+                matchTypeDoubleMainList(game)
+            } else {
+                displayWithGameStateTypeSingle(game)
+                matchTypeSingleMainList(game)
+            }
+        }
+
+        private fun matchTypeSingleMainList(game: Game) {
+            binding.matchMainListSingleInfo.visibility = View.VISIBLE
+            binding.matchMainListSingleDivider.visibility = View.VISIBLE
+
+            binding.matchMainListDoubleInfo.visibility = View.GONE
+            binding.matchMainListDoubleDivider.visibility = View.GONE
+
+            binding.matchMainListSingleNumber.setOnClickListener {
                 matchViewModel.updateGame(game.copy(gameState = !game.gameState))
                 game.gameState = !game.gameState
-                displayWithGameState(game)
+                displayWithGameStateTypeSingle(game)
             }
-            binding.matchMainListPlayerA.text = game.gameTeamA[0].playerName
-            binding.matchMainListPlayerB.text = game.gameTeamA[1].playerName
-            binding.matchMainListPlayerC.text = game.gameTeamB[0].playerName
-            binding.matchMainListPlayerD.text = game.gameTeamB[1].playerName
+            binding.matchMainListSinglePlayerA.text = game.gameTeamA[0].playerName
+            binding.matchMainListSinglePlayerB.text = game.gameTeamB[0].playerName
 
-            binding.matchMainListTeamAScore.setText(game.gameAScore.toString())
-            binding.matchMainListTeamBScore.setText(game.gameBScore.toString())
-            binding.matchMainListNumber.text = game.gameIndex.toString()
+            binding.matchMainListSingleTeamAScore.setText(game.gameAScore.toString())
+            binding.matchMainListSingleTeamBScore.setText(game.gameBScore.toString())
+            binding.matchMainListSingleNumber.text = game.gameIndex.toString()
 
-            binding.matchMainListTeamAScore.setOnFocusChangeListener { _, hasFocus ->
+            binding.matchMainListSingleTeamAScore.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
-                    val score = binding.matchMainListTeamAScore.text.toString().toIntOrNull() ?: 0
+                    val score =
+                        binding.matchMainListSingleTeamAScore.text.toString().toIntOrNull() ?: 0
                     if (game.gameAScore != score) {
                         matchViewModel.updateTeamAGameScore(game.copy(gameAScore = score))
                         game.gameAScore = score
                     }
-                    if (binding.matchMainListTeamAScore.text.toString().isEmpty()) {
-                        binding.matchMainListTeamAScore.setText("0")
+                    if (binding.matchMainListSingleTeamAScore.text.toString().isEmpty()) {
+                        binding.matchMainListSingleTeamAScore.setText("0")
                     }
                 } else {
-                    if (binding.matchMainListTeamAScore.text.toString() == "0") {
-                        binding.matchMainListTeamAScore.text.clear()
+                    if (binding.matchMainListSingleTeamAScore.text.toString() == "0") {
+                        binding.matchMainListSingleTeamAScore.text.clear()
                     }
                 }
             }
-            binding.matchMainListTeamBScore.setOnFocusChangeListener { _, hasFocus ->
+            binding.matchMainListSingleTeamBScore.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
-                    val score = binding.matchMainListTeamBScore.text.toString().toIntOrNull() ?: 0
+                    val score =
+                        binding.matchMainListSingleTeamBScore.text.toString().toIntOrNull() ?: 0
                     if (game.gameBScore != score) {
                         matchViewModel.updateTeamBGameScore(game.copy(gameBScore = score))
                         game.gameBScore = score
                     }
-                    if (binding.matchMainListTeamBScore.text.toString().isEmpty()) {
-                        binding.matchMainListTeamBScore.setText("0")
+                    if (binding.matchMainListSingleTeamBScore.text.toString().isEmpty()) {
+                        binding.matchMainListSingleTeamBScore.setText("0")
                     }
                 } else {
-                    if (binding.matchMainListTeamBScore.text.toString() == "0") {
-                        binding.matchMainListTeamBScore.text.clear()
+                    if (binding.matchMainListSingleTeamBScore.text.toString() == "0") {
+                        binding.matchMainListSingleTeamBScore.text.clear()
                     }
                 }
             }
         }
 
-        private fun displayWithGameState(game: Game) {
+        private fun displayWithGameStateTypeSingle(game: Game) {
             if (game.gameState) {
-                binding.matchMainListInfo.setBackgroundColor(Color.LTGRAY)
-                binding.matchMainListTeamAScore.isEnabled = false
-                binding.matchMainListTeamBScore.isEnabled = false
+                binding.matchMainListSingleInfo.setBackgroundColor(Color.LTGRAY)
+                binding.matchMainListSingleTeamAScore.isEnabled = false
+                binding.matchMainListSingleTeamBScore.isEnabled = false
             } else {
-                binding.matchMainListInfo.setBackgroundColor(Color.WHITE)
-                binding.matchMainListTeamAScore.isEnabled = true
-                binding.matchMainListTeamBScore.isEnabled = true
+                binding.matchMainListSingleInfo.setBackgroundColor(Color.WHITE)
+                binding.matchMainListSingleTeamAScore.isEnabled = true
+                binding.matchMainListSingleTeamBScore.isEnabled = true
+            }
+        }
+
+        private fun matchTypeDoubleMainList(game: Game) {
+            binding.matchMainListSingleInfo.visibility = View.GONE
+            binding.matchMainListSingleDivider.visibility = View.GONE
+
+            binding.matchMainListDoubleInfo.visibility = View.VISIBLE
+            binding.matchMainListDoubleDivider.visibility = View.VISIBLE
+
+            binding.matchMainListDoubleNumber.setOnClickListener {
+                matchViewModel.updateGame(game.copy(gameState = !game.gameState))
+                game.gameState = !game.gameState
+                displayWithGameStateTypeDouble(game)
+            }
+            binding.matchMainListDoublePlayerA.text = game.gameTeamA[0].playerName
+            binding.matchMainListDoublePlayerB.text = game.gameTeamA[1].playerName
+            binding.matchMainListDoublePlayerC.text = game.gameTeamB[0].playerName
+            binding.matchMainListDoublePlayerD.text = game.gameTeamB[1].playerName
+
+            binding.matchMainListDoubleTeamAScore.setText(game.gameAScore.toString())
+            binding.matchMainListDoubleTeamBScore.setText(game.gameBScore.toString())
+            binding.matchMainListDoubleNumber.text = game.gameIndex.toString()
+
+            binding.matchMainListDoubleTeamAScore.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    val score =
+                        binding.matchMainListDoubleTeamAScore.text.toString().toIntOrNull() ?: 0
+                    if (game.gameAScore != score) {
+                        matchViewModel.updateTeamAGameScore(game.copy(gameAScore = score))
+                        game.gameAScore = score
+                    }
+                    if (binding.matchMainListDoubleTeamAScore.text.toString().isEmpty()) {
+                        binding.matchMainListDoubleTeamAScore.setText("0")
+                    }
+                } else {
+                    if (binding.matchMainListDoubleTeamAScore.text.toString() == "0") {
+                        binding.matchMainListDoubleTeamAScore.text.clear()
+                    }
+                }
+            }
+            binding.matchMainListDoubleTeamBScore.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    val score =
+                        binding.matchMainListDoubleTeamBScore.text.toString().toIntOrNull() ?: 0
+                    if (game.gameBScore != score) {
+                        matchViewModel.updateTeamBGameScore(game.copy(gameBScore = score))
+                        game.gameBScore = score
+                    }
+                    if (binding.matchMainListDoubleTeamBScore.text.toString().isEmpty()) {
+                        binding.matchMainListDoubleTeamBScore.setText("0")
+                    }
+                } else {
+                    if (binding.matchMainListDoubleTeamBScore.text.toString() == "0") {
+                        binding.matchMainListDoubleTeamBScore.text.clear()
+                    }
+                }
+            }
+        }
+
+        private fun displayWithGameStateTypeDouble(game: Game) {
+            if (game.gameState) {
+                binding.matchMainListDoubleInfo.setBackgroundColor(Color.LTGRAY)
+                binding.matchMainListDoubleTeamAScore.isEnabled = false
+                binding.matchMainListDoubleTeamBScore.isEnabled = false
+            } else {
+                binding.matchMainListDoubleInfo.setBackgroundColor(Color.WHITE)
+                binding.matchMainListDoubleTeamAScore.isEnabled = true
+                binding.matchMainListDoubleTeamBScore.isEnabled = true
             }
         }
     }

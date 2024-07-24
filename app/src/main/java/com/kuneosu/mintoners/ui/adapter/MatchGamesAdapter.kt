@@ -45,17 +45,31 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
 
     private fun addGame() {
         val gameIndex = matchViewModel.games.value?.size?.plus(1) ?: 0
-        val newGame = Game(
-            gameIndex = gameIndex,
-            gameTeamA = listOf(
-                Player(playerName = "", playerIndex = 0),
-                Player(playerName = "", playerIndex = 1)
-            ),
-            gameTeamB = listOf(
-                Player(playerName = "", playerIndex = 2),
-                Player(playerName = "", playerIndex = 3)
+        val newGame: Game
+        if (matchViewModel.match.value?.matchType == "double") {
+            newGame = Game(
+                gameIndex = gameIndex,
+                gameTeamA = listOf(
+                    Player(playerName = "", playerIndex = 0),
+                    Player(playerName = "", playerIndex = 1)
+                ),
+                gameTeamB = listOf(
+                    Player(playerName = "", playerIndex = 2),
+                    Player(playerName = "", playerIndex = 3)
+                )
             )
-        )
+        } else {
+            newGame = Game(
+                gameIndex = gameIndex,
+                gameTeamA = listOf(
+                    Player(playerName = "", playerIndex = 0),
+                ),
+                gameTeamB = listOf(
+                    Player(playerName = "", playerIndex = 1)
+                )
+            )
+        }
+
         matchViewModel.addGame(newGame)
     }
 
@@ -100,53 +114,98 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
         }
 
         fun bind(game: Game) {
-            binding.matchGameNumber.text = game.gameIndex.toString()
-            binding.matchGamePlayerA.setText(game.gameTeamA[0].playerName)
-            binding.matchGamePlayerB.setText(game.gameTeamA[1].playerName)
-            binding.matchGamePlayerC.setText(game.gameTeamB[0].playerName)
-            binding.matchGamePlayerD.setText(game.gameTeamB[1].playerName)
+            if (matchViewModel.match.value?.matchType == "double") {
+                matchTypeDoubleBind(game)
+            } else {
+                matchTypeSingleBind(game)
+            }
 
-            binding.matchGamePlayerA.setOnFocusChangeListener { _, hasFocus ->
+
+        }
+
+        private fun matchTypeSingleBind(game: Game) {
+            binding.matchGameDoubleItem.visibility = View.GONE
+            binding.matchGameDoubleDivider.visibility = View.GONE
+
+            binding.matchGameSingleItem.visibility = View.VISIBLE
+            binding.matchGameSingleDivider.visibility = View.VISIBLE
+
+            binding.matchGameSingleNumber.text = game.gameIndex.toString()
+            binding.matchGamePlayerSingleA.setText(game.gameTeamA[0].playerName)
+            binding.matchGamePlayerSingleB.setText(game.gameTeamB[0].playerName)
+
+            binding.matchGamePlayerSingleA.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    val newName = binding.matchGamePlayerSingleA.text.toString()
+                    game.gameTeamA[0].playerName = newName
+                    updateGame(game)
+                }
+            }
+            binding.matchGamePlayerSingleB.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    val newName = binding.matchGamePlayerSingleB.text.toString()
+                    game.gameTeamB[0].playerName = newName
+                    updateGame(game)
+                }
+            }
+            binding.matchGamePlayerSingleA.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerSingleA))
+            binding.matchGamePlayerSingleB.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerSingleB))
+        }
+
+        private fun matchTypeDoubleBind(game: Game) {
+            binding.matchGameSingleItem.visibility = View.GONE
+            binding.matchGameSingleDivider.visibility = View.GONE
+
+            binding.matchGameDoubleItem.visibility = View.VISIBLE
+            binding.matchGameDoubleDivider.visibility = View.VISIBLE
+
+
+            binding.matchGameDoubleNumber.text = game.gameIndex.toString()
+            binding.matchGamePlayerDoubleA.setText(game.gameTeamA[0].playerName)
+            binding.matchGamePlayerDoubleB.setText(game.gameTeamA[1].playerName)
+            binding.matchGamePlayerDoubleC.setText(game.gameTeamB[0].playerName)
+            binding.matchGamePlayerDoubleD.setText(game.gameTeamB[1].playerName)
+
+            binding.matchGamePlayerDoubleA.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     val oldName = game.gameTeamA[0].playerName
-                    val newName = binding.matchGamePlayerA.text.toString()
+                    val newName = binding.matchGamePlayerDoubleA.text.toString()
                     game.gameTeamA[0].playerName = newName
-//                    changePlayerName(oldName, newName)
+                    //                    changePlayerName(oldName, newName)
                     updateGame(game)
                 }
             }
-            binding.matchGamePlayerB.setOnFocusChangeListener { _, hasFocus ->
+            binding.matchGamePlayerDoubleB.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     val oldName = game.gameTeamA[1].playerName
-                    val newName = binding.matchGamePlayerB.text.toString()
+                    val newName = binding.matchGamePlayerDoubleB.text.toString()
                     game.gameTeamA[1].playerName = newName
-//                    changePlayerName(oldName, newName)
+                    //                    changePlayerName(oldName, newName)
                     updateGame(game)
                 }
             }
-            binding.matchGamePlayerC.setOnFocusChangeListener { _, hasFocus ->
+            binding.matchGamePlayerDoubleC.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     val oldName = game.gameTeamB[0].playerName
-                    val newName = binding.matchGamePlayerC.text.toString()
+                    val newName = binding.matchGamePlayerDoubleC.text.toString()
                     game.gameTeamB[0].playerName = newName
-//                    changePlayerName(oldName, newName)
+                    //                    changePlayerName(oldName, newName)
                     updateGame(game)
                 }
             }
-            binding.matchGamePlayerD.setOnFocusChangeListener { _, hasFocus ->
+            binding.matchGamePlayerDoubleD.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     val oldName = game.gameTeamB[1].playerName
-                    val newName = binding.matchGamePlayerD.text.toString()
+                    val newName = binding.matchGamePlayerDoubleD.text.toString()
                     game.gameTeamB[1].playerName = newName
-//                    changePlayerName(oldName, newName)
+                    //                    changePlayerName(oldName, newName)
                     updateGame(game)
                 }
             }
-            binding.matchGamePlayerA.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerA))
-            binding.matchGamePlayerB.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerB))
-            binding.matchGamePlayerC.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerC))
-            binding.matchGamePlayerD.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerD))
-
+            binding.matchGamePlayerDoubleA.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerDoubleA))
+            binding.matchGamePlayerDoubleB.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerDoubleB))
+            binding.matchGamePlayerDoubleC.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerDoubleC))
+            binding.matchGamePlayerDoubleD.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerDoubleD))
         }
 
         private fun changePlayerName(oldName: String, newName: String) {
@@ -166,10 +225,13 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
         }
 
         fun add() {
-            binding.matchGameInfo.visibility = View.GONE
+            binding.matchGameDoubleItem.visibility = View.GONE
+            binding.matchGameDoubleDivider.visibility = View.GONE
+            binding.matchGameSingleItem.visibility = View.GONE
+            binding.matchGameSingleDivider.visibility = View.GONE
             binding.addGameInfo.visibility = View.VISIBLE
             binding.matchGameAddDivider.visibility = View.VISIBLE
-            binding.matchGameDivider.visibility = View.GONE
+
             binding.addGameButton.setOnClickListener {
                 addGame()
             }
