@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="330dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    app:cardCornerRadius="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="330dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/player_add_dialog_header"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:background="@color/main"
+            android:padding="@dimen/padding_medium"
+            android:text="선수 입력"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_xlarge"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/player_add_dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/padding_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/player_add_dialog_header">
+
+            <EditText
+                android:id="@+id/player_add_dialog_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/match_edittext"
+                android:hint="선수명을 입력하세요."
+                android:inputType="text"
+                android:padding="@dimen/padding_medium"
+                android:textSize="@dimen/text_large" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:text="선수명을 띄어쓰기로 구분하여 \n여러명 입력할 수 있습니다."
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/player_add_dialog_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#804B89DC"
+            app:layout_constraintBottom_toTopOf="@id/player_add_dialog_buttons"
+            app:layout_constraintTop_toBottomOf="@id/player_add_dialog_content" />
+
+        <LinearLayout
+            android:id="@+id/player_add_dialog_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/player_add_dialog_divider">
+
+            <TextView
+                android:id="@+id/player_add_dialog_close"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/padding_medium"
+                android:text="닫기"
+                android:textAlignment="center"
+                android:textColor="@color/negative"
+                android:textSize="@dimen/text_large" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.01"
+                android:background="#804B89DC" />
+
+            <TextView
+                android:id="@+id/player_add_dialog_add"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/padding_medium"
+                android:text="추가"
+                android:textAlignment="center"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_large" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

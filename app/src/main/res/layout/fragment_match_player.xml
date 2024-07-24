@@ -10,7 +10,7 @@
     android:background="@color/white"
     tools:context=".ui.fragments.MatchPlayerFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent">
@@ -162,7 +162,7 @@
                         android:layout_height="@dimen/small_button_height"
                         android:background="@drawable/match_main_button"
                         android:paddingHorizontal="@dimen/padding_small"
-                        android:text="선수 불러오기"
+                        android:text="선수 추가하기"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_large"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -181,6 +181,8 @@
                     android:id="@+id/match_player_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
                     app:layout_constraintTop_toBottomOf="@id/match_player_card_title_divider" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -212,6 +214,6 @@
 
             </com.kuneosu.mintoners.ui.customview.CustomConstraint>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </com.kuneosu.mintoners.ui.customview.CustomConstraint>

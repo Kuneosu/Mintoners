@@ -52,16 +52,24 @@
             android:layout_height="match_parent"
             android:background="@color/trans_black_25"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/recent_game_info_image"
+            app:layout_constraintEnd_toStartOf="@+id/recent_game_delete_image"
             app:layout_constraintStart_toEndOf="@id/recent_game_info"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+        <FrameLayout
+            android:id="@+id/recent_game_delete_button"
+            android:layout_width="@dimen/small_button_height"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/recent_game_divider" />
+
         <ImageView
-            android:id="@+id/recent_game_info_image"
+            android:id="@+id/recent_game_delete_image"
             android:layout_width="@dimen/margin_large"
             android:layout_height="@dimen/margin_large"
             android:contentDescription="@string/recent_game_info"
-            android:src="@drawable/recent_game_info"
+            android:src="@drawable/trashbin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/recent_game_divider"

@@ -14,30 +14,31 @@
         android:theme="@style/Theme.Mintoners"
         tools:targetApi="31">
         <provider
-            android:authorities="com.kuneosu.mintoners.fileprovider"
             android:name="androidx.core.content.FileProvider"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:authorities="com.kuneosu.mintoners.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <activity
             android:name=".ui.view.MatchActivity"
             android:exported="false" />
         <activity
             android:name=".ui.view.SplashActivity"
             android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+
         </activity>
     </application>
 

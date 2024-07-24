@@ -10,6 +10,9 @@
         <item name="colorOnSecondary">@color/main</item>
         <item name="colorSurface">@color/white</item>
 
+        <item name="android:textSelectHandle">@color/main</item>
+        <item name="android:textColorHighlight">@color/datePrimary</item>
+
         <item name="android:textViewStyle">@style/customTextViewFontStyle</item>
         <item name="android:buttonStyle">@style/customButtonFontStyle</item>
         <item name="android:editTextStyle">@style/customEditTextFontStyle</item>

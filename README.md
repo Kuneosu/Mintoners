@@ -179,7 +179,7 @@ July 2024 Personal project, match table creation and management application
         - MatchMainListItem 디자인 수정
         - Match.players 를 가져와서 플레이어 목록 출력 (MatchMainRankFragment)
             - 각 플레이어 별 승점에 따라 정렬 기능 구현 필요.
-    - HomeFragment 리사이클러뷰 아이템 출력
+    - HomeFragment 리사이+클러뷰 아이템 출력
         - Database에서 matches 테이블 데이터를 조회하여 출력
 
 ## 2024.07.18
@@ -241,9 +241,35 @@ July 2024 Personal project, match table creation and management application
   - Drag&Drop을 통해 아이템의 위치를 변경
   - Swipe를 이벤트는 구현 하였으나 ItemTouchHelper.RIGHT를 막아서 이벤트 발생이 안되도록 해둠(기능 구상중)
 
+- **Release 1.0.0-beta.1**
+  - 미구현 기능(로그인, 경기 수 조정, 복식/단식) 접근 제어. 베타 텍스트 출력
+  - 최근 경기 아이템 디자인 변경 (info -> trash bin)
+  - 최근 경기 타이틀 우측에 새로고침 아이콘 삽입 (가시성 향상)
+  - 선수 추가 시 Focus 변경이 자연스럽게 흘러가도록 변경
+
+- **선수 여러명 동시 입력 기능 추가** branch : (feature/player-add-dialog)
+  - MatchPlayerAddDialog 추가
+  - MatchPlayerFragment 에서 여러명의 선수를 한번에 추가 가능
+  - MatchPlayerAddDialog 에서 이름을 띄어쓰기로 구분해서 입력받아 동시에 선수 추가
+
 - **Small Update**
   - ViewPager 화면 전환 시 RecyclerView 의 내용이 짤리는 문제 해결 (화면 전환 시 ViewPager 높이 재설정)
   - MatchMainRankFragment 이름 순 출력 정규식 도입
   - _games.value.shuffle() 을 통해 게임 순서 랜덤화 기능 추가
   - MatchMainRankFragment 에 있던 Sync Button 을 MatchMainFragment 의 TopInfo 로 이동
   - InfoDialog 는 MatchMainTitle 클릭 시 출력
+
+## 2024.07.24
+
+- **Release 1.0.0-beta.2**
+  - MatchPlayerFragment 와 MatchGameFragment 에서 Item 이 Recycle 되면서 잘못 출력되던 오류 해결
+    - ScrollView 를 NestedScrollView 로 바꾸고 RecyclerView 에 속성을 부여 하여 Recycle 방지
+  - HomeRecentGame Card 의 클릭 이벤트 발생 범위 변경
+    - Title 영역을 클릭해야 해당 Match Activity 로 이동
+    - Delete 버튼 영역 확장
+
+- **1인당 경기 수에 따른 대진표 생성 알고리즘 추가**
+  - MatchInfoFragment 에서 입력할 수 있는 1인당 경기 수를 3,4 로 제한
+  - 1인당 경기 수 입력 제목 우측에 주의사항 버튼 추가
+  - MatchPlayerFragment 에서 1인당 경기 수 및 참가 인원 수 판별 알고리즘 추가
+  - 3경기 알고리즘 추가

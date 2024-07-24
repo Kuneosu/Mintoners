@@ -53,7 +53,6 @@ class MatchInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         // 넘겨받은 MatchNumber가 있을 경우 기존 데이터 기반 UI 업데이트
         loadUIbyMatchNumber()
 
@@ -72,6 +71,13 @@ class MatchInfoFragment : Fragment() {
         // 뒤로가기 버튼 두번 눌러 종료
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
+        binding.matchInfoGameCountWarning.setOnClickListener {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.game_count_warning),
+                Toast.LENGTH_LONG
+            ).show()
+        }
 
     }
 
@@ -163,13 +169,20 @@ class MatchInfoFragment : Fragment() {
     private fun matchGameCountChanged() {
         binding.matchInfoGameCountMinus.setOnClickListener {
             val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
-            if (currentCount > 1) {
+            if (currentCount > 3) {
                 binding.matchInfoGameCountNumber.text = (currentCount - 1).toString()
+            } else {
+                Toast.makeText(requireContext(), "설정 가능한 최소 경기 수 입니다.", Toast.LENGTH_SHORT).show()
             }
         }
+
         binding.matchInfoGameCountPlus.setOnClickListener {
             val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
-            binding.matchInfoGameCountNumber.text = (currentCount + 1).toString()
+            if (currentCount < 4) {
+                binding.matchInfoGameCountNumber.text = (currentCount + 1).toString()
+            } else {
+                Toast.makeText(requireContext(), "설정 가능한 최대 경기 수 입니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -208,11 +221,6 @@ class MatchInfoFragment : Fragment() {
         binding.matchInfoGameTypeInput.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 binding.matchInfoGameTypeDouble.id -> {
-                    Toast.makeText(
-                        requireContext(),
-                        "${matchViewModel.match.value}",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     binding.matchInfoGameTypeDouble.setTextColor(Color.WHITE)
                     binding.matchInfoGameTypeSingle.setTextColor(
                         resources.getColor(
@@ -223,13 +231,18 @@ class MatchInfoFragment : Fragment() {
                 }
 
                 binding.matchInfoGameTypeSingle.id -> {
-                    binding.matchInfoGameTypeDouble.setTextColor(
-                        resources.getColor(
-                            R.color.main,
-                            null
-                        )
-                    )
-                    binding.matchInfoGameTypeSingle.setTextColor(Color.WHITE)
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.beta_feature_message),
+                        Toast.LENGTH_SHORT
+                    ).show()
+//                    binding.matchInfoGameTypeDouble.setTextColor(
+//                        resources.getColor(
+//                            R.color.main,
+//                            null
+//                        )
+//                    )
+//                    binding.matchInfoGameTypeSingle.setTextColor(Color.WHITE)
                 }
             }
         }
