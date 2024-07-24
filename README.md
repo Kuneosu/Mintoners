@@ -179,7 +179,7 @@ July 2024 Personal project, match table creation and management application
         - MatchMainListItem 디자인 수정
         - Match.players 를 가져와서 플레이어 목록 출력 (MatchMainRankFragment)
             - 각 플레이어 별 승점에 따라 정렬 기능 구현 필요.
-    - HomeFragment 리사이클러뷰 아이템 출력
+    - HomeFragment 리사이+클러뷰 아이템 출력
         - Database에서 matches 테이블 데이터를 조회하여 출력
 
 ## 2024.07.18
@@ -258,3 +258,12 @@ July 2024 Personal project, match table creation and management application
   - _games.value.shuffle() 을 통해 게임 순서 랜덤화 기능 추가
   - MatchMainRankFragment 에 있던 Sync Button 을 MatchMainFragment 의 TopInfo 로 이동
   - InfoDialog 는 MatchMainTitle 클릭 시 출력
+
+## 2024.07.24
+
+- **Release 1.0.0-beta.2**
+  - MatchPlayerFragment 와 MatchGameFragment 에서 Item 이 Recycle 되면서 잘못 출력되던 오류 해결
+    - ScrollView 를 NestedScrollView 로 바꾸고 RecyclerView 에 속성을 부여 하여 Recycle 방지
+  - HomeRecentGame Card 의 클릭 이벤트 발생 범위 변경
+    - Title 영역을 클릭해야 해당 Match Activity 로 이동
+    - Delete 버튼 영역 확장
