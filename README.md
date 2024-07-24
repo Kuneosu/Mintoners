@@ -267,3 +267,9 @@ July 2024 Personal project, match table creation and management application
   - HomeRecentGame Card 의 클릭 이벤트 발생 범위 변경
     - Title 영역을 클릭해야 해당 Match Activity 로 이동
     - Delete 버튼 영역 확장
+
+- **1인당 경기 수에 따른 대진표 생성 알고리즘 추가**
+  - MatchInfoFragment 에서 입력할 수 있는 1인당 경기 수를 3,4 로 제한
+  - 1인당 경기 수 입력 제목 우측에 주의사항 버튼 추가
+  - MatchPlayerFragment 에서 1인당 경기 수 및 참가 인원 수 판별 알고리즘 추가
+  - 3경기 알고리즘 추가

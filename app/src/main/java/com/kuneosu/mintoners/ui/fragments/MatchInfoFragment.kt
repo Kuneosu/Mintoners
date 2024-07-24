@@ -71,6 +71,13 @@ class MatchInfoFragment : Fragment() {
         // 뒤로가기 버튼 두번 눌러 종료
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
+        binding.matchInfoGameCountWarning.setOnClickListener {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.game_count_warning),
+                Toast.LENGTH_LONG
+            ).show()
+        }
 
     }
 
@@ -161,25 +168,21 @@ class MatchInfoFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun matchGameCountChanged() {
         binding.matchInfoGameCountMinus.setOnClickListener {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.beta_feature_message),
-                Toast.LENGTH_SHORT
-            ).show()
-//            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
-//            if (currentCount > 1) {
-//                binding.matchInfoGameCountNumber.text = (currentCount - 1).toString()
-//            }
+            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
+            if (currentCount > 3) {
+                binding.matchInfoGameCountNumber.text = (currentCount - 1).toString()
+            } else {
+                Toast.makeText(requireContext(), "설정 가능한 최소 경기 수 입니다.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.matchInfoGameCountPlus.setOnClickListener {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.beta_feature_message),
-                Toast.LENGTH_SHORT
-            ).show()
-//            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
-//            binding.matchInfoGameCountNumber.text = (currentCount + 1).toString()
+            val currentCount = binding.matchInfoGameCountNumber.text.toString().toInt()
+            if (currentCount < 4) {
+                binding.matchInfoGameCountNumber.text = (currentCount + 1).toString()
+            } else {
+                Toast.makeText(requireContext(), "설정 가능한 최대 경기 수 입니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
