@@ -327,6 +327,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/match_info_score_input" />
 
+                <ImageView
+                    android:id="@+id/match_info_game_count_warning"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/recent_game_info"
+                    android:layout_marginStart="@dimen/margin_small"
+                    app:layout_constraintStart_toEndOf="@id/match_info_game_count_title"
+                    app:layout_constraintTop_toTopOf="@id/match_info_game_count_title"
+                    app:layout_constraintBottom_toBottomOf="@id/match_info_game_count_title"/>
+
                 <LinearLayout
                     android:id="@+id/match_info_game_count_input"
                     android:layout_width="@dimen/match_info_game_count"
@@ -354,10 +364,10 @@
                         android:layout_margin="0dp"
                         android:layout_weight="1.5"
                         android:background="@drawable/match_game_count"
+                        android:enabled="false"
                         android:gravity="center"
                         android:inputType="number"
                         android:maxLength="1"
-                        android:enabled="false"
                         android:text="4"
                         android:textAlignment="center"
                         android:textColor="@color/main"
@@ -404,9 +414,9 @@
                         android:background="@drawable/selector_radio_right"
                         android:button="@color/transparent"
                         android:checked="false"
+                        android:enabled="false"
                         android:gravity="center"
                         android:text="단식"
-                        android:enabled="false"
                         android:textColor="@color/main"
                         android:textSize="@dimen/text_large" />
                 </RadioGroup>

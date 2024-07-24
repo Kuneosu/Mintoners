@@ -58,6 +58,10 @@ class MatchViewModel @Inject constructor(
         _updateCount.value = 0
     }
 
+    fun updateMatchCount() {
+        _match.value = _match.value?.copy(matchCount = 4)
+        updateMatchByNumber(_match.value?.matchNumber!!)
+    }
 
     fun setMatchState(state: Int) {
         _matchState.value = state
@@ -233,7 +237,8 @@ class MatchViewModel @Inject constructor(
         _players.value!!.forEach {
             it.playerScore = 0
         }
-        _games.value = KdkGameMaker(_players.value!!).gameMakingWithKdk()
+
+        _games.value = KdkGameMaker(_players.value!!).gameMakingWithKdk(_match.value?.matchCount!!)
     }
 
     fun applyGameList() {

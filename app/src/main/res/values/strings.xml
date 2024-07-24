@@ -38,4 +38,5 @@
     <string name="withdraw_warning_text">회원 탈퇴 시 데이터가 전부 삭제됩니다.\n삭제된 데이터는 복구할 수 없으니 주의 바랍니다.</string>
     <string name="sync_button">sync_button</string>
     <string name="beta_feature_message">BETA 버전에선 사용할 수 없는 기능입니다.</string>
+    <string name="game_count_warning">경기 참가 인원 수가 8,12,16명인 경우에만\n3게임 대진표를 작성할 수 있습니다.\n인원수가 맞지 않을 경우 대진표를 생성할 수 없습니다.</string>
 </resources>
