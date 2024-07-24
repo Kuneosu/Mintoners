@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -26,6 +27,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentMatchMainBinding
 import com.kuneosu.mintoners.ui.adapter.MatchMainPagerAdapter
 import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
@@ -56,7 +58,10 @@ class MatchMainFragment : Fragment() {
         moveButtonSetting()
         initPager()
 
+        val rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.sync_rotate)
+
         binding.matchMainTopSync.setOnClickListener {
+            binding.matchMainTopSync.startAnimation(rotateAnimation)
             matchViewModel.updatePoint(string = "Sync Button")
         }
 

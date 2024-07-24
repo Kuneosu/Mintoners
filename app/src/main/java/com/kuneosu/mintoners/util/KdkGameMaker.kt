@@ -918,4 +918,23 @@ class KdkGameMaker(private val players: List<Player>) {
             }
         }
     }
+
+    fun gameMakingWithKdkSingle(): List<Game> {
+        val games = mutableListOf<Game>()
+        var gameIndex = 1
+
+        for (i in players.indices) {
+            for (j in i + 1 until players.size) {
+                games.add(
+                    Game(
+                        gameIndex = gameIndex++,
+                        gameTeamA = listOf(players[i]),
+                        gameTeamB = listOf(players[j])
+                    )
+                )
+            }
+        }
+
+        return games.toList()
+    }
 }

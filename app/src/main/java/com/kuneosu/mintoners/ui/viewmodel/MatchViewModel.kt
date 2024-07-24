@@ -237,8 +237,13 @@ class MatchViewModel @Inject constructor(
         _players.value!!.forEach {
             it.playerScore = 0
         }
+        if (_match.value?.matchType == "double") {
+            _games.value =
+                KdkGameMaker(_players.value!!).gameMakingWithKdk(_match.value?.matchCount!!)
+        } else {
+            _games.value = KdkGameMaker(_players.value!!).gameMakingWithKdkSingle()
+        }
 
-        _games.value = KdkGameMaker(_players.value!!).gameMakingWithKdk(_match.value?.matchCount!!)
     }
 
     fun applyGameList() {
@@ -297,8 +302,62 @@ class MatchViewModel @Inject constructor(
             it.playerLose = 0
             it.playerDraw = 0
         }
-
         val currentList = _games.value.orEmpty().toMutableList()
+        if (match.value?.matchType!! == "double") {
+            syncGamePointTypeDouble(currentList)
+        } else {
+            syncGamePointTypeSingle(currentList)
+        }
+
+
+        applyGameScore()
+    }
+
+    private fun syncGamePointTypeSingle(currentList: MutableList<Game>) {
+        currentList.forEach {
+            Log.d(TAG, "updatePoint: ${it.gameIndex}")
+            val winTeam =
+                if (it.gameAScore > it.gameBScore) "A" else if (it.gameAScore < it.gameBScore) "B" else "D"
+            val a1 = it.gameTeamA[0].playerIndex
+            val b1 = it.gameTeamB[0].playerIndex
+            Log.d(TAG, "updatePoint BEFORE : ${players.value}")
+
+            when (winTeam) {
+                "A" -> {
+                    _players.value?.forEach { player ->
+                        val index = player.playerIndex
+                        if (index == a1) {
+                            player.playerWin += 1
+                        } else if (index == b1) {
+                            player.playerLose += 1
+                        }
+                    }
+                }
+
+                "B" -> {
+                    _players.value?.forEach { player ->
+                        val index = player.playerIndex
+                        if (index == b1) {
+                            player.playerWin += 1
+                        } else if (index == a1) {
+                            player.playerLose += 1
+                        }
+                    }
+                }
+
+                "D" -> {
+                    _players.value?.forEach { player ->
+                        val index = player.playerIndex
+                        if (index == a1 || index == b1) {
+                            player.playerDraw += 1
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun syncGamePointTypeDouble(currentList: MutableList<Game>) {
         currentList.forEach {
             Log.d(TAG, "updatePoint: ${it.gameIndex}")
             val winTeam =
@@ -342,7 +401,6 @@ class MatchViewModel @Inject constructor(
                 }
             }
         }
-        applyGameScore()
     }
 
     fun updateGameList(gameList: List<Game>) {
@@ -363,5 +421,10 @@ class MatchViewModel @Inject constructor(
             currentList.add(player)
         }
         _players.value = currentList
+    }
+
+    fun resetGames() {
+        _games.value = listOf()
+        applyGameList()
     }
 }

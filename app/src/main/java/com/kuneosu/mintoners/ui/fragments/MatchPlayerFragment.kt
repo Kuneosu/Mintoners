@@ -74,32 +74,56 @@ class MatchPlayerFragment : Fragment() {
             matchViewModel.applyPlayerList()
         }
         binding.matchPlayerNextButton.setOnClickListener {
-            if (matchViewModel.match.value?.matchCount == 3) {
-                matchCountChecker =
-                    matchViewModel.players.value?.size == 8 || matchViewModel.players.value?.size == 12 || matchViewModel.players.value?.size == 16
-            }
-            playerCountChecker = matchViewModel.players.value?.size!! in 5..16
-
-            if (matchCountChecker && playerCountChecker) {
-                findNavController().navigate(R.id.action_matchPlayerFragment_to_matchGameFragment)
-                matchViewModel.updateMatchState(2)
-                matchViewModel.applyPlayerList()
-            } else if (!matchCountChecker) {
-                Toast.makeText(
-                    context,
-                    "인원수가 맞지 않습니다.\n8, 12, 16명일 때만\n3게임 대진표 생성이 가능합니다.",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+            if (matchViewModel.match.value?.matchType == "double") {
+                matchTypeDoublePlayerSetting()
             } else {
-                Toast.makeText(
-                    context,
-                    "인원수가 맞지 않습니다.\n5명 이상 16명 이하로\n설정해주세요.",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                matchTypeSinglePlayerSetting()
             }
+        }
+    }
 
+    private fun matchTypeSinglePlayerSetting() {
+        playerCountChecker = matchViewModel.players.value?.size!! in 2..8
+
+        if (playerCountChecker) {
+            findNavController().navigate(R.id.action_matchPlayerFragment_to_matchGameFragment)
+            matchViewModel.updateMatchState(2)
+            matchViewModel.applyPlayerList()
+        } else {
+            Toast.makeText(
+                context,
+                "플레이어를 최소 2명, 최대 8명 사이로 추가해주세요.",
+                Toast.LENGTH_SHORT
+            )
+                .show()
+        }
+    }
+
+    private fun matchTypeDoublePlayerSetting() {
+        if (matchViewModel.match.value?.matchCount == 3) {
+            matchCountChecker =
+                matchViewModel.players.value?.size == 8 || matchViewModel.players.value?.size == 12 || matchViewModel.players.value?.size == 16
+        }
+        playerCountChecker = matchViewModel.players.value?.size!! in 5..16
+
+        if (matchCountChecker && playerCountChecker) {
+            findNavController().navigate(R.id.action_matchPlayerFragment_to_matchGameFragment)
+            matchViewModel.updateMatchState(2)
+            matchViewModel.applyPlayerList()
+        } else if (!matchCountChecker) {
+            Toast.makeText(
+                context,
+                "인원수가 맞지 않습니다.\n8, 12, 16명일 때만\n3게임 대진표 생성이 가능합니다.",
+                Toast.LENGTH_SHORT
+            )
+                .show()
+        } else {
+            Toast.makeText(
+                context,
+                "인원수가 맞지 않습니다.\n5명 이상 16명 이하로\n설정해주세요.",
+                Toast.LENGTH_SHORT
+            )
+                .show()
         }
     }
 
