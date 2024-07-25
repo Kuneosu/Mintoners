@@ -25,30 +25,36 @@
             android:textColor="@color/black"
             android:textSize="@dimen/text_large" />
 
-        <EditText
+        <TextView
             android:id="@+id/match_game_player_double_a"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_weight="2"
             android:background="@drawable/match_edittext"
-            android:inputType="textCapWords"
+            android:clickable="true"
+            android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:text="김권수"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_medium" />
 
-        <EditText
+        <TextView
             android:id="@+id/match_game_player_double_b"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:background="@drawable/match_edittext"
-            android:inputType="textCapWords"
+            android:clickable="true"
+            android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:text="김권수"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_medium" />
 
         <TextView
             android:id="@+id/match_game_double_vs"
@@ -61,31 +67,37 @@
             android:textColor="@color/trans_black_50"
             android:textSize="@dimen/text_medium" />
 
-        <EditText
+        <TextView
             android:id="@+id/match_game_player_double_c"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_weight="2"
             android:background="@drawable/match_edittext"
-            android:inputType="textCapWords"
+            android:clickable="true"
+            android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:text="김권수"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_medium" />
 
-        <EditText
+        <TextView
             android:id="@+id/match_game_player_double_d"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_weight="2"
             android:background="@drawable/match_edittext"
-            android:inputType="textCapWords"
+            android:clickable="true"
+            android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:text="김권수"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_medium" />
 
 
     </LinearLayout>
@@ -118,18 +130,21 @@
             android:textColor="@color/black"
             android:textSize="@dimen/text_large" />
 
-        <EditText
+        <TextView
             android:id="@+id/match_game_player_single_a"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_weight="2"
             android:background="@drawable/match_edittext"
-            android:inputType="textCapWords"
+            android:clickable="true"
+            android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:text="김권수"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_medium" />
 
         <TextView
             android:id="@+id/match_game_single_vs"
@@ -142,18 +157,21 @@
             android:textColor="@color/trans_black_50"
             android:textSize="@dimen/text_medium" />
 
-        <EditText
+        <TextView
             android:id="@+id/match_game_player_single_b"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_weight="2"
             android:background="@drawable/match_edittext"
-            android:inputType="textCapWords"
+            android:clickable="true"
+            android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
             android:text="김권수"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_medium" />
 
 
     </LinearLayout>
@@ -199,8 +217,8 @@
         android:id="@+id/match_game_add_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:visibility="gone"
         android:background="#26000000"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/add_game_info" />
 
 
