@@ -4,14 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.airbnb.lottie.BuildConfig
+import com.kuneosu.mintoners.BuildConfig
+
+
 import com.kuneosu.mintoners.databinding.FeedbackDialogBinding
 
 class FeedbackDialog : DialogFragment() {
@@ -44,18 +45,20 @@ class FeedbackDialog : DialogFragment() {
 
     @SuppressLint("QueryPermissionsNeeded")
     private fun sendEmail(message: String) {
-        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:") // only email apps should handle this
+        val emailIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "message/rfc822"
             putExtra(
                 Intent.EXTRA_EMAIL,
-                arrayOf(com.kuneosu.mintoners.BuildConfig.FEEDBACK_EMAIL)
+                arrayOf(BuildConfig.FEEDBACK_EMAIL)
             ) // recipient email address
             putExtra(Intent.EXTRA_SUBJECT, "#Mintoners 불편사항 접수")
             putExtra(Intent.EXTRA_TEXT, message)
         }
 
-        if (emailIntent.resolveActivity(requireContext().packageManager) != null) {
-            requireContext().startActivity(emailIntent)
+        try {
+            startActivity(Intent.createChooser(emailIntent, "이메일 앱을 선택하세요"))
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), "이메일을 전송할 수 있는 앱이 없습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 

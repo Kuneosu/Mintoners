@@ -42,4 +42,5 @@
     <string name="beta_logo">현재 개발이 진행중인 베타 버전입니다.\n많은 피드백 부탁드립니다.</string>
     <string name="versions">version 1.0.0-beta.4</string>
     <string name="copy_right">© 2024 Kuneosu. All rights reserved.</string>
+    <string name="developer_email">kks92155784@gmail.com</string>
 </resources>
