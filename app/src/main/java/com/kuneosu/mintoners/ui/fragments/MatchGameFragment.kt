@@ -95,7 +95,7 @@ class MatchGameFragment : Fragment() {
 
         gameCount.observe(viewLifecycleOwner, Observer {
             val count = it
-            if (count != postCount) {
+            if (count > postCount) {
                 binding.matchGameScrollView.smoothScrollTo(0, binding.matchGameScrollView.bottom)
             }
             postCount = count

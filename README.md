@@ -295,6 +295,8 @@ July 2024 Personal project, match table creation and management application
   - HomeFragment 에서 Sync 버튼을 누를 시 아이템이 추가 되고 리사이클러뷰 스크롤이 가장 앞으로 이동
   - MatchPlayerFragment 에서 선수 추가 시 전체 스크롤이 가장 아래로 이동
   - MatchGameFragment 에서 게임 추가 시 전체 스크롤이 가장 아래로 이동
-
+  - 선수 추가 시에만 스크롤이 이동하도록 설정
+  
 - **Small Update**
   - MatchInfoFragment 의 1인당 경기 수 주의 사항을 Toast 메시지에서 Dialog 로 변경
+  - MatchPlayerFragment 에서 선수 삭제 후 포커스가 두 단계씩 뛰는 문제 해결 (position->adapterPosition)
