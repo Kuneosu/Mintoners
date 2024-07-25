@@ -289,3 +289,8 @@ July 2024 Personal project, match table creation and management application
     - HomeFragment, BottomNavigationView Ripple 효과 삭제
     - HomeFragment, 최근 경기 Sync 버튼 영역 확장
     - PlayerFragment Empty 버튼 제거, 입력 시에도 제거할 수 있도록 제거 버튼 제공
+
+## 2024.07.25
+
+- **Small Update**
+  - MatchInfoFragment 의 1인당 경기 수 주의 사항을 Toast 메시지에서 Dialog 로 변경
