@@ -10,19 +10,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/match_main_list_double_number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:paddingVertical="@dimen/padding_medium"
             android:text="1"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_large" />
+
+        <ImageView
+            android:id="@+id/match_main_list_double_lock"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:paddingVertical="@dimen/padding_medium"
+            android:src="@drawable/lock"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -142,6 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent">
@@ -149,13 +160,22 @@
         <TextView
             android:id="@+id/match_main_list_single_number"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_weight="1"
             android:paddingVertical="@dimen/padding_medium"
             android:text="1"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_large" />
+
+        <ImageView
+            android:id="@+id/match_main_list_single_lock"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:paddingVertical="@dimen/padding_medium"
+            android:src="@drawable/lock"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="0dp"
