@@ -2,14 +2,18 @@ package com.kuneosu.mintoners.ui.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.MatchGameItemBinding
@@ -42,6 +46,7 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
 
     private var fromPosition = -1
     private var toPosition = -1
+    private var selectedName = ""
 
     private fun addGame() {
         val gameIndex = matchViewModel.games.value?.size?.plus(1) ?: 0
@@ -51,11 +56,11 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
                 gameIndex = gameIndex,
                 gameTeamA = listOf(
                     Player(playerName = "", playerIndex = 0),
-                    Player(playerName = "", playerIndex = 1)
+                    Player(playerName = "", playerIndex = 0)
                 ),
                 gameTeamB = listOf(
-                    Player(playerName = "", playerIndex = 2),
-                    Player(playerName = "", playerIndex = 3)
+                    Player(playerName = "", playerIndex = 0),
+                    Player(playerName = "", playerIndex = 0)
                 )
             )
         } else {
@@ -65,7 +70,7 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
                     Player(playerName = "", playerIndex = 0),
                 ),
                 gameTeamB = listOf(
-                    Player(playerName = "", playerIndex = 1)
+                    Player(playerName = "", playerIndex = 0)
                 )
             )
         }
@@ -120,7 +125,149 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
                 matchTypeSingleBind(game)
             }
 
+        }
 
+        private fun showPopupMenu(
+            view: View,
+            binding: MatchGameItemBinding,
+            player: String,
+            type: String,
+            game: Game
+        ) {
+            val TAG = "PopupMenu"
+            val popupMenu = PopupMenu(view.context, view)
+            // 동적으로 메뉴 항목 추가
+            val menu = popupMenu.menu
+            val options = matchViewModel.players.value ?: emptyList()
+            Log.d(TAG, "showPopupMenu: $options")
+            options.forEachIndexed { _, option ->
+                menu.add(option.playerName)
+            }
+            Log.d(TAG, "showPopupMenu: $menu")
+            popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+                val newName = menuItem.title.toString()
+                val newPlayer = matchViewModel.players.value?.find { it.playerName == newName }
+                when (type) {
+                    "double" -> {
+                        when (player) {
+                            "A" -> {
+                                if (game.gameTeamA[1].playerName == newName || game.gameTeamB[0].playerName == newName || game.gameTeamB[1].playerName == newName) {
+                                    Toast.makeText(view.context, "중복된 선수입니다.", Toast.LENGTH_SHORT)
+                                        .show()
+                                } else {
+                                    binding.matchGamePlayerDoubleA.text = newName
+                                    val newGame = Game(
+                                        gameIndex = game.gameIndex,
+                                        gameTeamA = listOf(
+                                            newPlayer ?: game.gameTeamA[0],
+                                            game.gameTeamA[1]
+                                        ),
+                                        gameTeamB = game.gameTeamB
+                                    )
+                                    updateGame(newGame)
+                                }
+
+                            }
+
+                            "B" -> {
+                                if (game.gameTeamA[0].playerName == newName || game.gameTeamB[0].playerName == newName || game.gameTeamB[1].playerName == newName) {
+                                    Toast.makeText(view.context, "중복된 선수입니다.", Toast.LENGTH_SHORT)
+                                        .show()
+                                } else {
+                                    binding.matchGamePlayerDoubleB.text = newName
+                                    val newGame = Game(
+                                        gameIndex = game.gameIndex,
+                                        gameTeamA = listOf(
+                                            game.gameTeamA[0],
+                                            newPlayer ?: game.gameTeamA[1]
+
+                                        ),
+                                        gameTeamB = game.gameTeamB
+                                    )
+                                    updateGame(newGame)
+                                }
+
+                            }
+
+                            "C" -> {
+                                if (game.gameTeamA[0].playerName == newName || game.gameTeamA[1].playerName == newName || game.gameTeamB[1].playerName == newName) {
+                                    Toast.makeText(view.context, "중복된 선수입니다.", Toast.LENGTH_SHORT)
+                                        .show()
+                                } else {
+                                    binding.matchGamePlayerDoubleC.text = newName
+                                    val newGame = Game(
+                                        gameIndex = game.gameIndex,
+                                        gameTeamA = game.gameTeamA,
+                                        gameTeamB = listOf(
+                                            newPlayer ?: game.gameTeamB[0],
+                                            game.gameTeamB[1]
+                                        )
+                                    )
+                                    updateGame(newGame)
+                                }
+
+                            }
+
+                            "D" -> {
+                                if (game.gameTeamA[0].playerName == newName || game.gameTeamA[1].playerName == newName || game.gameTeamB[0].playerName == newName) {
+                                    Toast.makeText(view.context, "중복된 선수입니다.", Toast.LENGTH_SHORT)
+                                        .show()
+                                } else {
+                                    binding.matchGamePlayerDoubleD.text = newName
+                                    val newGame = Game(
+                                        gameIndex = game.gameIndex,
+                                        gameTeamA = game.gameTeamA,
+                                        gameTeamB = listOf(
+                                            game.gameTeamB[0],
+                                            newPlayer ?: game.gameTeamB[1]
+                                        )
+                                    )
+                                    updateGame(newGame)
+                                }
+
+                            }
+                        }
+                    }
+
+                    "single" -> {
+                        when (player) {
+                            "A" -> {
+                                if (game.gameTeamB[0].playerName == newName) {
+                                    Toast.makeText(view.context, "중복된 선수입니다.", Toast.LENGTH_SHORT)
+                                        .show()
+                                } else {
+                                    binding.matchGamePlayerSingleA.text = newName
+                                    val newGame = Game(
+                                        gameIndex = game.gameIndex,
+                                        gameTeamA = listOf(newPlayer ?: game.gameTeamA[0]),
+                                        gameTeamB = game.gameTeamB
+                                    )
+                                    updateGame(newGame)
+                                }
+                            }
+
+                            "B" -> {
+                                if (game.gameTeamA[0].playerName == newName) {
+                                    Toast.makeText(view.context, "중복된 선수입니다.", Toast.LENGTH_SHORT)
+                                        .show()
+                                } else {
+                                    binding.matchGamePlayerSingleB.text = newName
+                                    val newGame = Game(
+                                        gameIndex = game.gameIndex,
+                                        gameTeamA = game.gameTeamA,
+                                        gameTeamB = listOf(newPlayer ?: game.gameTeamB[0])
+                                    )
+                                    updateGame(newGame)
+                                }
+
+                            }
+                        }
+                    }
+                }
+                true
+            }
+
+            popupMenu.show()
         }
 
         private fun matchTypeSingleBind(game: Game) {
@@ -131,25 +278,15 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
             binding.matchGameSingleDivider.visibility = View.VISIBLE
 
             binding.matchGameSingleNumber.text = game.gameIndex.toString()
-            binding.matchGamePlayerSingleA.setText(game.gameTeamA[0].playerName)
-            binding.matchGamePlayerSingleB.setText(game.gameTeamB[0].playerName)
+            binding.matchGamePlayerSingleA.text = game.gameTeamA[0].playerName
+            binding.matchGamePlayerSingleB.text = game.gameTeamB[0].playerName
 
-            binding.matchGamePlayerSingleA.setOnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus) {
-                    val newName = binding.matchGamePlayerSingleA.text.toString()
-                    game.gameTeamA[0].playerName = newName
-                    updateGame(game)
-                }
+            binding.matchGamePlayerSingleA.setOnClickListener {
+                showPopupMenu(it, binding, "A", "single", game)
             }
-            binding.matchGamePlayerSingleB.setOnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus) {
-                    val newName = binding.matchGamePlayerSingleB.text.toString()
-                    game.gameTeamB[0].playerName = newName
-                    updateGame(game)
-                }
+            binding.matchGamePlayerSingleB.setOnClickListener {
+                showPopupMenu(it, binding, "B", "single", game)
             }
-            binding.matchGamePlayerSingleA.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerSingleA))
-            binding.matchGamePlayerSingleB.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerSingleB))
         }
 
         private fun matchTypeDoubleBind(game: Game) {
@@ -161,68 +298,27 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
 
 
             binding.matchGameDoubleNumber.text = game.gameIndex.toString()
-            binding.matchGamePlayerDoubleA.setText(game.gameTeamA[0].playerName)
-            binding.matchGamePlayerDoubleB.setText(game.gameTeamA[1].playerName)
-            binding.matchGamePlayerDoubleC.setText(game.gameTeamB[0].playerName)
-            binding.matchGamePlayerDoubleD.setText(game.gameTeamB[1].playerName)
+            binding.matchGamePlayerDoubleA.text = game.gameTeamA[0].playerName
+            binding.matchGamePlayerDoubleB.text = game.gameTeamA[1].playerName
+            binding.matchGamePlayerDoubleC.text = game.gameTeamB[0].playerName
+            binding.matchGamePlayerDoubleD.text = game.gameTeamB[1].playerName
 
-            binding.matchGamePlayerDoubleA.setOnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus) {
-                    val oldName = game.gameTeamA[0].playerName
-                    val newName = binding.matchGamePlayerDoubleA.text.toString()
-                    game.gameTeamA[0].playerName = newName
-                    //                    changePlayerName(oldName, newName)
-                    updateGame(game)
-                }
+            binding.matchGamePlayerDoubleA.setOnClickListener {
+                showPopupMenu(it, binding, "A", "double", game)
             }
-            binding.matchGamePlayerDoubleB.setOnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus) {
-                    val oldName = game.gameTeamA[1].playerName
-                    val newName = binding.matchGamePlayerDoubleB.text.toString()
-                    game.gameTeamA[1].playerName = newName
-                    //                    changePlayerName(oldName, newName)
-                    updateGame(game)
-                }
+            binding.matchGamePlayerDoubleB.setOnClickListener {
+                showPopupMenu(it, binding, "B", "double", game)
             }
-            binding.matchGamePlayerDoubleC.setOnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus) {
-                    val oldName = game.gameTeamB[0].playerName
-                    val newName = binding.matchGamePlayerDoubleC.text.toString()
-                    game.gameTeamB[0].playerName = newName
-                    //                    changePlayerName(oldName, newName)
-                    updateGame(game)
-                }
+            binding.matchGamePlayerDoubleC.setOnClickListener {
+                showPopupMenu(it, binding, "C", "double", game)
             }
-            binding.matchGamePlayerDoubleD.setOnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus) {
-                    val oldName = game.gameTeamB[1].playerName
-                    val newName = binding.matchGamePlayerDoubleD.text.toString()
-                    game.gameTeamB[1].playerName = newName
-                    //                    changePlayerName(oldName, newName)
-                    updateGame(game)
-                }
+            binding.matchGamePlayerDoubleD.setOnClickListener {
+                showPopupMenu(it, binding, "D", "double", game)
             }
-            binding.matchGamePlayerDoubleA.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerDoubleA))
-            binding.matchGamePlayerDoubleB.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerDoubleB))
-            binding.matchGamePlayerDoubleC.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerDoubleC))
-            binding.matchGamePlayerDoubleD.setOnEditorActionListener(getEditorActionListener(binding.matchGamePlayerDoubleD))
+
+
         }
 
-        private fun changePlayerName(oldName: String, newName: String) {
-            matchViewModel.players.value?.find { it.playerName == oldName }?.let {
-                it.playerName = newName
-            }
-            matchViewModel.applyPlayerList()
-        }
-
-        private fun getEditorActionListener(view: View): TextView.OnEditorActionListener { // 키보드에서 done(완료) 클릭 시
-            return TextView.OnEditorActionListener { _, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    view.clearFocus()
-                }
-                false
-            }
-        }
 
         fun add() {
             binding.matchGameDoubleItem.visibility = View.GONE
