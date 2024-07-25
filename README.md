@@ -316,3 +316,7 @@ July 2024 Personal project, match table creation and management application
   - MatchMainListFragment 에서 잠금 시 잠금 아이콘 표시
   - EditText 커서 색상 변경
   - TabLayout Tab 이 변경될 때마다 ViewPager 높이 계산
+
+- **Beta Release 1.0.0-beta.4** 
+  - 저작권 표시
+  - Feedback Eamil 보내기 추가.

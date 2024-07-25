@@ -1,5 +1,6 @@
 package com.kuneosu.mintoners.ui.fragments
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -8,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +23,7 @@ import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.FragmentHomeBinding
 import com.kuneosu.mintoners.ui.adapter.HomeRecentGameAdapter
+import com.kuneosu.mintoners.ui.customview.FeedbackDialog
 import com.kuneosu.mintoners.ui.decoration.LeftOffsetDecoration
 import com.kuneosu.mintoners.ui.view.MatchActivity
 import com.kuneosu.mintoners.ui.viewmodel.HomeViewModel
@@ -34,6 +38,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var homeRecentGameAdapter: HomeRecentGameAdapter
+    private lateinit var sendTextMessageLauncher: ActivityResultLauncher<Intent>
+    val pendingMessage: String? =null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,9 +51,10 @@ class HomeFragment : Fragment() {
 
         val rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.sync_rotate)
 
-
         binding.homeCardGuest.setOnClickListener {
-            updateBottomNavigationView(R.id.menu_profile)
+            val dialog = FeedbackDialog()
+            dialog.show(childFragmentManager, "FeedbackDialog")
+//            updateBottomNavigationView(R.id.menu_profile)
         }
 
         homeViewModel.getAllMatches()
