@@ -146,6 +146,19 @@ class MatchMainFragment : Fragment() {
                 1 -> tab.text = "현재 순위"
             }
         }.attach()
+
+        binding.matchMainTab.addOnTabSelectedListener(object :
+            com.google.android.material.tabs.TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: com.google.android.material.tabs.TabLayout.Tab?) {
+                Handler().postDelayed({
+                    viewPager.adjustHeight()
+                }, 100)
+            }
+
+            override fun onTabUnselected(tab: com.google.android.material.tabs.TabLayout.Tab?) {}
+            override fun onTabReselected(tab: com.google.android.material.tabs.TabLayout.Tab?) {}
+        })
+
     }
 
     fun ViewPager2.adjustHeight() {
