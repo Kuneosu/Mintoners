@@ -88,6 +88,12 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
                 game.gameState = !game.gameState
                 displayWithGameStateTypeSingle(game)
             }
+            binding.matchMainListSingleLock.setOnClickListener {
+                matchViewModel.updateGame(game.copy(gameState = !game.gameState))
+                game.gameState = !game.gameState
+                displayWithGameStateTypeSingle(game)
+            }
+
             binding.matchMainListSinglePlayerA.text = game.gameTeamA[0].playerName
             binding.matchMainListSinglePlayerB.text = game.gameTeamB[0].playerName
 
@@ -136,10 +142,14 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
                 binding.matchMainListSingleInfo.setBackgroundColor(Color.LTGRAY)
                 binding.matchMainListSingleTeamAScore.isEnabled = false
                 binding.matchMainListSingleTeamBScore.isEnabled = false
+                binding.matchMainListSingleNumber.visibility = View.GONE
+                binding.matchMainListSingleLock.visibility = View.VISIBLE
             } else {
                 binding.matchMainListSingleInfo.setBackgroundColor(Color.WHITE)
                 binding.matchMainListSingleTeamAScore.isEnabled = true
                 binding.matchMainListSingleTeamBScore.isEnabled = true
+                binding.matchMainListSingleNumber.visibility = View.VISIBLE
+                binding.matchMainListSingleLock.visibility = View.GONE
             }
         }
 
@@ -155,6 +165,13 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
                 game.gameState = !game.gameState
                 displayWithGameStateTypeDouble(game)
             }
+            binding.matchMainListDoubleLock.setOnClickListener {
+                matchViewModel.updateGame(game.copy(gameState = !game.gameState))
+                game.gameState = !game.gameState
+                displayWithGameStateTypeDouble(game)
+            }
+
+
             binding.matchMainListDoublePlayerA.text = game.gameTeamA[0].playerName
             binding.matchMainListDoublePlayerB.text = game.gameTeamA[1].playerName
             binding.matchMainListDoublePlayerC.text = game.gameTeamB[0].playerName
@@ -205,10 +222,14 @@ class MatchMainListAdapter(private val matchViewModel: MatchViewModel) :
                 binding.matchMainListDoubleInfo.setBackgroundColor(Color.LTGRAY)
                 binding.matchMainListDoubleTeamAScore.isEnabled = false
                 binding.matchMainListDoubleTeamBScore.isEnabled = false
+                binding.matchMainListDoubleNumber.visibility = View.GONE
+                binding.matchMainListDoubleLock.visibility = View.VISIBLE
             } else {
                 binding.matchMainListDoubleInfo.setBackgroundColor(Color.WHITE)
                 binding.matchMainListDoubleTeamAScore.isEnabled = true
                 binding.matchMainListDoubleTeamBScore.isEnabled = true
+                binding.matchMainListDoubleNumber.visibility = View.VISIBLE
+                binding.matchMainListDoubleLock.visibility = View.GONE
             }
         }
     }
