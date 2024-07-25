@@ -45,31 +45,31 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
-                ).addMigrations(MIGRATION_3_4).build()
+                ).build()
                 INSTANCE = instance
                 instance
             }
         }
 
-        private val MIGRATION_1_2 = object : Migration(1, 2) {
-            override fun migrate(db: SupportSQLiteDatabase) {
-                db.execSQL("ALTER TABLE matches ADD COLUMN matchState INTEGER NOT NULL DEFAULT 0")
-            }
-        }
-
-        private val MIGRATION_2_3 = object : Migration(2, 3) {
-            override fun migrate(db: SupportSQLiteDatabase) {
-                db.execSQL("ALTER TABLE players ADD COLUMN playerWin INTEGER NOT NULL DEFAULT 0")
-                db.execSQL("ALTER TABLE players ADD COLUMN playerDraw INTEGER NOT NULL DEFAULT 0")
-                db.execSQL("ALTER TABLE players ADD COLUMN playerLose INTEGER NOT NULL DEFAULT 0")
-                db.execSQL("ALTER TABLE players ADD COLUMN playerScore INTEGER NOT NULL DEFAULT 0")
-            }
-        }
-
-        private val MIGRATION_3_4 = object : Migration(3, 4) {
-            override fun migrate(db: SupportSQLiteDatabase) {
-                db.execSQL("ALTER TABLE games ADD COLUMN gameState INTEGER NOT NULL DEFAULT 0")
-            }
-        }
+//        private val MIGRATION_1_2 = object : Migration(1, 2) {
+//            override fun migrate(db: SupportSQLiteDatabase) {
+//                db.execSQL("ALTER TABLE matches ADD COLUMN matchState INTEGER NOT NULL DEFAULT 0")
+//            }
+//        }
+//
+//        private val MIGRATION_2_3 = object : Migration(2, 3) {
+//            override fun migrate(db: SupportSQLiteDatabase) {
+//                db.execSQL("ALTER TABLE players ADD COLUMN playerWin INTEGER NOT NULL DEFAULT 0")
+//                db.execSQL("ALTER TABLE players ADD COLUMN playerDraw INTEGER NOT NULL DEFAULT 0")
+//                db.execSQL("ALTER TABLE players ADD COLUMN playerLose INTEGER NOT NULL DEFAULT 0")
+//                db.execSQL("ALTER TABLE players ADD COLUMN playerScore INTEGER NOT NULL DEFAULT 0")
+//            }
+//        }
+//
+//        private val MIGRATION_3_4 = object : Migration(3, 4) {
+//            override fun migrate(db: SupportSQLiteDatabase) {
+//                db.execSQL("ALTER TABLE games ADD COLUMN gameState INTEGER NOT NULL DEFAULT 0")
+//            }
+//        }
     }
 }
