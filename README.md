@@ -296,6 +296,10 @@ July 2024 Personal project, match table creation and management application
   - MatchPlayerFragment 에서 선수 추가 시 전체 스크롤이 가장 아래로 이동
   - MatchGameFragment 에서 게임 추가 시 전체 스크롤이 가장 아래로 이동
   - 선수 추가 시에만 스크롤이 이동하도록 설정
+- **Lottie Animation View 추가**
+  - HomeFragment 에서 KDK 대진표 생성 로고 이미지를 Lottie 로 교체
+- **자유 대진 생성 메뉴 추가**
+  - KDK 형식에 구애받지 않고 자유롭게 대진표를 생성할 수 있는 메뉴 카드 추가
   
 - **Small Update**
   - MatchInfoFragment 의 1인당 경기 수 주의 사항을 Toast 메시지에서 Dialog 로 변경

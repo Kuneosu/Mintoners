@@ -60,9 +60,14 @@ class HomeFragment : Fragment() {
 
         }
 
+        binding.homeKdkMatchCard.setOnLongClickListener {
+            binding.lotti.playAnimation()
+            true
+        }
+
         homeRecentGameAdapterSetting()
 
-        binding.homeMakeMatchCard.setOnClickListener {
+        binding.homeKdkMatchCard.setOnClickListener {
             // start MatchActivity
             val intent = Intent(requireContext(), MatchActivity::class.java)
             intent.putExtra("matchNumber", 0)
