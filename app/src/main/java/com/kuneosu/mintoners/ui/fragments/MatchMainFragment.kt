@@ -62,6 +62,7 @@ class MatchMainFragment : Fragment() {
 
         binding.matchMainTopSync.setOnClickListener {
             binding.matchMainTopSync.startAnimation(rotateAnimation)
+            binding.matchMainViewPager.adjustHeight()
             matchViewModel.updatePoint(string = "Sync Button")
         }
 

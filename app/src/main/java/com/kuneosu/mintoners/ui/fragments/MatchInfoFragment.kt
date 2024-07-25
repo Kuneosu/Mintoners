@@ -60,6 +60,8 @@ class MatchInfoFragment : Fragment() {
         // 넘겨받은 MatchNumber가 있을 경우 기존 데이터 기반 UI 업데이트
         loadUIbyMatchNumber()
 
+        hideUIbyIsFreeMatch()
+
         // 복식, 단식 라디오 버튼 선택에 따른 텍스트 색 변화
         matchTypeRadioChanged()
 
@@ -79,6 +81,17 @@ class MatchInfoFragment : Fragment() {
             showAlertDialog()
         }
 
+    }
+
+    private fun hideUIbyIsFreeMatch() {
+        if (matchViewModel.isFreeMatch.value == true) {
+            binding.matchInfoGameCountTitle.visibility = View.INVISIBLE
+            binding.matchInfoGameCountInput.visibility = View.INVISIBLE
+            binding.matchInfoGameCountNumber.visibility = View.INVISIBLE
+            binding.matchInfoGameCountMinus.visibility = View.INVISIBLE
+            binding.matchInfoGameCountPlus.visibility = View.INVISIBLE
+            binding.matchInfoGameCountWarning.visibility = View.INVISIBLE
+        }
     }
 
     private fun showAlertDialog() {

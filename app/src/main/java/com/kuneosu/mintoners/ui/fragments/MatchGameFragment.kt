@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kuneosu.mintoners.R
+import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.databinding.FragmentMatchGameBinding
 import com.kuneosu.mintoners.ui.adapter.MatchGamesAdapter
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
@@ -85,8 +86,10 @@ class MatchGameFragment : Fragment() {
         binding.matchGameRecyclerView.layoutManager = LinearLayoutManager(context)
 
         matchViewModel.games.observe(viewLifecycleOwner, Observer {
-            if (it.isEmpty()) {
-                matchViewModel.generateGames()
+            if (matchViewModel.isFreeMatch.value == false) {
+                if (it.isEmpty()) {
+                    matchViewModel.generateGames()
+                }
             }
             adapter.submitList(it)
             gameCount.value = it.size

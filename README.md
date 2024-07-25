@@ -300,7 +300,11 @@ July 2024 Personal project, match table creation and management application
   - HomeFragment 에서 KDK 대진표 생성 로고 이미지를 Lottie 로 교체
   - PlayerFragment 에서 인원 수가 잘못 되었을 경우 경고 Toast 메시지를 Dialog 로 교체.(Lottie 사용)
 - **자유 대진 생성 메뉴 추가**
-  - KDK 형식에 구애받지 않고 자유롭게 대진표를 생성할 수 있는 메뉴 카드 추가
+  - KDK 형식에 구애받지 않고 자유롭게 대진표를 생성할 수 있는 메뉴 카드 추가\
+  - isFreeMatch Intent 를 통해 MatchActivity 에서 경로 판별
+  - isFreeMatch 를 ViewModel 에 저장하고 Fragment 에서 사용
+  - isFreeMatch 가 true 일 경우 경기수 입력 X, 인원 수 제한 X, 자동 게임 생성 X
+  - isFreeMatch 가 true 여도 생성 버튼을 통해 대진표 생성은 가능.
 - **GameFragment 선수 변경 목록화**
   - MatchGameItem 의 EditText 를 모두 TextView 로 변경
   - MatchGameItem 의 TextView 를 클릭 시 팝업 메뉴로 선수 변경 가능
