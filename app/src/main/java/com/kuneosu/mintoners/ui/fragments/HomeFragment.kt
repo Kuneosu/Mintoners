@@ -71,6 +71,15 @@ class HomeFragment : Fragment() {
             // start MatchActivity
             val intent = Intent(requireContext(), MatchActivity::class.java)
             intent.putExtra("matchNumber", 0)
+            intent.putExtra("isFreeMatch", false)
+            startActivity(intent)
+        }
+
+        binding.homeFreeMatchCard.setOnClickListener {
+            // start MatchActivity
+            val intent = Intent(requireContext(), MatchActivity::class.java)
+            intent.putExtra("matchNumber", 0)
+            intent.putExtra("isFreeMatch", true)
             startActivity(intent)
         }
 

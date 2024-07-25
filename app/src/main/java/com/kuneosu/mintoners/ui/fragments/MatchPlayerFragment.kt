@@ -85,10 +85,16 @@ class MatchPlayerFragment : Fragment() {
             matchViewModel.applyPlayerList()
         }
         binding.matchPlayerNextButton.setOnClickListener {
-            if (matchViewModel.match.value?.matchType == "double") {
-                matchTypeDoublePlayerSetting()
+            if (matchViewModel.isFreeMatch.value!!) {
+                findNavController().navigate(R.id.action_matchPlayerFragment_to_matchGameFragment)
+                matchViewModel.updateMatchState(2)
+                matchViewModel.applyPlayerList()
             } else {
-                matchTypeSinglePlayerSetting()
+                if (matchViewModel.match.value?.matchType == "double") {
+                    matchTypeDoublePlayerSetting()
+                } else {
+                    matchTypeSinglePlayerSetting()
+                }
             }
         }
     }
