@@ -314,3 +314,5 @@ July 2024 Personal project, match table creation and management application
   - MatchInfoFragment 의 1인당 경기 수 주의 사항을 Toast 메시지에서 Dialog 로 변경
   - MatchPlayerFragment 에서 선수 삭제 후 포커스가 두 단계씩 뛰는 문제 해결 (position->adapterPosition)
   - MatchMainListFragment 에서 잠금 시 잠금 아이콘 표시
+  - EditText 커서 색상 변경
+  - TabLayout Tab 이 변경될 때마다 ViewPager 높이 계산
