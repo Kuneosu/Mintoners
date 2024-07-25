@@ -298,6 +298,7 @@ July 2024 Personal project, match table creation and management application
   - 선수 추가 시에만 스크롤이 이동하도록 설정
 - **Lottie Animation View 추가**
   - HomeFragment 에서 KDK 대진표 생성 로고 이미지를 Lottie 로 교체
+  - PlayerFragment 에서 인원 수가 잘못 되었을 경우 경고 Toast 메시지를 Dialog 로 교체.(Lottie 사용)
 - **자유 대진 생성 메뉴 추가**
   - KDK 형식에 구애받지 않고 자유롭게 대진표를 생성할 수 있는 메뉴 카드 추가
   

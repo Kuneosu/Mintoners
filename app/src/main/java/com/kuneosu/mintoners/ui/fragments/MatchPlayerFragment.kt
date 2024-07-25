@@ -20,7 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentMatchPlayerBinding
 import com.kuneosu.mintoners.ui.adapter.MatchPlayerAdapter
+import com.kuneosu.mintoners.ui.customview.MatchInfoWarningDialog
 import com.kuneosu.mintoners.ui.customview.MatchPlayerAddDialog
+import com.kuneosu.mintoners.ui.customview.MatchPlayerWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,6 +58,11 @@ class MatchPlayerFragment : Fragment() {
 
         // Player Fragment Navigation 설정
         playerNavigationSetting()
+    }
+
+    private fun showAlertDialog(text: String) {
+        val dialog = MatchPlayerWarningDialog(text)
+        dialog.show(childFragmentManager, "MatchPlayerWarningDialog")
     }
 
     private fun playerNavigationSetting() {
@@ -94,12 +101,7 @@ class MatchPlayerFragment : Fragment() {
             matchViewModel.updateMatchState(2)
             matchViewModel.applyPlayerList()
         } else {
-            Toast.makeText(
-                context,
-                "플레이어를 최소 2명, 최대 8명 사이로 추가해주세요.",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+            showAlertDialog("플레이어를 최소 2명, 최대 8명 사이로 추가해주세요.")
         }
     }
 
@@ -115,19 +117,9 @@ class MatchPlayerFragment : Fragment() {
             matchViewModel.updateMatchState(2)
             matchViewModel.applyPlayerList()
         } else if (!matchCountChecker) {
-            Toast.makeText(
-                context,
-                "인원수가 맞지 않습니다.\n8, 12, 16명일 때만\n3게임 대진표 생성이 가능합니다.",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+            showAlertDialog("인원수가 맞지 않습니다.\n8, 12, 16명일 때만\n3게임 대진표 생성이 가능합니다.")
         } else {
-            Toast.makeText(
-                context,
-                "인원수가 맞지 않습니다.\n5명 이상 16명 이하로\n설정해주세요.",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+            showAlertDialog("인원수가 맞지 않습니다.\n5명 이상 16명 이하로\n설정해주세요.")
         }
     }
 
