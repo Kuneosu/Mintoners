@@ -291,6 +291,10 @@ July 2024 Personal project, match table creation and management application
     - PlayerFragment Empty 버튼 제거, 입력 시에도 제거할 수 있도록 제거 버튼 제공
 
 ## 2024.07.25
+- **Recycler View 아이템 추가 시 Scroll 이동**
+  - HomeFragment 에서 Sync 버튼을 누를 시 아이템이 추가 되고 리사이클러뷰 스크롤이 가장 앞으로 이동
+  - MatchPlayerFragment 에서 선수 추가 시 전체 스크롤이 가장 아래로 이동
+  - MatchGameFragment 에서 게임 추가 시 전체 스크롤이 가장 아래로 이동
 
 - **Small Update**
   - MatchInfoFragment 의 1인당 경기 수 주의 사항을 Toast 메시지에서 Dialog 로 변경

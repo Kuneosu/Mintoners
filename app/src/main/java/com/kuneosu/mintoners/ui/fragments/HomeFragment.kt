@@ -2,6 +2,7 @@ package com.kuneosu.mintoners.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ import com.kuneosu.mintoners.ui.decoration.LeftOffsetDecoration
 import com.kuneosu.mintoners.ui.view.MatchActivity
 import com.kuneosu.mintoners.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.coroutineScope
 import java.util.Date
 
 @AndroidEntryPoint
@@ -52,6 +54,10 @@ class HomeFragment : Fragment() {
         binding.homeRecentGameTitle.setOnClickListener {
             binding.homeRecentGameSync.startAnimation(rotateAnimation)
             homeViewModel.getAllMatches()
+            Handler().postDelayed({
+                binding.homeRecentGameRecycler.smoothScrollToPosition(0)
+            }, 100)
+
         }
 
         homeRecentGameAdapterSetting()
