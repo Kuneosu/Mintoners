@@ -289,3 +289,18 @@ July 2024 Personal project, match table creation and management application
     - HomeFragment, BottomNavigationView Ripple 효과 삭제
     - HomeFragment, 최근 경기 Sync 버튼 영역 확장
     - PlayerFragment Empty 버튼 제거, 입력 시에도 제거할 수 있도록 제거 버튼 제공
+
+## 2024.07.25
+- **Recycler View 아이템 추가 시 Scroll 이동**
+  - HomeFragment 에서 Sync 버튼을 누를 시 아이템이 추가 되고 리사이클러뷰 스크롤이 가장 앞으로 이동
+  - MatchPlayerFragment 에서 선수 추가 시 전체 스크롤이 가장 아래로 이동
+  - MatchGameFragment 에서 게임 추가 시 전체 스크롤이 가장 아래로 이동
+  - 선수 추가 시에만 스크롤이 이동하도록 설정
+- **Lottie Animation View 추가**
+  - HomeFragment 에서 KDK 대진표 생성 로고 이미지를 Lottie 로 교체
+- **자유 대진 생성 메뉴 추가**
+  - KDK 형식에 구애받지 않고 자유롭게 대진표를 생성할 수 있는 메뉴 카드 추가
+  
+- **Small Update**
+  - MatchInfoFragment 의 1인당 경기 수 주의 사항을 Toast 메시지에서 Dialog 로 변경
+  - MatchPlayerFragment 에서 선수 삭제 후 포커스가 두 단계씩 뛰는 문제 해결 (position->adapterPosition)

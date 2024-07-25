@@ -92,7 +92,7 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
                 showKeyboard(binding.editPlayerName)
 
             }
-            binding.editPlayerName.setOnEditorActionListener(getEditorActionListener(binding.editPlayerName, position))
+            binding.editPlayerName.setOnEditorActionListener(getEditorActionListener(binding.editPlayerName))
             binding.editPlayerName.setOnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     val newName = binding.editPlayerName.text.toString()
@@ -131,29 +131,33 @@ class MatchPlayerAdapter(private val matchViewModel: MatchViewModel) :
             imm?.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         }
 
-        private fun getEditorActionListener(view: TextView, position: Int): TextView.OnEditorActionListener {
+        private fun getEditorActionListener(view: TextView): TextView.OnEditorActionListener {
             return TextView.OnEditorActionListener { _, _, _ ->
-                val action = if(position < currentList.size -1) EditorInfo.IME_ACTION_NEXT else EditorInfo.IME_ACTION_DONE
-                Log.d(TAG, "getEditorActionListener: $action, $position, ${currentList.size}")
+                val action =
+                    if (adapterPosition < currentList.size - 1) EditorInfo.IME_ACTION_NEXT else EditorInfo.IME_ACTION_DONE
                 binding.editPlayerName.imeOptions = action
                 when (action) {
                     EditorInfo.IME_ACTION_DONE -> {
                         view.clearFocus()
-                        val imm = ContextCompat.getSystemService(view.context, InputMethodManager::class.java)
+                        val imm = ContextCompat.getSystemService(
+                            view.context,
+                            InputMethodManager::class.java
+                        )
                         imm?.hideSoftInputFromWindow(view.windowToken, 0)
-                        Log.d(TAG, "getEditorActionListener: DONE")
                         true
                     }
+
                     EditorInfo.IME_ACTION_NEXT -> {
                         val recyclerView = binding.root.parent as? RecyclerView
-                        val nextPosition = position + 1
+                        val nextPosition = adapterPosition + 1
                         recyclerView?.let {
-                            val nextViewHolder = it.findViewHolderForAdapterPosition(nextPosition) as? PlayerViewHolder
+                            val nextViewHolder =
+                                it.findViewHolderForAdapterPosition(nextPosition) as? PlayerViewHolder
                             nextViewHolder?.binding?.matchPlayerName?.performClick()
                         }
-                        Log.d(TAG, "getEditorActionListener: NEXT")
                         true
                     }
+
                     else -> {
                         false
                     }

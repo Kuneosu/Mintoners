@@ -3,6 +3,7 @@ package com.kuneosu.mintoners.ui.fragments
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +33,8 @@ class MatchPlayerFragment : Fragment() {
     private lateinit var adapter: MatchPlayerAdapter
     private var matchCountChecker = true
     private var playerCountChecker = false
+    private var playerCount = MutableLiveData<Int>()
+    private var postCount = 100
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -132,9 +136,24 @@ class MatchPlayerFragment : Fragment() {
         binding.matchPlayerRecyclerView.adapter = adapter
         binding.matchPlayerRecyclerView.layoutManager = LinearLayoutManager(context)
 
+
         matchViewModel.players.observe(viewLifecycleOwner, Observer {
+            Log.d("PlayerCount", "Player Changed")
+
             adapter.submitList(it)
+            playerCount.value = it.size
             updatePlayerCount(it.size)
+        })
+
+        playerCount.observe(viewLifecycleOwner, Observer {
+            val count = it
+            if (count > postCount) {
+                binding.matchPlayerScrollView.smoothScrollTo(
+                    0,
+                    binding.matchPlayerScrollView.bottom
+                )
+            }
+            postCount = count
         })
     }
 

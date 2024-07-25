@@ -11,6 +11,7 @@
     tools:context=".ui.fragments.MatchGameFragment">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/match_game_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"

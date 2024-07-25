@@ -1,6 +1,7 @@
 package com.kuneosu.mintoners.ui.fragments
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
@@ -21,6 +23,8 @@ import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.databinding.FragmentMatchInfoBinding
 import com.kuneosu.mintoners.ui.customview.MatchCalendarDialog
+import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
+import com.kuneosu.mintoners.ui.customview.MatchInfoWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.coroutineScope
@@ -72,14 +76,16 @@ class MatchInfoFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         binding.matchInfoGameCountWarning.setOnClickListener {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.game_count_warning),
-                Toast.LENGTH_LONG
-            ).show()
+            showAlertDialog()
         }
 
     }
+
+    private fun showAlertDialog() {
+        val dialog = MatchInfoWarningDialog()
+        dialog.show(childFragmentManager, "MatchInfoWarningDialog")
+    }
+
 
     private fun loadUIbyMatchNumber() {
         matchViewModel.match.observe(viewLifecycleOwner) { match ->

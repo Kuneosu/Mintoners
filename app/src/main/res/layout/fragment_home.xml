@@ -185,7 +185,7 @@
 
             <!-- Match Making -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/home_make_match_card"
+                android:id="@+id/home_kdk_match_card"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/match_making_card_height"
                 android:layout_margin="@dimen/margin_default"
@@ -196,7 +196,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/margin_xlarge"
+                    android:layout_marginHorizontal="@dimen/margin_large"
                     android:layout_marginVertical="@dimen/margin_large">
 
                     <TextView
@@ -217,7 +217,20 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/lotti"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/tournament_animation"
+                        app:lottie_repeatCount="2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <ImageView
+                        android:visibility="gone"
                         android:layout_width="@dimen/image_view_size"
                         android:layout_height="@dimen/image_view_size"
                         android:contentDescription="@string/match_card_image"
@@ -229,11 +242,56 @@
 
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/home_free_match_card"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/match_making_card_height"
+                android:layout_margin="@dimen/margin_default"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_corner_radius"
+                app:layout_constraintTop_toBottomOf="@id/home_kdk_match_card">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/margin_large"
+                    android:layout_marginVertical="@dimen/margin_large">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="친구들과 자유롭게 한 판 !"
+                        android:textColor="@color/trans_black_50"
+                        android:textSize="@dimen/text_medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="자유 대진\n생성하기"
+                        android:textSize="@dimen/text_2xlarge"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageView
+                        android:layout_width="@dimen/image_view_size"
+                        android:layout_height="@dimen/image_view_size"
+                        android:contentDescription="@string/match_card_image"
+                        android:src="@drawable/competition"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_default"
                 android:background="@color/transparent"
-                app:layout_constraintTop_toBottomOf="@+id/home_make_match_card" />
+                app:layout_constraintTop_toBottomOf="@+id/home_free_match_card" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

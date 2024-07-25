@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -28,6 +29,8 @@ class MatchGameFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: MatchGamesAdapter
     private val matchViewModel: MatchViewModel by activityViewModels()
+    private var gameCount = MutableLiveData<Int>()
+    private var postCount = 100
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,7 +89,16 @@ class MatchGameFragment : Fragment() {
                 matchViewModel.generateGames()
             }
             adapter.submitList(it)
+            gameCount.value = it.size
             updateGameCount(it.size)
+        })
+
+        gameCount.observe(viewLifecycleOwner, Observer {
+            val count = it
+            if (count > postCount) {
+                binding.matchGameScrollView.smoothScrollTo(0, binding.matchGameScrollView.bottom)
+            }
+            postCount = count
         })
     }
 
