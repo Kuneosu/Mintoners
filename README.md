@@ -301,6 +301,10 @@ July 2024 Personal project, match table creation and management application
   - PlayerFragment 에서 인원 수가 잘못 되었을 경우 경고 Toast 메시지를 Dialog 로 교체.(Lottie 사용)
 - **자유 대진 생성 메뉴 추가**
   - KDK 형식에 구애받지 않고 자유롭게 대진표를 생성할 수 있는 메뉴 카드 추가
+- **GameFragment 선수 변경 목록화**
+  - MatchGameItem 의 EditText 를 모두 TextView 로 변경
+  - MatchGameItem 의 TextView 를 클릭 시 팝업 메뉴로 선수 변경 가능
+  - 선수 변경 시 해당 선수로 대진표 및 순위 업데이트
   
 - **Small Update**
   - MatchInfoFragment 의 1인당 경기 수 주의 사항을 Toast 메시지에서 Dialog 로 변경
