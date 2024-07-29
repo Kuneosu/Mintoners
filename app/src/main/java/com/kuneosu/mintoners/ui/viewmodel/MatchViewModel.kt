@@ -64,7 +64,11 @@ class MatchViewModel @Inject constructor(
 
     fun updateMatchCount() {
         _match.value = _match.value?.copy(matchCount = 4)
-        updateMatchByNumber(_match.value?.matchNumber!!)
+        _match.value?.matchNumber?.let { matchNumber ->
+            updateMatchByNumber(matchNumber)
+        } ?: run {
+            Log.e(TAG, "Match number is null in updateMatchCount")
+        }
     }
 
     fun setMatchState(state: Int) {
@@ -75,8 +79,12 @@ class MatchViewModel @Inject constructor(
         viewModelScope.launch {
             _matchState.value = state
             _match.value = _match.value?.copy(matchState = state)
-            updateMatchByNumber(_match.value?.matchNumber!!)
-            Log.d(TAG, "updateMatchState: ${match.value}")
+            _match.value?.matchNumber?.let { matchNumber ->
+                updateMatchByNumber(matchNumber)
+                Log.d(TAG, "updateMatchState: ${match.value}")
+            } ?: run {
+                Log.e(TAG, "Match number is null")
+            }
         }
 
     }
@@ -270,13 +278,19 @@ class MatchViewModel @Inject constructor(
             matchCount = matchCount,
             matchType = matchType
         )
-        updateMatchByNumber(_match.value?.matchNumber!!)
+        _match.value?.matchNumber?.let { matchNumber ->
+            updateMatchByNumber(matchNumber)
+        } ?: run {
+            Log.e(TAG, "Match number is null in updateMatch")
+        }
     }
 
     fun updateMatchByNumber(number: Int) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                repository.updateByNumber(number, _match.value!!)
+                _match.value?.let { match ->
+                    repository.updateByNumber(number, match)
+                }
             }
         }
     }

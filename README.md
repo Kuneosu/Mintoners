@@ -320,3 +320,13 @@ July 2024 Personal project, match table creation and management application
 - **Beta Release 1.0.0-beta.4** 
   - 저작권 표시
   - Feedback Eamil 보내기 추가.
+
+## 2024.07.29
+
+- **Play Console 발견 오류 해결**
+  - Null check 오류 수정 (MatchViewModel)
+- **Firebase Test Lab 오류 해결**
+  - "IllegalArgumentException: parameter must be a descendant of this view" 오류 해결
+    - NestedScrollView, 0dp -> wrap_content로 변경
+  - "StringIndexOutOfBoundsException" 오류 해결
+    - MatchInfoFragment 에서 문자열 길이를 검사하여 예외 방지

@@ -56,7 +56,6 @@ class MatchInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         // 넘겨받은 MatchNumber가 있을 경우 기존 데이터 기반 UI 업데이트
         loadUIbyMatchNumber()
 
@@ -98,7 +97,6 @@ class MatchInfoFragment : Fragment() {
         val dialog = MatchInfoWarningDialog()
         dialog.show(childFragmentManager, "MatchInfoWarningDialog")
     }
-
 
     private fun loadUIbyMatchNumber() {
         matchViewModel.match.observe(viewLifecycleOwner) { match ->
@@ -143,9 +141,16 @@ class MatchInfoFragment : Fragment() {
 
         // 결과 출력
         binding.matchInfoDateInput.text = outputDateStr
-        binding.matchInfoScoreWinInput.setText(match.matchPoint[0].toString())
-        binding.matchInfoScoreDrawInput.setText(match.matchPoint[1].toString())
-        binding.matchInfoScoreLoseInput.setText(match.matchPoint[2].toString())
+
+        // matchPoint의 길이를 검사하여 예외 방지
+        if (match.matchPoint.length >= 3) {
+            binding.matchInfoScoreWinInput.setText(match.matchPoint[0].toString())
+            binding.matchInfoScoreDrawInput.setText(match.matchPoint[1].toString())
+            binding.matchInfoScoreLoseInput.setText(match.matchPoint[2].toString())
+        } else {
+            Log.e(TAG, "matchPoint length is less than 3")
+        }
+
         binding.matchInfoGameCountNumber.text = match.matchCount.toString()
         if (match.matchType == "double") {
             binding.matchInfoGameTypeDouble.isChecked = true
@@ -236,7 +241,6 @@ class MatchInfoFragment : Fragment() {
     }
 
     private fun matchTypeRadioChanged() {
-
         binding.matchInfoGameTypeInput.setOnCheckedChangeListener { _, checkedId ->
             try {
                 matchViewModel.resetGames()
@@ -267,7 +271,6 @@ class MatchInfoFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun matchInfoGameCountVisibility(visibility: Int) {
@@ -328,10 +331,8 @@ class MatchInfoFragment : Fragment() {
         }
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }
