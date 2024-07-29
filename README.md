@@ -325,3 +325,6 @@ July 2024 Personal project, match table creation and management application
 
 - **Play Console 발견 오류 해결**
   - Null check 오류 수정 (MatchViewModel)
+- **Firebase Test Lab 오류 해결**
+  - "IllegalArgumentException: parameter must be a descendant of this view" 오류 해결
+    - NestedScrollView, 0dp -> wrap_content로 변경
