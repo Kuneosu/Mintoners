@@ -201,7 +201,13 @@ class MatchViewModel @Inject constructor(
         viewModelScope.launch {
             val currentList = _players.value.orEmpty().toMutableList()
             _match.value?.matchPlayers = currentList
-            updateMatchByNumber(_match.value?.matchNumber!!)
+
+            val matchNumber = _match.value?.matchNumber
+            if (matchNumber != null) {
+                updateMatchByNumber(matchNumber)
+            } else {
+                Log.e(TAG, "Match number is null in applyPlayerList")
+            }
         }
     }
 
