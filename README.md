@@ -328,3 +328,5 @@ July 2024 Personal project, match table creation and management application
 - **Firebase Test Lab 오류 해결**
   - "IllegalArgumentException: parameter must be a descendant of this view" 오류 해결
     - NestedScrollView, 0dp -> wrap_content로 변경
+  - "StringIndexOutOfBoundsException" 오류 해결
+    - MatchInfoFragment 에서 문자열 길이를 검사하여 예외 방지
