@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/match_nav" />
+        app:navGraph="@navigation/match_nav"
+        tools:layout="@layout/fragment_match_info" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

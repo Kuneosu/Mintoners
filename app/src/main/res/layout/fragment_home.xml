@@ -173,6 +173,7 @@
                 android:paddingVertical="@dimen/margin_xsmall"
                 android:paddingStart="@dimen/margin_small"
                 android:paddingEnd="@dimen/margin_default"
+                tools:ignore="UseCompoundDrawables"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/home_card">
 
@@ -189,6 +190,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginStart="@dimen/margin_xsmall"
+                    android:contentDescription="@string/sync_button"
                     android:src="@drawable/syncronize" />
             </LinearLayout>
 
@@ -199,6 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/recent_game_recycler_height"
                 android:layout_marginTop="@dimen/margin_small"
+                android:contentDescription="@string/recent_game"
                 app:layout_constraintTop_toBottomOf="@id/home_recent_game_title" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -208,7 +211,7 @@
                 android:layout_marginTop="@dimen/margin_default"
                 android:background="@drawable/match_sub_button"
                 android:padding="@dimen/padding_medium"
-                android:text="사용설명 보러가기"
+                android:text="@string/go_to_instruction"
                 android:textColor="@color/main"
                 android:textSize="@dimen/text_medium"
                 app:layout_constraintEnd_toEndOf="@id/home_kdk_match_card"
@@ -217,6 +220,7 @@
             <!-- Match Making -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/home_kdk_match_card"
+                android:contentDescription="@string/kdk_match_card"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/match_making_card_height"
                 android:layout_margin="@dimen/margin_default"
@@ -291,7 +295,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="친구들과 자유롭게 한 판 !"
+                        android:text="@string/free_match_card_sub_title"
                         android:textColor="@color/trans_black_50"
                         android:textSize="@dimen/text_medium"
                         app:layout_constraintStart_toStartOf="parent"
@@ -300,7 +304,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="자유 대진\n생성하기"
+                        android:text="@string/free_match_card_title"
                         android:textSize="@dimen/text_2xlarge"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"

@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingVertical="@dimen/padding_medium"
-            android:text="1"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_large" />
@@ -36,7 +36,7 @@
             android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
-            android:text="김권수"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
@@ -51,7 +51,7 @@
             android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
-            android:text="김권수"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingVertical="@dimen/padding_medium"
-            android:text="vs"
+            android:text="@string/vs"
             android:textAlignment="center"
             android:textColor="@color/trans_black_50"
             android:textSize="@dimen/text_medium" />
@@ -78,7 +78,7 @@
             android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
-            android:text="김권수"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
@@ -94,7 +94,7 @@
             android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
-            android:text="김권수"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingVertical="@dimen/padding_medium"
-            android:text="1"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_large" />
@@ -141,7 +141,7 @@
             android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
-            android:text="김권수"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
@@ -152,7 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingVertical="@dimen/padding_medium"
-            android:text="vs"
+            android:text="@string/vs"
             android:textAlignment="center"
             android:textColor="@color/trans_black_50"
             android:textSize="@dimen/text_medium" />
@@ -168,7 +168,7 @@
             android:focusable="true"
             android:maxLines="1"
             android:padding="@dimen/padding_small"
-            android:text="김권수"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
@@ -198,7 +198,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingVertical="@dimen/padding_large"
-            android:text="+"
+            android:text="@string/plus"
             android:textColor="@color/main"
             android:textSize="@dimen/text_large"
             app:layout_constraintBottom_toBottomOf="parent"

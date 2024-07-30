@@ -12,6 +12,7 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingVertical="@dimen/padding_small"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -20,16 +21,18 @@
             android:layout_height="60dp"
             android:layout_weight="1"
             android:paddingVertical="@dimen/padding_medium"
-            android:text="1"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_large" />
 
         <ImageView
+
             android:id="@+id/match_main_list_double_lock"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
+            android:contentDescription="@string/lock"
             android:paddingVertical="@dimen/padding_medium"
             android:src="@drawable/lock"
             android:visibility="gone" />
@@ -45,7 +48,7 @@
                 android:id="@+id/match_main_list_double_player_a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="김권수"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_medium" />
@@ -60,7 +63,7 @@
                 android:id="@+id/match_main_list_double_player_b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="김권수"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_medium" />
@@ -71,11 +74,13 @@
             android:id="@+id/match_main_list_double_team_a_score"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.8"
+            android:autofillHints="0"
             android:background="@drawable/match_edittext"
+            android:hint="@string/zero"
             android:inputType="number"
-            android:padding="@dimen/padding_small"
-            android:text="0"
+            android:padding="@dimen/padding_medium"
+            android:text="@string/team_a_score"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
@@ -86,20 +91,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:paddingVertical="@dimen/padding_medium"
-            android:text=":"
+            android:text="@string/vs_dot"
             android:textAlignment="center"
-            android:textColor="@color/trans_black_50"
+            android:textColor="@color/trans_black_75"
             android:textSize="@dimen/text_medium" />
 
         <EditText
             android:id="@+id/match_main_list_double_team_b_score"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.8"
+            android:autofillHints="0"
             android:background="@drawable/match_edittext"
+            android:hint="@string/zero"
             android:inputType="number"
-            android:padding="@dimen/padding_small"
-            android:text="0"
+            android:padding="@dimen/padding_medium"
+            android:text="@string/team_b_score"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
@@ -116,7 +123,7 @@
                 android:id="@+id/match_main_list_double_player_c"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="김권수"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_medium" />
@@ -131,7 +138,7 @@
                 android:id="@+id/match_main_list_double_player_d"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="김권수"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_medium" />
@@ -155,6 +162,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:visibility="gone"
+        android:paddingVertical="@dimen/padding_small"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -163,7 +171,7 @@
             android:layout_height="60dp"
             android:layout_weight="1"
             android:paddingVertical="@dimen/padding_medium"
-            android:text="1"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_large" />
@@ -173,6 +181,7 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
+            android:contentDescription="@string/lock"
             android:paddingVertical="@dimen/padding_medium"
             android:src="@drawable/lock"
             android:visibility="gone" />
@@ -188,7 +197,7 @@
                 android:id="@+id/match_main_list_single_player_a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="김권수"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_medium" />
@@ -200,10 +209,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:autofillHints="0"
             android:background="@drawable/match_edittext"
             android:inputType="number"
             android:padding="@dimen/padding_small"
-            android:text="0"
+            android:text="@string/team_a_score"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
@@ -214,7 +224,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:paddingVertical="@dimen/padding_medium"
-            android:text=":"
+            android:text="@string/vs_dot"
             android:textAlignment="center"
             android:textColor="@color/trans_black_50"
             android:textSize="@dimen/text_medium" />
@@ -224,10 +234,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:autofillHints="0"
             android:background="@drawable/match_edittext"
             android:inputType="number"
             android:padding="@dimen/padding_small"
-            android:text="0"
+            android:text="@string/team_b_score"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
@@ -244,7 +255,7 @@
                 android:id="@+id/match_main_list_single_player_b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="김권수"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_medium" />

@@ -12,6 +12,7 @@
 
 
         <CalendarView
+            android:contentDescription="@string/calendar_view"
             android:id="@+id/match_calendar_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +36,7 @@
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_medium"
-            android:text="닫기"
+            android:text="@string/close"
             android:textAlignment="center"
             android:textColor="@color/trans_black_75"
             android:textSize="@dimen/text_large"

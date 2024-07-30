@@ -30,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_medium"
-                    android:text="대진표 생성"
+                    android:text="@string/make_list"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_2xlarge"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
                     android:layout_height="32dp"
                     android:background="@drawable/match_process_selected"
                     android:gravity="center"
-                    android:text="1"
+                    android:text="@string/one"
                     android:textAlignment="center"
                     android:textColor="@color/main"
                     android:textSize="@dimen/text_medium"
@@ -64,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_xsmall"
-                    android:text="기본정보"
+                    android:text="@string/default_info"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_small"
                     android:textStyle="bold"
@@ -79,7 +79,7 @@
                     android:layout_marginHorizontal="@dimen/margin_xlarge"
                     android:background="@drawable/match_process_unselected"
                     android:gravity="center"
-                    android:text="2"
+                    android:text="@string/two"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_medium"
@@ -92,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_xsmall"
-                    android:text="참가자"
+                    android:text="@string/player"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_small"
                     app:layout_constraintEnd_toEndOf="@id/match_info_process_two"
@@ -105,7 +105,7 @@
                     android:layout_height="32dp"
                     android:background="@drawable/match_process_unselected"
                     android:gravity="center"
-                    android:text="3"
+                    android:text="@string/three"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_medium"
@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_xsmall"
-                    android:text="대진표작성"
+                    android:text="@string/make_list"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_small"
                     app:layout_constraintEnd_toEndOf="@id/match_info_process_three"
@@ -134,6 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_default"
                 android:paddingBottom="@dimen/bottom_app_bar_height"
+                tools:ignore="HardcodedText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/match_info_top_bar">
 
@@ -142,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_xsmall"
-                    android:text="대회명"
+                    android:text="@string/match_title_title"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_large"
                     android:textStyle="bold"
@@ -150,12 +151,13 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
+                    android:autofillHints="0"
                     android:id="@+id/match_info_name_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:background="@drawable/match_edittext"
-                    android:hint="대회명을 입력해주세요."
+                    android:hint="@string/match_title_hint"
                     android:inputType="text"
                     android:padding="@dimen/padding_medium"
                     android:textSize="@dimen/text_large"
@@ -169,7 +171,7 @@
                     android:background="@drawable/match_hint_button"
                     android:paddingHorizontal="@dimen/margin_small"
                     android:paddingVertical="@dimen/margin_xsmall"
-                    android:text="2024-07-08 (월)"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_small"
                     app:layout_constraintStart_toStartOf="parent"
@@ -183,7 +185,7 @@
                     android:background="@drawable/match_hint_button"
                     android:paddingHorizontal="@dimen/margin_small"
                     android:paddingVertical="@dimen/margin_xsmall"
-                    android:text="2024-07 월례대회"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_small"
                     app:layout_constraintStart_toEndOf="@id/match_info_name_hint_one"
@@ -195,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_xsmall"
                     android:layout_marginTop="@dimen/margin_default"
-                    android:text="대회일자"
+                    android:text="@string/date_title"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_large"
                     android:textStyle="bold"
@@ -210,7 +212,7 @@
                     android:layout_marginTop="@dimen/margin_medium"
                     android:background="@drawable/match_edittext"
                     android:padding="@dimen/padding_medium"
-                    android:text="2024-07-08"
+                    android:text=""
                     android:textSize="@dimen/text_large"
                     app:layout_constraintTop_toBottomOf="@+id/match_info_date_title" />
 
@@ -249,6 +251,7 @@
 
 
                     <EditText
+                        android:hint="win"
                         android:id="@+id/match_info_score_win_input"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -258,7 +261,7 @@
                         android:inputType="number"
                         android:maxLength="1"
                         android:padding="@dimen/padding_medium"
-                        android:text="1"
+                        android:text=""
                         android:textAlignment="center"
                         android:textSize="@dimen/text_large" />
 
@@ -274,6 +277,7 @@
 
 
                     <EditText
+                        android:hint="draw"
                         android:id="@+id/match_info_score_draw_input"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -283,7 +287,7 @@
                         android:inputType="number"
                         android:maxLength="1"
                         android:padding="@dimen/padding_medium"
-                        android:text="0"
+                        android:text=""
                         android:textAlignment="center"
                         android:textSize="@dimen/text_large" />
 
@@ -299,6 +303,7 @@
 
 
                     <EditText
+                        android:hint="lose"
                         android:id="@+id/match_info_score_lose_input"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -308,7 +313,7 @@
                         android:inputType="number"
                         android:maxLength="1"
                         android:padding="@dimen/padding_medium"
-                        android:text="0"
+                        android:text=""
                         android:textAlignment="center"
                         android:textSize="@dimen/text_large" />
 
@@ -320,7 +325,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_xsmall"
                     android:layout_marginTop="@dimen/margin_default"
-                    android:text="1인당 경기 수"
+                    android:text="@string/game_count_title"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_large"
                     android:textStyle="bold"
@@ -328,6 +333,7 @@
                     app:layout_constraintTop_toBottomOf="@id/match_info_score_input" />
 
                 <ImageView
+                    android:contentDescription="@string/game_count_warning"
                     android:id="@+id/match_info_game_count_warning"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -353,7 +359,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/match_game_count_minus"
                         android:padding="0dp"
-                        android:text="-"
+                        android:text="@string/minus"
                         android:textColor="@color/main"
                         android:textSize="@dimen/text_large" />
 
@@ -362,13 +368,12 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_margin="0dp"
-                        android:layout_weight="1.5"
+                        android:layout_weight="1"
                         android:background="@drawable/match_game_count"
                         android:enabled="false"
                         android:gravity="center"
-                        android:inputType="number"
                         android:maxLength="1"
-                        android:text="4"
+                        android:text=""
                         android:textAlignment="center"
                         android:textColor="@color/main"
                         android:textSize="@dimen/text_large" />
@@ -379,7 +384,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/match_game_count_plus"
-                        android:text="+"
+                        android:text="@string/plus"
                         android:textColor="@color/main"
                         android:textSize="@dimen/text_large" />
                 </LinearLayout>
@@ -402,7 +407,7 @@
                         android:buttonTint="@color/main"
                         android:checked="true"
                         android:gravity="center"
-                        android:text="복식"
+                        android:text="@string/doubles"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_large" />
 
@@ -415,7 +420,7 @@
                         android:button="@color/transparent"
                         android:checked="false"
                         android:gravity="center"
-                        android:text="단식"
+                        android:text="@string/single"
                         android:textColor="@color/main"
                         android:textSize="@dimen/text_large" />
                 </RadioGroup>
@@ -426,7 +431,7 @@
                     android:layout_height="@dimen/small_button_height"
                     android:layout_marginTop="@dimen/margin_xlarge"
                     android:background="@drawable/match_main_button"
-                    android:text="다음"
+                    android:text="@string/next"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_large"
                     app:layout_constraintEnd_toEndOf="parent"
