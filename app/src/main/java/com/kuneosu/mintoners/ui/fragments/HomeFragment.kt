@@ -25,6 +25,7 @@ import com.kuneosu.mintoners.databinding.FragmentHomeBinding
 import com.kuneosu.mintoners.ui.adapter.HomeRecentGameAdapter
 import com.kuneosu.mintoners.ui.customview.FeedbackDialog
 import com.kuneosu.mintoners.ui.decoration.LeftOffsetDecoration
+import com.kuneosu.mintoners.ui.view.InstructionActivity
 import com.kuneosu.mintoners.ui.view.MatchActivity
 import com.kuneosu.mintoners.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +40,7 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var homeRecentGameAdapter: HomeRecentGameAdapter
     private lateinit var sendTextMessageLauncher: ActivityResultLauncher<Intent>
-    val pendingMessage: String? =null
+    val pendingMessage: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,11 +75,16 @@ class HomeFragment : Fragment() {
 
         homeRecentGameAdapterSetting()
 
+        binding.homeInstructionButton.setOnClickListener {
+            val intent = Intent(requireContext(), InstructionActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.homeKdkMatchCard.setOnClickListener {
             // start MatchActivity
             val intent = Intent(requireContext(), MatchActivity::class.java)
             intent.putExtra("matchNumber", 0)
-            intent.putExtra("isFreeMatch", false)
+            intent.putExtra("matchMode", 0)
             startActivity(intent)
         }
 

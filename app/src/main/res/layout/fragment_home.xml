@@ -46,6 +46,7 @@
                 android:layout_marginHorizontal="@dimen/margin_default"
                 android:visibility="visible"
                 app:layout_constraintTop_toBottomOf="@id/home_title">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -64,7 +65,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:shadowColor="#40000000"
@@ -76,6 +76,7 @@
                     android:textColor="@color/white"
                     android:textSize="34sp"
                     android:textStyle="bold"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -200,6 +201,19 @@
                 android:layout_marginTop="@dimen/margin_small"
                 app:layout_constraintTop_toBottomOf="@id/home_recent_game_title" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/home_instruction_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default"
+                android:background="@drawable/match_sub_button"
+                android:padding="@dimen/padding_medium"
+                android:text="사용설명 보러가기"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_medium"
+                app:layout_constraintEnd_toEndOf="@id/home_kdk_match_card"
+                app:layout_constraintTop_toBottomOf="@id/home_recent_game_recycler" />
+
             <!-- Match Making -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/home_kdk_match_card"
@@ -208,7 +222,7 @@
                 android:layout_margin="@dimen/margin_default"
                 app:cardCornerRadius="@dimen/card_corner_radius"
                 app:cardElevation="@dimen/card_corner_radius"
-                app:layout_constraintTop_toBottomOf="@id/home_recent_game_recycler">
+                app:layout_constraintTop_toBottomOf="@id/home_instruction_button">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -238,20 +252,20 @@
                         android:id="@+id/lotti"
                         android:layout_width="140dp"
                         android:layout_height="140dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:lottie_autoPlay="true"
                         app:lottie_loop="true"
                         app:lottie_rawRes="@raw/tournament_animation"
-                        app:lottie_repeatCount="2"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:lottie_repeatCount="2" />
 
                     <ImageView
-                        android:visibility="gone"
                         android:layout_width="@dimen/image_view_size"
                         android:layout_height="@dimen/image_view_size"
                         android:contentDescription="@string/match_card_image"
                         android:src="@drawable/tournament"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -308,14 +322,14 @@
                 android:id="@+id/home_copy_right"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xlarge"
                 android:text="@string/copy_right"
                 android:textAlignment="center"
                 android:textColor="@color/trans_black_50"
-                android:layout_marginTop="@dimen/margin_xlarge"
-                app:layout_constraintTop_toBottomOf="@+id/home_free_match_card"
                 app:layout_constraintBottom_toTopOf="@id/home_bottom_space"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/home_free_match_card" />
 
             <View
                 android:id="@+id/home_bottom_space"
