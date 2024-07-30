@@ -341,4 +341,7 @@ July 2024 Personal project, match table creation and management application
         - MatchActivity 에서 matchMode 에 따라 KDK 대진표, 자유 대진표로 분기
     - Game 프래그먼트에서 추가 버튼 스와이프 시 앱이 종료되는 문제 발견
         - SimpleSwipeHelperCallback 에서 마지막 아이템은 스와이프 되지 않도록 설정
-
+- **사용 설명 웹뷰 추가**
+  - Notion 에 사용 가이드 라인을 작성한 후 웹뷰로 연결
+  - Home 프래그먼트에 사용 설명 웹뷰로 이동할 수 있는 버튼 추가
+    
