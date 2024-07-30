@@ -359,6 +359,11 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
 
 
     override fun onSwiped(position: Int) {
-        deleteGame(currentList[position])
+        if (position < currentList.size) {
+            deleteGame(currentList[position])
+        } else {
+            // 마지막 아이템이면 스와이프 동작 무시
+            notifyItemChanged(position)
+        }
     }
 }
