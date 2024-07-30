@@ -344,4 +344,7 @@ July 2024 Personal project, match table creation and management application
 - **사용 설명 웹뷰 추가**
   - Notion 에 사용 가이드 라인을 작성한 후 웹뷰로 연결
   - Home 프래그먼트에 사용 설명 웹뷰로 이동할 수 있는 버튼 추가
+- **Small Update**
+  - Google Play Console 접근성 문제 : 대비 문제 해결
+    - 앱 실행 시 DarkMode 가 작동하지 않도록 설정
     
