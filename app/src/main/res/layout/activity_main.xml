@@ -32,8 +32,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_medium"
-            app:itemBackground="@color/white"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/bottom_navigation"
+            app:itemBackground="@color/white"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/menu_bottom_nav" />
     </com.google.android.material.bottomappbar.BottomAppBar>
@@ -47,7 +48,6 @@
         android:contentDescription="@string/app_title"
         android:focusable="true"
         android:src="@drawable/splash_logo"
-
         android:theme="@style/BottomAppBar"
         app:layout_anchor="@id/main_bottom_appBar" />
 

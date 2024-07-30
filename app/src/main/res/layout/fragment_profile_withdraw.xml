@@ -3,10 +3,12 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profile_withdraw"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    tools:ignore="HardcodedText"
     android:visibility="visible">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -154,6 +156,7 @@
                 app:layout_constraintTop_toBottomOf="@id/profile_withdraw_reason3" />
 
             <EditText
+                android:autofillHints="0"
                 android:id="@+id/profile_withdraw_reason_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -173,6 +176,7 @@
                 android:layout_marginTop="@dimen/margin_2xlarge"
                 android:background="@drawable/match_withdraw_button"
                 android:text="회원 탈퇴"
+                android:contentDescription="회원 탈퇴 버튼"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_large"
                 app:layout_constraintTop_toBottomOf="@+id/profile_withdraw_reason_input" />

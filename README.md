@@ -347,5 +347,6 @@ July 2024 Personal project, match table creation and management application
 - **Small Update**
   - Google Play Console 접근성 문제 : 대비 문제 해결
     - 앱 실행 시 DarkMode 가 작동하지 않도록 설정
-  - GameFragment 버튼 문구 변경 : "생성" -> "초기화"
+  - GameFragment 버튼 문구 변경 : "생성" -> "초기화" 
+  - Google Play Console 접근성 문제 : 콘텐츠 라벨 지정, HardCorded Text 일부 수정
     

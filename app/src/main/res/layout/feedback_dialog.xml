@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:background="@color/main"
             android:padding="@dimen/padding_medium"
-            android:text="불편사항/피드백 보내기"
+            android:text="@string/feedback_title"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/text_xlarge"
@@ -40,17 +40,20 @@
                 android:id="@+id/feedback_dialog_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/home_card_height"
+                android:autofillHints="@string/feedback_hint"
                 android:background="@drawable/match_edittext"
-                android:hint="불편사항/피드백을 입력해주세요."
+                android:hint="@string/feedback_hint"
                 android:inputType="textMultiLine"
                 android:padding="@dimen/padding_medium"
+                android:textColor="@color/black"
+                android:text="@string/feedback_hint"
                 android:textSize="@dimen/text_medium" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
-                android:text="불편을 겪었거나 추가/개선 되었으면\n하는 부분이 있다면 자유롭게 작성해주세요."
+                android:text="@string/feedback_instruction"
                 android:textAlignment="center" />
 
         </LinearLayout>
@@ -80,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="@dimen/padding_medium"
-                android:text="닫기"
+                android:text="@string/close"
                 android:textAlignment="center"
                 android:textColor="@color/negative"
                 android:textSize="@dimen/text_large" />
@@ -97,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="@dimen/padding_medium"
-                android:text="보내기"
+                android:text="@string/send"
                 android:textAlignment="center"
                 android:textColor="@color/main"
                 android:textSize="@dimen/text_large" />
