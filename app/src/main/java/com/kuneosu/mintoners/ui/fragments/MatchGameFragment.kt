@@ -86,7 +86,7 @@ class MatchGameFragment : Fragment() {
         binding.matchGameRecyclerView.layoutManager = LinearLayoutManager(context)
 
         matchViewModel.games.observe(viewLifecycleOwner, Observer {
-            if (matchViewModel.isFreeMatch.value == false) {
+            if (matchViewModel.matchMode.value == 0) {
                 if (it.isEmpty()) {
                     matchViewModel.generateGames()
                 }

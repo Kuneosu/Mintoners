@@ -83,7 +83,7 @@ class MatchInfoFragment : Fragment() {
     }
 
     private fun hideUIbyIsFreeMatch() {
-        if (matchViewModel.isFreeMatch.value == true) {
+        if (matchViewModel.matchMode.value == 1) {
             binding.matchInfoGameCountTitle.visibility = View.INVISIBLE
             binding.matchInfoGameCountInput.visibility = View.INVISIBLE
             binding.matchInfoGameCountNumber.visibility = View.INVISIBLE
@@ -225,7 +225,8 @@ class MatchInfoFragment : Fragment() {
                 matchCount = matchCountInput,
                 matchType = matchTypeInput,
                 matchPlayers = emptyList(),
-                matchList = emptyList()
+                matchList = emptyList(),
+                matchMode = matchViewModel.matchMode.value!!
             )
             matchViewModel.createMatch(match)
         } else {

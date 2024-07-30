@@ -86,7 +86,7 @@ class HomeFragment : Fragment() {
             // start MatchActivity
             val intent = Intent(requireContext(), MatchActivity::class.java)
             intent.putExtra("matchNumber", 0)
-            intent.putExtra("isFreeMatch", true)
+            intent.putExtra("matchMode", 1)
             startActivity(intent)
         }
 

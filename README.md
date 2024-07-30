@@ -330,3 +330,13 @@ July 2024 Personal project, match table creation and management application
     - NestedScrollView, 0dp -> wrap_content로 변경
   - "StringIndexOutOfBoundsException" 오류 해결
     - MatchInfoFragment 에서 문자열 길이를 검사하여 예외 방지
+
+## 2024.07.30
+
+- **버그 발견**
+  - 자유 대진표 생성 후 최근 경기를 통해 재접근 시 KDK 대진표로 인식되는 문제 발견
+    - isFreeMatch 삭제
+    - Match 데이터 클래스에 matchMode 멤버 변수 추가
+    - MatchActivity 에서 matchMode 에 따라 KDK 대진표, 자유 대진표로 분기
+  - Game 프래그먼트에서 추가 버튼 스와이프 시 앱이 종료되는 문제 발견
+

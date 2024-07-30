@@ -85,7 +85,7 @@ class MatchPlayerFragment : Fragment() {
             matchViewModel.applyPlayerList()
         }
         binding.matchPlayerNextButton.setOnClickListener {
-            if (matchViewModel.isFreeMatch.value!!) {
+            if (matchViewModel.matchMode.value!! == 1) {
                 findNavController().navigate(R.id.action_matchPlayerFragment_to_matchGameFragment)
                 matchViewModel.updateMatchState(2)
                 matchViewModel.applyPlayerList()
