@@ -32,11 +32,11 @@ class MatchActivity : AppCompatActivity() {
     private fun matchNumberSetting() {
         val matchNumber = intent.getIntExtra("matchNumber", 0)
         val matchState = intent.getIntExtra("matchState", 0)
-        val isFreeMatch = intent.getBooleanExtra("isFreeMatch", false)
+        val matchMode = intent.getIntExtra("matchMode", 0)
 
         matchViewModel.setMatchNumber(matchNumber)
         matchViewModel.setMatchState(matchState)
-        matchViewModel.setIsFreeMatch(isFreeMatch)
+        matchViewModel.setMatchMode(matchMode)
 
     }
 

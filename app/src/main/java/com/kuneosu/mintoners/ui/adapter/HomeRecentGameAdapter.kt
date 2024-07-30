@@ -69,9 +69,8 @@ class HomeRecentGameAdapter(private val homeViewModel: HomeViewModel) :
             binding.recentGameInfo.setOnClickListener {
                 val intent = Intent(binding.root.context, MatchActivity::class.java)
                 intent.putExtra("matchNumber", match.matchNumber)
-                Log.d("matchState", "matchNumber: ${match.matchNumber}")
-                Log.d("matchState", "matchState: ${match.matchState}")
                 intent.putExtra("matchState", match.matchState)
+                intent.putExtra("matchMode", match.matchMode)
                 binding.root.context.startActivity(intent)
             }
 

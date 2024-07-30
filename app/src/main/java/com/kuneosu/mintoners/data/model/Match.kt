@@ -17,5 +17,6 @@ data class Match(
     val matchType: String,
     var matchPlayers: List<Player>,
     var matchList: List<Game>,
-    var matchState: Int = 0
+    var matchState: Int = 0,
+    var matchMode : Int = 0
 )

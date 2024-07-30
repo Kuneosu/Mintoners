@@ -27,8 +27,8 @@ class MatchViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    private val _isFreeMatch = MutableLiveData<Boolean>()
-    val isFreeMatch: LiveData<Boolean> get() = _isFreeMatch
+    private val _matchMode = MutableLiveData<Int>()
+    val matchMode: LiveData<Int> get() = _matchMode
 
     private val _updateCount = MutableLiveData<Int>()
     val updateCount: LiveData<Int> get() = _updateCount
@@ -38,7 +38,6 @@ class MatchViewModel @Inject constructor(
 
     private val _matchState = MutableLiveData<Int>()
     val matchState: LiveData<Int> get() = _matchState
-
 
     private val _match = MutableLiveData<Match>()
     val match: LiveData<Match> get() = _match
@@ -59,7 +58,7 @@ class MatchViewModel @Inject constructor(
         _matchNumber.value = 0
         _matchState.value = 0
         _updateCount.value = 0
-        _isFreeMatch.value = false
+        _matchMode.value = 0
     }
 
     fun updateMatchCount() {
@@ -452,7 +451,9 @@ class MatchViewModel @Inject constructor(
         applyGameList()
     }
 
-    fun setIsFreeMatch(freeMatch: Boolean) {
-        _isFreeMatch.value = freeMatch
+    fun setMatchMode(matchMode: Int) {
+        _matchMode.value = matchMode
     }
+
+
 }

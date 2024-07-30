@@ -16,8 +16,11 @@ class SimpleSwipeHelperCallback(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
     ): Int {
+        val position = viewHolder.adapterPosition
+        val itemCount = recyclerView.adapter?.itemCount ?: 0
+
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
-        val swipeFlags = swipeDirection
+        val swipeFlags = if(position == itemCount - 1) 0 else swipeDirection
 
         return if (swipeDirection == ItemTouchHelper.LEFT) makeMovementFlags(dragFlags, swipeFlags)
         else makeMovementFlags(dragFlags, 0)

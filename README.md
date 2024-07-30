@@ -291,42 +291,54 @@ July 2024 Personal project, match table creation and management application
     - PlayerFragment Empty 버튼 제거, 입력 시에도 제거할 수 있도록 제거 버튼 제공
 
 ## 2024.07.25
-- **Recycler View 아이템 추가 시 Scroll 이동**
-  - HomeFragment 에서 Sync 버튼을 누를 시 아이템이 추가 되고 리사이클러뷰 스크롤이 가장 앞으로 이동
-  - MatchPlayerFragment 에서 선수 추가 시 전체 스크롤이 가장 아래로 이동
-  - MatchGameFragment 에서 게임 추가 시 전체 스크롤이 가장 아래로 이동
-  - 선수 추가 시에만 스크롤이 이동하도록 설정
-- **Lottie Animation View 추가**
-  - HomeFragment 에서 KDK 대진표 생성 로고 이미지를 Lottie 로 교체
-  - PlayerFragment 에서 인원 수가 잘못 되었을 경우 경고 Toast 메시지를 Dialog 로 교체.(Lottie 사용)
-- **자유 대진 생성 메뉴 추가**
-  - KDK 형식에 구애받지 않고 자유롭게 대진표를 생성할 수 있는 메뉴 카드 추가\
-  - isFreeMatch Intent 를 통해 MatchActivity 에서 경로 판별
-  - isFreeMatch 를 ViewModel 에 저장하고 Fragment 에서 사용
-  - isFreeMatch 가 true 일 경우 경기수 입력 X, 인원 수 제한 X, 자동 게임 생성 X
-  - isFreeMatch 가 true 여도 생성 버튼을 통해 대진표 생성은 가능.
-- **GameFragment 선수 변경 목록화**
-  - MatchGameItem 의 EditText 를 모두 TextView 로 변경
-  - MatchGameItem 의 TextView 를 클릭 시 팝업 메뉴로 선수 변경 가능
-  - 선수 변경 시 해당 선수로 대진표 및 순위 업데이트
-  
-- **Small Update**
-  - MatchInfoFragment 의 1인당 경기 수 주의 사항을 Toast 메시지에서 Dialog 로 변경
-  - MatchPlayerFragment 에서 선수 삭제 후 포커스가 두 단계씩 뛰는 문제 해결 (position->adapterPosition)
-  - MatchMainListFragment 에서 잠금 시 잠금 아이콘 표시
-  - EditText 커서 색상 변경
-  - TabLayout Tab 이 변경될 때마다 ViewPager 높이 계산
 
-- **Beta Release 1.0.0-beta.4** 
-  - 저작권 표시
-  - Feedback Eamil 보내기 추가.
+- **Recycler View 아이템 추가 시 Scroll 이동**
+    - HomeFragment 에서 Sync 버튼을 누를 시 아이템이 추가 되고 리사이클러뷰 스크롤이 가장 앞으로 이동
+    - MatchPlayerFragment 에서 선수 추가 시 전체 스크롤이 가장 아래로 이동
+    - MatchGameFragment 에서 게임 추가 시 전체 스크롤이 가장 아래로 이동
+    - 선수 추가 시에만 스크롤이 이동하도록 설정
+- **Lottie Animation View 추가**
+    - HomeFragment 에서 KDK 대진표 생성 로고 이미지를 Lottie 로 교체
+    - PlayerFragment 에서 인원 수가 잘못 되었을 경우 경고 Toast 메시지를 Dialog 로 교체.(Lottie 사용)
+- **자유 대진 생성 메뉴 추가**
+    - KDK 형식에 구애받지 않고 자유롭게 대진표를 생성할 수 있는 메뉴 카드 추가\
+    - isFreeMatch Intent 를 통해 MatchActivity 에서 경로 판별
+    - isFreeMatch 를 ViewModel 에 저장하고 Fragment 에서 사용
+    - isFreeMatch 가 true 일 경우 경기수 입력 X, 인원 수 제한 X, 자동 게임 생성 X
+    - isFreeMatch 가 true 여도 생성 버튼을 통해 대진표 생성은 가능.
+- **GameFragment 선수 변경 목록화**
+    - MatchGameItem 의 EditText 를 모두 TextView 로 변경
+    - MatchGameItem 의 TextView 를 클릭 시 팝업 메뉴로 선수 변경 가능
+    - 선수 변경 시 해당 선수로 대진표 및 순위 업데이트
+
+- **Small Update**
+    - MatchInfoFragment 의 1인당 경기 수 주의 사항을 Toast 메시지에서 Dialog 로 변경
+    - MatchPlayerFragment 에서 선수 삭제 후 포커스가 두 단계씩 뛰는 문제 해결 (position->adapterPosition)
+    - MatchMainListFragment 에서 잠금 시 잠금 아이콘 표시
+    - EditText 커서 색상 변경
+    - TabLayout Tab 이 변경될 때마다 ViewPager 높이 계산
+
+- **Beta Release 1.0.0-beta.4**
+    - 저작권 표시
+    - Feedback Eamil 보내기 추가.
 
 ## 2024.07.29
 
 - **Play Console 발견 오류 해결**
-  - Null check 오류 수정 (MatchViewModel)
+    - Null check 오류 수정 (MatchViewModel)
 - **Firebase Test Lab 오류 해결**
-  - "IllegalArgumentException: parameter must be a descendant of this view" 오류 해결
-    - NestedScrollView, 0dp -> wrap_content로 변경
-  - "StringIndexOutOfBoundsException" 오류 해결
-    - MatchInfoFragment 에서 문자열 길이를 검사하여 예외 방지
+    - "IllegalArgumentException: parameter must be a descendant of this view" 오류 해결
+        - NestedScrollView, 0dp -> wrap_content로 변경
+    - "StringIndexOutOfBoundsException" 오류 해결
+        - MatchInfoFragment 에서 문자열 길이를 검사하여 예외 방지
+
+## 2024.07.30
+
+- **버그 발견**
+    - 자유 대진표 생성 후 최근 경기를 통해 재접근 시 KDK 대진표로 인식되는 문제 발견
+        - isFreeMatch 삭제
+        - Match 데이터 클래스에 matchMode 멤버 변수 추가
+        - MatchActivity 에서 matchMode 에 따라 KDK 대진표, 자유 대진표로 분기
+    - Game 프래그먼트에서 추가 버튼 스와이프 시 앱이 종료되는 문제 발견
+        - SimpleSwipeHelperCallback 에서 마지막 아이템은 스와이프 되지 않도록 설정
+
