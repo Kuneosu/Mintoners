@@ -1,36 +1,24 @@
 package com.kuneosu.mintoners.ui.fragments
 
-import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kuneosu.mintoners.R
-import com.kuneosu.mintoners.data.local.database.AppDatabase
-import com.kuneosu.mintoners.data.model.Game
-import com.kuneosu.mintoners.data.model.Match
-import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.FragmentHomeBinding
 import com.kuneosu.mintoners.ui.adapter.HomeRecentGameAdapter
-import com.kuneosu.mintoners.ui.customview.FeedbackDialog
 import com.kuneosu.mintoners.ui.decoration.LeftOffsetDecoration
 import com.kuneosu.mintoners.ui.view.InstructionActivity
 import com.kuneosu.mintoners.ui.view.MatchActivity
 import com.kuneosu.mintoners.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.coroutineScope
-import java.util.Date
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -48,10 +36,6 @@ class HomeFragment : Fragment() {
         // 데이터 바인딩 객체를 인플레이트합니다
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        binding.homeCardGuest.setOnClickListener {
-            val dialog = FeedbackDialog()
-            dialog.show(childFragmentManager, "FeedbackDialog")
-        }
 
         binding.homeSwipeRefresh.setOnRefreshListener {
             homeRefresh()
@@ -117,8 +101,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun updateMatchList() {
-    }
 
     private fun updateBottomNavigationView(menuItemId: Int) {
         val bottomNavigationView =

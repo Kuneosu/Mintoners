@@ -27,7 +27,7 @@
                 <View
                     android:id="@+id/home_top_view"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/home_top_view_height"
+                    android:layout_height="180dp"
                     android:background="@color/main"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -38,148 +38,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_default"
-                    android:text="@string/home_title"
+                    android:text="@string/app_name"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_2xlarge"
+                    android:fontFamily="@font/logo_bold"
                     app:layout_constraintStart_toStartOf="@id/home_top_view"
                     app:layout_constraintTop_toTopOf="@+id/home_top_view" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/home_card_guest"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/home_card_height"
-                    android:layout_marginHorizontal="@dimen/margin_default"
-                    android:visibility="visible"
-                    app:layout_constraintTop_toBottomOf="@id/home_title">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:shadowColor="#40000000"
-                        android:shadowDx="2"
-                        android:shadowDy="4"
-                        android:shadowRadius="6"
-                        android:text="@string/beta_logo"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_large"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:shadowColor="#40000000"
-                        android:shadowDx="2"
-                        android:shadowDy="4"
-                        android:shadowRadius="6"
-                        android:text="@string/guest_login"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="34sp"
-                        android:textStyle="bold"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <!-- Home CARD -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/home_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/home_card_height"
-                    android:layout_marginHorizontal="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@id/home_card_guest">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/home_card_height"
-                        android:orientation="vertical"
-                        app:layout_constraintStart_toStartOf="@id/home_card"
-                        app:layout_constraintTop_toTopOf="@id/home_card">
-
-                        <TextView
-                            android:id="@+id/home_card_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/margin_xsmall"
-                            android:shadowColor="#40000000"
-                            android:shadowDx="2"
-                            android:shadowDy="4"
-                            android:shadowRadius="6"
-                            android:text="@string/example_name"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_xlarge" />
-
-                        <TextView
-                            android:id="@+id/home_card_grade"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/margin_xsmall"
-                            android:shadowColor="#40000000"
-                            android:shadowDx="2"
-                            android:shadowDy="4"
-                            android:shadowRadius="6"
-                            android:text="@string/example_grade"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_xlarge" />
-
-                        <TextView
-                            android:id="@+id/home_card_club"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/margin_xsmall"
-                            android:shadowColor="#40000000"
-                            android:shadowDx="2"
-                            android:shadowDy="4"
-                            android:shadowRadius="6"
-                            android:text="@string/example_club"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_xlarge" />
-                    </LinearLayout>
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/home_card_image"
-                        android:layout_width="@dimen/image_view_size"
-                        android:layout_height="@dimen/image_view_size"
-                        android:clipChildren="true"
-                        android:contentDescription="@string/home_card_image"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/rounded_corner_radius"
-                        app:cardElevation="@dimen/card_elevation"
-                        app:layout_constraintBottom_toBottomOf="@id/home_card"
-                        app:layout_constraintEnd_toEndOf="@id/home_card"
-                        app:layout_constraintTop_toTopOf="@id/home_card">
-
-                        <ImageView
-                            android:layout_width="@dimen/image_view_size"
-                            android:layout_height="@dimen/image_view_size"
-                            android:contentDescription="@string/home_card_image"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/cat" />
-                    </androidx.cardview.widget.CardView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/home_recent_game_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_default"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingVertical="@dimen/margin_xsmall"
                     android:paddingStart="@dimen/margin_small"
                     android:paddingEnd="@dimen/margin_default"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/home_card"
+                    app:layout_constraintTop_toBottomOf="@id/home_title"
                     tools:ignore="UseCompoundDrawables">
 
                     <TextView
@@ -268,16 +146,6 @@
                             app:lottie_loop="true"
                             app:lottie_rawRes="@raw/tournament_animation"
                             app:lottie_repeatCount="2" />
-
-                        <ImageView
-                            android:layout_width="@dimen/image_view_size"
-                            android:layout_height="@dimen/image_view_size"
-                            android:contentDescription="@string/match_card_image"
-                            android:src="@drawable/tournament"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
