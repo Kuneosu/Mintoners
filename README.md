@@ -380,3 +380,5 @@ July 2024 Personal project, match table creation and management application
   - SettingFragment/NoticeFragment Top bar 색상 변경
   - HomeRecentGameCard 에 게임이 없을 경우 EmptyCard 출력
   - HomeFragment 사용법 버튼 위치 수정
+
+- **Release 1.0.0**
