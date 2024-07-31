@@ -195,26 +195,13 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/home_copy_right"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_xlarge"
-                    android:text="@string/copy_right"
-                    android:textAlignment="center"
-                    android:textColor="@color/trans_black_50"
-                    app:layout_constraintBottom_toTopOf="@id/home_bottom_space"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/home_free_match_card" />
-
                 <View
                     android:id="@+id/home_bottom_space"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_default"
                     android:background="@color/transparent"
 
-                    app:layout_constraintTop_toBottomOf="@+id/home_copy_right" />
+                    app:layout_constraintTop_toBottomOf="@+id/home_free_match_card" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

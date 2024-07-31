@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -39,10 +40,12 @@ class NoticeFragment : Fragment() {
 
         adapter = NoticeAdapter()
         adapter.submitList(noticeList)
+        fetchNotices()
+
         binding.noticeRecyclerView.adapter = adapter
         binding.noticeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        fetchNotices()
+
 
         binding.noticeBackButton.setOnClickListener {
             findNavController().popBackStack()
@@ -52,6 +55,7 @@ class NoticeFragment : Fragment() {
     }
 
     private fun fetchNotices() {
+        binding.noticeLoadingAnimation.visibility = View.VISIBLE
         val apiService = RetrofitClient.getClient("https://api.github.com/")
             .create(GitHubApiService::class.java)
         val call = apiService.getFiles("Kuneosu", "Mintoners", "Notices")
@@ -68,7 +72,8 @@ class NoticeFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<GitHubFile>>, t: Throwable) {
-                Log.d("NoticeFragment", "onFailure: ${t.message}")
+                binding.noticeLoadingAnimation.visibility = View.GONE
+                Toast.makeText(requireContext(), "공지사항을 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -80,6 +85,7 @@ class NoticeFragment : Fragment() {
         call.enqueue(object : Callback<GitHubFile> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(call: Call<GitHubFile>, response: Response<GitHubFile>) {
+                binding.noticeLoadingAnimation.visibility = View.GONE
                 if (response.isSuccessful) {
                     val file = response.body()
                     val content = String(Base64.decode(file?.content, Base64.DEFAULT))
@@ -90,7 +96,8 @@ class NoticeFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<GitHubFile>, t: Throwable) {
-                Log.d("NoticeFragment", "onFailure: ${t.message}")
+                binding.noticeLoadingAnimation.visibility = View.GONE
+                Toast.makeText(requireContext(), "공지사항을 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
             }
         })
     }
