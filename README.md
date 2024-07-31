@@ -372,3 +372,9 @@ July 2024 Personal project, match table creation and management application
     - Navigation 연결 완료
     - 프로젝트에 Notices 폴더 생성 및 Notice json 파일 생성
     - Github 의 Notices 로 부터 json 파일을 읽어와 어댑터에 반환하는 Retrofit2 API 생성
+    - 공지사항을 불러오는 동안 lottie 를 통해 로딩 화면 출력
+
+- **Small Update**
+  - 저작권 표시 SettingFragment 로 이동
+  - SettingFragment Title 변경 (Mintoners -> 설정)
+  - SettingFragment/NoticeFragment Top bar 색상 변경
