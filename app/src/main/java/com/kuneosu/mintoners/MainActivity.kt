@@ -88,54 +88,12 @@ class MainActivity : AppCompatActivity() {
         when (binding.mainContainer.findNavController().currentDestination?.id) {
             R.id.homeFragment -> {
                 binding.mainContainer.findNavController()
-                    .navigate(R.id.action_homeFragment_to_profileMainFragment)
+                    .navigate(R.id.action_homeFragment_to_settingsFragment)
             }
 
-            R.id.profileMainFragment -> {
+            R.id.settingsFragment -> {
                 binding.mainContainer.findNavController()
-                    .navigate(R.id.action_profileMainFragment_to_homeFragment)
-            }
-
-            R.id.profileRegisterFragment -> {
-                when (item.itemId) {
-                    R.id.menu_home -> {
-                        binding.mainContainer.findNavController()
-                            .navigate(R.id.action_profileRegisterFragment_to_homeFragment)
-                    }
-
-                    R.id.menu_profile -> {
-                        binding.mainContainer.findNavController()
-                            .navigate(R.id.action_profileRegisterFragment_to_profileMainFragment)
-                    }
-                }
-            }
-
-            R.id.profilePersonalFragment -> {
-                when (item.itemId) {
-                    R.id.menu_home -> {
-                        binding.mainContainer.findNavController()
-                            .navigate(R.id.action_profilePersonalFragment_to_homeFragment)
-                    }
-
-                    R.id.menu_profile -> {
-                        binding.mainContainer.findNavController()
-                            .navigate(R.id.action_profilePersonalFragment_to_profileMainFragment)
-                    }
-                }
-            }
-
-            R.id.profileWithdrawFragment -> {
-                when (item.itemId) {
-                    R.id.menu_home -> {
-                        binding.mainContainer.findNavController()
-                            .navigate(R.id.action_profileWithdrawFragment_to_homeFragment)
-                    }
-
-                    R.id.menu_profile -> {
-                        binding.mainContainer.findNavController()
-                            .navigate(R.id.action_profileWithdrawFragment_to_profileMainFragment)
-                    }
-                }
+                    .navigate(R.id.action_settingsFragment_to_homeFragment)
             }
         }
         return false

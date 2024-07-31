@@ -342,18 +342,27 @@ July 2024 Personal project, match table creation and management application
     - Game 프래그먼트에서 추가 버튼 스와이프 시 앱이 종료되는 문제 발견
         - SimpleSwipeHelperCallback 에서 마지막 아이템은 스와이프 되지 않도록 설정
 - **사용 설명 웹뷰 추가**
-  - Notion 에 사용 가이드 라인을 작성한 후 웹뷰로 연결
-  - Home 프래그먼트에 사용 설명 웹뷰로 이동할 수 있는 버튼 추가
+    - Notion 에 사용 가이드 라인을 작성한 후 웹뷰로 연결
+    - Home 프래그먼트에 사용 설명 웹뷰로 이동할 수 있는 버튼 추가
 - **Small Update**
-  - Google Play Console 접근성 문제 : 대비 문제 해결
-    - 앱 실행 시 DarkMode 가 작동하지 않도록 설정
-  - GameFragment 버튼 문구 변경 : "생성" -> "초기화" 
-  - Google Play Console 접근성 문제 : 콘텐츠 라벨 지정, HardCorded Text 일부 수정
-    
+    - Google Play Console 접근성 문제 : 대비 문제 해결
+        - 앱 실행 시 DarkMode 가 작동하지 않도록 설정
+    - GameFragment 버튼 문구 변경 : "생성" -> "초기화"
+    - Google Play Console 접근성 문제 : 콘텐츠 라벨 지정, HardCorded Text 일부 수정
+
 ## 2024.07.31
 
 - **버그 수정**
-  - MatchInfoFragment 에서 승점, 경기 수 값을 할당 해주지 않아서 발생 하던 오류 수정
-    - 제목, 대회일자, 승점, 경기 수, 경기 타입 모두 입력 값이 없을 경우 기본 값을 할당
+    - MatchInfoFragment 에서 승점, 경기 수 값을 할당 해주지 않아서 발생 하던 오류 수정
+        - 제목, 대회일자, 승점, 경기 수, 경기 타입 모두 입력 값이 없을 경우 기본 값을 할당
 - SwipeRefreshLayout 도입
-  - HomeFragment 와 MatchMainFragment 에 SwipeRefreshLayout 도입
+    - HomeFragment 와 MatchMainFragment 에 SwipeRefreshLayout 도입
+
+- **대규모 변경**
+  - HomeFragment UI 수정
+    - 피드백 메시지, 로그인 텍스트, 홈 텍스트 를 제거하고 앱 로고 추가
+  - Profile Page 삭제 (ProfileMain, ProfilePersonal, ProfileRegister, ProfileWithdraw 모두 제거)
+  - Settings Fragment 추가.
+    - 앱 설정 변경, 공지사항, 문의/제휴 메뉴 추가 (문의/제휴 메뉴를 통해 피드백 메일 전송 가능)
+    - 앱 버전 출력
+  - Splash 실행 시간 조정 (750 -> 300)
