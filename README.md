@@ -378,3 +378,4 @@ July 2024 Personal project, match table creation and management application
   - 저작권 표시 SettingFragment 로 이동
   - SettingFragment Title 변경 (Mintoners -> 설정)
   - SettingFragment/NoticeFragment Top bar 색상 변경
+  - HomeRecentGameCard 에 게임이 없을 경우 EmptyCard 출력

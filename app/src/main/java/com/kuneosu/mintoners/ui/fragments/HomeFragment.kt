@@ -58,6 +58,13 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.homeRecentEmptyCard.setOnClickListener {
+            val intent = Intent(requireContext(), MatchActivity::class.java)
+            intent.putExtra("matchNumber", 0)
+            intent.putExtra("matchMode", 0)
+            startActivity(intent)
+        }
+
         binding.homeKdkMatchCard.setOnClickListener {
             // start MatchActivity
             val intent = Intent(requireContext(), MatchActivity::class.java)
@@ -97,15 +104,15 @@ class HomeFragment : Fragment() {
         binding.homeRecentGameRecycler.layoutManager = layoutManager
         binding.homeRecentGameRecycler.addItemDecoration(LeftOffsetDecoration(120))
         homeViewModel.matches.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.homeRecentEmptyCard.visibility = View.VISIBLE
+                binding.homeRecentGameRecycler.visibility = View.INVISIBLE
+            } else {
+                binding.homeRecentEmptyCard.visibility = View.GONE
+                binding.homeRecentGameRecycler.visibility = View.VISIBLE
+            }
             homeRecentGameAdapter.submitList(it)
         }
-    }
-
-
-    private fun updateBottomNavigationView(menuItemId: Int) {
-        val bottomNavigationView =
-            activity?.findViewById<BottomNavigationView>(R.id.main_bottom_nav)
-        bottomNavigationView?.selectedItemId = menuItemId
     }
 
     override fun onDestroyView() {
