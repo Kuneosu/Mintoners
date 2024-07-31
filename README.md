@@ -370,3 +370,4 @@ July 2024 Personal project, match table creation and management application
 - **Notice Fragment 추가**
     - Notice RecyclerView, NoticeAdapter, notice_item.xml, Notice Data Class 생성
     - Navigation 연결 완료
+    - 프로젝트에 Notices 폴더 생성 및 Notice json 파일 생성
