@@ -37,13 +37,6 @@ class NoticeFragment : Fragment() {
     ): View {
         _binding = FragmentNoticeBinding.inflate(inflater, container, false)
 
-        val noticeList = listOf(
-            Notice(
-                "안녕하세요. Mintoners입니다.",
-                "안녕하세요 Mintoners입니다.\n저희 서비스의 시작에 함께 해주셔서 감사합니다.",
-                "2024-07-31"
-            ),
-        )
         adapter = NoticeAdapter()
         adapter.submitList(noticeList)
         binding.noticeRecyclerView.adapter = adapter
