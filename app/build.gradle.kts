@@ -68,6 +68,7 @@ dependencies {
     ksp("androidx.room:room-compiler:2.6.1")
 
     implementation("com.airbnb.android:lottie:5.0.2")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
 
     implementation(libs.androidx.core.ktx)

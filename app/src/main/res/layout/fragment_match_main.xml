@@ -8,6 +8,7 @@
     android:background="@color/white"
     tools:context=".ui.fragments.MatchMainFragment">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/match_main_top_bar"
         android:layout_width="match_parent"
@@ -50,7 +51,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/match_main_swipe_refresh"
+        app:layout_constraintTop_toBottomOf="@id/match_main_top_bar">
     <androidx.core.widget.NestedScrollView
         android:id="@+id/match_main_scroll_view"
         android:layout_width="match_parent"
@@ -161,10 +166,11 @@
                 android:text="@string/end_game"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_large"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/match_main_view_pager" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/match_main_view_pager"
+                android:layout_marginBottom="@dimen/margin_2xlarge"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </com.kuneosu.mintoners.ui.customview.CustomConstraint>

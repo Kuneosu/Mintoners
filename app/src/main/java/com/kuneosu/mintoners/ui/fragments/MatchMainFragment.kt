@@ -66,6 +66,12 @@ class MatchMainFragment : Fragment() {
             matchViewModel.updatePoint(string = "Sync Button")
         }
 
+        binding.matchMainSwipeRefresh.setOnRefreshListener {
+            binding.matchMainSwipeRefresh.isRefreshing = false
+            binding.matchMainTopSync.startAnimation(rotateAnimation)
+            matchViewModel.updatePoint(string = "Swipe Refresh")
+        }
+
         binding.matchMainTopBack.setOnClickListener {
             callback.handleOnBackPressed()
         }

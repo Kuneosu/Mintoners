@@ -350,3 +350,10 @@ July 2024 Personal project, match table creation and management application
   - GameFragment 버튼 문구 변경 : "생성" -> "초기화" 
   - Google Play Console 접근성 문제 : 콘텐츠 라벨 지정, HardCorded Text 일부 수정
     
+## 2024.07.31
+
+- **버그 수정**
+  - MatchInfoFragment 에서 승점, 경기 수 값을 할당 해주지 않아서 발생 하던 오류 수정
+    - 제목, 대회일자, 승점, 경기 수, 경기 타입 모두 입력 값이 없을 경우 기본 값을 할당
+- SwipeRefreshLayout 도입
+  - HomeFragment 와 MatchMainFragment 에 SwipeRefreshLayout 도입
