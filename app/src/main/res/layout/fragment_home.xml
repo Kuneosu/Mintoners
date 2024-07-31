@@ -27,7 +27,7 @@
                 <View
                     android:id="@+id/home_top_view"
                     android:layout_width="0dp"
-                    android:layout_height="180dp"
+                    android:layout_height="200dp"
                     android:background="@color/main"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default"
-                    android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginTop="@dimen/margin_xlarge"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingVertical="@dimen/margin_xsmall"
@@ -130,14 +130,15 @@
                     android:id="@+id/home_instruction_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_default"
-                    android:background="@drawable/match_sub_button"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:background="@drawable/match_main_button"
                     android:padding="@dimen/padding_medium"
                     android:text="@string/go_to_instruction"
-                    android:textColor="@color/main"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/text_medium"
-                    app:layout_constraintEnd_toEndOf="@id/home_kdk_match_card"
-                    app:layout_constraintTop_toBottomOf="@id/home_recent_game_recycler" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- Match Making -->
                 <androidx.cardview.widget.CardView
@@ -148,7 +149,7 @@
                     android:contentDescription="@string/kdk_match_card"
                     app:cardCornerRadius="@dimen/card_corner_radius"
                     app:cardElevation="@dimen/card_corner_radius"
-                    app:layout_constraintTop_toBottomOf="@id/home_instruction_button">
+                    app:layout_constraintTop_toBottomOf="@id/home_recent_game_recycler">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
