@@ -40,13 +40,13 @@
                 android:id="@+id/feedback_dialog_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/home_card_height"
-                android:autofillHints="@string/feedback_hint"
+                android:autofillHints="0"
                 android:background="@drawable/match_edittext"
                 android:hint="@string/feedback_hint"
                 android:inputType="textMultiLine"
                 android:padding="@dimen/padding_medium"
+                android:text=""
                 android:textColor="@color/black"
-                android:text="@string/feedback_hint"
                 android:textSize="@dimen/text_medium" />
 
             <TextView
