@@ -39,6 +39,10 @@ class SettingsFragment : Fragment() {
             dialog.show(childFragmentManager, "FeedbackDialog")
         }
 
+        binding.settingsNoticeItem.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_noticeFragment)
+        }
+
         binding.settingBackButton.setOnClickListener {
             updateBottomNavigationView(R.id.menu_home)
         }

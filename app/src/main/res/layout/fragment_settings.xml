@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="@dimen/bottom_app_bar_height"
-    android:background="#ECEDF1"
+    android:background="@color/light_gray_background"
     tools:context=".ui.fragments.SettingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout

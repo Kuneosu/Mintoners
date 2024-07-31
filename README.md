@@ -359,10 +359,14 @@ July 2024 Personal project, match table creation and management application
     - HomeFragment 와 MatchMainFragment 에 SwipeRefreshLayout 도입
 
 - **대규모 변경**
-  - HomeFragment UI 수정
-    - 피드백 메시지, 로그인 텍스트, 홈 텍스트 를 제거하고 앱 로고 추가
-  - Profile Page 삭제 (ProfileMain, ProfilePersonal, ProfileRegister, ProfileWithdraw 모두 제거)
-  - Settings Fragment 추가.
-    - 앱 설정 변경, 공지사항, 문의/제휴 메뉴 추가 (문의/제휴 메뉴를 통해 피드백 메일 전송 가능)
-    - 앱 버전 출력
-  - Splash 실행 시간 조정 (750 -> 300)
+    - HomeFragment UI 수정
+        - 피드백 메시지, 로그인 텍스트, 홈 텍스트 를 제거하고 앱 로고 추가
+    - Profile Page 삭제 (ProfileMain, ProfilePersonal, ProfileRegister, ProfileWithdraw 모두 제거)
+    - Settings Fragment 추가.
+        - 앱 설정 변경, 공지사항, 문의/제휴 메뉴 추가 (문의/제휴 메뉴를 통해 피드백 메일 전송 가능)
+        - 앱 버전 출력
+    - Splash 실행 시간 조정 (750 -> 300)
+
+- **Notice Fragment 추가**
+    - Notice RecyclerView, NoticeAdapter, notice_item.xml, Notice Data Class 생성
+    - Navigation 연결 완료
