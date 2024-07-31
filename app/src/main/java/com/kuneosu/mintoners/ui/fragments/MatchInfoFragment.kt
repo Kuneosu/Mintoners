@@ -175,14 +175,19 @@ class MatchInfoFragment : Fragment() {
     private fun saveMatchOnNextButtonClicked() {
         binding.matchInfoNextButton.setOnClickListener {
             val points =
-                "${binding.matchInfoScoreWinInput.text}${binding.matchInfoScoreDrawInput.text}${binding.matchInfoScoreLoseInput.text}"
+                if (binding.matchInfoScoreWinInput.text.isEmpty() || binding.matchInfoScoreDrawInput.text.isEmpty() || binding.matchInfoScoreLoseInput.text.isEmpty()) "100"
+                else
+                    "${binding.matchInfoScoreWinInput.text}${binding.matchInfoScoreDrawInput.text}${binding.matchInfoScoreLoseInput.text}"
+            val name = if(binding.matchInfoNameInput.text.isEmpty()) binding.matchInfoNameHintOne.text.toString() else binding.matchInfoNameInput.text.toString()
+            val date = if (binding.matchInfoDateInput.text.toString().isEmpty()) Date() else
+                stringToDate(binding.matchInfoDateInput.text.toString())!!
+            val matchType = if (binding.matchInfoGameTypeDouble.isChecked) "double" else "single"
             onNextClicked(
-                binding.matchInfoNameInput.text.toString(),
-                if (binding.matchInfoDateInput.text.toString().isEmpty()) Date() else
-                    stringToDate(binding.matchInfoDateInput.text.toString())!!,
+                name,
+                date,
                 points,
                 binding.matchInfoGameCountNumber.text.toString().toInt(),
-                if (binding.matchInfoGameTypeDouble.isChecked) "double" else "single"
+                matchType
             )
             findNavController().navigate(R.id.action_matchInfoFragment_to_matchPlayerFragment)
             matchViewModel.setMatchState(1)

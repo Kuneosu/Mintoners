@@ -39,8 +39,6 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var homeRecentGameAdapter: HomeRecentGameAdapter
-    private lateinit var sendTextMessageLauncher: ActivityResultLauncher<Intent>
-    val pendingMessage: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,22 +48,18 @@ class HomeFragment : Fragment() {
         // 데이터 바인딩 객체를 인플레이트합니다
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        val rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.sync_rotate)
-
         binding.homeCardGuest.setOnClickListener {
             val dialog = FeedbackDialog()
             dialog.show(childFragmentManager, "FeedbackDialog")
-//            updateBottomNavigationView(R.id.menu_profile)
+        }
+
+        binding.homeSwipeRefresh.setOnRefreshListener {
+            homeRefresh()
         }
 
         homeViewModel.getAllMatches()
         binding.homeRecentGameTitle.setOnClickListener {
-            binding.homeRecentGameSync.startAnimation(rotateAnimation)
-            homeViewModel.getAllMatches()
-            Handler().postDelayed({
-                binding.homeRecentGameRecycler.smoothScrollToPosition(0)
-            }, 100)
-
+            homeRefresh()
         }
 
         binding.homeKdkMatchCard.setOnLongClickListener {
@@ -98,6 +92,17 @@ class HomeFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun homeRefresh() {
+        val rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.sync_rotate)
+
+        binding.homeRecentGameSync.startAnimation(rotateAnimation)
+        homeViewModel.getAllMatches()
+        Handler().postDelayed({
+            binding.homeSwipeRefresh.isRefreshing = false
+            binding.homeRecentGameRecycler.smoothScrollToPosition(0)
+        }, 100)
     }
 
     private fun homeRecentGameAdapterSetting() {
