@@ -12,4 +12,5 @@
     <color name="datePrimary">#804B89DC</color>
     <color name="dateAccent">@color/main</color>
     <color name="dateArrow">@color/black</color>
+    <color name="light_gray_background">#ECEDF1</color>
 </resources>

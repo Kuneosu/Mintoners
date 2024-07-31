@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -95,6 +96,12 @@ class MainActivity : AppCompatActivity() {
                 binding.mainContainer.findNavController()
                     .navigate(R.id.action_settingsFragment_to_homeFragment)
             }
+
+            R.id.noticeFragment -> {
+                binding.mainContainer.findNavController()
+                    .navigate(R.id.action_noticeFragment_to_homeFragment)
+            }
+
         }
         return false
     }
