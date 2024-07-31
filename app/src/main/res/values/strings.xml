@@ -64,7 +64,7 @@
     <string name="free_match_card_sub_title">친구들과 자유롭게 한 판 !</string>
     <string name="free_match_card_title">자유 대진\n생성하기</string>
     <string name="kdk_match_card">KDK Match Card</string>
-    <string name="go_to_instruction">사용설명 보러가기</string>
+    <string name="go_to_instruction">사용법</string>
     <string name="default_info">기본정보</string>
     <string name="player">참가자</string>
     <string name="make_list">대진표작성</string>
