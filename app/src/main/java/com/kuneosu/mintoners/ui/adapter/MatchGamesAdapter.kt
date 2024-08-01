@@ -1,5 +1,7 @@
 package com.kuneosu.mintoners.ui.adapter
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -81,10 +83,13 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
         matchViewModel.updateGame(game)
     }
 
-    private fun deleteGame(game: Game,position: Int) {
-        matchViewModel.deleteGame(game)
-        matchViewModel.updateGameIndexes()
-        notifyItemRemoved(position)
+    private fun deleteGame(game: Game, position: Int) {
+        Handler(Looper.getMainLooper()).post {
+            matchViewModel.deleteGame(game)
+            matchViewModel.updateGameIndexes()
+            notifyItemRemoved(position)
+        }
+        notifyItemRangeChanged(0, currentList.size+1)
     }
 
     override fun getItemCount(): Int {
@@ -119,6 +124,8 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
         }
 
         fun bind(game: Game) {
+            binding.addGameInfo.visibility = View.GONE
+            binding.matchGameAddDivider.visibility = View.GONE
             if (matchViewModel.match.value?.matchType == "double") {
                 matchTypeDoubleBind(game)
             } else {
@@ -359,12 +366,8 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
 
 
     override fun onSwiped(position: Int) {
-        if (position < currentList.size) {
-            deleteGame(currentList[position],position)
-            Log.d("onDEL", "onSwiped: $position, ${currentList.size}")
-        } else {
-            // 마지막 아이템이면 스와이프 동작 무시
-            Log.d("onDEL", "onSwiped: $position, ${currentList.size}")
-        }
+            Handler(Looper.getMainLooper()).post {
+                deleteGame(currentList[position],position)
+            }
     }
 }

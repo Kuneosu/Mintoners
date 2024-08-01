@@ -391,3 +391,6 @@ July 2024 Personal project, match table creation and management application
         - 난독화 해제 후 재빌드하여 테스트 진행 (해결)
         - Version Code 7 -> 13 으로 변경, Version Name 1.0.0 유지
         - Release 는 비공개 테스트 진행 전까지 당분간 보류
+    - GameFragment 에서 스와이프로 삭제 시 아이템이 가려지거나 add 아이템이 하나 더 생기는 문제 발생 (해결)
+        - notifyItemRemoved(position) 추가
+        - notifyItemRangeChanged(0, currentList.size+1) 추가
