@@ -46,7 +46,6 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
 
     private var fromPosition = -1
     private var toPosition = -1
-    private var selectedName = ""
 
     private fun addGame() {
         val gameIndex = matchViewModel.games.value?.size?.plus(1) ?: 0
@@ -82,10 +81,10 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
         matchViewModel.updateGame(game)
     }
 
-    private fun deleteGame(game: Game) {
+    private fun deleteGame(game: Game,position: Int) {
         matchViewModel.deleteGame(game)
         matchViewModel.updateGameIndexes()
-        notifyItemRangeChanged(0, currentList.size)
+        notifyItemRemoved(position)
     }
 
     override fun getItemCount(): Int {
@@ -103,6 +102,7 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
         if (position < currentList.size) {
             holder.bind(currentList[position])
         } else {
+            Log.d("onDEL", "addBinding : $position, ${currentList.size}")
             holder.add()
         }
     }
@@ -360,10 +360,11 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
 
     override fun onSwiped(position: Int) {
         if (position < currentList.size) {
-            deleteGame(currentList[position])
+            deleteGame(currentList[position],position)
+            Log.d("onDEL", "onSwiped: $position, ${currentList.size}")
         } else {
             // 마지막 아이템이면 스와이프 동작 무시
-            notifyItemChanged(position)
+            Log.d("onDEL", "onSwiped: $position, ${currentList.size}")
         }
     }
 }
