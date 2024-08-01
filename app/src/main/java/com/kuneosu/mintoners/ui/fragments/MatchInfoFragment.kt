@@ -22,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.databinding.FragmentMatchInfoBinding
+import com.kuneosu.mintoners.ui.customview.MatchBackDialog
 import com.kuneosu.mintoners.ui.customview.MatchCalendarDialog
 import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
 import com.kuneosu.mintoners.ui.customview.MatchInfoWarningDialog
@@ -178,7 +179,8 @@ class MatchInfoFragment : Fragment() {
                 if (binding.matchInfoScoreWinInput.text.isEmpty() || binding.matchInfoScoreDrawInput.text.isEmpty() || binding.matchInfoScoreLoseInput.text.isEmpty()) "100"
                 else
                     "${binding.matchInfoScoreWinInput.text}${binding.matchInfoScoreDrawInput.text}${binding.matchInfoScoreLoseInput.text}"
-            val name = if(binding.matchInfoNameInput.text.isEmpty()) binding.matchInfoNameHintOne.text.toString() else binding.matchInfoNameInput.text.toString()
+            val name =
+                if (binding.matchInfoNameInput.text.isEmpty()) binding.matchInfoNameHintOne.text.toString() else binding.matchInfoNameInput.text.toString()
             val date = if (binding.matchInfoDateInput.text.toString().isEmpty()) Date() else
                 stringToDate(binding.matchInfoDateInput.text.toString())!!
             val matchType = if (binding.matchInfoGameTypeDouble.isChecked) "double" else "single"
@@ -317,23 +319,11 @@ class MatchInfoFragment : Fragment() {
         }
     }
 
-    private var isDouble = false
-    private fun backPressToast() {
-        Toast.makeText(requireContext(), "종료하시려면 뒤로가기를 한번 더 눌러주세요.", Toast.LENGTH_SHORT).show()
-    }
 
     private val callback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            when {
-                isDouble -> {
-                    activity?.finish()
-                }
-            }
-            backPressToast()
-            isDouble = true
-            Handler().postDelayed({
-                isDouble = false
-            }, 2000)
+            val dialog = MatchBackDialog("info", matchViewModel)
+            dialog.show(childFragmentManager, "MatchBackDialog")
         }
     }
 

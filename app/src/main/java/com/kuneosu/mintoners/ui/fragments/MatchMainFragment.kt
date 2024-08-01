@@ -30,6 +30,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentMatchMainBinding
 import com.kuneosu.mintoners.ui.adapter.MatchMainPagerAdapter
+import com.kuneosu.mintoners.ui.customview.MatchBackDialog
 import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -231,29 +232,12 @@ class MatchMainFragment : Fragment() {
         }
     }
 
-    private var isDouble = false
-    private fun backPressToast() {
-        Toast.makeText(requireContext(), "종료하시려면 뒤로가기를 한번 더 눌러주세요.", Toast.LENGTH_SHORT).show()
-    }
 
     private val callback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            when {
-                isDouble -> {
-                    binding.root.clearFocus()
-                    matchViewModel.applyPlayerList()
-                    matchViewModel.applyGameList()
-                    matchViewModel.updateMatchByNumber(matchViewModel.match.value?.matchNumber!!)
-                    Toast.makeText(context, "대회 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
-                    activity?.finish()
-                }
-            }
-            backPressToast()
-
-            isDouble = true
-            Handler().postDelayed({
-                isDouble = false
-            }, 2000)
+            binding.root.clearFocus()
+            val dialog = MatchBackDialog("main", matchViewModel)
+            dialog.show(childFragmentManager, "MatchBackDialog")
         }
     }
 
@@ -300,62 +284,6 @@ class MatchMainFragment : Fragment() {
         }
     }
 
-
-//    @RequiresApi(Build.VERSION_CODES.O)
-//    private fun getBitmapFromView(view: View, callback: (Bitmap?) -> Unit) {
-//
-//        activity?.window?.let { window ->
-//            val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-//            // 비트맵 생성
-//
-//            val locationOfViewInWindow = IntArray(2)
-//            view.getLocationInWindow(locationOfViewInWindow)
-//            // 해당 뷰의 좌표를 계산하여 배열에 x, y가 반환
-//
-//            try {
-//                PixelCopy.request(
-//                    window,
-//                    Rect(
-//                        locationOfViewInWindow[0],
-//                        locationOfViewInWindow[1],
-//                        locationOfViewInWindow[0] + view.width,
-//                        locationOfViewInWindow[1] + view.height
-//                    ),
-//                    bitmap, { copyResult ->
-//                        if (copyResult == PixelCopy.SUCCESS) callback.invoke(bitmap)
-//                        else callback.invoke(null)
-//                    }, Handler(Looper.getMainLooper())
-//                )
-//            } catch (e: IllegalArgumentException) {
-//                callback.invoke(null)
-//            }
-//        }
-//    }
-//
-//    private fun screenShot(bitmap: Bitmap) {
-//        try {
-//            val cachePath = File(context?.cacheDir, "images")
-//            cachePath.mkdirs()
-//
-//            val stream = FileOutputStream("$cachePath/image.png")
-//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-//            stream.close()
-//
-//            val newFile = File(cachePath, "image.png")
-//            val contentUri: Uri = FileProvider.getUriForFile(
-//                requireContext(),
-//                "com.kuneosu.mintoners.fileprovider", newFile
-//            )
-//
-//            val sharingIntent = Intent(Intent.ACTION_SEND)
-//
-//            sharingIntent.type = "image/png"
-//            sharingIntent.putExtra(Intent.EXTRA_STREAM, contentUri)
-//            startActivity(Intent.createChooser(sharingIntent, "Share image using"))
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
