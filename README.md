@@ -375,10 +375,19 @@ July 2024 Personal project, match table creation and management application
     - 공지사항을 불러오는 동안 lottie 를 통해 로딩 화면 출력
 
 - **Small Update**
-  - 저작권 표시 SettingFragment 로 이동
-  - SettingFragment Title 변경 (Mintoners -> 설정)
-  - SettingFragment/NoticeFragment Top bar 색상 변경
-  - HomeRecentGameCard 에 게임이 없을 경우 EmptyCard 출력
-  - HomeFragment 사용법 버튼 위치 수정
+    - 저작권 표시 SettingFragment 로 이동
+    - SettingFragment Title 변경 (Mintoners -> 설정)
+    - SettingFragment/NoticeFragment Top bar 색상 변경
+    - HomeRecentGameCard 에 게임이 없을 경우 EmptyCard 출력
+    - HomeFragment 사용법 버튼 위치 수정
 
 - **Release 1.0.0**
+
+## 2024.08.01
+
+- **버그 발견**
+    - 내부 테스트 링크로 다운로드한 어플에서 공지사항 프래그먼트 접속 시 앱이 종료되는 현상 발생
+        - 난독화 해제. (난독화와 Retrofit 또는 여러 라이브러리가 충돌하여 문제가 발생하는 것으로 추정)
+        - 난독화 해제 후 재빌드하여 테스트 진행 (해결)
+        - Version Code 7 -> 13 으로 변경, Version Name 1.0.0 유지
+        - Release 는 비공개 테스트 진행 전까지 당분간 보류
