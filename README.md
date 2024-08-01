@@ -394,3 +394,9 @@ July 2024 Personal project, match table creation and management application
     - GameFragment 에서 스와이프로 삭제 시 아이템이 가려지거나 add 아이템이 하나 더 생기는 문제 발생 (해결)
         - notifyItemRemoved(position) 추가
         - notifyItemRangeChanged(0, currentList.size+1) 추가
+- **피드백 반영**
+    - MatchInfoFragment 백 프레스 이벤트의 의미가 헷갈린다.
+        - 백 프레스 이벤트 제거 -> MatchBackDialog 로 대체
+        - MatchMainFragment 백 프레스 이벤트도 MatchBackDialog 로 대체
+    - MatchMainList 의 플레이어 이름이 작다.
+        - MatchMainList 의 플레이어 이름 크기 조정 (16sp->20sp)
