@@ -1,23 +1,16 @@
 package com.kuneosu.mintoners.ui.fragments
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.shapes.RectShape
-import android.graphics.drawable.shapes.Shape
 import android.os.Bundle
 import android.os.Handler
-import android.text.Highlights
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentHomeBinding
 import com.kuneosu.mintoners.ui.adapter.HomeRecentGameAdapter
@@ -28,9 +21,6 @@ import com.kuneosu.mintoners.ui.viewmodel.HomeViewModel
 import com.kuneosu.mintoners.util.GuideToolTip
 import com.kuneosu.mintoners.util.PreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
-import io.github.douglasjunior.androidSimpleTooltip.OverlayView
-import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -39,6 +29,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var homeRecentGameAdapter: HomeRecentGameAdapter
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,18 +50,19 @@ class HomeFragment : Fragment() {
 
         // 최초 진입 여부 확인
         if (fragmentName != null && preferencesManager.isFirstTimeLaunch(fragmentName)) {
-            binding.homeInstructionButton.setOnClickListener(null)
-            binding.homeKdkMatchCard.setOnClickListener(null)
-            binding.homeFreeMatchCard.setOnClickListener(null)
             // 최초 진입이므로 팝업 가이드 표시
             homeFragmentGuide()
             // 최초 진입 상태를 false로 변경
             preferencesManager.setFirstTimeLaunch(fragmentName, false)
+        } else {
+
         }
 
 
         return binding.root
     }
+
+
 
     private fun homeFragmentSetting() {
 

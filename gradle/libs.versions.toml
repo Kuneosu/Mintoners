@@ -19,6 +19,7 @@ retrofit = "2.11.0"
 roomRuntime = "2.6.1"
 roomRuntimeVersion = "2.6.1"
 swiperefreshlayout = "1.1.0"
+firebaseConfigKtx = "22.0.0"
 
 
 [libraries]
@@ -44,6 +45,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+firebase-config-ktx = { group = "com.google.firebase", name = "firebase-config-ktx", version.ref = "firebaseConfigKtx" }
 
 
 [plugins]
