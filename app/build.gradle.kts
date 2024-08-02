@@ -74,6 +74,10 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.androidx.recyclerview)
 
+    implementation("uk.co.samuelwall:material-tap-target-prompt:3.0.0")
+    implementation("com.github.douglasjunior:android-simple-tooltip:0.2.1")
+
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
