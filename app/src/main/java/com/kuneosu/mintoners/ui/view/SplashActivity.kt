@@ -2,14 +2,21 @@ package com.kuneosu.mintoners.ui.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.google.firebase.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.kuneosu.mintoners.MainActivity
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.ActivitySplashBinding
@@ -17,6 +24,7 @@ import com.kuneosu.mintoners.databinding.ActivitySplashBinding
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,11 +53,14 @@ class SplashActivity : AppCompatActivity() {
             override fun onAnimationStart(animation: Animation?) {}
 
             override fun onAnimationEnd(animation: Animation?) {
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                startActivity(intent)
                 finish()
             }
 
             override fun onAnimationRepeat(animation: Animation?) {}
         })
     }
+
+
 }

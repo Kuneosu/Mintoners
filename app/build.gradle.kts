@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -15,8 +16,8 @@ android {
         applicationId = "com.kuneosu.mintoners"
         minSdk = 24
         targetSdk = 34
-        versionCode = 14
-        versionName = "1.0.1"
+        versionCode = 15
+        versionName = "1.0.2"
 
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
@@ -61,6 +62,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.hilt.android)
+    implementation(libs.firebase.config.ktx)
     ksp(libs.hilt.android.compiler)
 
     implementation(libs.androidx.room.runtime)
@@ -74,10 +76,11 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.androidx.recyclerview)
 
-    implementation("uk.co.samuelwall:material-tap-target-prompt:3.0.0")
+
     implementation("com.github.douglasjunior:android-simple-tooltip:0.2.1")
 
-
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation("com.google.firebase:firebase-analytics")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
