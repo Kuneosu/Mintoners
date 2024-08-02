@@ -73,6 +73,10 @@ class MatchInfoFragment : Fragment() {
             preferencesManager.setFirstTimeLaunch(fragmentName, false)
         }
 
+        binding.matchInfoHelp.setOnClickListener {
+            infoFragmentGuide()
+        }
+
         // 넘겨받은 MatchNumber가 있을 경우 기존 데이터 기반 UI 업데이트
         loadUIbyMatchNumber()
 

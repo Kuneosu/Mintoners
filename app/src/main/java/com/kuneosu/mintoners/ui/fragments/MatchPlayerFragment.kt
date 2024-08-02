@@ -73,6 +73,10 @@ class MatchPlayerFragment : Fragment() {
             MatchPlayerAddDialog().show(childFragmentManager, "MatchPlayerLoadDialog")
         }
 
+        binding.matchPlayerHelp.setOnClickListener {
+            playerFragmentGuide()
+        }
+
         // Player Fragment Navigation 설정
         playerNavigationSetting()
     }

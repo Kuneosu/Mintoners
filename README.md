@@ -408,3 +408,4 @@ July 2024 Personal project, match table creation and management application
 - **피드백 반영**
     - 사용법을 알려주는 UI, 강조 표시가 있으면 좋을 것 같다.
         - SimpleToolTip 사용. Fragment 최초 진입 시 사용법을 알려주는 툴팁 출력
+        - 각 프래그먼트에 HELP 버튼 추가. HELP 버튼 클릭 시 가이드 툴팁 출력

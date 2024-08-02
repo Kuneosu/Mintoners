@@ -62,18 +62,14 @@ class MatchMainFragment : Fragment() {
         moveButtonSetting()
         initPager()
 
-        val rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.sync_rotate)
-
-        binding.matchMainTopSync.setOnClickListener {
-            binding.matchMainTopSync.startAnimation(rotateAnimation)
-            binding.matchMainViewPager.adjustHeight()
-            matchViewModel.updatePoint(string = "Sync Button")
-        }
-
         binding.matchMainSwipeRefresh.setOnRefreshListener {
             binding.matchMainSwipeRefresh.isRefreshing = false
-            binding.matchMainTopSync.startAnimation(rotateAnimation)
+            binding.matchMainViewPager.adjustHeight()
             matchViewModel.updatePoint(string = "Swipe Refresh")
+        }
+
+        binding.matchMainHelp.setOnClickListener {
+            mainFragmentGuide()
         }
 
         binding.matchMainTopBack.setOnClickListener {
@@ -123,13 +119,16 @@ class MatchMainFragment : Fragment() {
             gravity = Gravity.BOTTOM,
             shape = "oval",
             dismiss = {
-                binding.matchMainScrollView.smoothScrollTo(0, binding.matchMainScrollView.top)
+                binding.matchMainScrollView.smoothScrollTo(
+                    0,
+                    binding.matchMainScrollView.top
+                )
                 GuideToolTip().createGuide(
                     context = requireContext(),
-                    text = "새로고침 버튼을 누르거나 화면을 아래로 당기면 대진표와 순위를 최신화할 수 있습니다.",
-                    anchor = binding.matchMainTopSync,
+                    text = "대진 수정 버튼을 눌러 이전 단계로 돌아가 대회 정보를 수정할 수 있습니다.",
+                    anchor = binding.matchMainEditButton,
                     gravity = Gravity.BOTTOM,
-                    shape = "oval",
+                    shape = "rectangular",
                     dismiss = {
                         binding.matchMainScrollView.smoothScrollTo(
                             0,
@@ -137,8 +136,8 @@ class MatchMainFragment : Fragment() {
                         )
                         GuideToolTip().createGuide(
                             context = requireContext(),
-                            text = "대진 수정 버튼을 눌러 이전 단계로 돌아가 대회 정보를 수정할 수 있습니다.",
-                            anchor = binding.matchMainEditButton,
+                            text = "대진 공유 버튼을 눌러 대진표나 현재 순위를 이미지로 공유할 수 있습니다.",
+                            anchor = binding.matchMainShareButton,
                             gravity = Gravity.BOTTOM,
                             shape = "rectangular",
                             dismiss = {
@@ -148,9 +147,11 @@ class MatchMainFragment : Fragment() {
                                 )
                                 GuideToolTip().createGuide(
                                     context = requireContext(),
-                                    text = "대진 공유 버튼을 눌러 대진표나 현재 순위를 이미지로 공유할 수 있습니다.",
-                                    anchor = binding.matchMainShareButton,
-                                    gravity = Gravity.BOTTOM,
+                                    text = "대진표와 순위를 확인할 수 있습니다.\n\n순서 영역의 숫자를 터치하면 해당 대진표를 잠금 상태로 변경할 수 있습니다." +
+                                            "\n\n대진을 꾹 눌러 드래그하면 대진 순서를 조정할 수 있습니다.\n\n" +
+                                            "화면을 아래로 당겨 대진표와 순위표를 최신화 할 수 있습니다.",
+                                    anchor = binding.matchMainViewPager,
+                                    gravity = Gravity.TOP,
                                     shape = "rectangular",
                                     dismiss = {
                                         binding.matchMainScrollView.smoothScrollTo(
@@ -159,9 +160,8 @@ class MatchMainFragment : Fragment() {
                                         )
                                         GuideToolTip().createGuide(
                                             context = requireContext(),
-                                            text = "대진표와 순위를 확인할 수 있습니다.\n\n순서 영역의 숫자를 터치하면 해당 대진표를 잠금 상태로 변경할 수 있습니다." +
-                                                    "\n\n대진을 꾹 눌러 드래그하면 대진 순서를 조정할 수 있습니다.",
-                                            anchor = binding.matchMainViewPager,
+                                            text = "경기 종료 버튼을 눌러 대회를 종료하고 저장할 수 있습니다.",
+                                            anchor = binding.matchMainEndButton,
                                             gravity = Gravity.TOP,
                                             shape = "rectangular",
                                             dismiss = {
@@ -169,20 +169,7 @@ class MatchMainFragment : Fragment() {
                                                     0,
                                                     binding.matchMainScrollView.top
                                                 )
-                                                GuideToolTip().createGuide(
-                                                    context = requireContext(),
-                                                    text = "경기 종료 버튼을 눌러 대회를 종료하고 저장할 수 있습니다.",
-                                                    anchor = binding.matchMainEndButton,
-                                                    gravity = Gravity.TOP,
-                                                    shape = "rectangular",
-                                                    dismiss = {
-                                                        binding.matchMainScrollView.smoothScrollTo(
-                                                            0,
-                                                            binding.matchMainScrollView.top
-                                                        )
-                                                    })
-                                            }
-                                        )
+                                            })
                                     }
                                 )
                             }
@@ -191,6 +178,7 @@ class MatchMainFragment : Fragment() {
                 )
             }
         )
+
     }
 
     private fun setButtonsVisibility(visibility: Int) {

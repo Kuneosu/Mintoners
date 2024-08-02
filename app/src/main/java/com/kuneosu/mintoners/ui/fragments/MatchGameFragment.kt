@@ -63,6 +63,10 @@ class MatchGameFragment : Fragment() {
 
         gameNavigationSetting()
 
+        binding.matchGameHelp.setOnClickListener{
+            gameFragmentGuide()
+        }
+
 
 
         return binding.root
