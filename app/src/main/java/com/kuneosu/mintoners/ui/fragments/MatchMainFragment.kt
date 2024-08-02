@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -33,6 +34,8 @@ import com.kuneosu.mintoners.ui.adapter.MatchMainPagerAdapter
 import com.kuneosu.mintoners.ui.customview.MatchBackDialog
 import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
+import com.kuneosu.mintoners.util.GuideToolTip
+import com.kuneosu.mintoners.util.PreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
@@ -59,18 +62,14 @@ class MatchMainFragment : Fragment() {
         moveButtonSetting()
         initPager()
 
-        val rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.sync_rotate)
-
-        binding.matchMainTopSync.setOnClickListener {
-            binding.matchMainTopSync.startAnimation(rotateAnimation)
-            binding.matchMainViewPager.adjustHeight()
-            matchViewModel.updatePoint(string = "Sync Button")
-        }
-
         binding.matchMainSwipeRefresh.setOnRefreshListener {
             binding.matchMainSwipeRefresh.isRefreshing = false
-            binding.matchMainTopSync.startAnimation(rotateAnimation)
+            binding.matchMainViewPager.adjustHeight()
             matchViewModel.updatePoint(string = "Swipe Refresh")
+        }
+
+        binding.matchMainHelp.setOnClickListener {
+            mainFragmentGuide()
         }
 
         binding.matchMainTopBack.setOnClickListener {
@@ -94,8 +93,92 @@ class MatchMainFragment : Fragment() {
             false
         }
 
+        // PreferencesManager 인스턴스 생성
+        val preferencesManager = PreferencesManager(requireContext())
+        // 현재 프래그먼트의 이름을 키로 사용
+        val fragmentName = this::class.simpleName
+
+        // 최초 진입 여부 확인
+        if (fragmentName != null && preferencesManager.isFirstTimeLaunch(fragmentName)) {
+            // 최초 진입이므로 팝업 가이드 표시
+            mainFragmentGuide()
+            // 최초 진입 상태를 false로 변경
+            preferencesManager.setFirstTimeLaunch(fragmentName, false)
+        }
+
+
 
         return binding.root
+    }
+
+    private fun mainFragmentGuide() {
+        GuideToolTip().createGuide(
+            context = requireContext(),
+            text = "대회명을 눌러 대회 정보를 확인할 수 있습니다.",
+            anchor = binding.matchMainTopTitle,
+            gravity = Gravity.BOTTOM,
+            shape = "oval",
+            dismiss = {
+                binding.matchMainScrollView.smoothScrollTo(
+                    0,
+                    binding.matchMainScrollView.top
+                )
+                GuideToolTip().createGuide(
+                    context = requireContext(),
+                    text = "대진 수정 버튼을 눌러 이전 단계로 돌아가 대회 정보를 수정할 수 있습니다.",
+                    anchor = binding.matchMainEditButton,
+                    gravity = Gravity.BOTTOM,
+                    shape = "rectangular",
+                    dismiss = {
+                        binding.matchMainScrollView.smoothScrollTo(
+                            0,
+                            binding.matchMainScrollView.top
+                        )
+                        GuideToolTip().createGuide(
+                            context = requireContext(),
+                            text = "대진 공유 버튼을 눌러 대진표나 현재 순위를 이미지로 공유할 수 있습니다.",
+                            anchor = binding.matchMainShareButton,
+                            gravity = Gravity.BOTTOM,
+                            shape = "rectangular",
+                            dismiss = {
+                                binding.matchMainScrollView.smoothScrollTo(
+                                    0,
+                                    binding.matchMainScrollView.top
+                                )
+                                GuideToolTip().createGuide(
+                                    context = requireContext(),
+                                    text = "대진표와 순위를 확인할 수 있습니다.\n\n순서 영역의 숫자를 터치하면 해당 대진표를 잠금 상태로 변경할 수 있습니다." +
+                                            "\n\n대진을 꾹 눌러 드래그하면 대진 순서를 조정할 수 있습니다.\n\n" +
+                                            "화면을 아래로 당겨 대진표와 순위표를 최신화 할 수 있습니다.",
+                                    anchor = binding.matchMainViewPager,
+                                    gravity = Gravity.TOP,
+                                    shape = "rectangular",
+                                    dismiss = {
+                                        binding.matchMainScrollView.smoothScrollTo(
+                                            0,
+                                            binding.matchMainScrollView.top
+                                        )
+                                        GuideToolTip().createGuide(
+                                            context = requireContext(),
+                                            text = "경기 종료 버튼을 눌러 대회를 종료하고 저장할 수 있습니다.",
+                                            anchor = binding.matchMainEndButton,
+                                            gravity = Gravity.TOP,
+                                            shape = "rectangular",
+                                            dismiss = {
+                                                binding.matchMainScrollView.smoothScrollTo(
+                                                    0,
+                                                    binding.matchMainScrollView.top
+                                                )
+                                            })
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+            }
+        )
+
     }
 
     private fun setButtonsVisibility(visibility: Int) {

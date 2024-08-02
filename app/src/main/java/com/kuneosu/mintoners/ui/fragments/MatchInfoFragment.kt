@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,8 @@ import com.kuneosu.mintoners.ui.customview.MatchCalendarDialog
 import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
 import com.kuneosu.mintoners.ui.customview.MatchInfoWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
+import com.kuneosu.mintoners.util.GuideToolTip
+import com.kuneosu.mintoners.util.PreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -57,6 +60,23 @@ class MatchInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // PreferencesManager 인스턴스 생성
+        val preferencesManager = PreferencesManager(requireContext())
+        // 현재 프래그먼트의 이름을 키로 사용
+        val fragmentName = this::class.simpleName
+
+        // 최초 진입 여부 확인
+        if (fragmentName != null && preferencesManager.isFirstTimeLaunch(fragmentName)) {
+            // 최초 진입이므로 팝업 가이드 표시
+            infoFragmentGuide()
+            // 최초 진입 상태를 false로 변경
+            preferencesManager.setFirstTimeLaunch(fragmentName, false)
+        }
+
+        binding.matchInfoHelp.setOnClickListener {
+            infoFragmentGuide()
+        }
+
         // 넘겨받은 MatchNumber가 있을 경우 기존 데이터 기반 UI 업데이트
         loadUIbyMatchNumber()
 
@@ -80,6 +100,20 @@ class MatchInfoFragment : Fragment() {
         binding.matchInfoGameCountWarning.setOnClickListener {
             showAlertDialog()
         }
+
+    }
+
+    private fun infoFragmentGuide() {
+        GuideToolTip().createGuide(
+            context = requireContext(),
+            text = "대회 정보를 입력하고 다음으로 넘어갈 수 있습니다.\n기본값을 사용하려면 바로 다음 버튼을 눌러주세요 !",
+            anchor = binding.matchInfoCard,
+            gravity = Gravity.TOP,
+            shape = "rectangular",
+            dismiss = {
+                binding.matchInfoScroll.smoothScrollTo(0, binding.matchInfoScroll.top)
+            }
+        )
 
     }
 
@@ -264,7 +298,9 @@ class MatchInfoFragment : Fragment() {
                             null
                         )
                     )
-                    matchInfoGameCountVisibility(View.VISIBLE)
+                    if (matchViewModel.matchMode.value == 0) {
+                        matchInfoGameCountVisibility(View.VISIBLE)
+                    }
                 }
 
                 binding.matchInfoGameTypeSingle.id -> {

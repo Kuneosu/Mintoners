@@ -400,3 +400,14 @@ July 2024 Personal project, match table creation and management application
         - MatchMainFragment 백 프레스 이벤트도 MatchBackDialog 로 대체
     - MatchMainList 의 플레이어 이름이 작다.
         - MatchMainList 의 플레이어 이름 크기 조정 (16sp->20sp)
+
+## 2024.08.02
+
+- **버그 수정**
+    - 자유 대진 생성 메뉴에서 단식 -> 복식 변경 시 1인당 경기 수가 출력되는 문제 (해결)
+- **피드백 반영**
+    - 사용법을 알려주는 UI, 강조 표시가 있으면 좋을 것 같다.
+        - SimpleToolTip 사용. Fragment 최초 진입 시 사용법을 알려주는 툴팁 출력
+        - 각 프래그먼트에 HELP 버튼 추가. HELP 버튼 클릭 시 가이드 툴팁 출력
+
+- **Version 1.0.1 Release**

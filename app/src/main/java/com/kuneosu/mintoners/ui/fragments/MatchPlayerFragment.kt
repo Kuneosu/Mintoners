@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -24,6 +25,8 @@ import com.kuneosu.mintoners.ui.customview.MatchInfoWarningDialog
 import com.kuneosu.mintoners.ui.customview.MatchPlayerAddDialog
 import com.kuneosu.mintoners.ui.customview.MatchPlayerWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
+import com.kuneosu.mintoners.util.GuideToolTip
+import com.kuneosu.mintoners.util.PreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,12 +55,56 @@ class MatchPlayerFragment : Fragment() {
         // Player RecyclerView Adapter 설정
         playerAdapterSetting()
 
+        // PreferencesManager 인스턴스 생성
+        val preferencesManager = PreferencesManager(requireContext())
+        // 현재 프래그먼트의 이름을 키로 사용
+        val fragmentName = this::class.simpleName
+
+        // 최초 진입 여부 확인
+        if (fragmentName != null && preferencesManager.isFirstTimeLaunch(fragmentName)) {
+            // 최초 진입이므로 팝업 가이드 표시
+            playerFragmentGuide()
+            // 최초 진입 상태를 false로 변경
+            preferencesManager.setFirstTimeLaunch(fragmentName, false)
+        }
+
+
         binding.matchPlayerLoadButton.setOnClickListener {
             MatchPlayerAddDialog().show(childFragmentManager, "MatchPlayerLoadDialog")
         }
 
+        binding.matchPlayerHelp.setOnClickListener {
+            playerFragmentGuide()
+        }
+
         // Player Fragment Navigation 설정
         playerNavigationSetting()
+    }
+
+    private fun playerFragmentGuide() {
+        GuideToolTip().createGuide(
+            context = requireContext(),
+            text = "선수 추가 버튼을 통해 여러명의 선수를 한 번에 추가할 수 있습니다.",
+            anchor = binding.matchPlayerLoadButton,
+            gravity = Gravity.BOTTOM,
+            shape = "rectangular",
+            dismiss = {
+                binding.matchPlayerScrollView.smoothScrollTo(0, binding.matchPlayerScrollView.top)
+                GuideToolTip().createGuide(
+                    context = requireContext(),
+                    text = "한 명씩 추가할 수도 있으며 선수명을 터치하면 추가된 선수의 이름을 변경할 수 있습니다.",
+                    anchor = binding.matchPlayerRecyclerView,
+                    gravity = Gravity.TOP,
+                    shape = "rectangular",
+                    dismiss = {
+                        binding.matchPlayerScrollView.smoothScrollTo(
+                            0,
+                            binding.matchPlayerScrollView.top
+                        )
+                    }
+                )
+            }
+        )
     }
 
     private fun showAlertDialog(text: String) {

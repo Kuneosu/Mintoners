@@ -16,7 +16,7 @@ android {
         minSdk = 24
         targetSdk = 34
         versionCode = 14
-        versionName = "1.0.0"
+        versionName = "1.0.1"
 
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
@@ -73,6 +73,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.androidx.recyclerview)
+
+    implementation("uk.co.samuelwall:material-tap-target-prompt:3.0.0")
+    implementation("com.github.douglasjunior:android-simple-tooltip:0.2.1")
+
 
 
     implementation(libs.androidx.core.ktx)

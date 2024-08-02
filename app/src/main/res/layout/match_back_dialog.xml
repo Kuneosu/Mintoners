@@ -46,6 +46,7 @@
                 android:layout_margin="@dimen/margin_small"
                 android:text="대진표 작성을 그만두시겠습니까 ?"
                 android:textSize="@dimen/text_medium"
+                android:textStyle="bold"
                 android:paddingVertical="@dimen/padding_medium"
                 android:textAlignment="center" />
 
