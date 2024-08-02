@@ -53,10 +53,6 @@ class HomeFragment : Fragment() {
         // 현재 프래그먼트의 이름을 키로 사용
         val fragmentName = this::class.simpleName
 
-        binding.homeTitle.setOnClickListener {
-            preferencesManager.resetAllPreferences()
-        }
-
         homeRecentGameAdapterSetting()
         homeFragmentSetting()
 
