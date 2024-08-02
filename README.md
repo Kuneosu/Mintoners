@@ -411,3 +411,9 @@ July 2024 Personal project, match table creation and management application
         - 각 프래그먼트에 HELP 버튼 추가. HELP 버튼 클릭 시 가이드 툴팁 출력
 
 - **Version 1.0.1 Release**
+
+- **업데이트 알림 추가**
+    - Firebase Remote Config 를 통해 업데이트 알림 추가
+    - 업데이트 알림을 받을 경우 앱 실행 시 업데이트 알림 다이얼로그 출력
+
+- **Version 1.0.2 Update**
