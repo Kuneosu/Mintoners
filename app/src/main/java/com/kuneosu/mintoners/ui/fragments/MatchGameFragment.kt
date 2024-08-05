@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -21,6 +22,7 @@ import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.databinding.FragmentMatchGameBinding
 import com.kuneosu.mintoners.ui.adapter.MatchGamesAdapter
+import com.kuneosu.mintoners.ui.customview.MatchPlayerWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.GuideToolTip
 import com.kuneosu.mintoners.util.PreferencesManager
@@ -63,7 +65,7 @@ class MatchGameFragment : Fragment() {
 
         gameNavigationSetting()
 
-        binding.matchGameHelp.setOnClickListener{
+        binding.matchGameHelp.setOnClickListener {
             gameFragmentGuide()
         }
 
@@ -133,10 +135,27 @@ class MatchGameFragment : Fragment() {
         }
 
         binding.matchGameNextButton.setOnClickListener {
-            findNavController().navigate(R.id.action_matchGameFragment_to_matchMainFragment)
-            matchViewModel.updateMatchState(3)
-            matchViewModel.applyGameList()
+            if (areAllPlayersNamed()) {
+                findNavController().navigate(R.id.action_matchGameFragment_to_matchMainFragment)
+                matchViewModel.updateMatchState(3)
+                matchViewModel.applyGameList()
+            } else {
+                val dialog = MatchPlayerWarningDialog("모든 선수의 이름을 입력해주세요.")
+                dialog.show(childFragmentManager, "warning")
+            }
         }
+    }
+
+    private fun areAllPlayersNamed(): Boolean {
+        val games = adapter.currentList
+        for (game in games) {
+            for (player in game.gameTeamA + game.gameTeamB) {
+                if (player.playerName.isBlank()) {
+                    return false
+                }
+            }
+        }
+        return true
     }
 
     private fun gameAdapterSetting() {
