@@ -265,9 +265,21 @@ class MatchViewModel @Inject constructor(
 
     fun applyGameList() {
         val currentList = _games.value.orEmpty().toMutableList()
-        _match.value?.matchList = currentList
-        updateMatchByNumber(_match.value?.matchNumber!!)
+
+        // _match.value가 null인지 확인
+        val matchValue = _match.value
+        if (matchValue != null) {
+            matchValue.matchList = currentList
+
+            // matchNumber가 null인지 확인
+            val matchNumber = matchValue.matchNumber
+            updateMatchByNumber(matchNumber)
+        } else {
+            // _match.value가 null인 경우 적절한 처리
+            Log.e("applyGameList", "_match.value is null")
+        }
     }
+
 
     fun updateMatch(
         matchName: String,

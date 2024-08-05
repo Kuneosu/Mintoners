@@ -425,3 +425,5 @@ July 2024 Personal project, match table creation and management application
     - NoticeFragment 아이템 하단이 잘리던 문제 해결
     - HomeFragment 에서 카드 여러번 클릭 시 액티비티가 여러 개 열리던 문제 해결
     - MatchMainFragment 에서 대진 공유가 여러번 클릭 되던 문제도 동일하게 해결
+    - GameFragment 에서 선수를 비운 채로 대진표를 생성할 수 있던 문제 해결
+    - 사전 출시 보고서에 잡힌 에러 해결

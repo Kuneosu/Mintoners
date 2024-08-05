@@ -11,9 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
-import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Notice
 import com.kuneosu.mintoners.data.remote.api.GitHubApiService
 import com.kuneosu.mintoners.data.remote.api.GitHubFile
@@ -23,7 +21,6 @@ import com.kuneosu.mintoners.ui.adapter.NoticeAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 class NoticeFragment : Fragment() {
     private var _binding: FragmentNoticeBinding? = null
@@ -44,8 +41,6 @@ class NoticeFragment : Fragment() {
 
         binding.noticeRecyclerView.adapter = adapter
         binding.noticeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-
 
         binding.noticeBackButton.setOnClickListener {
             findNavController().popBackStack()
@@ -85,27 +80,29 @@ class NoticeFragment : Fragment() {
         call.enqueue(object : Callback<GitHubFile> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(call: Call<GitHubFile>, response: Response<GitHubFile>) {
-                binding.noticeLoadingAnimation.visibility = View.GONE
-                if (response.isSuccessful) {
-                    val file = response.body()
-                    val content = String(Base64.decode(file?.content, Base64.DEFAULT))
-                    val notice = Gson().fromJson(content, Notice::class.java)
-                    noticeList.add(notice)
-                    adapter.notifyDataSetChanged()
+                _binding?.let { binding ->
+                    binding.noticeLoadingAnimation.visibility = View.GONE
+                    if (response.isSuccessful) {
+                        val file = response.body()
+                        val content = String(Base64.decode(file?.content, Base64.DEFAULT))
+                        val notice = Gson().fromJson(content, Notice::class.java)
+                        noticeList.add(notice)
+                        adapter.notifyDataSetChanged()
+                    }
                 }
             }
 
             override fun onFailure(call: Call<GitHubFile>, t: Throwable) {
-                binding.noticeLoadingAnimation.visibility = View.GONE
-                Toast.makeText(requireContext(), "공지사항을 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                _binding?.let { binding ->
+                    binding.noticeLoadingAnimation.visibility = View.GONE
+                    Toast.makeText(requireContext(), "공지사항을 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }
