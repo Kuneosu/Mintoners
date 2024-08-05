@@ -2,6 +2,7 @@ package com.kuneosu.mintoners.ui.adapter
 
 import android.content.Intent
 import android.os.Build
+import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -31,6 +32,8 @@ class HomeRecentGameAdapter(private val homeViewModel: HomeViewModel) :
             }
         }
     }
+
+    private var lastClickTime = 0L
 
     override fun getItemCount(): Int {
         return currentList.size
@@ -67,6 +70,10 @@ class HomeRecentGameAdapter(private val homeViewModel: HomeViewModel) :
             binding.recentGameDate.text = outputDateStr
 
             binding.recentGameInfo.setOnClickListener {
+                if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+                    return@setOnClickListener
+                }
+                lastClickTime = SystemClock.elapsedRealtime()
                 val intent = Intent(binding.root.context, MatchActivity::class.java)
                 intent.putExtra("matchNumber", match.matchNumber)
                 intent.putExtra("matchState", match.matchState)

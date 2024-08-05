@@ -3,6 +3,7 @@ package com.kuneosu.mintoners.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.SystemClock
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +30,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var homeRecentGameAdapter: HomeRecentGameAdapter
-
+    private var lastClickTime = 0L
 
 
     override fun onCreateView(
@@ -54,14 +55,11 @@ class HomeFragment : Fragment() {
             homeFragmentGuide()
             // 최초 진입 상태를 false로 변경
             preferencesManager.setFirstTimeLaunch(fragmentName, false)
-        } else {
-
         }
 
 
         return binding.root
     }
-
 
 
     private fun homeFragmentSetting() {
@@ -96,6 +94,10 @@ class HomeFragment : Fragment() {
 
         binding.homeKdkMatchCard.setOnClickListener {
             // start MatchActivity
+            if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            lastClickTime = SystemClock.elapsedRealtime()
             val intent = Intent(requireContext(), MatchActivity::class.java)
             intent.putExtra("matchNumber", 0)
             intent.putExtra("matchMode", 0)
@@ -104,6 +106,10 @@ class HomeFragment : Fragment() {
 
         binding.homeFreeMatchCard.setOnClickListener {
             // start MatchActivity
+            if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            lastClickTime = SystemClock.elapsedRealtime()
             val intent = Intent(requireContext(), MatchActivity::class.java)
             intent.putExtra("matchNumber", 0)
             intent.putExtra("matchMode", 1)

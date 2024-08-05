@@ -8,6 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    tools:ignore="HardcodedText"
     tools:context=".ui.fragments.MatchPlayerFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -23,7 +24,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/match_player_top_bar"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="@dimen/height_match_process_top_view"
                 android:background="@color/main"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -59,8 +60,8 @@
 
                 <TextView
                     android:id="@+id/match_player_process_one"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="@dimen/size_match_process_item"
+                    android:layout_height="@dimen/size_match_process_item"
                     android:background="@drawable/match_process_unselected"
                     android:gravity="center"
                     android:text="1"
@@ -85,8 +86,8 @@
 
                 <TextView
                     android:id="@+id/match_player_process_two"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="@dimen/size_match_process_item"
+                    android:layout_height="@dimen/size_match_process_item"
                     android:layout_marginHorizontal="@dimen/margin_xlarge"
                     android:background="@drawable/match_process_selected"
                     android:gravity="center"
@@ -114,8 +115,8 @@
 
                 <TextView
                     android:id="@+id/match_player_process_three"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="@dimen/size_match_process_item"
+                    android:layout_height="@dimen/size_match_process_item"
                     android:background="@drawable/match_process_unselected"
                     android:gravity="center"
                     android:text="3"
@@ -145,7 +146,7 @@
                 android:id="@+id/match_player_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/bottom_app_bar_height"
+                android:paddingBottom="@dimen/height_bottom_padding"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/match_player_top_bar">
 
@@ -171,7 +172,7 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/match_player_load_button"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/small_button_height"
+                        android:layout_height="@dimen/height_match_process_move_button"
                         android:background="@drawable/match_main_button"
                         android:paddingHorizontal="@dimen/padding_small"
                         android:text="선수 추가하기"
@@ -200,7 +201,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/match_player_previous_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/small_button_height"
+                    android:layout_height="@dimen/height_match_process_move_button"
                     android:layout_marginStart="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_xlarge"
                     android:background="@drawable/match_sub_button"
@@ -213,7 +214,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/match_player_next_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/small_button_height"
+                    android:layout_height="@dimen/height_match_process_move_button"
                     android:layout_marginTop="@dimen/margin_xlarge"
                     android:layout_marginEnd="@dimen/margin_default"
                     android:background="@drawable/match_main_button"

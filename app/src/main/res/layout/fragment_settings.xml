@@ -6,22 +6,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/bottom_app_bar_height"
+    android:layout_marginBottom="@dimen/margin_2xlarge"
     android:background="@color/light_gray_background"
     tools:context=".ui.fragments.SettingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settings_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/profile_top_bar_height"
+        android:layout_height="@dimen/height_notice_item"
         android:background="@color/main"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/setting_back_button"
-            android:layout_width="@dimen/match_main_top_bar_icon_size"
-            android:layout_height="@dimen/match_main_top_bar_icon_size"
+            android:layout_width="@dimen/size_match_main_top_bar_icon"
+            android:layout_height="@dimen/size_match_main_top_bar_icon"
             android:layout_marginStart="@dimen/margin_small"
             android:contentDescription="Setting back button"
             android:padding="@dimen/padding_small"
@@ -65,8 +65,8 @@
 
             <ImageView
                 android:id="@+id/setting_icon"
-                android:layout_width="@dimen/match_main_top_bar_icon_size"
-                android:layout_height="@dimen/match_main_top_bar_icon_size"
+                android:layout_width="@dimen/size_match_main_top_bar_icon"
+                android:layout_height="@dimen/size_match_main_top_bar_icon"
                 android:contentDescription="@string/setting_item_icon"
                 android:padding="@dimen/padding_small"
                 android:src="@drawable/settings"
@@ -88,8 +88,8 @@
 
             <ImageView
                 android:id="@+id/setting_chevron"
-                android:layout_width="@dimen/match_main_top_bar_icon_size"
-                android:layout_height="@dimen/match_main_top_bar_icon_size"
+                android:layout_width="@dimen/size_match_main_top_bar_icon"
+                android:layout_height="@dimen/size_match_main_top_bar_icon"
                 android:contentDescription="@string/setting_chevron"
                 android:padding="@dimen/padding_small"
                 android:rotation="180"
@@ -109,8 +109,8 @@
 
             <ImageView
                 android:id="@+id/notice_icon"
-                android:layout_width="@dimen/match_main_top_bar_icon_size"
-                android:layout_height="@dimen/match_main_top_bar_icon_size"
+                android:layout_width="@dimen/size_match_main_top_bar_icon"
+                android:layout_height="@dimen/size_match_main_top_bar_icon"
                 android:contentDescription="@string/setting_item_icon"
                 android:padding="@dimen/padding_small"
                 android:src="@drawable/notice"
@@ -132,8 +132,8 @@
 
             <ImageView
                 android:id="@+id/notice_chevron"
-                android:layout_width="@dimen/match_main_top_bar_icon_size"
-                android:layout_height="@dimen/match_main_top_bar_icon_size"
+                android:layout_width="@dimen/size_match_main_top_bar_icon"
+                android:layout_height="@dimen/size_match_main_top_bar_icon"
                 android:contentDescription="@string/setting_chevron"
                 android:padding="@dimen/padding_small"
                 android:rotation="180"
@@ -153,8 +153,8 @@
 
             <ImageView
                 android:id="@+id/feedback_icon"
-                android:layout_width="@dimen/match_main_top_bar_icon_size"
-                android:layout_height="@dimen/match_main_top_bar_icon_size"
+                android:layout_width="@dimen/size_match_main_top_bar_icon"
+                android:layout_height="@dimen/size_match_main_top_bar_icon"
                 android:contentDescription="@string/setting_item_icon"
                 android:padding="@dimen/padding_small"
                 android:src="@drawable/feedback"
@@ -176,8 +176,8 @@
 
             <ImageView
                 android:id="@+id/feedback_chevron"
-                android:layout_width="@dimen/match_main_top_bar_icon_size"
-                android:layout_height="@dimen/match_main_top_bar_icon_size"
+                android:layout_width="@dimen/size_match_main_top_bar_icon"
+                android:layout_height="@dimen/size_match_main_top_bar_icon"
                 android:contentDescription="@string/setting_chevron"
                 android:padding="@dimen/padding_small"
                 android:rotation="180"

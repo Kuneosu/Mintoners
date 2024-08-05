@@ -18,7 +18,7 @@
         <TextView
             android:id="@+id/match_main_list_double_number"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/height_rank_item"
             android:layout_weight="1"
             android:paddingVertical="@dimen/padding_medium"
             android:text=""
@@ -30,7 +30,7 @@
 
             android:id="@+id/match_main_list_double_lock"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/height_rank_item"
             android:layout_weight="1"
             android:contentDescription="@string/lock"
             android:paddingVertical="@dimen/padding_medium"
@@ -168,7 +168,7 @@
         <TextView
             android:id="@+id/match_main_list_single_number"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/height_rank_item"
             android:layout_weight="1"
             android:paddingVertical="@dimen/padding_medium"
             android:text=""
@@ -179,7 +179,7 @@
         <ImageView
             android:id="@+id/match_main_list_single_lock"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/height_rank_item"
             android:layout_weight="1"
             android:contentDescription="@string/lock"
             android:paddingVertical="@dimen/padding_medium"

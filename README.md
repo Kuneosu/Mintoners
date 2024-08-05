@@ -417,3 +417,11 @@ July 2024 Personal project, match table creation and management application
     - 업데이트 알림을 받을 경우 앱 실행 시 업데이트 알림 다이얼로그 출력
 
 - **Version 1.0.2 Update**
+
+## 2024.08.05
+
+- **1.0.3 업데이트 내역**
+    - dimens.xml 정리
+    - NoticeFragment 아이템 하단이 잘리던 문제 해결
+    - HomeFragment 에서 카드 여러번 클릭 시 액티비티가 여러 개 열리던 문제 해결
+    - MatchMainFragment 에서 대진 공유가 여러번 클릭 되던 문제도 동일하게 해결
