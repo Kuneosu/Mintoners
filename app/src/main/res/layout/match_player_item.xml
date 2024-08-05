@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    tools:ignore="HardcodedText"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +44,7 @@
 
         <EditText
             android:id="@+id/edit_player_name"
-            android:layout_width="@dimen/match_main_top_view_height"
+            android:layout_width="@dimen/height_match_process_top_view"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_large"
             android:autofillHints="이름"
@@ -63,7 +64,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/edit_empty_button"
-            android:layout_width="@dimen/small_button_height"
+            android:layout_width="@dimen/height_match_process_move_button"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
             android:text="X"

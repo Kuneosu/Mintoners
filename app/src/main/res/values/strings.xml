@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mintoners</string>
     <string name="app_title">Mintoners</string>
-    <string name="version">1.0.2</string>
+    <string name="version">1.0.3</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -16,9 +16,6 @@
     <string name="recent_game_state">경기상태 : %1$s</string>
     <string name="recent_game_info">recent_game_info</string>
 
-    <string name="example_name"><b>구너수</b> 님</string>
-    <string name="example_grade">급수: <b>D</b> 조</string>
-    <string name="example_club">소속: <b>마코 클럽</b></string>
     <string name="guest_login">로그인 하기</string>
     <string name="bottom_home">홈</string>
     <string name="bottom_profile">프로필</string>
@@ -94,4 +91,5 @@
     <string name="setting_chevron">Setting item chevron\n</string>
     <string name="setting_item_icon">Setting item icon</string>
     <string name="settings_notice_text">공지사항</string>
+    <string name="help">HELP</string>
 </resources>

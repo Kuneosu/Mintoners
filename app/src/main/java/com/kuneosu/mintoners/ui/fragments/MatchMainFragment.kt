@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.SystemClock
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -48,6 +49,7 @@ class MatchMainFragment : Fragment() {
     private var _binding: FragmentMatchMainBinding? = null
     private val binding get() = _binding!!
     private val matchViewModel: MatchViewModel by activityViewModels()
+    private var lastClickTime = 0L
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -77,6 +79,11 @@ class MatchMainFragment : Fragment() {
         }
 
         binding.matchMainShareButton.setOnClickListener {
+            if(SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            lastClickTime = SystemClock.elapsedRealtime()
+
             getBitmapFromScrollView(binding.matchMainScrollView) { bitmap ->
                 bitmap?.let {
                     screenShot(it)

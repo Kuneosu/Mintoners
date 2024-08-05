@@ -23,12 +23,12 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/card_height">
+                android:paddingBottom="@dimen/height_bottom_padding">
 
                 <View
                     android:id="@+id/home_top_view"
                     android:layout_width="0dp"
-                    android:layout_height="200dp"
+                    android:layout_height="@dimen/height_home_top_view"
                     android:background="@color/main"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -82,19 +82,19 @@
                 <LinearLayout
                     android:id="@+id/home_recent_empty_card"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/recent_game_recycler_height"
+                    android:layout_height="@dimen/height_recent_game_recycler_view"
                     android:layout_marginTop="@dimen/margin_small"
                     android:orientation="horizontal"
                     android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@id/home_recent_game_title">
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="@dimen/card_width"
-                        android:layout_height="@dimen/card_height"
+                        android:layout_width="@dimen/width_recent_game_item"
+                        android:layout_height="@dimen/height_recent_game_item"
                         android:layout_marginStart="@dimen/margin_xlarge"
                         android:layout_marginEnd="@dimen/margin_default"
-                        app:cardCornerRadius="@dimen/card_corner_radius"
-                        app:cardElevation="@dimen/card_elevation">
+                        app:cardCornerRadius="@dimen/radius_10"
+                        app:cardElevation="@dimen/margin_xsmall">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -122,7 +122,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/home_recent_game_recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/recent_game_recycler_height"
+                    android:layout_height="@dimen/height_recent_game_recycler_view"
                     android:layout_marginTop="@dimen/margin_small"
                     android:contentDescription="@string/recent_game"
                     app:layout_constraintTop_toBottomOf="@id/home_recent_game_title" />
@@ -135,9 +135,9 @@
                     android:background="@drawable/match_main_button"
                     android:padding="@dimen/padding_medium"
                     android:text="@string/go_to_instruction"
-                    android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_medium"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,11 +145,11 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/home_kdk_match_card"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/match_making_card_height"
+                    android:layout_height="@dimen/height_home_item_card"
                     android:layout_margin="@dimen/margin_default"
                     android:contentDescription="@string/kdk_match_card"
-                    app:cardCornerRadius="@dimen/card_corner_radius"
-                    app:cardElevation="@dimen/card_corner_radius"
+                    app:cardCornerRadius="@dimen/radius_10"
+                    app:cardElevation="@dimen/margin_xsmall"
                     app:layout_constraintTop_toBottomOf="@id/home_recent_game_recycler">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -178,8 +178,8 @@
 
                         <com.airbnb.lottie.LottieAnimationView
                             android:id="@+id/lotti"
-                            android:layout_width="140dp"
-                            android:layout_height="140dp"
+                            android:layout_width="@dimen/size_home_item_card_image_view"
+                            android:layout_height="@dimen/size_home_item_card_image_view"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -194,10 +194,10 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/home_free_match_card"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/match_making_card_height"
+                    android:layout_height="@dimen/height_home_item_card"
                     android:layout_margin="@dimen/margin_default"
-                    app:cardCornerRadius="@dimen/card_corner_radius"
-                    app:cardElevation="@dimen/card_corner_radius"
+                    app:cardCornerRadius="@dimen/radius_10"
+                    app:cardElevation="@dimen/radius_10"
                     app:layout_constraintTop_toBottomOf="@id/home_kdk_match_card">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -225,8 +225,8 @@
                             app:layout_constraintStart_toStartOf="parent" />
 
                         <ImageView
-                            android:layout_width="@dimen/image_view_size"
-                            android:layout_height="@dimen/image_view_size"
+                            android:layout_width="@dimen/size_home_item_card_image_view"
+                            android:layout_height="@dimen/size_home_item_card_image_view"
                             android:contentDescription="@string/match_card_image"
                             android:src="@drawable/competition"
                             app:layout_constraintBottom_toBottomOf="parent"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="330dp"
+    android:layout_width="@dimen/width_wide_dialog"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
@@ -9,12 +9,12 @@
     app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="330dp"
+        android:layout_width="@dimen/width_wide_dialog"
         android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/player_add_dialog_header"
-            android:layout_width="330dp"
+            android:layout_width="@dimen/width_wide_dialog"
             android:layout_height="wrap_content"
             android:background="@color/main"
             android:padding="@dimen/padding_medium"

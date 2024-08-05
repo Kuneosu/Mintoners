@@ -3,11 +3,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/recent_game_card"
-    android:layout_width="@dimen/card_width"
-    android:layout_height="@dimen/card_height"
+    android:layout_width="@dimen/width_recent_game_item"
+    android:layout_height="@dimen/height_recent_game_item"
     android:layout_marginEnd="@dimen/margin_default"
-    app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="@dimen/card_elevation">
+    app:cardCornerRadius="@dimen/radius_10"
+    app:cardElevation="@dimen/margin_xsmall">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/recent_game_info"
-            android:layout_width="@dimen/splash_logo_size"
+            android:layout_width="@dimen/size_splash_logo"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_small"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +59,7 @@
 
         <FrameLayout
             android:id="@+id/recent_game_delete_button"
-            android:layout_width="@dimen/small_button_height"
+            android:layout_width="@dimen/height_match_process_move_button"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/recent_game_divider" />

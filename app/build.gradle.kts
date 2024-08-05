@@ -16,8 +16,8 @@ android {
         applicationId = "com.kuneosu.mintoners"
         minSdk = 24
         targetSdk = 34
-        versionCode = 15
-        versionName = "1.0.2"
+        versionCode = 16
+        versionName = "1.0.3"
 
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
