@@ -21,6 +21,8 @@ import com.kuneosu.mintoners.ui.adapter.NoticeAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class NoticeFragment : Fragment() {
     private var _binding: FragmentNoticeBinding? = null
@@ -87,8 +89,16 @@ class NoticeFragment : Fragment() {
                         val content = String(Base64.decode(file?.content, Base64.DEFAULT))
                         val notice = Gson().fromJson(content, Notice::class.java)
                         noticeList.add(notice)
+                        sortNoticesByDate()
                         adapter.notifyDataSetChanged()
                     }
+                }
+            }
+
+            private fun sortNoticesByDate() {
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                noticeList.sortByDescending { notice ->
+                    dateFormat.parse(notice.noticeDate)?.time ?: 0L
                 }
             }
 
