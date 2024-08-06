@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mintoners</string>
     <string name="app_title">Mintoners</string>
-    <string name="version">1.0.3</string>
+    <string name="version">1.0.4</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -92,4 +92,5 @@
     <string name="setting_item_icon">Setting item icon</string>
     <string name="settings_notice_text">공지사항</string>
     <string name="help">HELP</string>
+    <string name="one_more">섞어서 한번 더하기</string>
 </resources>

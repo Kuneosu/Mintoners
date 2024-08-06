@@ -16,8 +16,8 @@ android {
         applicationId = "com.kuneosu.mintoners"
         minSdk = 24
         targetSdk = 34
-        versionCode = 16
-        versionName = "1.0.3"
+        versionCode = 18
+        versionName = "1.0.4"
 
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
@@ -77,10 +77,10 @@ dependencies {
     implementation(libs.androidx.recyclerview)
 
 
-    implementation("com.github.douglasjunior:android-simple-tooltip:0.2.1")
+    implementation(libs.android.simple.tooltip)
 
-    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

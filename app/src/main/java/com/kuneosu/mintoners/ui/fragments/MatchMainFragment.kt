@@ -5,22 +5,29 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
+import android.print.PrintAttributes.Margins
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
+import android.view.ViewGroup.MarginLayoutParams
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar.LayoutParams
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.constraintlayout.widget.Constraints
 import androidx.core.content.FileProvider
+import androidx.core.view.marginTop
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -34,6 +41,8 @@ import com.kuneosu.mintoners.databinding.FragmentMatchMainBinding
 import com.kuneosu.mintoners.ui.adapter.MatchMainPagerAdapter
 import com.kuneosu.mintoners.ui.customview.MatchBackDialog
 import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
+import com.kuneosu.mintoners.ui.customview.MatchPlayerWarningDialog
+import com.kuneosu.mintoners.ui.customview.OneMoreWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.GuideToolTip
 import com.kuneosu.mintoners.util.PreferencesManager
@@ -79,7 +88,7 @@ class MatchMainFragment : Fragment() {
         }
 
         binding.matchMainShareButton.setOnClickListener {
-            if(SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+            if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
                 return@setOnClickListener
             }
             lastClickTime = SystemClock.elapsedRealtime()
@@ -113,9 +122,43 @@ class MatchMainFragment : Fragment() {
             preferencesManager.setFirstTimeLaunch(fragmentName, false)
         }
 
+        oneMoreButtonSettingWithMatchMode()
 
 
         return binding.root
+    }
+
+    private fun oneMoreButtonSettingWithMatchMode() {
+        if (matchViewModel.matchMode.value == 0) {
+            binding.matchMainOneMoreButton.setOnClickListener {
+                val dialog = OneMoreWarningDialog { oneMoreGameGenerate() }
+                dialog.show(childFragmentManager, "OneMoreWarningDialog")
+
+            }
+        } else {
+            binding.matchMainOneMoreButton.visibility = View.GONE
+            binding.matchMainEndButton.layoutParams = ConstraintLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            ).apply {
+                //넓이, 높이
+                height = resources.getDimensionPixelSize(R.dimen.height_match_process_move_button)
+
+                setMargins(40, 120, 40, 120) //margin left, top, right, bottom 한번에 적용
+
+                //ConstraintSet 제약조건
+                bottomToBottom = ConstraintSet.PARENT_ID //부모 View
+                endToEnd = ConstraintSet.PARENT_ID
+                startToStart = ConstraintSet.PARENT_ID     //대상 View id
+                topToBottom = binding.matchMainViewPager.id
+            }
+        }
+    }
+
+    private fun oneMoreGameGenerate() {
+        matchViewModel.oneMoreGame()
+        matchViewModel.updatePoint(string = "One More")
+        binding.matchMainViewPager.adjustHeight()
     }
 
     private fun mainFragmentGuide() {
@@ -163,12 +206,13 @@ class MatchMainFragment : Fragment() {
                                     dismiss = {
                                         binding.matchMainScrollView.smoothScrollTo(
                                             0,
-                                            binding.matchMainScrollView.top
+                                            binding.matchMainScrollView.top,
                                         )
+                                        binding.matchMainScrollView.scrollY = 3000
                                         GuideToolTip().createGuide(
                                             context = requireContext(),
-                                            text = "경기 종료 버튼을 눌러 대회를 종료하고 저장할 수 있습니다.",
-                                            anchor = binding.matchMainEndButton,
+                                            text = "섞어서 한번 더하기는 파트너를 섞어서 대진표를 초기화 할 수 있는 기능입니다.\n기존의 대진표와 순위는 제거되는 점에 유의하세요 !",
+                                            anchor = binding.matchMainOneMoreButton,
                                             gravity = Gravity.TOP,
                                             shape = "rectangular",
                                             dismiss = {
@@ -176,7 +220,21 @@ class MatchMainFragment : Fragment() {
                                                     0,
                                                     binding.matchMainScrollView.top
                                                 )
+                                                GuideToolTip().createGuide(
+                                                    context = requireContext(),
+                                                    text = "경기 종료 버튼을 눌러 대회를 종료하고 저장할 수 있습니다.",
+                                                    anchor = binding.matchMainEndButton,
+                                                    gravity = Gravity.TOP,
+                                                    shape = "rectangular",
+                                                    dismiss = {
+                                                        binding.matchMainScrollView.smoothScrollTo(
+                                                            0,
+                                                            binding.matchMainScrollView.top
+                                                        )
+                                                        binding.matchMainScrollView.scrollY = 0
+                                                    })
                                             })
+
                                     }
                                 )
                             }

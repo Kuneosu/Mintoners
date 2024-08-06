@@ -46,10 +46,6 @@ class MatchGameFragment : Fragment() {
 
         gameAdapterSetting()
 
-        binding.matchGameRandomButton.setOnClickListener {
-            matchViewModel.randomizeGames()
-        }
-
         binding.matchGameCreateButton.setOnClickListener {
             matchViewModel.generateGames()
         }
@@ -98,26 +94,19 @@ class MatchGameFragment : Fragment() {
                             0,
                             binding.matchGameScrollView.top
                         )
+                        binding.matchGameScrollView.scrollY = 3000
                         GuideToolTip().createGuide(
                             context = requireContext(),
-                            text = "섞기 버튼을 눌러서 대진 순서를 무작위로 섞을 수 있습니다.",
-                            anchor = binding.matchGameRandomButton,
-                            gravity = Gravity.BOTTOM,
+                            text = "대진표 확정을 통해 경기를 시작할 수 있습니다.",
+                            anchor = binding.matchGameNextButton,
+                            gravity = Gravity.TOP,
                             shape = "rectangular",
                             dismiss = {
                                 binding.matchGameScrollView.smoothScrollTo(
                                     0,
                                     binding.matchGameScrollView.top
                                 )
-                                GuideToolTip().createGuide(
-                                    context = requireContext(),
-                                    text = "대진표 확정을 통해 경기를 시작할 수 있습니다.",
-                                    anchor = binding.matchGameNextButton,
-                                    gravity = Gravity.TOP,
-                                    shape = "rectangular",
-                                    dismiss = {
-                                    }
-                                )
+                                binding.matchGameScrollView.scrollY = 0
                             }
                         )
                     }

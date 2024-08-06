@@ -444,12 +444,6 @@ class MatchViewModel @Inject constructor(
         applyGameList()
     }
 
-    fun randomizeGames() {
-        _games.value = _games.value?.shuffled()
-        updateGameIndexes()
-        applyGameList()
-    }
-
     fun addPlayerList(playerList: MutableList<Player>) {
         val currentList = _players.value.orEmpty().toMutableList()
         playerList.forEach { player ->
@@ -465,6 +459,14 @@ class MatchViewModel @Inject constructor(
 
     fun setMatchMode(matchMode: Int) {
         _matchMode.value = matchMode
+    }
+
+    fun oneMoreGame(){
+        val shuffledPlayers = players.value?.shuffled()
+        _players.value = shuffledPlayers!!
+        applyPlayerList()
+        generateGames()
+        applyGameList()
     }
 
 

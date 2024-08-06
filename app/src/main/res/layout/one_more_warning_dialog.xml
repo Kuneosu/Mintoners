@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/width_wide_dialog"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    app:cardCornerRadius="20dp"
+    tools:ignore="HardcodedText">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/width_wide_dialog"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/one_more_warning_dialog_header"
+            android:layout_width="@dimen/width_wide_dialog"
+            android:layout_height="wrap_content"
+            android:background="@color/main"
+            android:padding="@dimen/padding_medium"
+            android:text="주의사항"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_xlarge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/one_more_warning_dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/padding_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/one_more_warning_dialog_header">
+
+
+            <TextView
+                android:id="@+id/one_more_warning_dialog_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                android:paddingVertical="@dimen/padding_medium"
+                android:text="섞어서 한번 더하기를 진행하면\n이전 기록은 사라집니다.\n계속 진행하시겠습니까?"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_medium" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/one_more_warning_dialog_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#804B89DC"
+            app:layout_constraintBottom_toTopOf="@id/one_more_warning_dialog_buttons"
+            app:layout_constraintTop_toBottomOf="@id/one_more_warning_dialog_content" />
+
+        <LinearLayout
+            android:id="@+id/one_more_warning_dialog_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/one_more_warning_dialog_divider">
+
+            <TextView
+                android:id="@+id/one_more_warning_dialog_close"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/padding_medium"
+                android:text="그만두기"
+                android:textAlignment="center"
+                android:textColor="@color/negative"
+                android:textSize="@dimen/text_large" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.01"
+                android:background="#804B89DC" />
+
+            <TextView
+                android:id="@+id/one_more_warning_dialog_one_more_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/padding_medium"
+                android:text="진행하기"
+                android:textAlignment="center"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
