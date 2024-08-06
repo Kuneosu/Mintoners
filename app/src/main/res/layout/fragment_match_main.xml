@@ -147,18 +147,32 @@
                     app:layout_constraintTop_toBottomOf="@+id/match_main_tab" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/match_main_end_button"
+                    android:id="@+id/match_main_one_more_button"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_match_process_move_button"
                     android:layout_marginHorizontal="@dimen/margin_default"
                     android:layout_marginTop="@dimen/margin_2xlarge"
+                    android:layout_marginBottom="@dimen/margin_default"
+                    android:background="@drawable/match_main_button"
+                    android:text="@string/one_more"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_large"
+                    app:layout_constraintBottom_toTopOf="@+id/match_main_end_button"
+                    app:layout_constraintTop_toBottomOf="@id/match_main_view_pager" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/match_main_end_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_match_process_move_button"
+                    android:layout_marginHorizontal="@dimen/margin_default"
                     android:layout_marginBottom="@dimen/margin_2xlarge"
                     android:background="@drawable/match_main_button"
                     android:text="@string/end_game"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_large"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/match_main_view_pager" />
+                    app:layout_constraintTop_toBottomOf="@+id/match_main_one_more_button" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

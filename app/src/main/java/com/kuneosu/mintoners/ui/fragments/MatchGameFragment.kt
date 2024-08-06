@@ -94,6 +94,7 @@ class MatchGameFragment : Fragment() {
                             0,
                             binding.matchGameScrollView.top
                         )
+                        binding.matchGameScrollView.scrollY = 3000
                         GuideToolTip().createGuide(
                             context = requireContext(),
                             text = "대진표 확정을 통해 경기를 시작할 수 있습니다.",
@@ -101,6 +102,11 @@ class MatchGameFragment : Fragment() {
                             gravity = Gravity.TOP,
                             shape = "rectangular",
                             dismiss = {
+                                binding.matchGameScrollView.smoothScrollTo(
+                                    0,
+                                    binding.matchGameScrollView.top
+                                )
+                                binding.matchGameScrollView.scrollY = 0
                             }
                         )
                     }

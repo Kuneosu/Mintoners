@@ -15,7 +15,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -29,11 +28,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentMatchMainBinding
 import com.kuneosu.mintoners.ui.adapter.MatchMainPagerAdapter
 import com.kuneosu.mintoners.ui.customview.MatchBackDialog
 import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
+import com.kuneosu.mintoners.ui.customview.OneMoreWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.GuideToolTip
 import com.kuneosu.mintoners.util.PreferencesManager
@@ -79,7 +78,7 @@ class MatchMainFragment : Fragment() {
         }
 
         binding.matchMainShareButton.setOnClickListener {
-            if(SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+            if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
                 return@setOnClickListener
             }
             lastClickTime = SystemClock.elapsedRealtime()
@@ -113,9 +112,21 @@ class MatchMainFragment : Fragment() {
             preferencesManager.setFirstTimeLaunch(fragmentName, false)
         }
 
+        binding.matchMainOneMoreButton.setOnClickListener {
+            val dialog = OneMoreWarningDialog { oneMoreGameGenerate() }
+            dialog.show(childFragmentManager, "OneMoreWarningDialog")
+
+        }
+
 
 
         return binding.root
+    }
+
+    private fun oneMoreGameGenerate() {
+        matchViewModel.oneMoreGame()
+        matchViewModel.updatePoint(string = "One More")
+        binding.matchMainViewPager.adjustHeight()
     }
 
     private fun mainFragmentGuide() {
@@ -163,12 +174,13 @@ class MatchMainFragment : Fragment() {
                                     dismiss = {
                                         binding.matchMainScrollView.smoothScrollTo(
                                             0,
-                                            binding.matchMainScrollView.top
+                                            binding.matchMainScrollView.top,
                                         )
+                                        binding.matchMainScrollView.scrollY = 3000
                                         GuideToolTip().createGuide(
                                             context = requireContext(),
-                                            text = "경기 종료 버튼을 눌러 대회를 종료하고 저장할 수 있습니다.",
-                                            anchor = binding.matchMainEndButton,
+                                            text = "섞어서 한번 더하기는 파트너를 섞어서 대진표를 초기화 할 수 있는 기능입니다.\n기존의 대진표와 순위는 제거되는 점에 유의하세요 !",
+                                            anchor = binding.matchMainOneMoreButton,
                                             gravity = Gravity.TOP,
                                             shape = "rectangular",
                                             dismiss = {
@@ -176,7 +188,21 @@ class MatchMainFragment : Fragment() {
                                                     0,
                                                     binding.matchMainScrollView.top
                                                 )
+                                                GuideToolTip().createGuide(
+                                                    context = requireContext(),
+                                                    text = "경기 종료 버튼을 눌러 대회를 종료하고 저장할 수 있습니다.",
+                                                    anchor = binding.matchMainEndButton,
+                                                    gravity = Gravity.TOP,
+                                                    shape = "rectangular",
+                                                    dismiss = {
+                                                        binding.matchMainScrollView.smoothScrollTo(
+                                                            0,
+                                                            binding.matchMainScrollView.top
+                                                        )
+                                                        binding.matchMainScrollView.scrollY = 0
+                                                    })
                                             })
+
                                     }
                                 )
                             }

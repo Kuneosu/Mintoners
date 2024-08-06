@@ -461,5 +461,13 @@ class MatchViewModel @Inject constructor(
         _matchMode.value = matchMode
     }
 
+    fun oneMoreGame(){
+        val shuffledPlayers = players.value?.shuffled()
+        _players.value = shuffledPlayers!!
+        applyPlayerList()
+        generateGames()
+        applyGameList()
+    }
+
 
 }
