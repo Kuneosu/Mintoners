@@ -32,12 +32,10 @@ class HomeFragment : Fragment() {
     private lateinit var homeRecentGameAdapter: HomeRecentGameAdapter
     private var lastClickTime = 0L
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         // 데이터 바인딩 객체를 인플레이트합니다
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -57,14 +55,10 @@ class HomeFragment : Fragment() {
             preferencesManager.setFirstTimeLaunch(fragmentName, false)
         }
 
-
         return binding.root
     }
 
-
     private fun homeFragmentSetting() {
-
-
         binding.homeSwipeRefresh.setOnRefreshListener {
             homeRefresh()
         }
@@ -78,7 +72,6 @@ class HomeFragment : Fragment() {
             binding.lotti.playAnimation()
             true
         }
-
 
         binding.homeInstructionButton.setOnClickListener {
             val intent = Intent(requireContext(), InstructionActivity::class.java)
@@ -114,70 +107,65 @@ class HomeFragment : Fragment() {
             intent.putExtra("matchNumber", 0)
             intent.putExtra("matchMode", 1)
             startActivity(intent)
-
         }
     }
 
     private fun homeFragmentGuide() {
-        GuideToolTip().createGuide(
-            context = requireContext(),
-            text = "반갑습니다 ! Mintoners를 사용해주셔서 감사합니다.\n\n" +
-                    "해당 가이드는 최초 1회만 출력됩니다.\n\n" +
-                    "Mintoners 사용이 처음이시라면 유심히 읽어보시는 것을 추천드립니다 !",
-            anchor = binding.homeTitle,
-            gravity = Gravity.BOTTOM,
-            shape = "rectangular",
-            dismiss = {
-                binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
-                GuideToolTip().createGuide(
-                    context = requireContext(),
-                    text = "여기서 자세한 사용법을 확인할 수 있습니다.",
-                    anchor = binding.homeInstructionButton,
-                    gravity = Gravity.BOTTOM,
-                    shape = "oval",
-                    dismiss = {
-                        binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
-                        GuideToolTip().createGuide(
-                            context = requireContext(),
-                            text = "최근 경기는 여기에 표시됩니다. 최근 경기 부분을 누르거나 화면을 아래로 당겨서 최신화 할 수 있습니다.",
-                            anchor = binding.homeRecentGameRecycler,
-                            gravity = Gravity.BOTTOM,
-                            shape = "rectangular",
-                            dismiss = {
-                                binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
-                                GuideToolTip().createGuide(
-                                    context = requireContext(),
-                                    text = "KDK 복식/단식 대진표를 작성할 수 있습니다." +
-                                            "최소 5명, 최대 16명의 인원 수 제한이 있습니다.",
-                                    anchor = binding.homeKdkMatchCard,
-                                    gravity = Gravity.TOP,
-                                    shape = "rectangular",
-                                    dismiss = {
-                                        binding.homeScrollView.smoothScrollTo(
-                                            0,
-                                            binding.homeScrollView.top
-                                        )
-                                        GuideToolTip().createGuide(
-                                            context = requireContext(),
-                                            text = "인원 수 제한 없는 자유 대진표를 작성할 수 있습니다.",
-                                            anchor = binding.homeFreeMatchCard,
-                                            gravity = Gravity.TOP,
-                                            shape = "rectangular",
-                                            dismiss = {
-                                                binding.homeScrollView.smoothScrollTo(
-                                                    0,
-                                                    binding.homeScrollView.top
-                                                )
-                                                homeFragmentSetting()
-                                            }
-                                        )
-                                    }
-                                )
-                            })
-                    }
-                )
-            }
-        )
+        _binding?.let { binding ->
+            GuideToolTip().createGuide(
+                context = requireContext(),
+                text = "반갑습니다 ! Mintoners를 사용해주셔서 감사합니다.\n\n" +
+                        "해당 가이드는 최초 1회만 출력됩니다.\n\n" +
+                        "Mintoners 사용이 처음이시라면 유심히 읽어보시는 것을 추천드립니다 !",
+                anchor = binding.homeTitle,
+                gravity = Gravity.BOTTOM,
+                shape = "rectangular",
+                dismiss = {
+                    binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
+                    GuideToolTip().createGuide(
+                        context = requireContext(),
+                        text = "여기서 자세한 사용법을 확인할 수 있습니다.",
+                        anchor = binding.homeInstructionButton,
+                        gravity = Gravity.BOTTOM,
+                        shape = "oval",
+                        dismiss = {
+                            binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
+                            GuideToolTip().createGuide(
+                                context = requireContext(),
+                                text = "최근 경기는 여기에 표시됩니다. 최근 경기 부분을 누르거나 화면을 아래로 당겨서 최신화 할 수 있습니다.",
+                                anchor = binding.homeRecentGameRecycler,
+                                gravity = Gravity.BOTTOM,
+                                shape = "rectangular",
+                                dismiss = {
+                                    binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
+                                    GuideToolTip().createGuide(
+                                        context = requireContext(),
+                                        text = "KDK 복식/단식 대진표를 작성할 수 있습니다." +
+                                                "최소 5명, 최대 16명의 인원 수 제한이 있습니다.",
+                                        anchor = binding.homeKdkMatchCard,
+                                        gravity = Gravity.TOP,
+                                        shape = "rectangular",
+                                        dismiss = {
+                                            binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
+                                            GuideToolTip().createGuide(
+                                                context = requireContext(),
+                                                text = "인원 수 제한 없는 자유 대진표를 작성할 수 있습니다.",
+                                                anchor = binding.homeFreeMatchCard,
+                                                gravity = Gravity.TOP,
+                                                shape = "rectangular",
+                                                dismiss = {
+                                                    binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
+                                                    homeFragmentSetting()
+                                                }
+                                            )
+                                        }
+                                    )
+                                })
+                        }
+                    )
+                }
+            )
+        }
     }
 
     private fun homeRefresh() {
