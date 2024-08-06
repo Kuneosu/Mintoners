@@ -442,4 +442,5 @@ July 2024 Personal project, match table creation and management application
     - 가이드 툴팁 출력 시 툴팁이 화면을 벗어나는 문제가 발생
         - 툴팁이 화면을 벗어나는 경우에 스크롤을 조정하여 툴팁이 화면에 출력되도록 수정
 - **일부 수정**
-  - NoticeFragment 에서 공지사항 순서가 무작위로 출력되던 문제 해결 (최신순으로 정렬)
+    - NoticeFragment 에서 공지사항 순서가 무작위로 출력되던 문제 해결 (최신순으로 정렬)
+    - MatchPlayerFragment 에서 중복되는 선수명을 입력했을 경우 1,2 로 숫자를 붙여서 중복을 방지

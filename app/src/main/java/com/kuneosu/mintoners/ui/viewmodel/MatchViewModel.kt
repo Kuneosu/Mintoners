@@ -51,6 +51,7 @@ class MatchViewModel @Inject constructor(
     private val _selectedDate = MutableLiveData<String>()
     val selectedDate: LiveData<String> get() = _selectedDate
 
+
     init {
         _players.value = _match.value?.matchPlayers ?: listOf()
         _games.value = _match.value?.matchList ?: listOf()
@@ -199,6 +200,7 @@ class MatchViewModel @Inject constructor(
     fun applyPlayerList() {
         viewModelScope.launch {
             val currentList = _players.value.orEmpty().toMutableList()
+            resolveDuplicatePlayerNames(currentList)
             _match.value?.matchPlayers = currentList
 
             val matchNumber = _match.value?.matchNumber
@@ -461,12 +463,49 @@ class MatchViewModel @Inject constructor(
         _matchMode.value = matchMode
     }
 
-    fun oneMoreGame(){
+    fun oneMoreGame() {
         val shuffledPlayers = players.value?.shuffled()
         _players.value = shuffledPlayers!!
         applyPlayerList()
         generateGames()
         applyGameList()
+    }
+
+    private fun resolveDuplicatePlayerNames(players: MutableList<Player>) {
+        val nameCountMap = mutableMapOf<String, Int>()
+        val newNames = mutableMapOf<Int, String>()
+
+        // 1. 각 플레이어 이름의 중복 여부를 확인합니다.
+        for (player in players) {
+            val originalName = player.playerName
+            if (nameCountMap.containsKey(originalName)) {
+                // 중복된 이름이 있을 경우 카운트를 증가시킵니다.
+                val count = nameCountMap[originalName]!! + 1
+                nameCountMap[originalName] = count
+                // 새로운 이름을 생성합니다. 예: "James 2"
+                newNames[player.playerIndex] = "$originalName $count"
+            } else {
+                // 중복되지 않은 이름은 카운트를 1로 설정합니다.
+                nameCountMap[originalName] = 1
+                newNames[player.playerIndex] = originalName
+            }
+        }
+
+        // 2. 다시 순회하면서 중복된 이름에만 "이름 1" 형식으로 수정합니다.
+        for ((originalName, count) in nameCountMap) {
+            if (count > 1) {
+                var counter = 1
+                players.filter { it.playerName == originalName }.forEach { player ->
+                    newNames[player.playerIndex] = "$originalName $counter"
+                    counter++
+                }
+            }
+        }
+
+        // 3. 플레이어 객체에 새로운 이름을 설정합니다.
+        for (player in players) {
+            player.playerName = newNames[player.playerIndex]!!
+        }
     }
 
 
