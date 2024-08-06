@@ -5,21 +5,29 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
+import android.print.PrintAttributes.Margins
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar.LayoutParams
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.constraintlayout.widget.Constraints
 import androidx.core.content.FileProvider
+import androidx.core.view.marginTop
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -28,10 +36,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentMatchMainBinding
 import com.kuneosu.mintoners.ui.adapter.MatchMainPagerAdapter
 import com.kuneosu.mintoners.ui.customview.MatchBackDialog
 import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
+import com.kuneosu.mintoners.ui.customview.MatchPlayerWarningDialog
 import com.kuneosu.mintoners.ui.customview.OneMoreWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.GuideToolTip
@@ -112,15 +122,37 @@ class MatchMainFragment : Fragment() {
             preferencesManager.setFirstTimeLaunch(fragmentName, false)
         }
 
-        binding.matchMainOneMoreButton.setOnClickListener {
-            val dialog = OneMoreWarningDialog { oneMoreGameGenerate() }
-            dialog.show(childFragmentManager, "OneMoreWarningDialog")
-
-        }
-
+        oneMoreButtonSettingWithMatchMode()
 
 
         return binding.root
+    }
+
+    private fun oneMoreButtonSettingWithMatchMode() {
+        if (matchViewModel.matchMode.value == 0) {
+            binding.matchMainOneMoreButton.setOnClickListener {
+                val dialog = OneMoreWarningDialog { oneMoreGameGenerate() }
+                dialog.show(childFragmentManager, "OneMoreWarningDialog")
+
+            }
+        } else {
+            binding.matchMainOneMoreButton.visibility = View.GONE
+            binding.matchMainEndButton.layoutParams = ConstraintLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            ).apply {
+                //넓이, 높이
+                height = resources.getDimensionPixelSize(R.dimen.height_match_process_move_button)
+
+                setMargins(40, 120, 40, 120) //margin left, top, right, bottom 한번에 적용
+
+                //ConstraintSet 제약조건
+                bottomToBottom = ConstraintSet.PARENT_ID //부모 View
+                endToEnd = ConstraintSet.PARENT_ID
+                startToStart = ConstraintSet.PARENT_ID     //대상 View id
+                topToBottom = binding.matchMainViewPager.id
+            }
+        }
     }
 
     private fun oneMoreGameGenerate() {
