@@ -16,7 +16,7 @@ android {
         applicationId = "com.kuneosu.mintoners"
         minSdk = 24
         targetSdk = 34
-        versionCode = 19
+        versionCode = 20
         versionName = "1.0.4"
 
         val properties = Properties()
