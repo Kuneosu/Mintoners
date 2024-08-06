@@ -427,3 +427,9 @@ July 2024 Personal project, match table creation and management application
     - MatchMainFragment 에서 대진 공유가 여러번 클릭 되던 문제도 동일하게 해결
     - GameFragment 에서 선수를 비운 채로 대진표를 생성할 수 있던 문제 해결
     - 사전 출시 보고서에 잡힌 에러 해결
+
+## 2024.08.06
+
+- **피드백 반영**
+  - 대진표 진행 시 앞뒤 경기 선수가 중복되어 대진이 매끄럽게 진행되지 않는 문제가 발생
+    - 대진표 섞기 기능으로 인해 알고리즘이 꼬이는 것을 확인 -> 섞기 기능 삭제

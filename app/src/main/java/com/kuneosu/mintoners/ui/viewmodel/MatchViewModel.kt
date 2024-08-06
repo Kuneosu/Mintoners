@@ -444,12 +444,6 @@ class MatchViewModel @Inject constructor(
         applyGameList()
     }
 
-    fun randomizeGames() {
-        _games.value = _games.value?.shuffled()
-        updateGameIndexes()
-        applyGameList()
-    }
-
     fun addPlayerList(playerList: MutableList<Player>) {
         val currentList = _players.value.orEmpty().toMutableList()
         playerList.forEach { player ->
