@@ -25,10 +25,23 @@ jobs:
         distribution: 'adopt'
         check-latest: true
 
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v2
+      with:
+        api-level: 30
+        build-tools: '30.0.3'
+
     - name: Create local.properties
       run: |
         echo "sdk.dir=${{ secrets.SDK_DIR }}" >> local.properties
         echo "feedback_email=${{ secrets.FEEDBACK_EMAIL }}" >> local.properties
+
+    - name: Create google-services.json
+      run: |
+        mkdir -p app/src/debug
+        echo "${{ secrets.GOOGLE_SERVICES_JSON }}" > app/src/debug/google-services.json
+        mkdir -p app/src
+        echo "${{ secrets.GOOGLE_SERVICES_JSON }}" > app/src/google-services.json
 
     - name: Cache Gradle packages
       uses: actions/cache@v2
