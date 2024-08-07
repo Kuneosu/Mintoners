@@ -454,3 +454,5 @@ July 2024 Personal project, match table creation and management application
         - TouchInterceptorFrameLayout 을 만들어 가이드 툴팁 출력 중에 발생하는 터치를 모두 가로챔.
         - 이를 통해 스크롤도 함께 막음.
         - 기존에 터치를 막기 위해 있던 smoothScrollToPosition 을 삭제
+
+- **1.0.5 Release**
