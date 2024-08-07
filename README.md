@@ -456,3 +456,4 @@ July 2024 Personal project, match table creation and management application
         - 기존에 터치를 막기 위해 있던 smoothScrollToPosition 을 삭제
 
 - **1.0.5 Release**
+  - hotfix - 단식과 복식 아이템 Layout 이 다르던 문제 해결

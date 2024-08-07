@@ -13,6 +13,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingVertical="@dimen/padding_small"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -161,8 +162,8 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:visibility="gone"
         android:paddingVertical="@dimen/padding_small"
+        android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -200,7 +201,7 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_medium" />
+                android:textSize="@dimen/text_large" />
         </LinearLayout>
 
 
@@ -208,11 +209,12 @@
             android:id="@+id/match_main_list_single_team_a_score"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.8"
             android:autofillHints="0"
             android:background="@drawable/match_edittext"
+            android:hint="@string/zero"
             android:inputType="number"
-            android:padding="@dimen/padding_small"
+            android:padding="@dimen/padding_medium"
             android:text="@string/team_a_score"
             android:textAlignment="center"
             android:textColor="@color/black"
@@ -226,19 +228,20 @@
             android:paddingVertical="@dimen/padding_medium"
             android:text="@string/vs_dot"
             android:textAlignment="center"
-            android:textColor="@color/trans_black_50"
+            android:textColor="@color/trans_black_75"
             android:textSize="@dimen/text_medium" />
 
         <EditText
             android:id="@+id/match_main_list_single_team_b_score"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.8"
             android:autofillHints="0"
             android:background="@drawable/match_edittext"
+            android:hint="@string/zero"
             android:inputType="number"
-            android:padding="@dimen/padding_small"
-            android:text="@string/team_b_score"
+            android:padding="@dimen/padding_medium"
+            android:text="@string/team_a_score"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
@@ -258,7 +261,7 @@
                 android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_medium" />
+                android:textSize="@dimen/text_large" />
         </LinearLayout>
 
 
