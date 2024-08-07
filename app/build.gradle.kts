@@ -22,7 +22,7 @@ android {
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
         val feedbackEmail = properties.getProperty("feedback_email")
-        buildConfigField("String", "FEEDBACK_EMAIL", feedbackEmail)
+        buildConfigField("String", "FEEDBACK_EMAIL", "\"$feedbackEmail\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

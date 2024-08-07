@@ -51,7 +51,7 @@ class FeedbackDialog : DialogFragment() {
                 Intent.EXTRA_EMAIL,
                 arrayOf(BuildConfig.FEEDBACK_EMAIL)
             ) // recipient email address
-            putExtra(Intent.EXTRA_SUBJECT, "#Mintoners 불편사항 접수")
+            putExtra(Intent.EXTRA_SUBJECT, "#Mintoners 문의사항 접수")
             putExtra(Intent.EXTRA_TEXT, message)
         }
 
