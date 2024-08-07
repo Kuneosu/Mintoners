@@ -82,6 +82,21 @@ class MatchPlayerFragment : Fragment() {
     }
 
     private fun playerFragmentGuide() {
+        val backPressedCallbackOnGuide = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Toast.makeText(
+                    requireContext(),
+                    "가이드를 완료하려면 화면을 터치해주세요.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            backPressedCallbackOnGuide
+        )
+        binding.matchPlayerTouchInterceptor.isTouchIntercepted = true
+        binding.matchPlayerTouchInterceptor.visibility = View.VISIBLE
         GuideToolTip().createGuide(
             context = requireContext(),
             text = "선수 추가 버튼을 통해 여러명의 선수를 한 번에 추가할 수 있습니다.",
@@ -97,10 +112,12 @@ class MatchPlayerFragment : Fragment() {
                     gravity = Gravity.TOP,
                     shape = "rectangular",
                     dismiss = {
-                        binding.matchPlayerScrollView.smoothScrollTo(
-                            0,
-                            binding.matchPlayerScrollView.top
+                        requireActivity().onBackPressedDispatcher.addCallback(
+                            viewLifecycleOwner,
+                            callback
                         )
+                        binding.matchPlayerTouchInterceptor.isTouchIntercepted = false
+                        binding.matchPlayerTouchInterceptor.visibility = View.GONE
                     }
                 )
             }

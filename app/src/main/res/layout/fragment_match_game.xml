@@ -229,4 +229,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <com.kuneosu.mintoners.ui.customview.TouchInterceptorFrameLayout
+        android:id="@+id/match_game_touch_interceptor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:visibility="gone" />
+
+
 </com.kuneosu.mintoners.ui.customview.CustomConstraint>

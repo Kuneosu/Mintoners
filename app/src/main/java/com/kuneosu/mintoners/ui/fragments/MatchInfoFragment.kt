@@ -1,7 +1,6 @@
 package com.kuneosu.mintoners.ui.fragments
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -11,27 +10,23 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.databinding.FragmentMatchInfoBinding
 import com.kuneosu.mintoners.ui.customview.MatchBackDialog
 import com.kuneosu.mintoners.ui.customview.MatchCalendarDialog
-import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
 import com.kuneosu.mintoners.ui.customview.MatchInfoWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.GuideToolTip
 import com.kuneosu.mintoners.util.PreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -104,6 +99,8 @@ class MatchInfoFragment : Fragment() {
     }
 
     private fun infoFragmentGuide() {
+        binding.matchInfoTouchInterceptor.isTouchIntercepted = true
+        binding.matchInfoTouchInterceptor.visibility = View.VISIBLE
         GuideToolTip().createGuide(
             context = requireContext(),
             text = "대회 정보를 입력하고 다음으로 넘어갈 수 있습니다.\n기본값을 사용하려면 바로 다음 버튼을 눌러주세요 !",
@@ -111,7 +108,8 @@ class MatchInfoFragment : Fragment() {
             gravity = Gravity.TOP,
             shape = "rectangular",
             dismiss = {
-                binding.matchInfoScroll.smoothScrollTo(0, binding.matchInfoScroll.top)
+                binding.matchInfoTouchInterceptor.isTouchIntercepted = false
+                binding.matchInfoTouchInterceptor.visibility = View.GONE
             }
         )
 
