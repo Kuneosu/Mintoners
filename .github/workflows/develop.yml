@@ -37,8 +37,9 @@ jobs:
         echo "feedback_email=${{ secrets.FEEDBACK_EMAIL }}" >> local.properties
 
     - name: Create google-services.json
-      run: |
-        printf "%s" "${{ secrets.GOOGLE_SERVICES_JSON }}" > app/google-services.json
+      env:
+          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+      run: echo $DATA | base64 -di > app/google-services.json
 
     - name: Cache Gradle packages
       uses: actions/cache@v2
