@@ -36,9 +36,12 @@ jobs:
         echo "sdk.dir=${{ secrets.SDK_DIR }}" >> local.properties
         echo "feedback_email=${{ secrets.FEEDBACK_EMAIL }}" >> local.properties
 
+    - name: Install jq
+      run: sudo apt-get install -y jq
+
     - name: Create google-services.json
       run: |
-        echo "${{ secrets.GOOGLE_SERVICES_JSON }}" > app/google-services.json
+        echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | jq '.' > app/google-services.json
 
     - name: Cache Gradle packages
       uses: actions/cache@v2
