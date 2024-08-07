@@ -37,7 +37,7 @@ jobs:
         FEEDBACK_EMAIL: ${{ secrets.FEEDBACK_EMAIL }}
       run: |
         echo "sdk.dir=${SDK_DIR}" > local.properties
-        echo "feedback_email=\"${FEEDBACK_EMAIL}\"" >> local.properties
+        echo "feedback_email=${FEEDBACK_EMAIL}" >> local.properties
 
     - name: Create google-services.json
       env:
