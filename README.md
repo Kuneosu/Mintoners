@@ -457,3 +457,9 @@ July 2024 Personal project, match table creation and management application
 
 - **1.0.5 Release**
   - hotfix - 단식과 복식 아이템 Layout 이 다르던 문제 해결
+
+- **GitHub Actions 를 사용한 CI 도입**
+  - 빌드, 테스트 자동화를 위한 GitHub Actions 도입
+  - 우선은 develop 브랜치에 push 또는 pr 이 생길때만 동작하도록 설정
+  - .github/workflows/develop.yml 생성
+  - local.properties, build.gradle 일부 수정
