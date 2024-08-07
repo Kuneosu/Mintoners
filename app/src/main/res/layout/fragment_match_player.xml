@@ -8,8 +8,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:ignore="HardcodedText"
-    tools:context=".ui.fragments.MatchPlayerFragment">
+    tools:context=".ui.fragments.MatchPlayerFragment"
+    tools:ignore="HardcodedText">
+
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/match_player_scroll_view"
@@ -228,5 +230,10 @@
             </com.kuneosu.mintoners.ui.customview.CustomConstraint>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
+    <com.kuneosu.mintoners.ui.customview.TouchInterceptorFrameLayout
+        android:id="@+id/match_player_touch_interceptor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:visibility="gone" />
 </com.kuneosu.mintoners.ui.customview.CustomConstraint>

@@ -61,7 +61,7 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/match_main_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/match_main_top_bar">
@@ -165,8 +165,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_match_process_move_button"
                     android:layout_marginHorizontal="@dimen/margin_default"
-                    android:layout_marginBottom="@dimen/margin_2xlarge"
                     android:layout_marginTop="@dimen/margin_default"
+                    android:layout_marginBottom="@dimen/margin_2xlarge"
                     android:background="@drawable/match_main_button"
                     android:text="@string/end_game"
                     android:textColor="@color/white"
@@ -175,6 +175,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/match_main_one_more_button" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.kuneosu.mintoners.ui.customview.TouchInterceptorFrameLayout
+        android:id="@+id/match_main_touch_interceptor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:visibility="gone" />
 
 </com.kuneosu.mintoners.ui.customview.CustomConstraint>

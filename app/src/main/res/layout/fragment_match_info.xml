@@ -9,25 +9,6 @@
     android:background="@color/white"
     tools:context=".ui.fragments.MatchInfoFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/match_info_loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/trans_black_75"
-        android:visibility="gone">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/height_notice_item"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/loading_animation" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <ScrollView
         android:id="@+id/match_info_scroll"
         android:layout_width="match_parent"
@@ -474,5 +455,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <com.kuneosu.mintoners.ui.customview.TouchInterceptorFrameLayout
+        android:id="@+id/match_info_touch_interceptor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

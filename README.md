@@ -441,3 +441,18 @@ July 2024 Personal project, match table creation and management application
         - 자유 대진에선 섞어서 한번 더하기 기능 비활성화
     - 가이드 툴팁 출력 시 툴팁이 화면을 벗어나는 문제가 발생
         - 툴팁이 화면을 벗어나는 경우에 스크롤을 조정하여 툴팁이 화면에 출력되도록 수정
+- **일부 수정**
+    - NoticeFragment 에서 공지사항 순서가 무작위로 출력되던 문제 해결 (최신순으로 정렬)
+    - MatchPlayerFragment 에서 중복되는 선수명을 입력했을 경우 1,2 로 숫자를 붙여서 중복을 방지
+
+## 2024.08.07
+
+- **버그 수정**
+    - 가이드 툴팁 출력 중 뒤로가기로 프래그먼트 이동 후 dismiss 호출 시 앱이 종료되는 문제 해결
+        - onBackPressedCallback 을 따로 만들어 가이드 출력 시엔 뒤로가기 버튼을 막고, 마지막 가이드가 닫힐 때 뒤로가기 버튼을 활성화
+    - 가이드 툴팁 출력 중 스크롤이 되던 문제 해결
+        - TouchInterceptorFrameLayout 을 만들어 가이드 툴팁 출력 중에 발생하는 터치를 모두 가로챔.
+        - 이를 통해 스크롤도 함께 막음.
+        - 기존에 터치를 막기 위해 있던 smoothScrollToPosition 을 삭제
+
+- **1.0.5 Release**

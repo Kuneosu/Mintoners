@@ -112,6 +112,8 @@ class HomeFragment : Fragment() {
 
     private fun homeFragmentGuide() {
         _binding?.let { binding ->
+            binding.homeTouchInterceptor.isTouchIntercepted = true
+            binding.homeTouchInterceptor.visibility = View.VISIBLE
             GuideToolTip().createGuide(
                 context = requireContext(),
                 text = "반갑습니다 ! Mintoners를 사용해주셔서 감사합니다.\n\n" +
@@ -121,7 +123,6 @@ class HomeFragment : Fragment() {
                 gravity = Gravity.BOTTOM,
                 shape = "rectangular",
                 dismiss = {
-                    binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
                     GuideToolTip().createGuide(
                         context = requireContext(),
                         text = "여기서 자세한 사용법을 확인할 수 있습니다.",
@@ -129,7 +130,6 @@ class HomeFragment : Fragment() {
                         gravity = Gravity.BOTTOM,
                         shape = "oval",
                         dismiss = {
-                            binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
                             GuideToolTip().createGuide(
                                 context = requireContext(),
                                 text = "최근 경기는 여기에 표시됩니다. 최근 경기 부분을 누르거나 화면을 아래로 당겨서 최신화 할 수 있습니다.",
@@ -137,7 +137,6 @@ class HomeFragment : Fragment() {
                                 gravity = Gravity.BOTTOM,
                                 shape = "rectangular",
                                 dismiss = {
-                                    binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
                                     GuideToolTip().createGuide(
                                         context = requireContext(),
                                         text = "KDK 복식/단식 대진표를 작성할 수 있습니다." +
@@ -146,7 +145,6 @@ class HomeFragment : Fragment() {
                                         gravity = Gravity.TOP,
                                         shape = "rectangular",
                                         dismiss = {
-                                            binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
                                             GuideToolTip().createGuide(
                                                 context = requireContext(),
                                                 text = "인원 수 제한 없는 자유 대진표를 작성할 수 있습니다.",
@@ -154,8 +152,11 @@ class HomeFragment : Fragment() {
                                                 gravity = Gravity.TOP,
                                                 shape = "rectangular",
                                                 dismiss = {
-                                                    binding.homeScrollView.smoothScrollTo(0, binding.homeScrollView.top)
                                                     homeFragmentSetting()
+                                                    binding.homeTouchInterceptor.isTouchIntercepted =
+                                                        false
+                                                    binding.homeTouchInterceptor.visibility =
+                                                        View.GONE
                                                 }
                                             )
                                         }

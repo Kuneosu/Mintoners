@@ -16,17 +16,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kuneosu.mintoners.R
-import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.databinding.FragmentMatchGameBinding
 import com.kuneosu.mintoners.ui.adapter.MatchGamesAdapter
 import com.kuneosu.mintoners.ui.customview.MatchPlayerWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.GuideToolTip
 import com.kuneosu.mintoners.util.PreferencesManager
-import com.kuneosu.mintoners.util.SimpleSwipeHelperCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -71,6 +68,21 @@ class MatchGameFragment : Fragment() {
     }
 
     private fun gameFragmentGuide() {
+        val backPressedCallbackOnGuide = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Toast.makeText(
+                    requireContext(),
+                    "가이드를 완료하려면 화면을 터치해주세요.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            backPressedCallbackOnGuide
+        )
+        binding.matchGameTouchInterceptor.isTouchIntercepted = true
+        binding.matchGameTouchInterceptor.visibility = View.VISIBLE
         GuideToolTip().createGuide(
             context = requireContext(),
             text = "추가된 선수에 따라 자동으로 대진표가 생성됩니다. 선수명을 터치하여 대진을 수정하거나 아이템을 " +
@@ -80,7 +92,6 @@ class MatchGameFragment : Fragment() {
             gravity = Gravity.TOP,
             shape = "rectangular",
             dismiss = {
-                binding.matchGameScrollView.smoothScrollTo(0, binding.matchGameScrollView.top)
                 binding.matchGameRecyclerView.isEnabled = false
                 GuideToolTip().createGuide(
                     context = requireContext(),
@@ -90,10 +101,6 @@ class MatchGameFragment : Fragment() {
                     gravity = Gravity.BOTTOM,
                     shape = "rectangular",
                     dismiss = {
-                        binding.matchGameScrollView.smoothScrollTo(
-                            0,
-                            binding.matchGameScrollView.top
-                        )
                         binding.matchGameScrollView.scrollY = 3000
                         GuideToolTip().createGuide(
                             context = requireContext(),
@@ -102,11 +109,13 @@ class MatchGameFragment : Fragment() {
                             gravity = Gravity.TOP,
                             shape = "rectangular",
                             dismiss = {
-                                binding.matchGameScrollView.smoothScrollTo(
-                                    0,
-                                    binding.matchGameScrollView.top
-                                )
                                 binding.matchGameScrollView.scrollY = 0
+                                requireActivity().onBackPressedDispatcher.addCallback(
+                                    viewLifecycleOwner,
+                                    callback
+                                )
+                                binding.matchGameTouchInterceptor.isTouchIntercepted = false
+                                binding.matchGameTouchInterceptor.visibility = View.GONE
                             }
                         )
                     }

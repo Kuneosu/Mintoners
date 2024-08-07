@@ -5,29 +5,23 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
-import android.print.PrintAttributes.Margins
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.MarginLayoutParams
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.ActionBar.LayoutParams
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.constraintlayout.widget.Constraints
 import androidx.core.content.FileProvider
-import androidx.core.view.marginTop
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -41,7 +35,6 @@ import com.kuneosu.mintoners.databinding.FragmentMatchMainBinding
 import com.kuneosu.mintoners.ui.adapter.MatchMainPagerAdapter
 import com.kuneosu.mintoners.ui.customview.MatchBackDialog
 import com.kuneosu.mintoners.ui.customview.MatchInfoDialog
-import com.kuneosu.mintoners.ui.customview.MatchPlayerWarningDialog
 import com.kuneosu.mintoners.ui.customview.OneMoreWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import com.kuneosu.mintoners.util.GuideToolTip
@@ -162,6 +155,21 @@ class MatchMainFragment : Fragment() {
     }
 
     private fun mainFragmentGuide() {
+        val backPressedCallbackOnGuide = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Toast.makeText(
+                    requireContext(),
+                    "가이드를 완료하려면 화면을 터치해주세요.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            backPressedCallbackOnGuide
+        )
+        binding.matchMainTouchInterceptor.isTouchIntercepted = true
+        binding.matchMainTouchInterceptor.visibility = View.VISIBLE
         GuideToolTip().createGuide(
             context = requireContext(),
             text = "대회명을 눌러 대회 정보를 확인할 수 있습니다.",
@@ -169,10 +177,6 @@ class MatchMainFragment : Fragment() {
             gravity = Gravity.BOTTOM,
             shape = "oval",
             dismiss = {
-                binding.matchMainScrollView.smoothScrollTo(
-                    0,
-                    binding.matchMainScrollView.top
-                )
                 GuideToolTip().createGuide(
                     context = requireContext(),
                     text = "대진 수정 버튼을 눌러 이전 단계로 돌아가 대회 정보를 수정할 수 있습니다.",
@@ -180,10 +184,6 @@ class MatchMainFragment : Fragment() {
                     gravity = Gravity.BOTTOM,
                     shape = "rectangular",
                     dismiss = {
-                        binding.matchMainScrollView.smoothScrollTo(
-                            0,
-                            binding.matchMainScrollView.top
-                        )
                         GuideToolTip().createGuide(
                             context = requireContext(),
                             text = "대진 공유 버튼을 눌러 대진표나 현재 순위를 이미지로 공유할 수 있습니다.",
@@ -191,10 +191,6 @@ class MatchMainFragment : Fragment() {
                             gravity = Gravity.BOTTOM,
                             shape = "rectangular",
                             dismiss = {
-                                binding.matchMainScrollView.smoothScrollTo(
-                                    0,
-                                    binding.matchMainScrollView.top
-                                )
                                 GuideToolTip().createGuide(
                                     context = requireContext(),
                                     text = "대진표와 순위를 확인할 수 있습니다.\n\n순서 영역의 숫자를 터치하면 해당 대진표를 잠금 상태로 변경할 수 있습니다." +
@@ -204,10 +200,6 @@ class MatchMainFragment : Fragment() {
                                     gravity = Gravity.TOP,
                                     shape = "rectangular",
                                     dismiss = {
-                                        binding.matchMainScrollView.smoothScrollTo(
-                                            0,
-                                            binding.matchMainScrollView.top,
-                                        )
                                         binding.matchMainScrollView.scrollY = 3000
                                         GuideToolTip().createGuide(
                                             context = requireContext(),
@@ -216,10 +208,6 @@ class MatchMainFragment : Fragment() {
                                             gravity = Gravity.TOP,
                                             shape = "rectangular",
                                             dismiss = {
-                                                binding.matchMainScrollView.smoothScrollTo(
-                                                    0,
-                                                    binding.matchMainScrollView.top
-                                                )
                                                 GuideToolTip().createGuide(
                                                     context = requireContext(),
                                                     text = "경기 종료 버튼을 눌러 대회를 종료하고 저장할 수 있습니다.",
@@ -227,11 +215,15 @@ class MatchMainFragment : Fragment() {
                                                     gravity = Gravity.TOP,
                                                     shape = "rectangular",
                                                     dismiss = {
-                                                        binding.matchMainScrollView.smoothScrollTo(
-                                                            0,
-                                                            binding.matchMainScrollView.top
-                                                        )
                                                         binding.matchMainScrollView.scrollY = 0
+                                                        requireActivity().onBackPressedDispatcher.addCallback(
+                                                            viewLifecycleOwner,
+                                                            callback
+                                                        )
+                                                        binding.matchMainTouchInterceptor.isTouchIntercepted =
+                                                            false
+                                                        binding.matchMainTouchInterceptor.visibility =
+                                                            View.GONE
                                                     })
                                             })
 
