@@ -32,9 +32,12 @@ jobs:
         build-tools: '30.0.3'
 
     - name: Create local.properties
+      env:
+        SDK_DIR: ${{ secrets.SDK_DIR }}
+        FEEDBACK_EMAIL: ${{ secrets.FEEDBACK_EMAIL }}
       run: |
-        echo "sdk.dir=${{ secrets.SDK_DIR }}" >> local.properties
-        echo "feedback_email=${{ secrets.FEEDBACK_EMAIL }}" >> local.properties
+        echo "sdk.dir=${SDK_DIR}" > local.properties
+        echo "feedback_email=\"${FEEDBACK_EMAIL}\"" >> local.properties
 
     - name: Create google-services.json
       env:
