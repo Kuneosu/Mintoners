@@ -79,16 +79,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "Creating tag ${{ steps.extract_version.outputs.version }}"
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git tag ${{ env.RELEASE_NAME }}
-          git push origin HEAD:refs/tags/${{ env.RELEASE_NAME }}
+          git tag ${{ steps.extract_version.outputs.version }}
+          git push origin HEAD:refs/tags/${{ steps.extract_version.outputs.version }}
 
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ env.RELEASE_NAME }}
-          release_name: "Release ${{ env.RELEASE_NAME }}"
+          tag_name: ${{ steps.extract_version.outputs.version }}
+          release_name: "Release ${{ steps.extract_version.outputs.version }}"
           files: app/build/outputs/bundle/release/app-release.aab
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
