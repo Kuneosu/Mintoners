@@ -69,11 +69,11 @@ jobs:
       - name: Build release AAB
         run: ./gradlew bundleRelease
 
-      - name: Get version
+      - name: Get version from build.gradle
         id: get_version
         run: |
-          echo "VERSION_CODE=$(grep versionCode buildSrc/src/main/java/Dependencies.kt | awk '{print $5}')" >> $GITHUB_ENV
-          echo "VERSION_NAME=$(grep versionName buildSrc/src/main/java/Dependencies.kt | awk '{print $5}' | tr -d '\"' | tr -d ' ')" >> $GITHUB_ENV
+          echo "VERSION_CODE=$(grep versionCode app/build.gradle | sed 's/[^0-9]*//g')" >> $GITHUB_ENV
+          echo "VERSION_NAME=$(grep versionName app/build.gradle | sed 's/.*\"\([^\"]*\)\".*/\1/')" >> $GITHUB_ENV
 
       - name: Get tag name
         id: get_tag
