@@ -463,3 +463,13 @@ July 2024 Personal project, match table creation and management application
   - 우선은 develop 브랜치에 push 또는 pr 이 생길때만 동작하도록 설정
   - .github/workflows/develop.yml 생성
   - local.properties, build.gradle 일부 수정
+
+## 2024.08.08
+
+- **GitHub Actions를 사용한 CI/CD 도입**
+  - 빌드, 테스트, 배포 자동화를 위한 GitHub Actions 도입
+  - develop 브랜치에 push 할 경우 CI(CI for develop) 동작
+  - main 브랜치에 Pull Request 생성 시 CD(CD for PR) 동작
+  - main 브랜치에 push 할 경우 CI/CD(CI for Main, CD for Main) 동작
+  - 현재 CD 시 앱 번들을 생성하고 GitHub Release 가 출시되도록 설정
+  - Release 명은 pr 또는 push 시 지정한 'v{X}.{Y}.{Z}'로 설정
