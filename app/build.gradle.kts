@@ -32,13 +32,10 @@ android {
         create("release") {
             val properties = Properties()
             properties.load(project.rootProject.file("local.properties").inputStream())
-            storeFile = file("/app/keystore.jks")
-            val propertyPassword = properties.getProperty("store_password")
-            storePassword = propertyPassword
-            val propertyKeyPassword = properties.getProperty("key_password")
-            keyPassword = propertyKeyPassword
-            val propertyKeyAlias = properties.getProperty("key_alias")
-            keyAlias = propertyKeyAlias
+            storeFile = file(properties.getProperty("store_file"))
+            storePassword = properties.getProperty("store_password")
+            keyPassword = properties.getProperty("key_password")
+            keyAlias = properties.getProperty("key_alias")
         }
     }
 
