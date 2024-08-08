@@ -87,6 +87,46 @@ jobs:
         id: get_note
         run: echo "RELEASE_NOTE=v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
 
+      - name: Check if release exists
+        id: check_release
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const versionName = process.env.VERSION_NAME;
+            const { data: releases } = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            const existingRelease = releases.find(release => release.tag_name === `v${versionName}`);
+            if (existingRelease) {
+              core.setOutput('release_id', existingRelease.id);
+              core.setOutput('release_exists', 'true');
+            } else {
+              core.setOutput('release_exists', 'false');
+            }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete existing release if exists
+        if: steps.check_release.outputs.release_exists == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const release_id = ${{ steps.check_release.outputs.release_id }};
+            await github.rest.repos.deleteRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id,
+            });
+            const tag_name = `v${process.env.VERSION_NAME}`;
+            await github.rest.git.deleteRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `tags/${tag_name}`,
+            });
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Generate Release
         uses: actions/create-release@latest
         env:
@@ -96,3 +136,4 @@ jobs:
           tag_name: ${{ env.TAG_NAME }}
           draft: false
           prerelease: false
+          body: ${{ env.RELEASE_NOTE }}
