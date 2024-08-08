@@ -89,16 +89,6 @@ jobs:
         id: get_note
         run: echo "RELEASE_NOTE=v${{ steps.get_version.outputs.VERSION_NAME }}" >> $GITHUB_ENV
 
-      - name: Create Tag
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Creating tag $TAG_NAME"
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git tag $TAG_NAME
-          git push origin HEAD:refs/tags/$TAG_NAME
-
       - name: Generate Release
         uses: actions/create-release@latest
         env:
