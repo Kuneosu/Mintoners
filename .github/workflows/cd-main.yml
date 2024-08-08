@@ -71,34 +71,30 @@ jobs:
       - name: Build release AAB
         run: ./gradlew bundleRelease
 
-      # 버전 정보 가져오기
-      - name: Get version
+      - name: Get version from build.gradle
         id: get_version
         run: |
-          echo "::set-output name=code::$(grep versionCode buildSrc/src/main/java/Dependencies.kt | awk '{print $5}')"
-          echo "::set-output name=name::$(grep versionName buildSrc/src/main/java/Dependencies.kt | awk '{print $5}' | tr '"' ' ' | tr -d " ")"
-      # 태그 이름 가져오기
+          echo "VERSION_CODE=$(grep versionCode app/build.gradle | sed 's/[^0-9]*//g')" >> $GITHUB_ENV
+          echo "VERSION_NAME=$(grep versionName app/build.gradle | sed 's/.*\"\([^\"]*\)\".*/\1/')" >> $GITHUB_ENV
+
       - name: Get tag name
         id: get_tag
-        run: echo "::set-output name=name::v${{ steps.get_version.outputs.name }}"
+        run: echo "TAG_NAME=v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
 
-      # 릴리즈 이름 가져오기
       - name: Get release name
         id: get_release
-        run: echo "::set-output name=name::v${{ steps.get_version.outputs.name }}"
+        run: echo "RELEASE_NAME=Release v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
 
-      # 배포 내역 가져오기
       - name: Get Release Note
         id: get_note
-        run: echo "::set-output name=name::v${{ steps.get_version.outputs.name }}"
+        run: echo "RELEASE_NOTE=v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
 
-      # 릴리즈 생성
       - name: Generate Release
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_name: ${{ steps.get_release.outputs.name }}
-          tag_name: ${{ steps.get_tag.outputs.name }}
+          release_name: ${{ env.RELEASE_NAME }}
+          tag_name: ${{ env.TAG_NAME }}
           draft: false
           prerelease: false
