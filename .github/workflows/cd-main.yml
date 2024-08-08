@@ -71,25 +71,34 @@ jobs:
       - name: Build release AAB
         run: ./gradlew bundleRelease
 
-      - name: Extract Version Name from PR Title
-        id: extract_version
-        run: echo "RELEASE_NAME=$(echo '${{ github.event.pull_request.title }}' | grep -oP 'v[0-9]+\\.[0-9]+\\.[0-9]+')" >> $GITHUB_ENV
-
-      - name: Create Tag
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # 버전 정보 가져오기
+      - name: Get version
+        id: get_version
         run: |
-          echo "Creating tag ${{ env.RELEASE_NAME }}"
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git tag ${{ env.RELEASE_NAME }}
-          git push origin HEAD:refs/tags/${{ env.RELEASE_NAME }}
+          echo "::set-output name=code::$(grep versionCode buildSrc/src/main/java/Dependencies.kt | awk '{print $5}')"
+          echo "::set-output name=name::$(grep versionName buildSrc/src/main/java/Dependencies.kt | awk '{print $5}' | tr '"' ' ' | tr -d " ")"
+      # 태그 이름 가져오기
+      - name: Get tag name
+        id: get_tag
+        run: echo "::set-output name=name::v${{ steps.get_version.outputs.name }}"
 
-      - name: Create Github Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ env.RELEASE_NAME }}
-          release_name: "Release ${{ env.RELEASE_NAME }}"
-          files: app/build/outputs/bundle/release/app-release.aab
+      # 릴리즈 이름 가져오기
+      - name: Get release name
+        id: get_release
+        run: echo "::set-output name=name::v${{ steps.get_version.outputs.name }}"
+
+      # 배포 내역 가져오기
+      - name: Get Release Note
+        id: get_note
+        run: echo "::set-output name=name::v${{ steps.get_version.outputs.name }}"
+
+      # 릴리즈 생성
+      - name: Generate Release
+        uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_name: ${{ steps.get_release.outputs.name }}
+          tag_name: ${{ steps.get_tag.outputs.name }}
+          draft: false
+          prerelease: false
