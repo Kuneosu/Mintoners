@@ -75,19 +75,35 @@ jobs:
           echo "VERSION_CODE=$(grep versionCode app/build.gradle.kts | sed 's/[^0-9]*//g')" >> $GITHUB_ENV
           echo "VERSION_NAME=$(grep versionName app/build.gradle.kts | sed 's/.*\"\([^\"]*\)\".*/\1/')" >> $GITHUB_ENV
 
-      - name: Get tag name
-        id: get_tag
-        run: echo "TAG_NAME=v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
+      - name: Check if release exists
+        id: check_release
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const versionName = process.env.VERSION_NAME;
+            const { data: releases } = await github.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            const releaseExists = releases.some(release => release.tag_name === `v${versionName}`);
+            return { releaseExists };
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get release name
-        id: get_release
-        run: echo "RELEASE_NAME=Release v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
-
-      - name: Get Release Note
-        id: get_note
-        run: echo "RELEASE_NOTE=v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
+      - name: Set release creation condition
+        id: set_release_condition
+        run: |
+          echo "RELEASE_EXISTS=${{ steps.check_release.outputs.releaseExists }}" >> $GITHUB_ENV
+          if [ "${{ steps.check_release.outputs.releaseExists }}" = "true" ]; then
+            echo "RELEASE_EXISTS=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_EXISTS=false" >> $GITHUB_ENV
+            echo "TAG_NAME=v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
+            echo "RELEASE_NAME=Release v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
+            echo "RELEASE_NOTE=Release notes for version ${{ env.VERSION_NAME }}" >> $GITHUB_ENV
 
       - name: Generate Release
+        if: env.RELEASE_EXISTS == 'false'
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -96,3 +112,4 @@ jobs:
           tag_name: ${{ env.TAG_NAME }}
           draft: false
           prerelease: false
+          body: ${{ env.RELEASE_NOTE }}
