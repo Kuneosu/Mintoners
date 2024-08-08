@@ -35,9 +35,15 @@ jobs:
       env:
         SDK_DIR: ${{ secrets.SDK_DIR }}
         FEEDBACK_EMAIL: ${{ secrets.FEEDBACK_EMAIL }}
+        STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
       run: |
         echo "sdk.dir=${SDK_DIR}" > local.properties
         echo "feedback_email=${FEEDBACK_EMAIL}" >> local.properties
+        echo "store_password=${STORE_PASSWORD}" >> local.properties
+        echo "key_password=${KEY_PASSWORD}" >> local.properties
+        echo "key_alias=${KEY_ALIAS}" >> local.properties
 
     - name: Create google-services.json
       env:
