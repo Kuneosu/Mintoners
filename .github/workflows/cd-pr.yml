@@ -112,11 +112,17 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const release_id = process.env.RELEASE_ID;
+            const release_id = ${{ steps.check_release.outputs.release_id }};
             await github.rest.repos.deleteRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id,
+            });
+            const tag_name = `v${process.env.VERSION_NAME}`;
+            await github.rest.git.deleteRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `tags/${tag_name}`,
             });
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
