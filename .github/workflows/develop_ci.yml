@@ -1,10 +1,7 @@
-name: Develop CI
+name: CI for Develop
 
 on:
   push:
-    branches:
-      - develop
-  pull_request:
     branches:
       - develop
 
@@ -14,12 +11,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        ref: develop
+      uses: actions/checkout@v4
 
     - name: Set up JDK 17
-      uses: actions/setup-java@v2
+      uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'adopt'
@@ -48,8 +43,8 @@ jobs:
 
     - name: Create google-services.json
       env:
-          DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
-      run: echo $DATA | base64 -di > app/google-services.json
+        DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
+      run: echo $DATA | base64 -d > app/google-services.json
 
     - name: Create keystore.jks
       env:
@@ -60,7 +55,7 @@ jobs:
       run: ls -la app/keystore.jks
 
     - name: Cache Gradle packages
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: |
           ~/.gradle/caches
@@ -70,7 +65,7 @@ jobs:
 
     - name: Clean Build
       run: ./gradlew clean
-      
+
     - name: Build with Gradle
       run: ./gradlew build
 
