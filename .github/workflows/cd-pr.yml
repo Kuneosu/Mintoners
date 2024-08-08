@@ -71,19 +71,17 @@ jobs:
 
       - name: Extract Version Name from PR Title
         id: extract_version
-        run: |
-          echo "RELEASE_NAME=$(echo '${{ github.event.pull_request.title }}' | grep -oP 'release v\\K[0-9]+\\.[0-9]+\\.[0-9]+')" >> $GITHUB_ENV
+        run: echo "RELEASE_NAME=$(echo '${{ github.event.pull_request.title }}' | grep -oP 'v[0-9]+\\.[0-9]+\\.[0-9]+')" >> $GITHUB_ENV
 
       - name: Create Tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_NAME: ${{ env.RELEASE_NAME }}
         run: |
-          echo "Creating tag $RELEASE_NAME" # debug 출력
+          echo "Creating tag ${{ env.RELEASE_NAME }}"
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git tag $RELEASE_NAME
-          git push origin HEAD:refs/tags/$RELEASE_NAME
+          git tag ${{ env.RELEASE_NAME }}
+          git push origin HEAD:refs/tags/${{ env.RELEASE_NAME }}
 
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
