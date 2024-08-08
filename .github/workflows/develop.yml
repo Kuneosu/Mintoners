@@ -41,6 +41,7 @@ jobs:
       run: |
         echo "sdk.dir=${SDK_DIR}" > local.properties
         echo "feedback_email=${FEEDBACK_EMAIL}" >> local.properties
+        echo "store_file=${{ github.workspace }}/app/keystore.jks" >> local.properties
         echo "store_password=${STORE_PASSWORD}" >> local.properties
         echo "key_password=${KEY_PASSWORD}" >> local.properties
         echo "key_alias=${KEY_ALIAS}" >> local.properties
@@ -54,6 +55,9 @@ jobs:
       env:
         DATA: ${{ secrets.KEY_STORE }}
       run: echo $DATA | base64 -d > app/keystore.jks
+
+    - name: Verify keystore file
+      run: ls -la app/keystore.jks
 
     - name: Cache Gradle packages
       uses: actions/cache@v2
