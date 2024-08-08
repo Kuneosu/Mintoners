@@ -75,12 +75,12 @@ jobs:
 
       - name: Create Tag
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git tag ${{ env.RELEASE_NAME }}
-          git push origin ${{ env.RELEASE_NAME }}
+          git push origin HEAD:refs/tags/${{ env.RELEASE_NAME }}
 
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
