@@ -73,26 +73,26 @@ jobs:
         id: get_version
         run: |
           echo "VERSION_CODE=$(grep versionCode buildSrc/src/main/java/Dependencies.kt | awk '{print $5}')" >> $GITHUB_ENV
-          echo "VERSION_NAME=$(grep versionName buildSrc/src/main/java/Dependencies.kt | awk '{print $5}' | tr -d '"' | tr -d ' ')" >> $GITHUB_ENV
+          echo "VERSION_NAME=$(grep versionName buildSrc/src/main/java/Dependencies.kt | awk '{print $5}' | tr -d '\"' | tr -d ' ')" >> $GITHUB_ENV
 
       - name: Get tag name
         id: get_tag
-        run: echo "TAG_NAME=v${{ steps.get_version.outputs.VERSION_NAME }}" >> $GITHUB_ENV
+        run: echo "TAG_NAME=v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
 
       - name: Get release name
         id: get_release
-        run: echo "RELEASE_NAME=Release v${{ steps.get_version.outputs.VERSION_NAME }}" >> $GITHUB_ENV
+        run: echo "RELEASE_NAME=Release v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
 
       - name: Get Release Note
         id: get_note
-        run: echo "RELEASE_NOTE=v${{ steps.get_version.outputs.VERSION_NAME }}" >> $GITHUB_ENV
+        run: echo "RELEASE_NOTE=v${{ env.VERSION_NAME }}" >> $GITHUB_ENV
 
       - name: Generate Release
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_name: ${{ env.VERSION_NAME }}
-          tag_name: ${{ env.VERSION_NAME }}
+          release_name: ${{ env.RELEASE_NAME }}
+          tag_name: ${{ env.TAG_NAME }}
           draft: false
           prerelease: false
