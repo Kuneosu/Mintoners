@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.MatchMainRankItemBinding
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
-import com.kuneosu.mintoners.util.ItemTouchHelperListener
 
 class MatchMainRankAdapter(private val matchViewModel: MatchViewModel) :
     ListAdapter<Player, MatchMainRankAdapter.RankViewHolder>(diffUtil) {

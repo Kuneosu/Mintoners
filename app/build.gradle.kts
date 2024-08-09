@@ -71,31 +71,10 @@ android {
 
 dependencies {
 
-    implementation(libs.gson)
-
+    // Kotlin standard library
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.hilt.android)
-    implementation(libs.firebase.config.ktx)
-    ksp(libs.hilt.android.compiler)
-
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-
-    implementation(libs.lottie)
-    implementation(libs.androidx.swiperefreshlayout)
-
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
     implementation(libs.androidx.recyclerview)
-
-
-    implementation(libs.android.simple.tooltip)
-
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -104,4 +83,34 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+
+    // Firebase
+    implementation(libs.firebase.config.ktx)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    // lottie
+    implementation(libs.lottie)
+
+    // SwipeRefreshLayout
+    implementation(libs.androidx.swiperefreshlayout)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.gson)
+
+    // SimpleToolTip
+    implementation(libs.android.simple.tooltip)
+
+
 }

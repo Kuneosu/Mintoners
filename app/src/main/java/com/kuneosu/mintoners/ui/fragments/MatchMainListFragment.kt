@@ -1,7 +1,6 @@
 package com.kuneosu.mintoners.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kuneosu.mintoners.data.model.Game
-import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.FragmentMatchMainListBinding
 import com.kuneosu.mintoners.ui.adapter.MatchMainListAdapter
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel

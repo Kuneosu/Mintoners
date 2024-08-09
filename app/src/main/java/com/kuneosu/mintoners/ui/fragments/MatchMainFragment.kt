@@ -80,18 +80,7 @@ class MatchMainFragment : Fragment() {
             callback.handleOnBackPressed()
         }
 
-        binding.matchMainShareButton.setOnClickListener {
-            if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
-                return@setOnClickListener
-            }
-            lastClickTime = SystemClock.elapsedRealtime()
-
-            getBitmapFromScrollView(binding.matchMainScrollView) { bitmap ->
-                bitmap?.let {
-                    screenShot(it)
-                }
-            }
-        }
+        sharedButtonSetting()
 
         binding.matchMainRoot.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
@@ -102,6 +91,15 @@ class MatchMainFragment : Fragment() {
             false
         }
 
+        checkFirstEntrance()
+
+        oneMoreButtonSettingWithMatchMode()
+
+
+        return binding.root
+    }
+
+    private fun checkFirstEntrance() {
         // PreferencesManager 인스턴스 생성
         val preferencesManager = PreferencesManager(requireContext())
         // 현재 프래그먼트의 이름을 키로 사용
@@ -114,11 +112,21 @@ class MatchMainFragment : Fragment() {
             // 최초 진입 상태를 false로 변경
             preferencesManager.setFirstTimeLaunch(fragmentName, false)
         }
+    }
 
-        oneMoreButtonSettingWithMatchMode()
+    private fun sharedButtonSetting() {
+        binding.matchMainShareButton.setOnClickListener {
+            if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            lastClickTime = SystemClock.elapsedRealtime()
 
-
-        return binding.root
+            getBitmapFromScrollView(binding.matchMainScrollView) { bitmap ->
+                bitmap?.let {
+                    screenShot(it)
+                }
+            }
+        }
     }
 
     private fun oneMoreButtonSettingWithMatchMode() {

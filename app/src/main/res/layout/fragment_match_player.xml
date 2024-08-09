@@ -12,7 +12,6 @@
     tools:ignore="HardcodedText">
 
 
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/match_player_scroll_view"
         android:layout_width="match_parent"
@@ -230,6 +229,7 @@
             </com.kuneosu.mintoners.ui.customview.CustomConstraint>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
     <com.kuneosu.mintoners.ui.customview.TouchInterceptorFrameLayout
         android:id="@+id/match_player_touch_interceptor"
         android:layout_width="match_parent"

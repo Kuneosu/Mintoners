@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/width_wide_dialog"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
-    tools:ignore="HardcodedText"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="20dp"
+    tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="@dimen/width_wide_dialog"
@@ -16,22 +16,22 @@
             android:id="@+id/info_dialog_header"
             android:layout_width="@dimen/width_wide_dialog"
             android:layout_height="wrap_content"
+            android:background="@color/main"
             android:padding="@dimen/padding_medium"
             android:text="대회 정보"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/text_xlarge"
             android:textStyle="bold"
-            android:textAlignment="center"
-            android:background="@color/main"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_marginTop="@dimen/margin_small"
             android:id="@+id/info_dialog_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
 
             android:orientation="vertical"
             android:padding="@dimen/padding_medium"
@@ -105,14 +105,14 @@
             android:id="@+id/info_dialog_close"
             android:layout_width="@dimen/width_wide_dialog"
             android:layout_height="wrap_content"
-            android:text="닫기"
-            android:textColor="@color/main"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_large"
             android:padding="@dimen/padding_medium"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="닫기"
+            android:textAlignment="center"
+            android:textColor="@color/main"
+            android:textSize="@dimen/text_large"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/info_dialog_divider" />
 
 
