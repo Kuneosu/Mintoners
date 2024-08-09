@@ -456,26 +456,28 @@ July 2024 Personal project, match table creation and management application
         - 기존에 터치를 막기 위해 있던 smoothScrollToPosition 을 삭제
 
 - **1.0.5 Release**
-  - hotfix - 단식과 복식 아이템 Layout 이 다르던 문제 해결
+    - hotfix - 단식과 복식 아이템 Layout 이 다르던 문제 해결
 
 - **GitHub Actions 를 사용한 CI 도입**
-  - 빌드, 테스트 자동화를 위한 GitHub Actions 도입
-  - 우선은 develop 브랜치에 push 또는 pr 이 생길때만 동작하도록 설정
-  - .github/workflows/develop.yml 생성
-  - local.properties, build.gradle 일부 수정
+    - 빌드, 테스트 자동화를 위한 GitHub Actions 도입
+    - 우선은 develop 브랜치에 push 또는 pr 이 생길때만 동작하도록 설정
+    - .github/workflows/develop.yml 생성
+    - local.properties, build.gradle 일부 수정
 
 ## 2024.08.08
 
 - **GitHub Actions를 사용한 CI/CD 도입**
-  - 빌드, 테스트, 배포 자동화를 위한 GitHub Actions 도입
-  - develop 브랜치에 push 할 경우 CI(CI for develop) 동작
-  - main 브랜치에 Pull Request 생성 시 CD(CD for PR) 동작
-  - main 브랜치에 push 할 경우 CI/CD(CI for Main, CD for Main) 동작
-  - 현재 CD 시 앱 번들을 생성하고 GitHub Release 가 출시되도록 설정
-  - Release 명은 pr 또는 push 시 지정한 'v{X}.{Y}.{Z}'로 설정
-
+    - 빌드, 테스트, 배포 자동화를 위한 GitHub Actions 도입
+    - develop 브랜치에 push 할 경우 CI(CI for develop) 동작
+    - main 브랜치에 Pull Request 생성 시 CD(CD for PR) 동작
+    - main 브랜치에 push 할 경우 CI/CD(CI for Main, CD for Main) 동작
+    - 현재 CD 시 앱 번들을 생성하고 GitHub Release 가 출시되도록 설정
+    - Release 명은 pr 또는 push 시 지정한 'v{X}.{Y}.{Z}'로 설정
 
 ## 2024.08.09
 
 - **프로젝트 발표**
-  - 코드 재검토 및 import, codeLine 정리
+    - 코드 재검토 및 import, codeLine 정리
+
+- **1.0.6 Release**
+    - hotfix - firebase test lab 에서 발생한 오류 수정(HomeFragment null check)
