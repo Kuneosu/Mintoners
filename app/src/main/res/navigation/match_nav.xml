@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/match_nav.xml"
     app:startDestination="@id/matchInfoFragment">
 
     <fragment
         android:id="@+id/matchInfoFragment"
         android:name="com.kuneosu.mintoners.ui.fragments.MatchInfoFragment"
-        android:label="MatchInfoFragment" >
+        android:label="MatchInfoFragment">
         <action
             android:id="@+id/action_matchInfoFragment_to_matchPlayerFragment"
             app:destination="@id/matchPlayerFragment" />
@@ -22,7 +21,7 @@
     <fragment
         android:id="@+id/matchPlayerFragment"
         android:name="com.kuneosu.mintoners.ui.fragments.MatchPlayerFragment"
-        android:label="MatchPlayerFragment" >
+        android:label="MatchPlayerFragment">
         <action
             android:id="@+id/action_matchPlayerFragment_to_matchInfoFragment"
             app:destination="@id/matchInfoFragment" />
@@ -44,7 +43,7 @@
     <fragment
         android:id="@+id/matchMainFragment"
         android:name="com.kuneosu.mintoners.ui.fragments.MatchMainFragment"
-        android:label="MatchMainFragment" >
+        android:label="MatchMainFragment">
         <action
             android:id="@+id/action_matchMainFragment_to_matchGameFragment"
             app:destination="@id/matchGameFragment" />

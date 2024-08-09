@@ -1,7 +1,6 @@
 package com.kuneosu.mintoners.di
 
 import android.content.Context
-import androidx.room.Room
 import com.kuneosu.mintoners.data.local.dao.GameDao
 import com.kuneosu.mintoners.data.local.dao.MatchDao
 import com.kuneosu.mintoners.data.local.dao.MemberDao

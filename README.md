@@ -473,3 +473,9 @@ July 2024 Personal project, match table creation and management application
   - main 브랜치에 push 할 경우 CI/CD(CI for Main, CD for Main) 동작
   - 현재 CD 시 앱 번들을 생성하고 GitHub Release 가 출시되도록 설정
   - Release 명은 pr 또는 push 시 지정한 'v{X}.{Y}.{Z}'로 설정
+
+
+## 2024.08.09
+
+- **프로젝트 발표**
+  - 코드 재검토 및 import, codeLine 정리

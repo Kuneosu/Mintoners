@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.kuneosu.mintoners.data.model.Player
-import com.kuneosu.mintoners.databinding.MatchInfoDialogBinding
 import com.kuneosu.mintoners.databinding.MatchPlayerAddDialogBinding
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 

@@ -1,16 +1,8 @@
 package com.kuneosu.mintoners.ui.view
 
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.ActivityMatchBinding
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 import dagger.hilt.android.AndroidEntryPoint

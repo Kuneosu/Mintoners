@@ -9,9 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.kuneosu.mintoners.databinding.MatchBackDialogBinding
 import com.kuneosu.mintoners.databinding.UpdateDialogBinding
-import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 
 class UpdateDialog : DialogFragment() {
 

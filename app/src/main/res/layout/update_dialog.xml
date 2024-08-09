@@ -45,8 +45,7 @@
                 android:paddingVertical="@dimen/padding_medium"
                 android:text="새로운 업데이트가 존재합니다.\n업데이트 하시겠습니까 ?"
                 android:textAlignment="center"
-                android:textSize="@dimen/text_large"
-                />
+                android:textSize="@dimen/text_large" />
 
         </LinearLayout>
 

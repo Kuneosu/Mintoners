@@ -14,7 +14,7 @@ class HomeRepository @Inject constructor(
     private val matchDao: MatchDao,
     private val scope: CoroutineScope
 ) {
-    fun getMatchByNumber(number:Int): Match {
+    fun getMatchByNumber(number: Int): Match {
         return matchDao.getMatchByNumber(number)
     }
 
