@@ -114,6 +114,7 @@ class MatchMainFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun sharedButtonSetting() {
         binding.matchMainShareButton.setOnClickListener {
             if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
