@@ -1,6 +1,5 @@
 package com.kuneosu.mintoners.ui.adapter
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
@@ -12,7 +11,7 @@ class MatchMainPagerAdapter(
 ) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = fragmentList.size
-    override fun createFragment(position: Int): Fragment{
+    override fun createFragment(position: Int): Fragment {
         return fragmentList[position]
     }
 }

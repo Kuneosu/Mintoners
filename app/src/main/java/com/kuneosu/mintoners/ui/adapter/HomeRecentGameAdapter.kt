@@ -3,7 +3,6 @@ package com.kuneosu.mintoners.ui.adapter
 import android.content.Intent
 import android.os.Build
 import android.os.SystemClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
@@ -14,7 +13,6 @@ import com.kuneosu.mintoners.data.model.Match
 import com.kuneosu.mintoners.databinding.RecentGameItemBinding
 import com.kuneosu.mintoners.ui.view.MatchActivity
 import com.kuneosu.mintoners.ui.viewmodel.HomeViewModel
-import com.kuneosu.mintoners.util.ItemTouchHelperListener
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

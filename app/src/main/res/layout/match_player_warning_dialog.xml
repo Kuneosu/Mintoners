@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="@dimen/margin_large"
     android:background="@color/transparent"
-    tools:ignore="HardcodedText"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="20dp"
+    tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,9 +32,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="@dimen/padding_large"
-            android:gravity="center_vertical"
             app:layout_constraintTop_toBottomOf="@id/player_warning_header">
 
             <com.airbnb.lottie.LottieAnimationView

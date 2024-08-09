@@ -55,18 +55,7 @@ class MatchInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // PreferencesManager 인스턴스 생성
-        val preferencesManager = PreferencesManager(requireContext())
-        // 현재 프래그먼트의 이름을 키로 사용
-        val fragmentName = this::class.simpleName
-
-        // 최초 진입 여부 확인
-        if (fragmentName != null && preferencesManager.isFirstTimeLaunch(fragmentName)) {
-            // 최초 진입이므로 팝업 가이드 표시
-            infoFragmentGuide()
-            // 최초 진입 상태를 false로 변경
-            preferencesManager.setFirstTimeLaunch(fragmentName, false)
-        }
+        checkFristEntrance()
 
         binding.matchInfoHelp.setOnClickListener {
             infoFragmentGuide()
@@ -96,6 +85,21 @@ class MatchInfoFragment : Fragment() {
             showAlertDialog()
         }
 
+    }
+
+    private fun checkFristEntrance() {
+        // PreferencesManager 인스턴스 생성
+        val preferencesManager = PreferencesManager(requireContext())
+        // 현재 프래그먼트의 이름을 키로 사용
+        val fragmentName = this::class.simpleName
+
+        // 최초 진입 여부 확인
+        if (fragmentName != null && preferencesManager.isFirstTimeLaunch(fragmentName)) {
+            // 최초 진입이므로 팝업 가이드 표시
+            infoFragmentGuide()
+            // 최초 진입 상태를 false로 변경
+            preferencesManager.setFirstTimeLaunch(fragmentName, false)
+        }
     }
 
     private fun infoFragmentGuide() {

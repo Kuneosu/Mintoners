@@ -1,18 +1,16 @@
 package com.kuneosu.mintoners.ui.customview
 
+import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
-import com.kuneosu.mintoners.R
-import com.kuneosu.mintoners.databinding.MatchInfoWarningDialogBinding
-import android.app.Dialog
-import android.content.DialogInterface
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.MatchPlayerWarningDialogBinding
 
 class MatchPlayerWarningDialog(private val text: String) : DialogFragment() {
