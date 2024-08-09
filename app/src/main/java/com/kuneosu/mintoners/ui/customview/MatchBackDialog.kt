@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment
 import com.kuneosu.mintoners.databinding.MatchBackDialogBinding
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
 
-class MatchBackDialog(private val case:String, viewModel:MatchViewModel) : DialogFragment() {
+class MatchBackDialog(private val case: String, viewModel: MatchViewModel) : DialogFragment() {
 
     // 뷰 바인딩 정의
     private var _binding: MatchBackDialogBinding? = null
@@ -27,7 +27,7 @@ class MatchBackDialog(private val case:String, viewModel:MatchViewModel) : Dialo
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        when(case){
+        when (case) {
             "info" -> {
                 binding.matchBackDialogClose.setOnClickListener {
                     requireActivity().finish()
@@ -36,6 +36,7 @@ class MatchBackDialog(private val case:String, viewModel:MatchViewModel) : Dialo
                     dismiss()
                 }
             }
+
             "main" -> {
                 binding.matchBackDialogText.text = "대회를 종료하시겠습니까 ?"
                 binding.matchBackDialogClose.text = "종료"

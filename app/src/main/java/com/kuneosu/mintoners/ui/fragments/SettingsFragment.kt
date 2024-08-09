@@ -24,14 +24,16 @@ class SettingsFragment : Fragment() {
     ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
+        settingFragmentDisplaySetting()
+
+        return binding.root
+    }
+
+    private fun settingFragmentDisplaySetting() {
         binding.settingsVersion.text = getString(R.string.version)
 
         binding.settingsSettingItem.setOnClickListener {
             Toast.makeText(requireContext(), "아직 변경 가능한 설정이 없습니다.", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.settingsNoticeItem.setOnClickListener {
-            Toast.makeText(requireContext(), "확인 가능한 공지사항이 없습니다.", Toast.LENGTH_SHORT).show()
         }
 
         binding.settingsFeedbackItem.setOnClickListener {
@@ -46,8 +48,6 @@ class SettingsFragment : Fragment() {
         binding.settingBackButton.setOnClickListener {
             updateBottomNavigationView(R.id.menu_home)
         }
-
-        return binding.root
     }
 
     private fun updateBottomNavigationView(menuItemId: Int) {

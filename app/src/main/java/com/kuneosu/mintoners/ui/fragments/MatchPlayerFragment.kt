@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.databinding.FragmentMatchPlayerBinding
 import com.kuneosu.mintoners.ui.adapter.MatchPlayerAdapter
-import com.kuneosu.mintoners.ui.customview.MatchInfoWarningDialog
 import com.kuneosu.mintoners.ui.customview.MatchPlayerAddDialog
 import com.kuneosu.mintoners.ui.customview.MatchPlayerWarningDialog
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel

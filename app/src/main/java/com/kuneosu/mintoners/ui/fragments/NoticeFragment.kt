@@ -3,12 +3,11 @@ package com.kuneosu.mintoners.ui.fragments
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
@@ -37,18 +36,21 @@ class NoticeFragment : Fragment() {
     ): View {
         _binding = FragmentNoticeBinding.inflate(inflater, container, false)
 
-        adapter = NoticeAdapter()
-        adapter.submitList(noticeList)
-        fetchNotices()
-
-        binding.noticeRecyclerView.adapter = adapter
-        binding.noticeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        noticeRecyclerViewSetting()
 
         binding.noticeBackButton.setOnClickListener {
             findNavController().popBackStack()
         }
 
         return binding.root
+    }
+
+    private fun noticeRecyclerViewSetting() {
+        adapter = NoticeAdapter()
+        adapter.submitList(noticeList)
+        fetchNotices()
+        binding.noticeRecyclerView.adapter = adapter
+        binding.noticeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun fetchNotices() {
@@ -105,7 +107,8 @@ class NoticeFragment : Fragment() {
             override fun onFailure(call: Call<GitHubFile>, t: Throwable) {
                 _binding?.let { binding ->
                     binding.noticeLoadingAnimation.visibility = View.GONE
-                    Toast.makeText(requireContext(), "공지사항을 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "공지사항을 불러오는데 실패했습니다.", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         })

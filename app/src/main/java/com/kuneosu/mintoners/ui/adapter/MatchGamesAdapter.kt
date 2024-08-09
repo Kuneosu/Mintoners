@@ -7,15 +7,12 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.widget.PopupMenu
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.kuneosu.mintoners.R
 import com.kuneosu.mintoners.data.model.Game
 import com.kuneosu.mintoners.data.model.Player
 import com.kuneosu.mintoners.databinding.MatchGameItemBinding
@@ -89,7 +86,7 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
             matchViewModel.updateGameIndexes()
             notifyItemRemoved(position)
         }
-        notifyItemRangeChanged(0, currentList.size+1)
+        notifyItemRangeChanged(0, currentList.size + 1)
     }
 
     override fun getItemCount(): Int {
@@ -366,8 +363,8 @@ class MatchGamesAdapter(private val matchViewModel: MatchViewModel) :
 
 
     override fun onSwiped(position: Int) {
-            Handler(Looper.getMainLooper()).post {
-                deleteGame(currentList[position],position)
-            }
+        Handler(Looper.getMainLooper()).post {
+            deleteGame(currentList[position], position)
+        }
     }
 }

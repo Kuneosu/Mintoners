@@ -12,15 +12,15 @@
 
 
         <CalendarView
-            android:contentDescription="@string/calendar_view"
             android:id="@+id/match_calendar_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/match_calendar_divider"
-            app:layout_constraintTop_toTopOf="parent"
-            android:theme="@style/CalenderViewCustom"
+            android:contentDescription="@string/calendar_view"
             android:dateTextAppearance="@style/CalenderViewDateCustomText"
-            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText" />
+            android:theme="@style/CalenderViewCustom"
+            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+            app:layout_constraintBottom_toTopOf="@id/match_calendar_divider"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <View

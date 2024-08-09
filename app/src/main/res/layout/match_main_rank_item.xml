@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingVertical="@dimen/padding_medium">
+        android:paddingVertical="@dimen/padding_medium"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/match_main_rank_number"
@@ -83,8 +83,6 @@
             android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_medium" />
-
-
 
 
     </LinearLayout>

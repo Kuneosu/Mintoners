@@ -10,10 +10,8 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.kuneosu.mintoners.databinding.MatchCalendarDialogBinding
 import com.kuneosu.mintoners.ui.viewmodel.MatchViewModel
-import java.time.LocalDate
 import java.util.Calendar
 
 

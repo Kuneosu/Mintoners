@@ -6,9 +6,9 @@
     android:id="@+id/recent_game_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/radius_10"
     android:layout_marginHorizontal="@dimen/margin_default"
     android:layout_marginVertical="@dimen/margin_small"
+    app:cardCornerRadius="@dimen/radius_10"
     app:cardElevation="@dimen/margin_xsmall"
     tools:ignore="HardcodedText">
 
@@ -18,10 +18,10 @@
 
         <LinearLayout
             android:id="@+id/notice_item"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_notice_item"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingHorizontal="@dimen/padding_medium"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="UseCompoundDrawables">
@@ -29,15 +29,14 @@
             <TextView
                 android:id="@+id/notice_title"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="공지사항 제목"
                 android:textColor="@color/trans_black_50"
                 android:textSize="@dimen/text_medium"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:ellipsize="end"
-                />
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/notice_toggle"
