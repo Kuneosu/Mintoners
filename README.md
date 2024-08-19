@@ -481,3 +481,8 @@ July 2024 Personal project, match table creation and management application
 
 - **1.0.6 Release**
     - hotfix - firebase test lab 에서 발생한 오류 수정(HomeFragment null check)
+
+## 2024.08.19
+
+- **1.0.7 Release**
+    - Mintoners 정식 출시
