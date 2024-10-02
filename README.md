@@ -6,7 +6,7 @@ July 2024 Personal project, match table creation and management application
 
 ### 프로젝트 진행 기간
 
-- 2024.06.25 ~ 진행중
+- 2024.06.25 ~ 2024-08-19
 
 ### 프로젝트 목표
 
